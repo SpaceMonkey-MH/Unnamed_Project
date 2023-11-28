@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciiuf431tlipc"]
+
+[ext_resource type="PackedScene" uid="uid://bq653xirgnv8k" path="res://hud.tscn" id="1_kquu7"]
+[ext_resource type="PackedScene" uid="uid://cthsy2erljdkt" path="res://player.tscn" id="2_cf57p"]
+[ext_resource type="PackedScene" uid="uid://cx1sajd10x4m3" path="res://ground_1.tscn" id="3_yojds"]
+
+[node name="Main" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("1_kquu7")]
+
+[node name="Player" parent="." instance=ExtResource("2_cf57p")]
+position = Vector2(953, 627)
+
+[node name="Ground1" parent="." instance=ExtResource("3_yojds")]
+position = Vector2(960, 1043)

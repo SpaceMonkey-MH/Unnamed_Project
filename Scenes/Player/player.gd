@@ -2,17 +2,20 @@ extends CharacterBody2D
 
 # Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
-@export var move_speed = 300.0
-@export var air_jumps_max : int = 1
-var air_jumps_current : int = air_jumps_max
+# Defining variables:
+@export var move_speed = 300.0	# Speed on the movement of the character, in pixels/second.
+@export var air_jumps_max : int = 1	# Maximum number of air jumps.
+#var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
 
-@export var jump_height : float = 10000.0
+@export var jump_height : float = 100.0
 @export var jump_time_to_peak : float = 0.5
 @export var jump_time_to_descent : float = 0.4
 
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+
+@onready var state_machine : CharacterStateMachine = $CharacterStateMachine
 
 # // From template:
 #const SPEED = 300.0
@@ -51,15 +54,19 @@ func _physics_process(delta):
 #	#print(move_toward(velocity.x, 0, SPEED))	# Not in the template.
 	# // End of the template.
 	
-	
+	# Allows for falling mechanic.
 	velocity.y += get_gravity() * delta
-	velocity.x = get_input_direction() * move_speed
 	
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor():
-			jump()
-		elif air_jumps_current > 0:
-			air_jump()
+	# Allows movement of the player. 
+	velocity.x = get_input_direction() * move_speed * int(state_machine.check_if_can_move())
+#
+#	if Input.is_action_just_pressed("jump"):
+#		if is_on_floor():
+##			jump()
+#			pass
+##		elif air_jumps_current > 0:
+##			pass
+##			air_jump()
 
 	move_and_slide()
 
@@ -67,14 +74,14 @@ func _physics_process(delta):
 func get_gravity():
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
 
+#
+#func jump():
+#	air_jumps_current = air_jumps_max
+#	velocity.y = jump_velocity
 
-func jump():
-	air_jumps_current = air_jumps_max
-	velocity.y = jump_velocity
-
-func air_jump():
-	air_jumps_current -= 1
-	velocity.y = jump_velocity
+#func air_jump():
+#	air_jumps_current -= 1
+#	velocity.y = jump_velocity
 
 
 func get_input_direction():

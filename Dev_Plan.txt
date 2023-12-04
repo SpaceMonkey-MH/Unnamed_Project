@@ -1,0 +1,34 @@
+- Player
+	- Movements
+		- Left and Right
+		- Falling
+		- Jumping
+			- Air Jumping
+	- Attacks
+		- Weapons
+			- Projectiles
+	- Stats
+		- Health
+		- Damage Multiplier
+		- 
+	- State Machine
+		- Machine
+		- States
+			- Ground
+			- Air
+			- Landing
+			- Dying
+- Environnement
+	- Levels
+- Enemies
+	- Sprite
+	- Pattern
+	- State Machine
+- Sounds
+	- Music
+	- VFX
+		- Weapon Sounds
+		- Movement Sounds
+			- Jumping
+			- Landing
+- UI

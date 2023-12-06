@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://cthsy2erljdkt"]
+
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_isi14"]
+[ext_resource type="Script" path="res://Scenes/Player/StateMachine.gd" id="2_5rd4l"]
+[ext_resource type="Script" path="res://Scenes/Player/RunState.gd" id="3_jik23"]
+[ext_resource type="Script" path="res://Scenes/Player/AirState.gd" id="4_bpxqw"]
+[ext_resource type="Script" path="res://Scenes/Player/LandingState.gd" id="5_8a6eh"]
+[ext_resource type="Script" path="res://Scenes/Player/idle.gd" id="6_dsyg3"]
+[ext_resource type="Script" path="res://Scenes/Player/StateDebugLabel.gd" id="6_fi7ce"]
+[ext_resource type="Script" path="res://Scenes/Player/State.gd" id="8_wt7t3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
+size = Vector2(40, 40)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_isi14")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_w47ok")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_5rd4l")
+current_state = NodePath("Idle")
+
+[node name="Run" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "idle_state")]
+script = ExtResource("3_jik23")
+air_state = NodePath("../Air")
+idle_state = NodePath("../Idle")
+
+[node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
+script = ExtResource("4_bpxqw")
+landing_state = NodePath("../Landing")
+
+[node name="Landing" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("5_8a6eh")
+move_speed = null
+air_jumps_max = null
+jump_height = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+
+[node name="Idle" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "run_state")]
+script = ExtResource("6_dsyg3")
+air_state = NodePath("../Air")
+run_state = NodePath("../Run")
+move_speed = null
+air_jumps_max = null
+jump_height = null
+jump_time_to_peak = null
+jump_time_to_descent = null
+
+[node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -62.0
+offset_top = -58.0
+offset_right = 60.0
+offset_bottom = -32.0
+text = "State:"
+script = ExtResource("6_fi7ce")
+state_machine = NodePath("../CharacterStateMachine")
+
+[node name="State" type="Node" parent="."]
+script = ExtResource("8_wt7t3")

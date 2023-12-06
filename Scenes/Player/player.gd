@@ -3,19 +3,22 @@ extends CharacterBody2D
 # Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
 # Defining variables:
-@export var move_speed = 300.0	# Speed on the movement of the character, in pixels/second.
+@export var move_speed : float = 300.0	# Speed on the movement of the character, in pixels/second.
 @export var air_jumps_max : int = 1	# Maximum number of air jumps.
-#var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
+var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
 
-@export var jump_height : float = 100.0
-@export var jump_time_to_peak : float = 0.5
-@export var jump_time_to_descent : float = 0.4
+# Base variable, not used directly for the jump.
+@export var jump_height : float = 100.0	# Height of the jump, in pixels.
+@export var jump_time_to_peak : float = 0.5	# Time for the player to reach the peak of the jump, in seconds.
+@export var jump_time_to_descent : float = 0.4	# Time to reach the ground during the jump, in seconds.
 
+# Variable directly used for the jump and the falling.
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
+@onready var animation_tree : AnimationTree = $AnimationTree
 
 # // From template:
 #const SPEED = 300.0
@@ -32,6 +35,12 @@ extends CharacterBody2D
 #func _process(delta):
 #	print("Player velocity: ", velocity)
 
+#
+#func _ready():
+#	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
+
+func _ready():
+	animation_tree.active = true
 
 func _physics_process(delta):
 	# // Template from the editor:

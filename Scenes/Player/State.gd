@@ -2,30 +2,32 @@ extends Node
 
 class_name State
 
-# Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
-# Defining variables:
-@export var move_speed = 300.0	# Speed on the movement of the character, in pixels/second.
-@export var air_jumps_max : int = 1	# Maximum number of air jumps.
-var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
+var move_speed : float
+var air_jumps_max : int
+var air_jumps_current : int
 
-# Base variable, not used directly for the jump.
-@export var jump_height : float = 100.0	# Height of the jump, in pixels.
-@export var jump_time_to_peak : float = 0.5	# Time for the player to reach the peak of the jump, in seconds.
-@export var jump_time_to_descent : float = 0.4	# Time to reach the ground during the jump, in seconds.
+var jump_height : float
+var jump_time_to_peak : float
+var jump_time_to_descent : float
 
-# Variable directly used for the jump and the falling.
-@onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-@onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
-@onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+
+var jump_velocity : float
+var jump_gravity : float
+var fall_gravity : float
 
 
 @export var can_move : bool = true
 
-var character : CharacterBody2D
+var player : CharacterBody2D
+var playback : AnimationNodeStateMachinePlayback
 var next_state : State
 
 
+
+#
+#func _ready():
+#	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 
 func state_process(delta):
 	pass

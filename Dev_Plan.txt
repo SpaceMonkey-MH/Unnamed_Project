@@ -10,7 +10,7 @@
 	- Stats
 		- Health
 		- Damage Multiplier
-		- 
+		- Regen?
 	- State Machine
 		- Machine
 		- States
@@ -32,3 +32,5 @@
 			- Jumping
 			- Landing
 - UI
+	- Menu
+	- Health Bar

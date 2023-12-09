@@ -1,19 +1,19 @@
 extends Node
 
-class_name CharacterStateMachine
+class_name CharacterMovementStateMachine
 
 @export var player : CharacterBody2D
 @export var animatioon_tree : AnimationTree
-@export var current_state : State
+@export var current_state : MovementState
 
-var states : Array[State]
+var states : Array[MovementState]
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for child in get_children():
-		if (child is State):
+		if (child is MovementState):
 			states.append(child)
 			
 			# Set the states up with what they need to function
@@ -52,7 +52,7 @@ func check_if_can_move():
 	return current_state.can_move
 
 
-func switch_states(new_state : State):
+func switch_states(new_state : MovementState):
 	if(current_state != null):
 		current_state.on_exit()
 		current_state.next_state = null

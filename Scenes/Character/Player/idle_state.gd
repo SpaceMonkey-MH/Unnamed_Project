@@ -1,4 +1,4 @@
-extends State
+extends MovementState
 
 class_name IdleState
 
@@ -7,6 +7,7 @@ class_name IdleState
 @export var run_state : RunState
 @export var run_animation_name : String = "run"
 @export var jump_animation_name : String = "jump_start"
+@export var air_animation_name : String = "air"
 
 
 
@@ -14,6 +15,9 @@ func state_process(delta):
 	if player.velocity.x != 0:
 		next_state = run_state
 		playback.travel(run_animation_name)
+	if !player.is_on_floor():
+		next_state = air_state
+		playback.travel(air_animation_name)
 
 
 func state_input(event : InputEvent):

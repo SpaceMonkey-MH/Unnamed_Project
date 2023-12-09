@@ -4,11 +4,11 @@ extends CharacterBody2D
 
 # Defining variables:
 @export var move_speed : float = 300.0	# Speed on the movement of the character, in pixels/second.
-@export var air_jumps_max : int = 1	# Maximum number of air jumps.
+@export var air_jumps_max : int = 3	# Maximum number of air jumps.
 var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
 
 # Base variable, not used directly for the jump.
-@export var jump_height : float = 100.0	# Height of the jump, in pixels.
+@export var jump_height : float = 120.0	# Height of the jump, in pixels.
 @export var jump_time_to_peak : float = 0.5	# Time for the player to reach the peak of the jump, in seconds.
 @export var jump_time_to_descent : float = 0.4	# Time to reach the ground during the jump, in seconds.
 
@@ -17,7 +17,7 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
-@onready var state_machine : CharacterStateMachine = $CharacterStateMachine
+@onready var state_machine : CharacterMovementStateMachine = $CharacterMovementStateMachine
 @onready var animation_tree : AnimationTree = $AnimationTree
 
 # // From template:
@@ -67,7 +67,10 @@ func _physics_process(delta):
 	velocity.y += get_gravity() * delta
 	
 	# Allows movement of the player. 
-	velocity.x = get_input_direction() * move_speed * int(state_machine.check_if_can_move())
+	var direction = get_input_direction()
+	velocity.x = direction * move_speed * int(state_machine.check_if_can_move())
+	$Sprite2D.flip_h = direction < 0	# This doesn't do anything yet, because the sprites are symetrical.
+										# Maybe this doesn't work at all.
 #
 #	if Input.is_action_just_pressed("jump"):
 #		if is_on_floor():

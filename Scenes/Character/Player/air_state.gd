@@ -1,4 +1,4 @@
-extends State
+extends MovementState
 
 class_name AirState
 
@@ -24,7 +24,7 @@ func state_input(event : InputEvent):
 func on_exit():
 	if next_state is LandingState:
 		air_jumps_current = air_jumps_max
-		playback.travel(landing_animation_name)
+		playback.travel(landing_animation_name)	# Maybe this should go in state_process instead.
 
 
 func air_jump():
@@ -39,5 +39,5 @@ func air_jump():
 func _on_animation_tree_animation_finished(anim_name):
 	if (anim_name == air_jump_animation_name):
 		playback.travel(air_animation_name)
-		print("hello")
+#		print("hello")
 		

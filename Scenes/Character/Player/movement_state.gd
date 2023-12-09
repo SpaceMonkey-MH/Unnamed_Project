@@ -1,6 +1,6 @@
-extends Node
+extends State
 
-class_name State
+class_name MovementState
 
 
 var move_speed : float
@@ -21,22 +21,10 @@ var fall_gravity : float
 
 var player : CharacterBody2D
 var playback : AnimationNodeStateMachinePlayback
-var next_state : State
+var next_state : MovementState
 
 
 
 #
 #func _ready():
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
-
-func state_process(delta):
-	pass
-
-func state_input(event : InputEvent):
-	pass
-
-func on_enter():
-	pass
-
-func on_exit():
-	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv6wtd2pqvjb5"]
+[gd_scene load_steps=5 format=3 uid="uid://cv6wtd2pqvjb5"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/attack_dummy.gd" id="1_1jhl5"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="1_o3jmd"]
@@ -7,13 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmp6b"]
 size = Vector2(40, 40)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5s1wq"]
-size = Vector2(40, 40)
-
 [node name="AttackDummy" type="CharacterBody2D"]
 script = ExtResource("1_1jhl5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pmp6b")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -25,8 +22,6 @@ offset_bottom = 20.0
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("1_o3jmd")]
 character = NodePath("..")
 
-[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_m7by1")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_box") instance=ExtResource("2_m7by1")]
 health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-shape = SubResource("RectangleShape2D_5s1wq")
+hit_box = NodePath("../HitBox")

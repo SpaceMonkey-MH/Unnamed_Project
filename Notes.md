@@ -2,7 +2,10 @@
 	because the other options (making it small and scaling, or stretching) are not satisfying.
 	This makes everything very zoomed out but it is ok.
 
-- 2023/12/06 : The animations are set up, but there is a lot of dupplication in the code. It's not a big deal.
+- 2023/12/06: The animations are set up, but there is a lot of dupplication in the code. It's not a big deal.
 
-- 2023/12/08 : I created a new level of State scripts so that the jump variables aren't shared by all States.
+- 2023/12/08: I created a new level of State scripts so that the jump variables aren't shared by all States.
 	Can Move is useless for now.
+
+- 2023/12/10: I have to make a choice between letting the player cancel the landing animation to jump again or not.
+	I think it is better if he can do it.

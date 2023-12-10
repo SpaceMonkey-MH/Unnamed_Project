@@ -13,7 +13,6 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/landing_state.gd" id="11_umr8v"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/idle_state.gd" id="12_kfhhe"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/state_debug_label.gd" id="13_ympu1"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/movement_state.gd" id="14_um6ea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(40, 40)
@@ -334,9 +333,12 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bkf4m"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qs40r"]
+states/End/position = Vector2(902, 100)
 states/air/node = SubResource("AnimationNodeAnimation_lp72g")
-states/air/position = Vector2(583, 100)
+states/air/position = Vector2(595, 122)
 states/air_jump/node = SubResource("AnimationNodeAnimation_fevyr")
 states/air_jump/position = Vector2(563, 197)
 states/idle/node = SubResource("AnimationNodeAnimation_84un0")
@@ -344,17 +346,17 @@ states/idle/position = Vector2(337, -22)
 states/jump_start/node = SubResource("AnimationNodeAnimation_etpii")
 states/jump_start/position = Vector2(440, 100)
 states/landing/node = SubResource("AnimationNodeAnimation_nbnvn")
-states/landing/position = Vector2(726, 100)
+states/landing/position = Vector2(720, 57)
 states/run/node = SubResource("AnimationNodeAnimation_7184w")
 states/run/position = Vector2(337, 232)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_nq50v"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_wqwe5"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_cjvwi"), "idle", "jump_start", SubResource("AnimationNodeStateMachineTransition_e6l58"), "run", "jump_start", SubResource("AnimationNodeStateMachineTransition_28qvp"), "air", "landing", SubResource("AnimationNodeStateMachineTransition_fw1v3"), "jump_start", "air", SubResource("AnimationNodeStateMachineTransition_3dm5p"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_a6sb8"), "jump_start", "air_jump", SubResource("AnimationNodeStateMachineTransition_hvggt"), "air", "air_jump", SubResource("AnimationNodeStateMachineTransition_oq3ls"), "air_jump", "air", SubResource("AnimationNodeStateMachineTransition_vg4xv")]
-graph_offset = Vector2(-91, -180)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_nq50v"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_wqwe5"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_cjvwi"), "idle", "jump_start", SubResource("AnimationNodeStateMachineTransition_e6l58"), "run", "jump_start", SubResource("AnimationNodeStateMachineTransition_28qvp"), "air", "landing", SubResource("AnimationNodeStateMachineTransition_fw1v3"), "jump_start", "air", SubResource("AnimationNodeStateMachineTransition_3dm5p"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_a6sb8"), "jump_start", "air_jump", SubResource("AnimationNodeStateMachineTransition_hvggt"), "air", "air_jump", SubResource("AnimationNodeStateMachineTransition_oq3ls"), "air_jump", "air", SubResource("AnimationNodeStateMachineTransition_vg4xv"), "landing", "jump_start", SubResource("AnimationNodeStateMachineTransition_bkf4m")]
+graph_offset = Vector2(-45, 23)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8tv8j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_xw5x4")
+texture = ExtResource("5_jsco3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w47ok")
@@ -386,16 +388,11 @@ can_move = null
 [node name="Air" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("10_tvrhh")
 landing_state = NodePath("../Landing")
-air_jump_animation_name = null
-air_animation_name = null
-landing_animation_name = null
-can_move = null
 
-[node name="Landing" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("idle_state")]
+[node name="Landing" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("idle_state", "air_state")]
 script = ExtResource("11_umr8v")
-landing_animation_name = null
 idle_state = NodePath("../Idle")
-can_move = null
+air_state = NodePath("../Air")
 
 [node name="Idle" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("air_state", "run_state")]
 script = ExtResource("12_kfhhe")
@@ -414,9 +411,6 @@ offset_bottom = -32.0
 text = "Movement State:"
 script = ExtResource("13_ympu1")
 state_machine = NodePath("../CharacterMovementStateMachine")
-
-[node name="State" type="Node" parent="."]
-script = ExtResource("14_um6ea")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]

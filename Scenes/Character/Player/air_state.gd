@@ -19,6 +19,7 @@ func state_process(delta):
 
 func state_input(event : InputEvent):
 	if event.is_action_pressed("jump") && air_jumps_current > 0:
+		pass
 		air_jump()
 
 func on_exit():

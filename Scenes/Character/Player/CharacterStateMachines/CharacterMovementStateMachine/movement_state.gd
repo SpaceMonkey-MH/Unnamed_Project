@@ -19,11 +19,6 @@ var fall_gravity : float
 
 @export var can_move : bool = true
 
-var player : CharacterBody2D
-var playback : AnimationNodeStateMachinePlayback
-var next_state : MovementState
-
-
 
 #
 #func _ready():

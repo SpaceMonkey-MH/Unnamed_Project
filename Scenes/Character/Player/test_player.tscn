@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2rybyuy3d4ye"]
 
-[ext_resource type="Script" path="res://Scenes/Character/Player/test_player.gd" id="1_wvhg3"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/test_player.gd" id="1_a00bd"]
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="2_otghk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l5osn"]
 size = Vector2(129, 128)
 
 [node name="TestPlayer" type="CharacterBody2D"]
-script = ExtResource("1_wvhg3")
+script = ExtResource("1_a00bd")
 jump_height = 100.0
 jump_time_to_peak = 0.5
 jump_time_to_descent = 0.4

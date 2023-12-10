@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=55 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://de3bv7571svru" path="res://Assets/Sprites/Player/Player_V1_40p_green.png" id="2_xw5x4"]
@@ -7,12 +7,25 @@
 [ext_resource type="Texture2D" uid="uid://beoji54vqxmeu" path="res://Assets/Sprites/Player/Player_V1_40p_blue.png" id="5_jsco3"]
 [ext_resource type="Texture2D" uid="uid://caapj6gog8tar" path="res://Assets/Sprites/Player/Player_V1_40p_yellow.png" id="6_48wmp"]
 [ext_resource type="Texture2D" uid="uid://vssh7y81m56x" path="res://Assets/Sprites/Player/Player_V1_40p_black.png" id="7_oieb4"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/character_movement_state_machine.gd" id="8_qk1v5"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/run_state.gd" id="9_q284i"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/air_state.gd" id="10_tvrhh"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/landing_state.gd" id="11_umr8v"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/idle_state.gd" id="12_kfhhe"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/state_debug_label.gd" id="13_ympu1"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="8_8i88a"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/run_state.gd" id="9_vwgpy"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/air_state.gd" id="10_cs3ji"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/landing_state.gd" id="11_p7vgs"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/idle_state.gd" id="12_4t18e"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="13_nnmwf"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/character_fire_state_machine.gd" id="14_j1tkn"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/not_firing.gd" id="15_b7158"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/firing.gd" id="16_nowjs"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/empty.gd" id="17_buhx5"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/character_weapons_state_machine.gd" id="17_feavh"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon1.gd" id="18_w7tqc"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon2.gd" id="19_wela8"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon3.gd" id="20_rfo25"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon4.gd" id="21_uxfjm"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon5.gd" id="22_umggx"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon6.gd" id="23_lvog5"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon8.gd" id="25_6vkpp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(40, 40)
@@ -371,13 +384,13 @@ tree_root = SubResource("AnimationNodeStateMachine_qs40r")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "animatioon_tree", "current_state")]
-script = ExtResource("8_qk1v5")
+script = ExtResource("8_8i88a")
 player = NodePath("..")
 animatioon_tree = NodePath("../AnimationTree")
 current_state = NodePath("Idle")
 
 [node name="Run" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("air_state", "idle_state")]
-script = ExtResource("9_q284i")
+script = ExtResource("9_vwgpy")
 air_state = NodePath("../Air")
 idle_state = NodePath("../Idle")
 jump_animation_name = null
@@ -386,16 +399,16 @@ air_animation_name = null
 can_move = null
 
 [node name="Air" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("landing_state")]
-script = ExtResource("10_tvrhh")
+script = ExtResource("10_cs3ji")
 landing_state = NodePath("../Landing")
 
 [node name="Landing" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("idle_state", "air_state")]
-script = ExtResource("11_umr8v")
+script = ExtResource("11_p7vgs")
 idle_state = NodePath("../Idle")
 air_state = NodePath("../Air")
 
 [node name="Idle" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("air_state", "run_state")]
-script = ExtResource("12_kfhhe")
+script = ExtResource("12_4t18e")
 air_state = NodePath("../Air")
 run_state = NodePath("../Run")
 run_animation_name = null
@@ -409,8 +422,66 @@ offset_top = -58.0
 offset_right = 25.0
 offset_bottom = -32.0
 text = "Movement State:"
-script = ExtResource("13_ympu1")
+script = ExtResource("13_nnmwf")
 state_machine = NodePath("../CharacterMovementStateMachine")
+
+[node name="CharacterFireStateMachine" type="Node" parent="."]
+script = ExtResource("14_j1tkn")
+
+[node name="NotFiring" type="Node" parent="CharacterFireStateMachine"]
+script = ExtResource("15_b7158")
+
+[node name="Firing" type="Node" parent="CharacterFireStateMachine"]
+script = ExtResource("16_nowjs")
+
+[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("17_feavh")
+current_state = NodePath("Empty")
+
+[node name="Empty" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("17_buhx5")
+next_weapon_state = NodePath("../Weapon1")
+previous_weapon_state = NodePath("../Weapon8")
+
+[node name="Weapon1" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("18_w7tqc")
+next_weapon_state = NodePath("../Weapon2")
+previous_weapon_state = NodePath("../Empty")
+
+[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("19_wela8")
+next_weapon_state = NodePath("../Weapon3")
+previous_weapon_state = NodePath("../Weapon1")
+
+[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("20_rfo25")
+next_weapon_state = NodePath("../Weapon4")
+previous_weapon_state = NodePath("../Weapon2")
+
+[node name="Weapon4" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("21_uxfjm")
+next_weapon_state = NodePath("../Weapon5")
+previous_weapon_state = NodePath("../Weapon3")
+
+[node name="Weapon5" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("22_umggx")
+next_weapon_state = NodePath("../Weapon6")
+previous_weapon_state = NodePath("../Weapon4")
+
+[node name="Weapon6" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("23_lvog5")
+next_weapon_state = NodePath("../Weapon7")
+previous_weapon_state = NodePath("../Weapon5")
+
+[node name="Weapon7" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("24_spe2t")
+next_weapon_state = NodePath("../Weapon8")
+previous_weapon_state = NodePath("../Weapon6")
+
+[node name="Weapon8" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("25_6vkpp")
+next_weapon_state = NodePath("../Empty")
+previous_weapon_state = NodePath("../Weapon7")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]

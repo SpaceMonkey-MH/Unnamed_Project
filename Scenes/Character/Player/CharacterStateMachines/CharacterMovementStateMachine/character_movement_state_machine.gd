@@ -38,7 +38,7 @@ func _ready():
 
 
 		else:
-			push_warning("Child " + child.name + " is not a State for CharacterStateMachine")
+			push_warning("Child " + child.name + " is not a MovementState for CharacterStateMachine.")
 
 
 func _physics_process(delta):

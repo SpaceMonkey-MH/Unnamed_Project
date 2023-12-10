@@ -13,11 +13,16 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 @export var jump_time_to_descent : float = 0.4	# Time to reach the ground during the jump, in seconds.
 
 # Variable directly used for the jump and the falling.
+# Velocity applied to the player when jumping.
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+# Gravity applied to the player during the rising part of the jump.
 @onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
+# Gravity applied to the plyaer during the fall.
 @onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
 
-@onready var state_machine : CharacterMovementStateMachine = $CharacterMovementStateMachine
+# CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
+@onready var movement_state_machine : CharacterMovementStateMachine = $CharacterMovementStateMachine
+# AnimationTree as a variable so it can be activated.
 @onready var animation_tree : AnimationTree = $AnimationTree
 
 # // From template:
@@ -40,7 +45,7 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 
 func _ready():
-	animation_tree.active = true
+	animation_tree.active = true	# Activating the animation tree so that the animations play.
 
 func _physics_process(delta):
 	# // Template from the editor:
@@ -67,8 +72,10 @@ func _physics_process(delta):
 	velocity.y += get_gravity() * delta
 	
 	# Allows movement of the player. 
-	var direction = get_input_direction()
-	velocity.x = direction * move_speed * int(state_machine.check_if_can_move())
+	var direction = get_input_direction()	# Get the direction of the input.
+	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
+	# and then by whether the player can move or not.
+	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
 	$Sprite2D.flip_h = direction < 0	# This doesn't do anything yet, because the sprites are symetrical.
 										# Maybe this doesn't work at all.
 #
@@ -80,10 +87,11 @@ func _physics_process(delta):
 ##			pass
 ##			air_jump()
 
-	move_and_slide()
+	move_and_slide()	# Apply the above changes.
 
-
+# Computes the gravity to use for the player.
 func get_gravity():
+	# If the player is rising, use the jump_gravity, else use the fall_gravity.
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
 
 #
@@ -96,5 +104,8 @@ func get_gravity():
 #	velocity.y = jump_velocity
 
 
+# Get the direction of the input.
 func get_input_direction():
+	# If the input is "left", returns -1, if the input is "right", returns 1, if the input is none or both,
+	# returns 0.
 	return Input.get_axis("left", "right")

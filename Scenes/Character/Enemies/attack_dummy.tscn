@@ -8,10 +8,8 @@
 size = Vector2(40, 40)
 
 [node name="AttackDummy" type="CharacterBody2D"]
+collision_layer = 3
 script = ExtResource("1_1jhl5")
-
-[node name="HitBox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_pmp6b")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0
@@ -19,9 +17,14 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pmp6b")
+
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("1_o3jmd")]
 character = NodePath("..")
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_box") instance=ExtResource("2_m7by1")]
 health_component = NodePath("../HealthComponent")
 hit_box = NodePath("../HitBox")
+
+[connection signal="area_entered" from="HitBoxComponent" to="." method="_on_hit_box_component_area_entered"]

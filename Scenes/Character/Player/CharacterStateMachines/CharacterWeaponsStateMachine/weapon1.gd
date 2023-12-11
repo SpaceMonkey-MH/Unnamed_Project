@@ -21,7 +21,7 @@ func state_input(event : InputEvent):
 func weapon_fire(spawn_pos : Vector2, target_pos : Vector2):
 	var bullet = bullet_1_scene.instantiate()
 	var rotation = spawn_pos.angle_to_point(target_pos)
-	print(rotation)
+#	print(rotation)
 	bullet.position = spawn_pos
 	bullet.rotate(rotation)
 	bullet.direction = target_pos - spawn_pos

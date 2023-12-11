@@ -30,3 +30,7 @@ func _physics_process(delta):
 
 func death():
 	queue_free()
+
+
+func _on_hit_box_component_area_entered(area):
+	print(area)

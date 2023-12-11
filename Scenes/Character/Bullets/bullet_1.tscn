@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bylc6wriv4awj"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Components/attack_component.gd" id="1_8hqkg"]
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/bullet_1.gd" id="1_vcstq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tha54"]
+radius = 5.0
+height = 40.0
+
+[node name="Bullet1" type="CharacterBody2D"]
+position = Vector2(-16, -4)
+collision_layer = 2
+script = ExtResource("1_vcstq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -1.0
+offset_right = 36.0
+offset_bottom = 9.0
+color = Color(0.760784, 0.054902, 0.156863, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 4)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_tha54")
+
+[node name="AttackComponent" type="Node2D" parent="." node_paths=PackedStringArray("hit_box")]
+script = ExtResource("1_8hqkg")
+hit_box = NodePath("../CollisionShape2D")

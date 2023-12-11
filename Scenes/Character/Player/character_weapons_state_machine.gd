@@ -2,6 +2,7 @@ extends Node
 
 class_name CharacterWeaponsStateMachine
 
+@export var player : CharacterBody2D
 @export var current_state : WeaponsState
 
 var states : Array[WeaponsState]
@@ -13,6 +14,7 @@ func _ready():
 			states.append(child)	# Maybe this is useless, idk.
 			
 			# Set the states up with what they need to function
+			child.player = player
 			
 		else:
 			push_warning("Child " + child.name + "is not a WeaponsState for CharacterWeaponsStateMachine.")

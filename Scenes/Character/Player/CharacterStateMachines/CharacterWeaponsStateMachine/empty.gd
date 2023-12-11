@@ -8,9 +8,12 @@ class_name EmptyState
 
 func state_process(delta):
 	if Input.is_action_just_pressed("fire"):
-		print("fire")	# Will print once per click.
-	if Input.is_action_pressed("fire"):
-		print("firing")	# Will print continuesly during the hold.
+		weapon_fire(get_parent().get_parent().position, player.get_global_mouse_position())
+#		print("fire")	# Will print once per click.
+#	if Input.is_action_pressed("fire"):
+#		weapon_fire(player.get_global_mouse_position())
+#		print("firing")	# Will print continuesly during the hold.
+#		print(player.get_global_mouse_position())
 
 func state_input(event : InputEvent):
 	if event.is_action_pressed("next_weapon"):
@@ -21,3 +24,5 @@ func state_input(event : InputEvent):
 #		print("fire")
 
 #	print("empty: ", next_state)
+
+

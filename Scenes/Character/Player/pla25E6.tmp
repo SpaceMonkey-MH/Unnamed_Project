@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=55 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://de3bv7571svru" path="res://Assets/Sprites/Player/Player_V1_40p_green.png" id="2_xw5x4"]
@@ -20,7 +20,6 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/character_weapons_state_machine.gd" id="17_feavh"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon1.gd" id="18_w7tqc"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon2.gd" id="19_wela8"]
-[ext_resource type="PackedScene" uid="uid://bylc6wriv4awj" path="res://Scenes/Character/Bullets/bullet_1.tscn" id="20_fgewv"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon3.gd" id="20_rfo25"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon4.gd" id="21_uxfjm"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon5.gd" id="22_umggx"]
@@ -429,62 +428,4 @@ state_machine = NodePath("../CharacterMovementStateMachine")
 [node name="CharacterFireStateMachine" type="Node" parent="."]
 script = ExtResource("14_j1tkn")
 
-[node name="NotFiring" type="Node" parent="CharacterFireStateMachine"]
-script = ExtResource("15_b7158")
-
-[node name="Firing" type="Node" parent="CharacterFireStateMachine"]
-script = ExtResource("16_nowjs")
-
-[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
-script = ExtResource("17_feavh")
-player = NodePath("..")
-current_state = NodePath("Empty")
-
-[node name="Empty" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("17_buhx5")
-next_weapon_state = NodePath("../Weapon1")
-previous_weapon_state = NodePath("../Weapon8")
-
-[node name="Weapon1" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("18_w7tqc")
-bullet_1_scene = ExtResource("20_fgewv")
-next_weapon_state = NodePath("../Weapon2")
-previous_weapon_state = NodePath("../Empty")
-
-[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("19_wela8")
-next_weapon_state = NodePath("../Weapon3")
-previous_weapon_state = NodePath("../Weapon1")
-
-[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("20_rfo25")
-next_weapon_state = NodePath("../Weapon4")
-previous_weapon_state = NodePath("../Weapon2")
-
-[node name="Weapon4" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("21_uxfjm")
-next_weapon_state = NodePath("../Weapon5")
-previous_weapon_state = NodePath("../Weapon3")
-
-[node name="Weapon5" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("22_umggx")
-next_weapon_state = NodePath("../Weapon6")
-previous_weapon_state = NodePath("../Weapon4")
-
-[node name="Weapon6" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("23_lvog5")
-next_weapon_state = NodePath("../Weapon7")
-previous_weapon_state = NodePath("../Weapon5")
-
-[node name="Weapon7" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("24_spe2t")
-next_weapon_state = NodePath("../Weapon8")
-previous_weapon_state = NodePath("../Weapon6")
-
-[node name="Weapon8" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("25_6vkpp")
-next_weapon_state = NodePath("../Empty")
-previous_weapon_state = NodePath("../Weapon7")
-
-[connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
-[connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
+[node name="NotFiring" type="Node" parent="CharacterFireState

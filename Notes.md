@@ -9,3 +9,10 @@
 
 - 2023/12/10: I have to make a choice between letting the player cancel the landing animation to jump again or not.
 	I think it is better if he can do it.
+
+- 2023/12/11: get_global_mouse_position() is a funtion of CanvasItem, so it can't be used directly by a simple Node,
+	I had to find a workaround. Another solution could be to change the type of the StateMachine parts
+	form Node to Node2D.
+	The firing part is working, but the bullets are moving the player, so I had to change the collision mask/layer,
+	I don't know how this will work out but it seems to be a hassle.
+	The attack component seems useless.

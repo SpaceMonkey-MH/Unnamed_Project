@@ -5,10 +5,10 @@ class_name EmptyState
 @export var next_weapon_state : Weapon1
 @export var previous_weapon_state : Weapon8
 
-
-func state_process(delta):
-	if Input.is_action_just_pressed("fire"):
-		weapon_fire(get_parent().get_parent().position, player.get_global_mouse_position())
+#
+#func state_process(delta):
+#	if Input.is_action_just_pressed("fire"):
+#		weapon_fire(get_parent().get_parent().position, player.get_global_mouse_position())	# Warning: not correct!
 #		print("fire")	# Will print once per click.
 #	if Input.is_action_pressed("fire"):
 #		weapon_fire(player.get_global_mouse_position())

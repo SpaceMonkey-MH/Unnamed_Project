@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=56 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://de3bv7571svru" path="res://Assets/Sprites/Player/Player_V1_40p_green.png" id="2_xw5x4"]
@@ -27,7 +27,6 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon6.gd" id="23_lvog5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon8.gd" id="25_6vkpp"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/weapons_state_debug_label.gd" id="28_0h485"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(40, 40)
@@ -452,25 +451,15 @@ bullet_1_scene = ExtResource("20_fgewv")
 next_weapon_state = NodePath("../Weapon2")
 previous_weapon_state = NodePath("../Empty")
 
-[node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon1"]
-one_shot = true
-
 [node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("19_wela8")
 next_weapon_state = NodePath("../Weapon3")
 previous_weapon_state = NodePath("../Weapon1")
-bullet_2_scene = ExtResource("20_fgewv")
-
-[node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
-one_shot = true
 
 [node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("20_rfo25")
 next_weapon_state = NodePath("../Weapon4")
 previous_weapon_state = NodePath("../Weapon2")
-
-[node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon3"]
-one_shot = true
 
 [node name="Weapon4" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("21_uxfjm")
@@ -497,16 +486,5 @@ script = ExtResource("25_6vkpp")
 next_weapon_state = NodePath("../Empty")
 previous_weapon_state = NodePath("../Weapon7")
 
-[node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_left = -108.0
-offset_top = -80.0
-offset_right = 12.0
-offset_bottom = -54.0
-text = "Weapons State:"
-script = ExtResource("28_0h485")
-state_machine = NodePath("../CharacterWeaponsStateMachine")
-
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon1/Weapon1CoolDown" to="CharacterWeaponsStateMachine/Weapon1" method="_on_weapon_1_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon2/Weapon2CoolDown" to="CharacterWeaponsStateMachine/Weapon2" method="_on_weapon_2_cool_down_timeout"]

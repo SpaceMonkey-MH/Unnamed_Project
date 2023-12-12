@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+@export var flashing_time : float = 0.1	# The amount of time the sprite will be flashing a color.
+@export var flashing_color : Color = Color.RED	# The color the sprite will be flashing.
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -27,6 +29,13 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+
+func take_damage():
+	get_node("ColorRect").modulate = flashing_color
+#	print("hello")
+	await get_tree().create_timer(flashing_time).timeout
+	get_node("ColorRect").modulate = Color.WHITE
+	
 
 func death():
 	queue_free()

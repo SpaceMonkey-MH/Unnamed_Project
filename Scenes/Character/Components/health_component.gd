@@ -14,6 +14,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func damage(attack : Attack):
 	health -= attack.attack_damage
+	character.take_damage()
 	
 	if health <= 0:
 		character.death()

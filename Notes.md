@@ -16,3 +16,5 @@
 	The firing part is working, but the bullets are moving the player, so I had to change the collision mask/layer,
 	I don't know how this will work out but it seems to be a hassle.
 	The attack component seems useless.
+
+- 2023/12/12: 

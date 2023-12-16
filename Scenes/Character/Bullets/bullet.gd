@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 class_name Bullet
 
-@export var attack_damage : float = 10
-@export var speed_factor : float = 10
+var attack_damage : float = 10
+var speed_factor : float = 10
 var direction : Vector2 = Vector2.ZERO
 
 
@@ -16,12 +16,15 @@ func _physics_process(delta):
 #		print(collider.has_node("HitBoxComponent"))
 #		print(collider.get_node("HitBoxComponent"))
 #		print(collider)
-		if collider.has_node("HitBoxComponent"):
-			collider.get_node("HitBoxComponent").damage(attack)
-#			print("hello")
-			explosion_effect()
-			area_of_effect()
-			queue_free()
+#		if collider.has_node("HitBoxComponent"):
+#			collider.get_node("HitBoxComponent").damage(attack)
+		for child in collider.get_children():
+			if child is HitBoxComponent:
+				child.damage(attack)
+	#			print("hello")
+				explosion_effect()
+				area_of_effect()
+				queue_free()
 		if collider is TileMap:
 #			print("hello2")
 			explosion_effect()

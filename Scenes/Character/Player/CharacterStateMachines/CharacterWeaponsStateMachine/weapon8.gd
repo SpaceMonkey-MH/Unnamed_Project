@@ -3,7 +3,7 @@ extends WeaponsState
 class_name Weapon8
 
 
-@export var next_weapon_state : EmptyState
+@export var next_weapon_state : MeleeWeaponState
 @export var previous_weapon_state : Weapon7
 
 func state_input(event : InputEvent):

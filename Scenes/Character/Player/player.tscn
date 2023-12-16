@@ -1,6 +1,8 @@
-[gd_scene load_steps=57 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=64 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
+[ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_5471m"]
+[ext_resource type="Texture2D" uid="uid://cfkf6ths8tyv3" path="res://Assets/Sprites/Player/Player_V1_40p_pink.png" id="2_kpxjq"]
 [ext_resource type="Texture2D" uid="uid://de3bv7571svru" path="res://Assets/Sprites/Player/Player_V1_40p_green.png" id="2_xw5x4"]
 [ext_resource type="Texture2D" uid="uid://5eytmdjxkiki" path="res://Assets/Sprites/Player/Player_V1_40p_red.png" id="3_yxg8s"]
 [ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="4_jdn1m"]
@@ -16,18 +18,19 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/character_fire_state_machine.gd" id="14_j1tkn"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/not_firing.gd" id="15_b7158"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/firing.gd" id="16_nowjs"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/empty.gd" id="17_buhx5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/character_weapons_state_machine.gd" id="17_feavh"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon1.gd" id="18_w7tqc"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon.gd" id="18_yssnd"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon2.gd" id="19_wela8"]
 [ext_resource type="PackedScene" uid="uid://bylc6wriv4awj" path="res://Scenes/Character/Bullets/bullet_1.tscn" id="20_fgewv"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon3.gd" id="20_rfo25"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/melee_weapon.gd" id="21_cr6j0"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon4.gd" id="21_uxfjm"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon5.gd" id="22_umggx"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon6.gd" id="23_lvog5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon8.gd" id="25_6vkpp"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/weapons_state_debug_label.gd" id="28_0h485"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(40, 40)
@@ -290,6 +293,86 @@ tracks/2/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_ues7y"]
+resource_name = "melee_ground_attack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_kpxjq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tby3b"]
+resource_name = "melee_air_attack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_5471m")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s4kqq"]
 _data = {
 "RESET": SubResource("Animation_0obfs"),
@@ -298,6 +381,8 @@ _data = {
 "idle": SubResource("Animation_br8x2"),
 "jump_start": SubResource("Animation_rmuie"),
 "landing": SubResource("Animation_gl5bu"),
+"melee_air_attack": SubResource("Animation_tby3b"),
+"melee_ground_attack": SubResource("Animation_ues7y"),
 "run": SubResource("Animation_bmtkv")
 }
 
@@ -365,13 +450,19 @@ states/landing/position = Vector2(720, 57)
 states/run/node = SubResource("AnimationNodeAnimation_7184w")
 states/run/position = Vector2(337, 232)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_nq50v"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_wqwe5"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_cjvwi"), "idle", "jump_start", SubResource("AnimationNodeStateMachineTransition_e6l58"), "run", "jump_start", SubResource("AnimationNodeStateMachineTransition_28qvp"), "air", "landing", SubResource("AnimationNodeStateMachineTransition_fw1v3"), "jump_start", "air", SubResource("AnimationNodeStateMachineTransition_3dm5p"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_a6sb8"), "jump_start", "air_jump", SubResource("AnimationNodeStateMachineTransition_hvggt"), "air", "air_jump", SubResource("AnimationNodeStateMachineTransition_oq3ls"), "air_jump", "air", SubResource("AnimationNodeStateMachineTransition_vg4xv"), "landing", "jump_start", SubResource("AnimationNodeStateMachineTransition_bkf4m")]
-graph_offset = Vector2(-45, 23)
+graph_offset = Vector2(-114, -91)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpew3"]
+size = Vector2(22, 94)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2v266"]
+size = Vector2(50, 22)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8tv8j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("5_jsco3")
+texture = ExtResource("2_5471m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w47ok")
@@ -439,24 +530,30 @@ script = ExtResource("16_nowjs")
 [node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
 script = ExtResource("17_feavh")
 player = NodePath("..")
-current_state = NodePath("Empty")
+current_state = NodePath("Melee")
 
-[node name="Empty" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("17_buhx5")
+[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
+script = ExtResource("18_yssnd")
+melee_weapon = NodePath("../../MeleeWeapon")
 next_weapon_state = NodePath("../Weapon1")
 previous_weapon_state = NodePath("../Weapon8")
+timer = NodePath("MeleeWeaponCoolDown")
 
-[node name="Weapon1" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="MeleeWeaponCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]
+
+[node name="Weapon1" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("18_w7tqc")
+timer = NodePath("Weapon1CoolDown")
 bullet_1_scene = ExtResource("20_fgewv")
 next_weapon_state = NodePath("../Weapon2")
-previous_weapon_state = NodePath("../Empty")
+previous_weapon_state = NodePath("../Melee")
 
 [node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon1"]
 one_shot = true
 
-[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("19_wela8")
+timer = NodePath("Weapon2CoolDown")
 next_weapon_state = NodePath("../Weapon3")
 previous_weapon_state = NodePath("../Weapon1")
 bullet_2_scene = ExtResource("20_fgewv")
@@ -494,7 +591,7 @@ previous_weapon_state = NodePath("../Weapon6")
 
 [node name="Weapon8" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("25_6vkpp")
-next_weapon_state = NodePath("../Empty")
+next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Weapon7")
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
@@ -503,10 +600,32 @@ offset_top = -80.0
 offset_right = 12.0
 offset_bottom = -54.0
 text = "Weapons State:"
-script = ExtResource("28_0h485")
+script = ExtResource("28_fvbqe")
 state_machine = NodePath("../CharacterWeaponsStateMachine")
+
+[node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("melee_weapon_state")]
+script = ExtResource("21_cr6j0")
+melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
+
+[node name="RightHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+position = Vector2(36, 0)
+shape = SubResource("RectangleShape2D_jpew3")
+
+[node name="LeftHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+position = Vector2(-36, 0)
+shape = SubResource("RectangleShape2D_jpew3")
+
+[node name="BottomHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_2v266")
+
+[node name="TopHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_2v266")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon1/Weapon1CoolDown" to="CharacterWeaponsStateMachine/Weapon1" method="_on_weapon_1_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon2/Weapon2CoolDown" to="CharacterWeaponsStateMachine/Weapon2" method="_on_weapon_2_cool_down_timeout"]
+[connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]

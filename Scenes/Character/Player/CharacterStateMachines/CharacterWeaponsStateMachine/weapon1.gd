@@ -2,11 +2,13 @@ extends WeaponsState
 
 class_name Weapon1
 
-@onready var timer : Timer = $Weapon1CoolDown
+@export var timer : Timer
 
 @export var bullet_1_scene : PackedScene
 @export var next_weapon_state : Weapon2
-@export var previous_weapon_state : EmptyState
+@export var previous_weapon_state : MeleeWeaponState
+@export var attack_damage : float = 20
+@export var speed_factor : float = 10
 
 var wait_time : float = 0.8
 
@@ -15,7 +17,8 @@ func _ready():
 
 func state_process(delta):
 	if Input.is_action_just_pressed("fire") && can_fire:
-		weapon_fire(get_parent().get_parent().position, player.get_global_mouse_position(), bullet_1_scene)
+		weapon_fire(get_parent().get_parent().position, player.get_global_mouse_position(), bullet_1_scene,
+		attack_damage, speed_factor)
 		can_fire = false
 		timer.start()
 

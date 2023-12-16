@@ -25,6 +25,16 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 # AnimationTree as a variable so it can be activated.
 @onready var animation_tree : AnimationTree = $AnimationTree
 
+
+######################
+# Gameplay variables #
+######################
+
+var damage_multiplier : float = 1	# Applied to every attack.
+
+
+
+
 # // From template:
 #const SPEED = 300.0
 ##const SPEED = 20
@@ -46,6 +56,8 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 
 func _ready():
 	animation_tree.active = true	# Activating the animation tree so that the animations play.
+#	rotation_degrees = 180
+#	flip_h = true
 
 func _physics_process(delta):
 	# // Template from the editor:

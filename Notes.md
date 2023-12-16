@@ -17,4 +17,6 @@
 	I don't know how this will work out but it seems to be a hassle.
 	The attack component seems useless.
 
-- 2023/12/12: 
+- 2023/12/17: For the melee attack, it seems difficult to rotate or flip the player so that it hits on the left,
+	I think I'm going to have the attack all around the player. The problem of having a big square CollisionShape2D
+	is that it detects the player as well, so I go for a ring of 4 different shapes.

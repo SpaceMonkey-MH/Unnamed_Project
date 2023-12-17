@@ -17,6 +17,8 @@ func _on_body_entered(body):
 	print(body)
 	var attack = Attack.new()
 	attack.attack_damage = melee_weapon_state.attack_damage
+	if body is Player:
+		return
 	for child in body.get_children():
 		if child is HitBoxComponent:
 			child.damage(attack)

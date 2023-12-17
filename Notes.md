@@ -19,4 +19,7 @@
 
 - 2023/12/17: For the melee attack, it seems difficult to rotate or flip the player so that it hits on the left,
 	I think I'm going to have the attack all around the player. The problem of having a big square CollisionShape2D
-	is that it detects the player as well, so I go for a ring of 4 different shapes.
+	is that it detects the player as well, so I go for a ring of 4 different shapes. It actually doesn't work xd.
+	Whatever (the hitbox detects the player as well, will have to exclude the player from the check).
+	Something will have to be done for the animation.
+	I think the components aren't done correctly, like the HBC needs a reference to the HB, but doesn't use it.

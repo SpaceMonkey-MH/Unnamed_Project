@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+class_name Player
+
 # Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
 # Defining variables:
@@ -25,6 +27,10 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 # AnimationTree as a variable so it can be activated.
 @onready var animation_tree : AnimationTree = $AnimationTree
 
+
+# Flashing is when the player takes damage
+var flashing_color : Color = Color.CHOCOLATE
+var flashing_time : float = 0.1
 
 ######################
 # Gameplay variables #
@@ -121,3 +127,13 @@ func get_input_direction():
 	# If the input is "left", returns -1, if the input is "right", returns 1, if the input is none or both,
 	# returns 0.
 	return Input.get_axis("left", "right")
+
+
+func take_damage():
+	get_node("Sprite2D").modulate = flashing_color
+#	print("hello")
+	await get_tree().create_timer(flashing_time).timeout
+	get_node("Sprite2D").modulate = Color.WHITE
+
+func death():
+	queue_free()

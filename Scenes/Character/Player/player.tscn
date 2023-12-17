@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=66 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_5471m"]
@@ -31,6 +31,8 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon8.gd" id="25_6vkpp"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
+[ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
+[ext_resource type="PackedScene" uid="uid://cpb1cy83f4b37" path="res://Scenes/Character/Components/hit_box_component.tscn" id="33_1h5ew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(40, 40)
@@ -453,10 +455,10 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(-114, -91)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jpew3"]
-size = Vector2(22, 94)
+size = Vector2(22, 110)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2v266"]
-size = Vector2(50, 22)
+size = Vector2(66, 22)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8tv8j")
@@ -608,20 +610,27 @@ script = ExtResource("21_cr6j0")
 melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
 
 [node name="RightHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(36, 0)
+position = Vector2(44, 0)
 shape = SubResource("RectangleShape2D_jpew3")
 
 [node name="LeftHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(-36, 0)
+position = Vector2(-44, 0)
 shape = SubResource("RectangleShape2D_jpew3")
 
 [node name="BottomHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(0, 36)
+position = Vector2(0, 44)
 shape = SubResource("RectangleShape2D_2v266")
 
 [node name="TopHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(0, -36)
+position = Vector2(0, -44)
 shape = SubResource("RectangleShape2D_2v266")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("32_5aed7")]
+character = NodePath("..")
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component", "hit_box") instance=ExtResource("33_1h5ew")]
+health_component = NodePath("../HealthComponent")
+hit_box = NodePath("../CollisionShape2D")
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]

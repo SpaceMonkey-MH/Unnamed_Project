@@ -24,8 +24,16 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 
 # CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
 @onready var movement_state_machine : CharacterMovementStateMachine = $CharacterMovementStateMachine
-# AnimationTree as a variable so it can be activated.
-@onready var animation_tree : AnimationTree = $AnimationTree
+# BodyAnimationTree as a variable so it can be activated.
+@export var body_animation_tree : AnimationTree 
+# WeaponsAnimationTree as a variable so it can be activated.
+@export var weapons_animation_tree : AnimationTree 
+# BodySprite2D as a variable so it can be flipped.
+@export var body_sprite_2d : Sprite2D
+# WeaponsSprite2D as a variable so it can be flipped.
+@export var weapons_sprite_2d : Sprite2D
+# Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
+var smoothed_mouse_pos : Vector2
 
 
 # Flashing is when the player takes damage
@@ -60,8 +68,14 @@ var damage_multiplier : float = 1	# Applied to every attack.
 #func _ready():
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 
+func _process(delta):
+	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
+	weapons_sprite_2d.look_at(smoothed_mouse_pos)
+
+
 func _ready():
-	animation_tree.active = true	# Activating the animation tree so that the animations play.
+	body_animation_tree.active = true	# Activating the animation trees so that the animations play.
+	weapons_animation_tree.active = true	# Activating the animation trees so that the animations play.
 #	rotation_degrees = 180
 #	flip_h = true
 
@@ -94,8 +108,8 @@ func _physics_process(delta):
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
 	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
-	$Sprite2D.flip_h = direction < 0	# This doesn't do anything yet, because the sprites are symetrical.
-										# Maybe this doesn't work at all.
+	body_sprite_2d.flip_h = direction < 0	# This doesn't do anything yet, because the sprites are symetrical.
+										# Maybe this doesn't work at all. It seems to be working.
 #
 #	if Input.is_action_just_pressed("jump"):
 #		if is_on_floor():

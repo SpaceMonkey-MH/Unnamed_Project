@@ -3,7 +3,7 @@ extends WeaponsState
 class_name MeleeWeaponState
 
 @export var melee_weapon : Area2D
-@export var next_weapon_state : Weapon1
+@export var next_weapon_state : DesertEagle
 @export var previous_weapon_state : Weapon8
 @export var timer : Timer
 @export var attack_damage = 50

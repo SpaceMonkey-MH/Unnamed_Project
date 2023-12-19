@@ -23,3 +23,6 @@
 	Whatever (the hitbox detects the player as well, will have to exclude the player from the check).
 	Something will have to be done for the animation.
 	I think the components aren't done correctly, like the HBC needs a reference to the HB, but doesn't use it.
+
+- 2023/12/18: Trying to make an explosion for Weapon3. The solution I'm implementing is to add an Area2D with
+	a CollisionShape2D to every enemy so that the exploding bullet can detect them.

@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Bullet
 
 var attack_damage : float = 10
+var aoe_attack_damage : float = 10
 var speed_factor : float = 10
 var direction : Vector2 = Vector2.ZERO
 
@@ -24,6 +25,8 @@ func _physics_process(delta):
 	#			print("hello")
 				explosion_effect()
 				area_of_effect()
+				# Creates a crash because it hits twice so it can hit something queue_freed.
+#				await get_tree().create_timer(0.001).timeout
 				queue_free()
 		if collider is TileMap:
 #			print("hello2")

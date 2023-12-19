@@ -1456,7 +1456,13 @@ texture = ExtResource("4_vwdav")
 hframes = 4
 
 [node name="AttackDummy" parent="." instance=ExtResource("5_pn2ls")]
-position = Vector2(1149, 139)
+position = Vector2(1208, 1008)
+
+[node name="AttackDummy4" parent="." instance=ExtResource("5_pn2ls")]
+position = Vector2(1172, 1006)
 
 [node name="AttackDummy2" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(571, 123)
+
+[node name="AttackDummy3" parent="." instance=ExtResource("5_pn2ls")]
+position = Vector2(1239, 1003)

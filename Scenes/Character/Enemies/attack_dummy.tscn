@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv6wtd2pqvjb5"]
+[gd_scene load_steps=6 format=3 uid="uid://cv6wtd2pqvjb5"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/attack_dummy.gd" id="1_1jhl5"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="1_o3jmd"]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmp6b"]
 size = Vector2(40, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h8gyu"]
+radius = 396.26
 
 [node name="AttackDummy" type="CharacterBody2D"]
 collision_layer = 3
@@ -34,3 +37,8 @@ offset_top = -46.0
 offset_right = 58.0
 offset_bottom = -20.0
 text = "Attack Dummy"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h8gyu")

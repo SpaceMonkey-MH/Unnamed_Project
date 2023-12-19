@@ -3,7 +3,6 @@ extends WeaponsState
 class_name Weapon2
 
 @export var timer : Timer
-
 @export var next_weapon_state : Weapon3
 @export var previous_weapon_state : Weapon1
 @export var bullet_2_scene : PackedScene
@@ -32,3 +31,4 @@ func state_input(event : InputEvent):
 
 func _on_weapon_2_cool_down_timeout():
 	can_fire = true
+#	print("hello2")

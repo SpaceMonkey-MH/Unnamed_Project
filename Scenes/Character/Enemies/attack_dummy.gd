@@ -35,7 +35,6 @@ func take_damage():
 #	print("hello")
 	await get_tree().create_timer(flashing_time).timeout
 	get_node("ColorRect").modulate = Color.WHITE
-	
 
 func death():
 	queue_free()

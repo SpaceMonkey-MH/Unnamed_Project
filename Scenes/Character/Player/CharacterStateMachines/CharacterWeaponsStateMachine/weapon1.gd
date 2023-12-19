@@ -3,7 +3,6 @@ extends WeaponsState
 class_name Weapon1
 
 @export var timer : Timer
-
 @export var bullet_1_scene : PackedScene
 @export var next_weapon_state : Weapon2
 @export var previous_weapon_state : MeleeWeaponState

@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon6.gd" id="23_lvog5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon8.gd" id="25_6vkpp"]
+[ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
 [ext_resource type="PackedScene" uid="uid://cpb1cy83f4b37" path="res://Scenes/Character/Components/hit_box_component.tscn" id="33_1h5ew"]
@@ -254,10 +255,9 @@ tracks/2/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_bmtkv"]
-resource_name = "run"
+[sub_resource type="Animation" id="Animation_tby3b"]
+resource_name = "melee_air_attack"
 length = 0.1
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -268,7 +268,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_oieb4")]
+"values": [ExtResource("2_5471m")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -335,9 +335,10 @@ tracks/2/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_tby3b"]
-resource_name = "melee_air_attack"
+[sub_resource type="Animation" id="Animation_bmtkv"]
+resource_name = "run"
 length = 0.1
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -348,7 +349,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_5471m")]
+"values": [ExtResource("7_oieb4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -454,11 +455,8 @@ states/run/position = Vector2(337, 232)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_nq50v"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_wqwe5"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_cjvwi"), "idle", "jump_start", SubResource("AnimationNodeStateMachineTransition_e6l58"), "run", "jump_start", SubResource("AnimationNodeStateMachineTransition_28qvp"), "air", "landing", SubResource("AnimationNodeStateMachineTransition_fw1v3"), "jump_start", "air", SubResource("AnimationNodeStateMachineTransition_3dm5p"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_a6sb8"), "jump_start", "air_jump", SubResource("AnimationNodeStateMachineTransition_hvggt"), "air", "air_jump", SubResource("AnimationNodeStateMachineTransition_oq3ls"), "air_jump", "air", SubResource("AnimationNodeStateMachineTransition_vg4xv"), "landing", "jump_start", SubResource("AnimationNodeStateMachineTransition_bkf4m")]
 graph_offset = Vector2(-114, -91)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpew3"]
-size = Vector2(22, 110)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2v266"]
-size = Vector2(66, 22)
+[sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
+radius = 60.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_8tv8j")
@@ -563,10 +561,12 @@ bullet_2_scene = ExtResource("20_fgewv")
 [node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
 one_shot = true
 
-[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("20_rfo25")
+timer = NodePath("Weapon3CoolDown")
 next_weapon_state = NodePath("../Weapon4")
 previous_weapon_state = NodePath("../Weapon2")
+bullet_3_scene = ExtResource("25_hx2jg")
 
 [node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon3"]
 one_shot = true
@@ -609,21 +609,8 @@ state_machine = NodePath("../CharacterWeaponsStateMachine")
 script = ExtResource("21_cr6j0")
 melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
 
-[node name="RightHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(44, 0)
-shape = SubResource("RectangleShape2D_jpew3")
-
-[node name="LeftHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(-44, 0)
-shape = SubResource("RectangleShape2D_jpew3")
-
-[node name="BottomHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(0, 44)
-shape = SubResource("RectangleShape2D_2v266")
-
-[node name="TopHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-position = Vector2(0, -44)
-shape = SubResource("RectangleShape2D_2v266")
+[node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+shape = SubResource("CircleShape2D_odl77")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("32_5aed7")]
 character = NodePath("..")
@@ -637,4 +624,5 @@ hit_box = NodePath("../CollisionShape2D")
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon1/Weapon1CoolDown" to="CharacterWeaponsStateMachine/Weapon1" method="_on_weapon_1_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon2/Weapon2CoolDown" to="CharacterWeaponsStateMachine/Weapon2" method="_on_weapon_2_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon3/Weapon3CoolDown" to="CharacterWeaponsStateMachine/Weapon3" method="_on_weapon_3_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]

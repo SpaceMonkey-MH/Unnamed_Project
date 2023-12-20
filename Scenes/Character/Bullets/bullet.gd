@@ -20,7 +20,7 @@ func _physics_process(delta):
 #		if collider.has_node("HitBoxComponent"):
 #			collider.get_node("HitBoxComponent").damage(attack)
 		for child in collider.get_children():
-			if child is HitBoxComponent:
+			if child is HealthComponent:
 				child.damage(attack)
 	#			print("hello")
 				explosion_effect()

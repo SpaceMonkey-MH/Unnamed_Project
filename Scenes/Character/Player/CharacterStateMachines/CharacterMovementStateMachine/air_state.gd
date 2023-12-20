@@ -14,7 +14,7 @@ func _process(delta):
 	pass
 
 func state_process(delta):
-	if player.is_on_floor():
+	if character.is_on_floor():
 		next_state = landing_state
 
 func state_input(event : InputEvent):
@@ -30,7 +30,7 @@ func on_exit():
 
 func air_jump():
 	air_jumps_current -= 1
-	player.velocity.y = jump_velocity
+	character.velocity.y = jump_velocity
 	playback.travel(air_jump_animation_name)
 
 

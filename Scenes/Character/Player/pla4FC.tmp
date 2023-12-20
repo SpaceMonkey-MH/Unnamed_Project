@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=74 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_5471m"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
+[ext_resource type="PackedScene" uid="uid://cpb1cy83f4b37" path="res://Scenes/Character/Components/hit_box_component.tscn" id="33_1h5ew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(45, 45)
@@ -580,16 +581,20 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_0orfo")
 anim_player = NodePath("../WeaponsAnimationPlayer")
 
-[node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
+[node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "animatioon_tree", "current_state")]
 script = ExtResource("8_8i88a")
-character = NodePath("..")
-animation_tree = NodePath("../BodyAnimationTree")
+player = NodePath("..")
+animatioon_tree = NodePath("../BodyAnimationTree")
 current_state = NodePath("Idle")
 
 [node name="Run" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("air_state", "idle_state")]
 script = ExtResource("9_vwgpy")
 air_state = NodePath("../Air")
 idle_state = NodePath("../Idle")
+jump_animation_name = null
+idle_animation_name = null
+air_animation_name = null
+can_move = null
 
 [node name="Air" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("10_cs3ji")
@@ -604,6 +609,10 @@ air_state = NodePath("../Air")
 script = ExtResource("12_4t18e")
 air_state = NodePath("../Air")
 run_state = NodePath("../Run")
+run_animation_name = null
+jump_animation_name = null
+air_animation_name = null
+can_move = null
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -107.0
@@ -623,9 +632,9 @@ script = ExtResource("15_b7158")
 [node name="Firing" type="Node" parent="CharacterFireStateMachine"]
 script = ExtResource("16_nowjs")
 
-[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
+[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
 script = ExtResource("17_feavh")
-character = NodePath("..")
+player = NodePath("..")
 current_state = NodePath("Melee")
 
 [node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
@@ -647,74 +656,4 @@ previous_weapon_state = NodePath("../Melee")
 [node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/DesertEagle"]
 one_shot = true
 
-[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
-script = ExtResource("19_wela8")
-timer = NodePath("Weapon2CoolDown")
-next_weapon_state = NodePath("../Weapon3")
-previous_weapon_state = NodePath("../DesertEagle")
-bullet_2_scene = ExtResource("20_fgewv")
-
-[node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
-one_shot = true
-
-[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
-script = ExtResource("20_rfo25")
-timer = NodePath("Weapon3CoolDown")
-next_weapon_state = NodePath("../Weapon4")
-previous_weapon_state = NodePath("../Weapon2")
-bullet_3_scene = ExtResource("25_hx2jg")
-
-[node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon3"]
-one_shot = true
-
-[node name="Weapon4" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("21_uxfjm")
-next_weapon_state = NodePath("../Weapon5")
-previous_weapon_state = NodePath("../Weapon3")
-
-[node name="Weapon5" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("22_umggx")
-next_weapon_state = NodePath("../Weapon6")
-previous_weapon_state = NodePath("../Weapon4")
-
-[node name="Weapon6" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("23_lvog5")
-next_weapon_state = NodePath("../Weapon7")
-previous_weapon_state = NodePath("../Weapon5")
-
-[node name="Weapon7" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("24_spe2t")
-next_weapon_state = NodePath("../Weapon8")
-previous_weapon_state = NodePath("../Weapon6")
-
-[node name="Weapon8" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("25_6vkpp")
-next_weapon_state = NodePath("../Melee")
-previous_weapon_state = NodePath("../Weapon7")
-
-[node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_left = -108.0
-offset_top = -80.0
-offset_right = 12.0
-offset_bottom = -54.0
-text = "Weapons State:"
-script = ExtResource("28_fvbqe")
-state_machine = NodePath("../CharacterWeaponsStateMachine")
-
-[node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("melee_weapon_state")]
-script = ExtResource("21_cr6j0")
-melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
-
-[node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-shape = SubResource("CircleShape2D_odl77")
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("32_5aed7")]
-character = NodePath("..")
-
-[connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
-[connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/Weapon1CoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_weapon_1_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon2/Weapon2CoolDown" to="CharacterWeaponsStateMachine/Weapon2" method="_on_weapon_2_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon3/Weapon3CoolDown" to="CharacterWeaponsStateMachine/Weapon3" method="_on_weapon_3_cool_down_timeout"]
-[connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
+[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMach

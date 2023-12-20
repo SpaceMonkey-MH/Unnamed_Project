@@ -4,7 +4,12 @@ class_name HealthComponent
 
 @export var max_health : float = 100
 @export var character : PhysicsBody2D
-var health : float
+var health : float :
+	get:
+		return health
+	set(value):
+		SignalBus.emit_signal("on_health_changed", get_parent(), value - health)
+		health = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

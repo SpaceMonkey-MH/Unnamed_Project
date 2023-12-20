@@ -2,9 +2,9 @@ extends Node
 
 class_name CharacterMovementStateMachine
 
-@export var player : CharacterBody2D
-@export var animatioon_tree : AnimationTree
-@export var current_state : MovementState
+@export var character : CharacterBody2D
+@export var animation_tree : AnimationTree
+@export var current_state : State
 
 var states : Array[MovementState]
 
@@ -12,29 +12,31 @@ var states : Array[MovementState]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print(animation_tree)
 	for child in get_children():
 		if (child is MovementState):
 			states.append(child)
 			
-			# Set the states up with what they need to function
-			child.player = player
-			child.playback = animatioon_tree["parameters/playback"]
-#			print(child)
-			child.move_speed= player.move_speed
-#			print(child.move_speed)
-			child.air_jumps_max = player.air_jumps_max
-#			print(child.air_jumps_max)
-			child.air_jumps_current = child.air_jumps_max
-#			print(child.air_jumps_current)
-			child.jump_height = player.jump_height
-#			print(child.jump_height)
-			child.jump_time_to_peak = player.jump_time_to_peak
-#			print(child.jump_time_to_peak)
-			child.jump_time_to_descent = player.jump_time_to_descent
-#			print(child.jump_time_to_descent)
-			child.jump_velocity = ((2.0 * child.jump_height) / child.jump_time_to_peak) * -1.0
-			child.jump_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_peak * child.jump_time_to_peak)) * -1.0
-			child.fall_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_descent * child.jump_time_to_descent)) * -1.0
+			# Set the states up with what they need to function.
+			child.character = character
+			if character is Player:
+				child.playback = animation_tree["parameters/playback"]
+	#			print(child)
+				child.move_speed= character.move_speed
+	#			print(child.move_speed)
+				child.air_jumps_max = character.air_jumps_max
+	#			print(child.air_jumps_max)
+				child.air_jumps_current = child.air_jumps_max
+	#			print(child.air_jumps_current)
+				child.jump_height = character.jump_height
+	#			print(child.jump_height)
+				child.jump_time_to_peak = character.jump_time_to_peak
+	#			print(child.jump_time_to_peak)
+				child.jump_time_to_descent = character.jump_time_to_descent
+	#			print(child.jump_time_to_descent)
+				child.jump_velocity = ((2.0 * child.jump_height) / child.jump_time_to_peak) * -1.0
+				child.jump_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_peak * child.jump_time_to_peak)) * -1.0
+				child.fall_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_descent * child.jump_time_to_descent)) * -1.0
 
 
 		else:

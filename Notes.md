@@ -26,3 +26,6 @@
 
 - 2023/12/18: Trying to make an explosion for Weapon3. The solution I'm implementing is to add an Area2D with
 	a CollisionShape2D to every enemy so that the exploding bullet can detect them.
+
+- 2023/12/20: The HitBoxComponent seems useless, I'll keep it in the files just in case but I'll remove it's use
+	from the actual game.

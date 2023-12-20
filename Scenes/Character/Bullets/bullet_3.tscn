@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk6w5w8jhfplu"]
 
-[ext_resource type="Script" path="res://bullet_3.gd" id="1_rl76b"]
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/bullet_3.gd" id="1_tdb7g"]
 [ext_resource type="Script" path="res://Scenes/Character/Bullets/area_of_effect.gd" id="2_lai2e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nl0b"]
@@ -13,7 +13,7 @@ radius = 80.0
 [node name="Bullet3" type="CharacterBody2D" node_paths=PackedStringArray("area_of_effect_zone")]
 collision_layer = 0
 collision_mask = 6
-script = ExtResource("1_rl76b")
+script = ExtResource("1_tdb7g")
 area_of_effect_zone = NodePath("AreaOfEffect")
 
 [node name="ColorRect" type="ColorRect" parent="."]

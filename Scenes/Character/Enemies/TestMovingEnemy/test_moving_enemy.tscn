@@ -1,0 +1,73 @@
+[gd_scene load_steps=11 format=3 uid="uid://fi71b5nrxf28"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.gd" id="1_cmmdb"]
+[ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_kyko0"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="3_v7f25"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/wander_state.gd" id="4_3h0w3"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/follow_state.gd" id="5_60o4d"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/attack_state.gd" id="6_vy6a6"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/death_state.gd" id="7_u2pue"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1hkq0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7sae"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrylo"]
+size = Vector2(40, 40)
+
+[node name="TestMovingEnemy" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 4
+script = ExtResource("1_cmmdb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.0705882, 1, 1, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_1hkq0")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f7sae")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_kyko0")]
+character = NodePath("..")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -46.0
+offset_right = 75.0
+offset_bottom = -20.0
+text = "Test Moving Enemy"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mrylo")
+
+[node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
+script = ExtResource("3_v7f25")
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+current_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("4_3h0w3")
+
+[node name="Follow" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("5_60o4d")
+
+[node name="Attack" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("6_vy6a6")
+
+[node name="Death" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("7_u2pue")

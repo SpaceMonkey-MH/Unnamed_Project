@@ -12,9 +12,9 @@ func weapon_fire(spawn_pos : Vector2, target_pos : Vector2, bullet_scene : Packe
 	bullet.position = spawn_pos
 	bullet.rotate(rotation)
 	bullet.direction = target_pos - spawn_pos
-	bullet.attack_damage = attack_damage * player.damage_multiplier
+	bullet.attack_damage = attack_damage * character.damage_multiplier
 #	print(aoe_attack_damage)
-	bullet.aoe_attack_damage = aoe_attack_damage * player.damage_multiplier
+	bullet.aoe_attack_damage = aoe_attack_damage * character.damage_multiplier
 	bullet.speed_factor = speed_factor
 	add_child(bullet)
 

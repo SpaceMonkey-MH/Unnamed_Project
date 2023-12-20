@@ -20,5 +20,5 @@ func _on_body_entered(body):
 	if body is Player:
 		return
 	for child in body.get_children():
-		if child is HitBoxComponent:
+		if child is HealthComponent:
 			child.damage(attack)

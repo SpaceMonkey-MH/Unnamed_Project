@@ -7,7 +7,7 @@ class_name HitState
 @export var dead_animation_node : String = "dead"
 
 func _ready():
-	health_component.connect("damaged", on_health_component_damaged)
+	health_component.connect("damaged", on_health_component_damaged)	# Signal damaged from health_component.
 
 func on_health_component_damaged(node : Node, damage_amount : float):
 #	print("hello")

@@ -10,7 +10,8 @@ var health : float :
 	get:
 		return health
 	set(value):
-		SignalBus.emit_signal("health_changed", get_parent(), value - health)	# From signal_bus
+		# Goes (for now) to health_changed_manager.
+		SignalBus.emit_signal("health_changed", get_parent(), value - health)
 		health = value
 
 # Called when the node enters the scene tree for the first time.
@@ -24,7 +25,7 @@ func damage(attack : Attack):
 	if character.has_method("take_damage"):
 		character.take_damage()
 #		print(health)
-	damaged.emit(get_parent(), attack.attack_damage)
+	damaged.emit(get_parent(), attack.attack_damage)	# Goes (for now) to hit_state.
 	
 #	if health <= 0 and character.has_method("death"):
 #		character.death()

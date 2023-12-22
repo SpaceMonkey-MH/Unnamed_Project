@@ -14,7 +14,7 @@ func _ready():
 
 
 func _on_body_entered(body):
-	print(body)
+#	print(body)
 	var attack = Attack.new()
 	attack.attack_damage = melee_weapon_state.attack_damage
 	if body is Player:

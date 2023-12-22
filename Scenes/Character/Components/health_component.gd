@@ -2,13 +2,15 @@ extends Node2D
 
 class_name HealthComponent
 
+signal damaged(node : Node, damage_taken : float)
+
 @export var max_health : float = 100
 @export var character : PhysicsBody2D
 var health : float :
 	get:
 		return health
 	set(value):
-		SignalBus.emit_signal("on_health_changed", get_parent(), value - health)
+		SignalBus.emit_signal("health_changed", get_parent(), value - health)	# From signal_bus
 		health = value
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +24,7 @@ func damage(attack : Attack):
 	if character.has_method("take_damage"):
 		character.take_damage()
 #		print(health)
+	damaged.emit(get_parent(), attack.attack_damage)
 	
-	if health <= 0 and character.has_method("death"):
-		character.death()
+#	if health <= 0 and character.has_method("death"):
+#		character.death()

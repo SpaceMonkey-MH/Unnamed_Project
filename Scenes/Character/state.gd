@@ -2,6 +2,7 @@ extends Node
 
 class_name State
 
+signal interrupt_state(new_state : State)
 
 var character : CharacterBody2D
 var playback : AnimationNodeStateMachinePlayback

@@ -6,16 +6,18 @@ class_name CharacterMovementStateMachine
 @export var animation_tree : AnimationTree
 @export var current_state : State
 
-var states : Array[MovementState]
+var states : Array[State]
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(animation_tree)
+#	print(get_parent())
+#	print(animation_tree)
 	for child in get_children():
-		if (child is MovementState):
+		if (child is State):
 			states.append(child)
+#			print(states)
 			
 			# Set the states up with what they need to function.
 			child.character = character
@@ -37,10 +39,16 @@ func _ready():
 				child.jump_velocity = ((2.0 * child.jump_height) / child.jump_time_to_peak) * -1.0
 				child.jump_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_peak * child.jump_time_to_peak)) * -1.0
 				child.fall_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_descent * child.jump_time_to_descent)) * -1.0
+				
+			# Connect to interrupt signal
+			child.connect("interrupt_state", on_state_interrupt_state)
+#			print(child)
+#			print(states)
+#			print(child.is_connected("interrupt_state", on_state_interrupt_state))	# Prints false. Hum... All good now.
 
 
 		else:
-			push_warning("Child " + child.name + " is not a MovementState for CharacterStateMachine.")
+			push_warning("Child " + child.name + " is not a State for CharacterStateMachine.")
 
 
 func _physics_process(delta):
@@ -54,7 +62,7 @@ func check_if_can_move():
 	return current_state.can_move
 
 
-func switch_states(new_state : MovementState):
+func switch_states(new_state : State):
 	if(current_state != null):
 		current_state.on_exit()
 		current_state.next_state = null
@@ -65,3 +73,8 @@ func switch_states(new_state : MovementState):
 
 func _input(event : InputEvent):
 	current_state.state_input(event)
+
+# Used to switch to state Hit.
+func on_state_interrupt_state(new_state : State):
+#	print("hello")
+	switch_states(new_state)

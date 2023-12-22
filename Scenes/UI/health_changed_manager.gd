@@ -7,7 +7,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	SignalBus.connect("on_health_changed", on_signal_health_changed)
+	SignalBus.connect("health_changed", on_signal_health_changed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

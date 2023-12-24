@@ -16,10 +16,12 @@ func _process(delta):
 
 
 func on_signal_health_changed(node : Node, amount_changed : float):
+	if amount_changed == 0:	# Made it so that there isn't a floating 0 upon rocket explosion.
+		return
 	var label_instance : Label = health_changed_label.instantiate()
 	label_instance.text = str(amount_changed)
 	
-	if amount_changed >= 0:
+	if amount_changed > 0:
 		label_instance.modulate = heal_color
 	else:
 		label_instance.modulate = damage_color

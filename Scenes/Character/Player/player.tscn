@@ -1,7 +1,6 @@
-[gd_scene load_steps=73 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=70 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
-[ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_5471m"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
 [ext_resource type="Texture2D" uid="uid://cfkf6ths8tyv3" path="res://Assets/Sprites/Player/Player_V1_40p_pink.png" id="2_kpxjq"]
 [ext_resource type="Texture2D" uid="uid://d1wlnwybx6ukd" path="res://Assets/Sprites/Player/Air_Jump/Player_Landing_Sheet_V3_6s_70p.png" id="2_kx3pl"]
@@ -255,86 +254,6 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_tby3b"]
-resource_name = "melee_air_attack"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BodySprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_5471m")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BodySprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BodySprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_ues7y"]
-resource_name = "melee_ground_attack"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BodySprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_kpxjq")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BodySprite2D:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("BodySprite2D:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="Animation" id="Animation_bmtkv"]
 resource_name = "run"
 length = 0.4
@@ -384,8 +303,6 @@ _data = {
 "idle": SubResource("Animation_br8x2"),
 "jump_start": SubResource("Animation_rmuie"),
 "landing": SubResource("Animation_gl5bu"),
-"melee_air_attack": SubResource("Animation_tby3b"),
-"melee_ground_attack": SubResource("Animation_ues7y"),
 "run": SubResource("Animation_bmtkv")
 }
 
@@ -554,8 +471,7 @@ body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
 
 [node name="BodySprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_xbbwc")
-hframes = 4
+texture = ExtResource("2_kpxjq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w47ok")

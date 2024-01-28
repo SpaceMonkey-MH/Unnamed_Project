@@ -27,5 +27,5 @@ func damage(attack : Attack):
 #		print(health)
 	damaged.emit(get_parent(), attack.attack_damage)	# Goes (for now) to hit_state.
 	
-#	if health <= 0 and character.has_method("death"):
-#		character.death()
+	if health <= 0 and character.has_method("death"):
+		character.death()

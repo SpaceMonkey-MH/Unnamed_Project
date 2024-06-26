@@ -2,6 +2,7 @@ NOT DONE :
 
 - Make it so that the double jump animation resets when triple jumping quickly.
 - Comment the code.
+- Make the explosion of the rockets damage in a matrice.
 
 -----------------------------------------------------------------------------------------------------------------------
 DONE :

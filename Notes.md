@@ -30,9 +30,8 @@
 - 2023/12/20: The HitBoxComponent seems useless, I'll keep it in the files just in case but I'll remove it's use
 	from the actual game.
 
-- 2024/06/26: having a wierd error, that doesn't lead to a piece of code: 
+- 2024/06/26: having a weird error, that doesn't lead to a piece of code: 
 	":E 0:00:18:0410   emit_signalp: Error calling from signal 'body_entered' to callable: 
 	'Area2D(area_of_effect.gd)::_on_body_entered': Method not found.
 	<C++ Source>   core/object/object.cpp:1082 @ emit_signalp()"
 	It seems to be caused when a rocket (Weapon 3) hits a target. Idk.
-

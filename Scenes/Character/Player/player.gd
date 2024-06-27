@@ -68,7 +68,7 @@ var damage_multiplier : float = 1	# Applied to every attack.
 #func _ready():
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 
-func _process(delta):
+func _process(_delta):
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)
 

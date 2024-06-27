@@ -8,7 +8,7 @@ var speed_factor : float = 10
 var direction : Vector2 = Vector2.ZERO
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var collision = move_and_collide(direction.normalized() * speed_factor)
 	var attack = Attack.new()
 	attack.attack_damage = attack_damage

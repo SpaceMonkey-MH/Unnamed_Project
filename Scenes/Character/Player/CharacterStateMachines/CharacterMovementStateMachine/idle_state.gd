@@ -11,7 +11,7 @@ class_name IdleState
 
 
 
-func state_process(delta):
+func state_process(_delta):
 	if character.velocity.x != 0:
 		next_state = run_state
 		playback.travel(run_animation_name)

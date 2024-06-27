@@ -9,7 +9,7 @@ class_name HitState
 func _ready():
 	health_component.connect("damaged", on_health_component_damaged)	# Signal damaged from health_component.
 
-func on_health_component_damaged(node : Node, damage_amount : float):
+func on_health_component_damaged(_node : Node, _damage_amount : float):
 #	print("hello")
 	if health_component.health > 0:
 		interrupt_state.emit(self)

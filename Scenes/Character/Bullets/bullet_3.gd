@@ -5,8 +5,10 @@ class_name Bullet3
 
 @export var area_of_effect_zone : Area2D
 
+
 #func _process(delta):
 #	print(area_of_effect_zone.get_overlapping_areas())
+
 
 func area_of_effect():
 	area_of_effect_zone.monitoring = true

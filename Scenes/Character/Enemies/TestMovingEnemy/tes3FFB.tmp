@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://fi71b5nrxf28"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.gd" id="1_cmmdb"]
+[ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_kyko0"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="3_v7f25"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/wander_state.gd" id="4_0ysqk"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/follow_state.gd" id="5_4vjxa"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/attack_state.gd" id="6_40nwy"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="7_en48c"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/hit_state.gd" id="8_f3jqe"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="9_vkggd"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1hkq0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7sae"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrylo"]
+size = Vector2(40, 40)
+
+[node name="TestMovingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("anitmation_tree")]
+collision_layer = 3
+collision_mask = 4
+script = ExtResource("1_cmmdb")
+anitmation_tree = NodePath("AnimationTree")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.0705882, 1, 1, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_1hkq0")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f7sae")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_kyko0")]
+character = NodePath("..")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -75.0
+offset_top = -46.0
+offset_right = 75.0
+offset_bottom = -20.0
+text = "Test Moving Enemy"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mrylo")
+
+[node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
+script = ExtResource("3_v7f25")
+character = NodePath("..")
+animation_tree = NodePath("../AnimationTree")
+current_state = NodePath("Wander")
+
+[node name="Wander" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("4_0ysqk")
+
+[node name="Follow" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("5_4vjxa")
+
+[node name="Attack" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("6_40nwy")
+
+[node name="Dead" type="Node" parent="CharacterMovementStateMachine"]
+script = ExtResource("7_en48c")
+
+[node name="Hit" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("health_component", "dead_state")]
+script = ExtResource("8_f3jqe")
+health_component = NodePath("../../HealthComponent")
+dead_state = NodePath("../Dead")
+
+[node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -107.0
+offset_top = -58.0
+offset_right = 25.0
+offset_bottom = -32.0
+text = "Movement State:"
+script = ExtResource("9_vkggd")
+state_machine = NodePath("../CharacterMovementStateMachine")

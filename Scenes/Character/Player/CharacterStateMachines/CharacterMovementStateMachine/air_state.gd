@@ -8,18 +8,17 @@ class_name AirState
 @export var landing_animation_name : String = "landing"
 
 
-func _process(delta):
+func _process(_delta):
 #	print("is_on_floor : ", character.is_on_floor(), "\n next state : ", next_state)
 #	print(air_jumps_current)
 	pass
 
-func state_process(delta):
-	if player.is_on_floor():
+func state_process(_delta):
+	if character.is_on_floor():
 		next_state = landing_state
 
 func state_input(event : InputEvent):
 	if event.is_action_pressed("jump") && air_jumps_current > 0:
-		pass
 		air_jump()
 
 func on_exit():
@@ -30,8 +29,10 @@ func on_exit():
 
 func air_jump():
 	air_jumps_current -= 1
-	player.velocity.y = jump_velocity
-	playback.travel(air_jump_animation_name)
+	character.velocity.y = jump_velocity
+	# Using the start() method because apparently it allows
+	# to jump directly to the animation, thus allowing to replay the animation before it ends.
+	playback.start(air_jump_animation_name)
 
 
 

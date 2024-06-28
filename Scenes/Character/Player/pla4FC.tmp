@@ -1,7 +1,9 @@
-[gd_scene load_steps=69 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=74 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
+[ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_5471m"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
+[ext_resource type="Texture2D" uid="uid://cfkf6ths8tyv3" path="res://Assets/Sprites/Player/Player_V1_40p_pink.png" id="2_kpxjq"]
 [ext_resource type="Texture2D" uid="uid://d1wlnwybx6ukd" path="res://Assets/Sprites/Player/Air_Jump/Player_Landing_Sheet_V3_6s_70p.png" id="2_kx3pl"]
 [ext_resource type="Texture2D" uid="uid://b7oymg1jxabfp" path="res://Assets/Sprites/Player/Landing/Player_Landing_Sheet_V4Bis_6s_70p.png" id="2_v5avg"]
 [ext_resource type="Texture2D" uid="uid://u4hwuestn0bk" path="res://Assets/Sprites/Player/Run/Player_Run_Sheet_V1_4s_45p.png" id="2_xbbwc"]
@@ -32,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
+[ext_resource type="PackedScene" uid="uid://cpb1cy83f4b37" path="res://Scenes/Character/Components/hit_box_component.tscn" id="33_1h5ew"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
 size = Vector2(45, 45)
@@ -253,6 +256,86 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_tby3b"]
+resource_name = "melee_air_attack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_5471m")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodySprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ues7y"]
+resource_name = "melee_ground_attack"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_kpxjq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodySprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_bmtkv"]
 resource_name = "run"
 length = 0.4
@@ -302,6 +385,8 @@ _data = {
 "idle": SubResource("Animation_br8x2"),
 "jump_start": SubResource("Animation_rmuie"),
 "landing": SubResource("Animation_gl5bu"),
+"melee_air_attack": SubResource("Animation_tby3b"),
+"melee_ground_attack": SubResource("Animation_ues7y"),
 "run": SubResource("Animation_bmtkv")
 }
 
@@ -369,7 +454,7 @@ states/landing/position = Vector2(720, 57)
 states/run/node = SubResource("AnimationNodeAnimation_7184w")
 states/run/position = Vector2(337, 232)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_nq50v"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_wqwe5"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_cjvwi"), "idle", "jump_start", SubResource("AnimationNodeStateMachineTransition_e6l58"), "run", "jump_start", SubResource("AnimationNodeStateMachineTransition_28qvp"), "air", "landing", SubResource("AnimationNodeStateMachineTransition_fw1v3"), "jump_start", "air", SubResource("AnimationNodeStateMachineTransition_3dm5p"), "landing", "idle", SubResource("AnimationNodeStateMachineTransition_a6sb8"), "jump_start", "air_jump", SubResource("AnimationNodeStateMachineTransition_hvggt"), "air", "air_jump", SubResource("AnimationNodeStateMachineTransition_oq3ls"), "air_jump", "air", SubResource("AnimationNodeStateMachineTransition_vg4xv"), "landing", "jump_start", SubResource("AnimationNodeStateMachineTransition_bkf4m")]
-graph_offset = Vector2(-150, -90)
+graph_offset = Vector2(-114, -91)
 
 [sub_resource type="Animation" id="Animation_tnwjr"]
 length = 0.001
@@ -496,16 +581,20 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_0orfo")
 anim_player = NodePath("../WeaponsAnimationPlayer")
 
-[node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
+[node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "animatioon_tree", "current_state")]
 script = ExtResource("8_8i88a")
-character = NodePath("..")
-animation_tree = NodePath("../BodyAnimationTree")
+player = NodePath("..")
+animatioon_tree = NodePath("../BodyAnimationTree")
 current_state = NodePath("Idle")
 
 [node name="Run" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("air_state", "idle_state")]
 script = ExtResource("9_vwgpy")
 air_state = NodePath("../Air")
 idle_state = NodePath("../Idle")
+jump_animation_name = null
+idle_animation_name = null
+air_animation_name = null
+can_move = null
 
 [node name="Air" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("10_cs3ji")
@@ -520,6 +609,10 @@ air_state = NodePath("../Air")
 script = ExtResource("12_4t18e")
 air_state = NodePath("../Air")
 run_state = NodePath("../Run")
+run_animation_name = null
+jump_animation_name = null
+air_animation_name = null
+can_move = null
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -107.0
@@ -539,9 +632,9 @@ script = ExtResource("15_b7158")
 [node name="Firing" type="Node" parent="CharacterFireStateMachine"]
 script = ExtResource("16_nowjs")
 
-[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
+[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
 script = ExtResource("17_feavh")
-character = NodePath("..")
+player = NodePath("..")
 current_state = NodePath("Melee")
 
 [node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
@@ -563,74 +656,4 @@ previous_weapon_state = NodePath("../Melee")
 [node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/DesertEagle"]
 one_shot = true
 
-[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
-script = ExtResource("19_wela8")
-timer = NodePath("Weapon2CoolDown")
-next_weapon_state = NodePath("../Weapon3")
-previous_weapon_state = NodePath("../DesertEagle")
-bullet_2_scene = ExtResource("20_fgewv")
-
-[node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
-one_shot = true
-
-[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
-script = ExtResource("20_rfo25")
-timer = NodePath("Weapon3CoolDown")
-next_weapon_state = NodePath("../Weapon4")
-previous_weapon_state = NodePath("../Weapon2")
-bullet_3_scene = ExtResource("25_hx2jg")
-
-[node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon3"]
-one_shot = true
-
-[node name="Weapon4" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("21_uxfjm")
-next_weapon_state = NodePath("../Weapon5")
-previous_weapon_state = NodePath("../Weapon3")
-
-[node name="Weapon5" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("22_umggx")
-next_weapon_state = NodePath("../Weapon6")
-previous_weapon_state = NodePath("../Weapon4")
-
-[node name="Weapon6" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("23_lvog5")
-next_weapon_state = NodePath("../Weapon7")
-previous_weapon_state = NodePath("../Weapon5")
-
-[node name="Weapon7" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("24_spe2t")
-next_weapon_state = NodePath("../Weapon8")
-previous_weapon_state = NodePath("../Weapon6")
-
-[node name="Weapon8" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("25_6vkpp")
-next_weapon_state = NodePath("../Melee")
-previous_weapon_state = NodePath("../Weapon7")
-
-[node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-offset_left = -108.0
-offset_top = -80.0
-offset_right = 12.0
-offset_bottom = -54.0
-text = "Weapons State:"
-script = ExtResource("28_fvbqe")
-state_machine = NodePath("../CharacterWeaponsStateMachine")
-
-[node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("melee_weapon_state")]
-script = ExtResource("21_cr6j0")
-melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
-
-[node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
-shape = SubResource("CircleShape2D_odl77")
-
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("32_5aed7")]
-character = NodePath("..")
-
-[connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
-[connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/Weapon1CoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_weapon_1_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon2/Weapon2CoolDown" to="CharacterWeaponsStateMachine/Weapon2" method="_on_weapon_2_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon3/Weapon3CoolDown" to="CharacterWeaponsStateMachine/Weapon3" method="_on_weapon_3_cool_down_timeout"]
-[connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
+[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMach

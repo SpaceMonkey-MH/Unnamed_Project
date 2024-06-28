@@ -68,7 +68,7 @@ var damage_multiplier : float = 1	# Applied to every attack.
 #func _ready():
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 
-func _process(delta):
+func _process(_delta):
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)
 
@@ -110,6 +110,7 @@ func _physics_process(delta):
 	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
 	body_sprite_2d.flip_h = direction < 0	# This doesn't do anything yet, because the sprites are symetrical.
 										# Maybe this doesn't work at all. It seems to be working.
+	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0	# Flipping the gun so it's not upside down.
 #
 #	if Input.is_action_just_pressed("jump"):
 #		if is_on_floor():

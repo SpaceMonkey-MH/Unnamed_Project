@@ -4,7 +4,7 @@ class_name Weapon2
 
 @export var timer : Timer
 @export var next_weapon_state : Weapon3
-@export var previous_weapon_state : DesertEagle
+@export var previous_weapon_state : DesertEagleState
 @export var bullet_2_scene : PackedScene
 @export var attack_damage : float = 10
 @export var speed_factor : float = 10

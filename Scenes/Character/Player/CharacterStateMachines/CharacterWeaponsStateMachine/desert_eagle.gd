@@ -1,6 +1,6 @@
 extends WeaponsState
 
-class_name DesertEagle
+class_name DesertEagleState
 
 @export var timer : Timer
 @export var bullet_1_scene : PackedScene

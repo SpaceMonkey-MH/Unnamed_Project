@@ -18,9 +18,11 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 # Velocity applied to the player when jumping.
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 # Gravity applied to the player during the rising part of the jump.
-@onready var jump_gravity : float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_peak)) * -1.0
+@onready var jump_gravity : float = ((-2.0 * jump_height) /
+									(jump_time_to_peak * jump_time_to_peak)) * -1.0
 # Gravity applied to the plyaer during the fall.
-@onready var fall_gravity : float = ((-2.0 * jump_height) / (jump_time_to_descent * jump_time_to_descent)) * -1.0
+@onready var fall_gravity : float = ((-2.0 * jump_height) /
+									(jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 # CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
 @onready var movement_state_machine : CharacterMovementStateMachine = $CharacterMovementStateMachine
@@ -36,7 +38,7 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 var smoothed_mouse_pos : Vector2
 
 
-# Flashing is when the player takes damage
+# Flashing is when the player takes damage.
 var flashing_color : Color = Color.CHOCOLATE
 var flashing_time : float = 0.1
 
@@ -45,6 +47,9 @@ var flashing_time : float = 0.1
 ######################
 
 var damage_multiplier : float = 1	# Applied to every attack.
+var self_damage : bool = false	# Whether or not the player can damage themselves. Used (for now)
+								# in the bullet_3 script for the AoE. Should ultimately be likend
+								# to options. Might have to move it, Idk.
 
 
 
@@ -57,27 +62,20 @@ var damage_multiplier : float = 1	# Applied to every attack.
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-#func _ready():
-#	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
-#
-#
-#func _process(delta):
-#	print("Player velocity: ", velocity)
-
-#
-#func _ready():
-#	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
-
-func _process(_delta):
-	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
-	weapons_sprite_2d.look_at(smoothed_mouse_pos)
-
 
 func _ready():
+#	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 	body_animation_tree.active = true	# Activating the animation trees so that the animations play.
 	weapons_animation_tree.active = true	# Activating the animation trees so that the animations play.
 #	rotation_degrees = 180
 #	flip_h = true
+
+
+func _process(_delta):
+#	print("Player velocity: ", velocity)
+	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
+	weapons_sprite_2d.look_at(smoothed_mouse_pos)
+
 
 func _physics_process(delta):
 	# // Template from the editor:
@@ -108,7 +106,8 @@ func _physics_process(delta):
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
 	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
-	body_sprite_2d.flip_h = direction < 0	# This doesn't do anything yet, because the sprites are symetrical.
+	body_sprite_2d.flip_h = direction < 0	# This doesn't do anything yet,
+										# because the sprites are symetrical.
 										# Maybe this doesn't work at all. It seems to be working.
 	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0	# Flipping the gun so it's not upside down.
 #
@@ -145,10 +144,11 @@ func get_input_direction():
 
 
 func take_damage():
-	get_node("Sprite2D").modulate = flashing_color
-#	print("hello")
-	await get_tree().create_timer(flashing_time).timeout
-	get_node("Sprite2D").modulate = Color.WHITE
+	print(body_sprite_2d)
+#	get_node("Sprite2D").modulate = flashing_color
+##	print("hello")
+#	await get_tree().create_timer(flashing_time).timeout
+#	get_node("Sprite2D").modulate = Color.WHITE
 
 func death():
 	queue_free()

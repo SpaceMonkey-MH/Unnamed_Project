@@ -1,8 +1,9 @@
+# I don't remember what this script is for, but I'm gonna leave it here anyway.
+
 extends Area2D
 
 @export var bullet : CharacterBody2D
 
-# I don't remember what this script is for, but I'm gonna leave it here anyway.
 #
 #var checking : bool = true
 

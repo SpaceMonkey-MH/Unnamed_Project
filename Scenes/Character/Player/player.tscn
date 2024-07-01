@@ -21,11 +21,10 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon.gd" id="18_yssnd"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon2.gd" id="19_wela8"]
 [ext_resource type="PackedScene" uid="uid://bylc6wriv4awj" path="res://Scenes/Character/Bullets/bullet_1.tscn" id="20_fgewv"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/character_weapons_state_machine.gd" id="20_p1ua6"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon3.gd" id="20_rfo25"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/melee_weapon.gd" id="21_cr6j0"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/desert_eagle.gd" id="21_o8ar2"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon4.gd" id="21_uxfjm"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/desert_eagle_state.gd" id="22_mjeon"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon5.gd" id="22_umggx"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon6.gd" id="23_lvog5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
@@ -540,15 +539,9 @@ script = ExtResource("15_b7158")
 [node name="Firing" type="Node" parent="CharacterFireStateMachine"]
 script = ExtResource("16_nowjs")
 
-<<<<<<< Updated upstream
 [node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
 script = ExtResource("17_feavh")
 character = NodePath("..")
-=======
-[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("player", "current_state")]
-script = ExtResource("20_p1ua6")
-player = NodePath("..")
->>>>>>> Stashed changes
 current_state = NodePath("Melee")
 
 [node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
@@ -562,7 +555,6 @@ timer = NodePath("MeleeWeaponCoolDown")
 
 [node name="DesertEagle" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("21_o8ar2")
-script = ExtResource("22_mjeon")
 timer = NodePath("Weapon1CoolDown")
 bullet_1_scene = ExtResource("20_fgewv")
 next_weapon_state = NodePath("../Weapon2")
@@ -577,8 +569,6 @@ timer = NodePath("Weapon2CoolDown")
 next_weapon_state = NodePath("../Weapon3")
 previous_weapon_state = NodePath("../DesertEagle")
 bullet_2_scene = ExtResource("20_fgewv")
-attack_damage = null
-speed_factor = null
 
 [node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
 one_shot = true

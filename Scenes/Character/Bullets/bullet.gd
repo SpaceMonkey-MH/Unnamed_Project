@@ -23,19 +23,21 @@ func _physics_process(_delta):
 			if child is HealthComponent:
 				child.damage(attack)
 	#			print("hello")
-				explosion_effect()
+				explosion_fx()
 				area_of_effect()
 				# Creates a crash because it hits twice so it can hit something queue_freed.
 #				await get_tree().create_timer(0.001).timeout
 				queue_free()
 		if collider is TileMap:
 #			print("hello2")
-			explosion_effect()
+			explosion_fx()
 			area_of_effect()
 			queue_free()
 
-func explosion_effect():
+
+func explosion_fx():
 	pass
+
 
 func area_of_effect():
 	pass

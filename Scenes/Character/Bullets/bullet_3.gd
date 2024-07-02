@@ -1,5 +1,6 @@
 extends Bullet
 
+
 class_name Bullet3
 
 
@@ -10,7 +11,6 @@ var player : CharacterBody2D
 
 func _ready():
 	player = get_parent().get_parent().get_parent()
-	
 
 
 func _process(_delta):

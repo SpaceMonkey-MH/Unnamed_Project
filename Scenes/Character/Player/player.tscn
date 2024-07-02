@@ -573,9 +573,9 @@ bullet_2_scene = ExtResource("20_fgewv")
 [node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
 one_shot = true
 
-[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
+[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("reload_timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("20_rfo25")
-timer = NodePath("Weapon3CoolDown")
+reload_timer = NodePath("Weapon3CoolDown")
 next_weapon_state = NodePath("../Weapon4")
 previous_weapon_state = NodePath("../Weapon2")
 bullet_3_scene = ExtResource("25_hx2jg")

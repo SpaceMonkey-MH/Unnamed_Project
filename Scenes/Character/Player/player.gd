@@ -104,10 +104,15 @@ func _physics_process(delta):
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
 	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
-	body_sprite_2d.flip_h = direction < 0	# This doesn't do anything yet,
-										# because the sprites are symetrical.
-										# Maybe this doesn't work at all. It seems to be working.
-	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0	# Flipping the gun so it's not upside down.
+	# This doesn't do anything yet, because the sprites are symetrical.
+	# Maybe this doesn't work at all. It seems to be working.
+	# I think it can be done better, like the body sprite should flip with the mouse cursor I think,
+	# this would solve the idle issue (when not moving, the spite always looks to the right).
+#	body_sprite_2d.flip_h = direction < 0
+	# Flipping the spite so it looks the right direction.
+	body_sprite_2d.flip_h = get_local_mouse_position().x < 0
+	# Flipping the gun so it's not upside down.
+	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0
 #
 #	if Input.is_action_just_pressed("jump"):
 #		if is_on_floor():

@@ -2,19 +2,19 @@ extends WeaponsState
 
 class_name Weapon3
 
-@export var timer : Timer
+@export var reload_timer : Timer
 @export var next_weapon_state : Weapon4
 @export var previous_weapon_state : Weapon2
 @export var bullet_3_scene : PackedScene
 @export var attack_damage : float = 0
 @export var aoe_attack_damage : float = 10
-@export var speed_factor : float = 10
+@export var speed_factor : float = 5
 
 var wait_time : float = 1.5
 
 
 func _ready():
-	timer.wait_time = wait_time
+	reload_timer.wait_time = wait_time
 #	print(timer.wait_time)
 
 func state_process(_delta):
@@ -23,7 +23,7 @@ func state_process(_delta):
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_3_scene,
 		attack_damage, speed_factor, aoe_attack_damage)
 		can_fire = false
-		timer.start()
+		reload_timer.start()
 
 func state_input(event : InputEvent):
 	if event.is_action_pressed("next_weapon"):

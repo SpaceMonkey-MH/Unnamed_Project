@@ -33,12 +33,11 @@ func _physics_process(delta):
 
 
 func take_damage():
-	get_node("ColorRect").modulate = flashing_color
+	sprite_2d.modulate = flashing_color
 #	print("hello")
 	await get_tree().create_timer(flashing_time).timeout
-	get_node("ColorRect").modulate = Color.WHITE
+	sprite_2d.modulate = Color.WHITE
+
 
 func death():
 	queue_free()
-
-

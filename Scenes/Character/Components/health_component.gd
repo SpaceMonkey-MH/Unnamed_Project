@@ -1,6 +1,6 @@
 # Component for the health of the characters, used to store health and take damage,
 # that is to say reduce health, as well as death. Ultimately, should incorporate various other features,
-# such as healing (
+# such as healing (kinda here, like negative damage, or maybe positive ? Idk).
 extends Node2D
 
 class_name HealthComponent

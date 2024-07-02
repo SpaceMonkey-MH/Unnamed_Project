@@ -1,3 +1,4 @@
+# I think this is used to and only to display the label that indicates damage or heal taken.
 extends Control
 
 @export var health_changed_label : PackedScene

@@ -30,14 +30,14 @@ var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, ini
 @export var body_animation_tree : AnimationTree 
 # WeaponsAnimationTree as a variable so it can be activated.
 @export var weapons_animation_tree : AnimationTree 
-# BodySprite2D as a variable so it can be flipped.
+# BodySprite2D as a variable so it can be flipped and modulated.
 @export var body_sprite_2d : Sprite2D
 # WeaponsSprite2D as a variable so it can be flipped.
 @export var weapons_sprite_2d : Sprite2D
 # Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
 var smoothed_mouse_pos : Vector2
-
-
+# Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
+@export var self_damage : bool = true	# Should ultimately be likend to options. Might have to move it, Idk.
 # Flashing is when the player takes damage.
 var flashing_color : Color = Color.CHOCOLATE
 var flashing_time : float = 0.1
@@ -47,9 +47,7 @@ var flashing_time : float = 0.1
 ######################
 
 var damage_multiplier : float = 1	# Applied to every attack.
-var self_damage : bool = false	# Whether or not the player can damage themselves. Used (for now)
-								# in the bullet_3 script for the AoE. Should ultimately be likend
-								# to options. Might have to move it, Idk.
+
 
 
 
@@ -121,10 +119,12 @@ func _physics_process(delta):
 
 	move_and_slide()	# Apply the above changes.
 
+
 # Computes the gravity to use for the player.
 func get_gravity():
 	# If the player is rising, use the jump_gravity, else use the fall_gravity.
 	return jump_gravity if velocity.y < 0.0 else fall_gravity
+
 
 #
 #func jump():
@@ -143,12 +143,14 @@ func get_input_direction():
 	return Input.get_axis("left", "right")
 
 
+# Called by health_component I think.
 func take_damage():
-	print(body_sprite_2d)
-#	get_node("Sprite2D").modulate = flashing_color
-##	print("hello")
-#	await get_tree().create_timer(flashing_time).timeout
-#	get_node("Sprite2D").modulate = Color.WHITE
+#	print(body_sprite_2d)
+	body_sprite_2d.modulate = flashing_color
+#	print("hello")
+	await get_tree().create_timer(flashing_time).timeout
+	body_sprite_2d.modulate = Color.WHITE
+
 
 func death():
 	queue_free()

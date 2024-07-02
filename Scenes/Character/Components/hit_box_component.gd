@@ -1,3 +1,4 @@
+# Is this used ? I don't think so.
 extends Area2D
 
 class_name HitBoxComponent

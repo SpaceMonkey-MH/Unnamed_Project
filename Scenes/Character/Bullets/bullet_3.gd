@@ -13,7 +13,7 @@ func _ready():
 	
 
 
-func _process(delta):
+func _process(_delta):
 	self_damage = player.self_damage
 #	print(self_damage)
 #	print(get_parent().get_parent().get_parent())

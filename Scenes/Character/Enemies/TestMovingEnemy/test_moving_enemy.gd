@@ -6,6 +6,8 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 @export var flashing_time : float = 0.1	# The amount of time the sprite will be flashing a color.
 @export var flashing_color : Color = Color.RED	# The color the sprite will be flashing.
+# Sprite2D as a variable so it can be modulated (and flipped, I don't know if it's gonna be used).
+@export var sprite_2d : Sprite2D
 
 @export var anitmation_tree : AnimationTree
 
@@ -38,10 +40,10 @@ func _physics_process(delta):
 
 
 func take_damage():
-	get_node("ColorRect").modulate = flashing_color
+	sprite_2d.modulate = flashing_color
 #	print("hello")
 	await get_tree().create_timer(flashing_time).timeout
-	get_node("ColorRect").modulate = Color.WHITE
+	sprite_2d.modulate = Color.WHITE
 
 
 func death():

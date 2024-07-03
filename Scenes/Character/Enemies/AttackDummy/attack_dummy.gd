@@ -1,4 +1,4 @@
-#class_name AttackDummy
+class_name AttackDummy
 extends CharacterClass
 
 
@@ -8,7 +8,7 @@ const JUMP_VELOCITY = -400.0
 @export var flashing_color : Color = Color.RED	# The color the sprite will be flashing.
 # Sprite2D as a variable so it can be modulated (and flipped, I don't know if it's gonna be used).
 @export var sprite_2d : Sprite2D
-## HitBox as a variable.
+## Get the gravity from the project settings to be synced with RigidBody nodes.
 #@export var hit_box : CollisionShape2D
 
 
@@ -44,7 +44,7 @@ func take_damage():
 #	queue_free()
 
 
-func deactivate_node():
-	print("deactivate_node")
-	# What this does is it makes the thing fall. Should not be taking any more damage.
+#func deactivate_node():
+#	print("deactivate_node")
+#	# What this does is it makes the thing fall. Should not be taking any more damage.
 #	hit_box.disabled = true

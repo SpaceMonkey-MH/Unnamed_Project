@@ -123,14 +123,13 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrylo"]
 size = Vector2(40, 40)
 
-[node name="TestMovingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "anitmation_tree")]
+[node name="TestMovingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "anitmation_tree", "hit_box")]
 collision_layer = 3
 collision_mask = 4
 script = ExtResource("1_cmmdb")
-flashing_time = null
-flashing_color = null
 sprite_2d = NodePath("Sprite2D")
 anitmation_tree = NodePath("AnimationTree")
+hit_box = NodePath("HitBox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_m4hrd")

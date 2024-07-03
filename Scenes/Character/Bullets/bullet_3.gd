@@ -31,7 +31,7 @@ func area_of_effect():
 #		if parent is Player:
 #			return
 		# Instead, we can incorporate the if statement. This works, but I'd like to give the player
-		# the choice of having or not self damage.
+		# the choice of having or not self damage. This will be an option.
 		if not parent is Player or self_damage:
 			for child in parent.get_children():
 				if child is HealthComponent:

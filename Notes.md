@@ -76,3 +76,4 @@
 	I kinda like it. It raises the issue of the z axis for the enemies: currently, they are at the front, so we can
 	see them when they fall; if I was to put them in the back, we wouldn't I think see them through the ground,
 	that would require a script to change the z order during runtime. I don't know what is best.
+	IMPORTANT NOTE: THE Area2D AND THE CollisionShape2D ATTACHED TO THE ENEMIES ARE IMPORTANT FOR BULLET 3.

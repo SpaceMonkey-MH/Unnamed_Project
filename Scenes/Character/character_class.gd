@@ -7,8 +7,8 @@ extends CharacterBody2D
 var death_animation_timer = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-## This is a bad idea...
-#@export var hit_box : CollisionShape2D
+# This is a bad idea...
+@export var hit_box : CollisionShape2D
 
 
 # Base function used for the death of the character, to be overwritten but useful if I forget to do so
@@ -30,7 +30,7 @@ func death():
 
 
 func deactivate_node():
-	pass
+	hit_box.disabled = true
 
 
 # This is used to wait before the node is queue-freed.

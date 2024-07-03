@@ -1,6 +1,6 @@
+class_name TestMovingEnemy
 extends CharacterClass
 
-class_name TestMovingEnemy
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -47,5 +47,5 @@ func take_damage():
 #	queue_free()
 
 
-func deactivate_node():
-	print("deactivate_node")
+#func deactivate_node():
+#	print("deactivate_node")

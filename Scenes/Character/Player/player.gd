@@ -161,5 +161,5 @@ func take_damage():
 #	queue_free()
 
 
-func deactivate_node():
-	print("deactivate_node")
+#func deactivate_node():
+#	print("deactivate_node")

@@ -16,7 +16,7 @@ var health : float = 100 :
 		# Goes (for now) to health_changed_manager.
 		SignalBus.emit_signal("health_changed", get_parent(), value - health)
 		health = value
-#		print("Set health in HealthComponent in ", get_parent(), "to: ", health)
+		print("Set health in HealthComponent in ", get_parent(), "to: ", health)
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():

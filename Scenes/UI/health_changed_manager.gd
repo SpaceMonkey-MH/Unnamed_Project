@@ -1,6 +1,7 @@
 # I think this is used to and only to display the label that indicates damage or heal taken.
 extends Control
 
+
 @export var health_changed_label : PackedScene
 @export var damage_color : Color = Color.DARK_RED
 @export var heal_color : Color = Color.DARK_GREEN
@@ -14,10 +15,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+#	print(position)
 	pass
 
 
 func on_signal_health_changed(node : Node, amount_changed : float):
+	print("on_signal_health_changed in health_changed_manager")
 	if amount_changed == 0:	# Made it so that there isn't a floating 0 upon rocket explosion.
 		return
 	var label_instance : Label = health_changed_label.instantiate()

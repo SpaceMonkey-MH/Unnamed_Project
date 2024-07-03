@@ -57,3 +57,11 @@
 		- Do both, but putting it in the difficulty settings or something, like "allow self damaging".
 	I think I'll try the third option. Aftermaths : IT WORKS! For some reason I had almost all the parts
 	I needed, now I "just" need to connect it to the options. LoL.
+- 2024/07/03:
+	I need to correct the fact that the damage label (health_changed_label) does not appear when on the killing
+	blow on the concerned scene, probably because the main node is queue-freed when it dies. I think I should
+	try and make it so that the label and the manager can exist without its parent node, ergo a way to find them
+	a new parent. Actually it's not how it seems to be working, idk. Actually, the manager is stand alone but
+	the label is a child of the enemy/player node. Maybe I could circonvate (?) this by adding an obligatory 
+	animation at death. Nah, this is not it, the character can still be damaged after being dead, I need to
+	deactivate it somehow.

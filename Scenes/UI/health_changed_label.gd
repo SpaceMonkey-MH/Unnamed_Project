@@ -9,3 +9,4 @@ func _process(delta):
 
 func _on_timer_timeout():
 	queue_free()
+	print("Hello from health_changed_label.")

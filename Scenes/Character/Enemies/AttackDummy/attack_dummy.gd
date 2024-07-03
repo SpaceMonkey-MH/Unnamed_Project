@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends CharacterClass
 
 
 const SPEED = 300.0
@@ -38,6 +38,6 @@ func take_damage():
 	await get_tree().create_timer(flashing_time).timeout
 	sprite_2d.modulate = Color.WHITE
 
-
-func death():
-	queue_free()
+#
+#func death():
+#	queue_free()

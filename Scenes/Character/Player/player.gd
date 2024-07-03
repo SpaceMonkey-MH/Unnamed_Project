@@ -1,20 +1,23 @@
-extends CharacterBody2D
-
 class_name Player
+extends CharacterClass
 
-# Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
-# Defining variables:
+### Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
+
+## Defining variables:
 @export var move_speed : float = 300.0	# Speed on the movement of the character, in pixels/second.
 @export var air_jumps_max : int = 3	# Maximum number of air jumps.
 var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
 
-# Base variable, not used directly for the jump.
-@export var jump_height : float = 120.0	# Height of the jump, in pixels.
-@export var jump_time_to_peak : float = 0.5	# Time for the player to reach the peak of the jump, in seconds.
-@export var jump_time_to_descent : float = 0.4	# Time to reach the ground during the jump, in seconds.
+## Base variables, not used directly for the jump.
+# Height of the jump, in pixels.
+@export var jump_height : float = 120.0
+# Time for the player to reach the peak of the jump, in seconds.
+@export var jump_time_to_peak : float = 0.5
+# Time to reach the ground during the jump, in seconds.
+@export var jump_time_to_descent : float = 0.4
 
-# Variable directly used for the jump and the falling.
+## Variables directly used for the jump and the falling:
 # Velocity applied to the player when jumping.
 @onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 # Gravity applied to the player during the rising part of the jump.
@@ -47,9 +50,6 @@ var flashing_time : float = 0.1
 ######################
 
 var damage_multiplier : float = 1	# Applied to every attack.
-
-
-
 
 
 # // From template:
@@ -156,6 +156,6 @@ func take_damage():
 	await get_tree().create_timer(flashing_time).timeout
 	body_sprite_2d.modulate = Color.WHITE
 
-
-func death():
-	queue_free()
+#
+#func death():
+#	queue_free()

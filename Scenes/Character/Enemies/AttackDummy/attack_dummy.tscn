@@ -1,13 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv6wtd2pqvjb5"]
+[gd_scene load_steps=5 format=3 uid="uid://cv6wtd2pqvjb5"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.gd" id="1_x5k5i"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_1oxxk"]
 [ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="2_assgn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmp6b"]
-size = Vector2(40, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7sij"]
 size = Vector2(40, 40)
 
 [node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d")]
@@ -31,8 +28,3 @@ offset_top = -46.0
 offset_right = 58.0
 offset_bottom = -20.0
 text = "Attack Dummy"
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_d7sij")

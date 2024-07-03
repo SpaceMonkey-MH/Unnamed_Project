@@ -5,6 +5,10 @@ extends CharacterBody2D
 
 # No magic numbers.
 var death_animation_timer = 1.5
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+## This is a bad idea...
+#@export var hit_box : CollisionShape2D
 
 
 # Base function used for the death of the character, to be overwritten but useful if I forget to do so
@@ -36,7 +40,6 @@ func wait():
 	print("Hello from wait() in character_class, before the await call.")
 	await get_tree().create_timer(death_animation_timer).timeout
 	print("Hello from wait() in character_class, after the await call.")
-	
 
 
 # This is meant to be overwritten.

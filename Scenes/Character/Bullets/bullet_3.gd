@@ -14,6 +14,7 @@ func _ready():
 
 
 func _process(_delta):
+	# Not sure if this is the right place, maybe should go in _ready(), but I can't really test right now.
 	self_damage = player.self_damage
 #	print(self_damage)
 #	print(get_parent().get_parent().get_parent())

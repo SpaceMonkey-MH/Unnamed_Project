@@ -65,3 +65,14 @@
 	the label is a child of the enemy/player node. Maybe I could circonvate (?) this by adding an obligatory 
 	animation at death. Nah, this is not it, the character can still be damaged after being dead, I need to
 	deactivate it somehow.
+	Need to also stop the health from going under 0, should be fixed by making the character un-affected by
+	environment.
+	There is still the option of not making the label a child of the character, but that won't leave an easy
+	possibility for the death animation, apart from creating a new sprite on the location, but then it wouldn't
+	move. Idk.
+	I need to find a way to make the deactivate_node() function do its thing inside the class script and not
+	the extended scripts.
+	What I have done currently, is that the enemy's hitbox is disabled when it dies, so it falls through the map.
+	I kinda like it. It raises the issue of the z axis for the enemies: currently, they are at the front, so we can
+	see them when they fall; if I was to put them in the back, we wouldn't I think see them through the ground,
+	that would require a script to change the z order during runtime. I don't know what is best.

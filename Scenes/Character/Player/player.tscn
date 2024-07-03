@@ -473,7 +473,7 @@ weapons_sprite_2d = NodePath("WeaponsSprite2D")
 texture = ExtResource("2_xbbwc")
 hframes = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_w47ok")
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]

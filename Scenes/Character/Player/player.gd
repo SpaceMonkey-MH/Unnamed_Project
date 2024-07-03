@@ -156,6 +156,10 @@ func take_damage():
 	await get_tree().create_timer(flashing_time).timeout
 	body_sprite_2d.modulate = Color.WHITE
 
-#
+
 #func death():
 #	queue_free()
+
+
+func deactivate_node():
+	print("deactivate_node")

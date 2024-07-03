@@ -11,9 +11,6 @@ const JUMP_VELOCITY = -400.0
 
 @export var anitmation_tree : AnimationTree
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _ready():
 	anitmation_tree.active = true
@@ -45,6 +42,10 @@ func take_damage():
 	await get_tree().create_timer(flashing_time).timeout
 	sprite_2d.modulate = Color.WHITE
 
-#
+
 #func death():
 #	queue_free()
+
+
+func deactivate_node():
+	print("deactivate_node")

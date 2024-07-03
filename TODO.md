@@ -5,6 +5,7 @@ NOT DONE :
 - Finish the code in hit_state.
 - Finish the code for test_moving_enemy, should be a state machine and all the tintouin.
 - Solve the issue where the dead characters can still be hit after their death.
+- To do when the options are set up: try to move the self_damage assign in bullet_3.gd to _ready() instead.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

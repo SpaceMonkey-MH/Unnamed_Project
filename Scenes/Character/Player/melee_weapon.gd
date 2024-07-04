@@ -22,4 +22,7 @@ func _on_body_entered(body):
 		return
 	for child in body.get_children():
 		if child is HealthComponent:
-			child.damage(attack)
+#			print("call_deferred(\"child.damage\", attack)")
+			# IT WORKS! I just had to not be an idiot!
+			child.call_deferred("damage", attack)
+#			child.damage(attack)

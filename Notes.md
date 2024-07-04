@@ -78,8 +78,21 @@
 	that would require a script to change the z order during runtime. I don't know what is best.
 	IMPORTANT NOTE: THE Area2D AND THE CollisionShape2D ATTACHED TO THE ENEMIES ARE IMPORTANT FOR BULLET 3.
 - 2024/07/04:
-	I'm trying to make the falling dead bodies disappear when out of the screen, bu I just stumbled upon a weird
+	I'm trying to make the falling dead bodies disappear when out of the screen, but I just stumbled upon a weird
 	bug: killing with the melee weapon does not make the body fall. Hum...
 	There is an error when the enemy is killed by the melee weapon, but not if it is killed by another weapon.
 	The error says to defer the hit_box.disabled = true set instead, but then they fall in none of the cases.
 	I'm gonna commit so I can see what I doing.
+	Maybe clearing the error would solve the issue?
+	Error:
+		E 0:00:04:0551   character_class.gd:48 @ deactivate_node(): Can't change this state while flushing queries.
+		Use call_deferred() or set_deferred() to change monitoring state instead.
+  <C++ Error>    Condition "body->get_space() && flushing_queries" is true.
+  <C++ Source>   servers/physics_2d/godot_physics_server_2d.cpp:654 @ body_set_shape_disabled()
+  <Stack Trace>  character_class.gd:48 @ deactivate_node()
+				 character_class.gd:34 @ death()
+				 health_component.gd:36 @ damage()
+				 melee_weapon.gd:28 @ _on_body_entered()
+
+	It worked, but it is important to note that call_deferred has to be "x.call_deferred("y", args)" and not
+	"call_deferred("x.y", args). Idiot boy.

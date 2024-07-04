@@ -14,7 +14,7 @@ const JUMP_VELOCITY = -400.0
 #@export var hit_box : CollisionShape2D
 
 
-#func _process(delta):
+#func _process(_delta):
 #	print("HitBox is disabled: ", hit_box.disabled)
 
 

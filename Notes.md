@@ -77,3 +77,9 @@
 	see them when they fall; if I was to put them in the back, we wouldn't I think see them through the ground,
 	that would require a script to change the z order during runtime. I don't know what is best.
 	IMPORTANT NOTE: THE Area2D AND THE CollisionShape2D ATTACHED TO THE ENEMIES ARE IMPORTANT FOR BULLET 3.
+- 2024/07/04:
+	I'm trying to make the falling dead bodies disappear when out of the screen, bu I just stumbled upon a weird
+	bug: killing with the melee weapon does not make the body fall. Hum...
+	There is an error when the enemy is killed by the melee weapon, but not if it is killed by another weapon.
+	The error says to defer the hit_box.disabled = true set instead, but then they fall in none of the cases.
+	I'm gonna commit so I can see what I doing.

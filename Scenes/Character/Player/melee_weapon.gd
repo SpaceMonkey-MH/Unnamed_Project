@@ -14,9 +14,10 @@ func _ready():
 
 
 func _on_body_entered(body):
-#	print(body)
+	print("Body entered: ", body)
 	var attack = Attack.new()
 	attack.attack_damage = melee_weapon_state.attack_damage
+	# Could this be an easter egg that the melee weapon does self damage?
 	if body is Player:
 		return
 	for child in body.get_children():

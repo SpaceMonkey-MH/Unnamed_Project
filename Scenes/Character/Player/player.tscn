@@ -18,7 +18,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/not_firing.gd" id="15_b7158"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/firing.gd" id="16_nowjs"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/character_weapons_state_machine.gd" id="17_feavh"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon.gd" id="18_yssnd"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon_state.gd" id="19_lk4n7"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon2.gd" id="19_wela8"]
 [ext_resource type="PackedScene" uid="uid://bylc6wriv4awj" path="res://Scenes/Character/Bullets/bullet_1.tscn" id="20_fgewv"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon3.gd" id="20_rfo25"]
@@ -546,7 +546,7 @@ character = NodePath("..")
 current_state = NodePath("Melee")
 
 [node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
-script = ExtResource("18_yssnd")
+script = ExtResource("19_lk4n7")
 melee_weapon = NodePath("../../MeleeWeapon")
 next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../Weapon8")

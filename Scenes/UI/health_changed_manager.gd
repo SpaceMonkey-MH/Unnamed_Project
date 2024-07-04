@@ -20,7 +20,7 @@ func _process(_delta):
 
 
 func on_signal_health_changed(node : Node, amount_changed : float):
-	print("on_signal_health_changed in health_changed_manager")
+#	print("on_signal_health_changed in health_changed_manager")
 	if amount_changed == 0:	# Made it so that there isn't a floating 0 upon rocket explosion.
 		return
 	var label_instance : Label = health_changed_label.instantiate()

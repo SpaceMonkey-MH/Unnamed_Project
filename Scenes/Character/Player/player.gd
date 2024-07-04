@@ -75,54 +75,73 @@ func _process(_delta):
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)
 
 
-func _physics_process(delta):
-	# // Template from the editor:
-#	# Add the gravity.
-#	if not is_on_floor():
-#		velocity.y += gravity * delta
-#
-#	# Handle Jump.
-#	if Input.is_action_just_pressed("jump") and is_on_floor():
-#		velocity.y = JUMP_VELOCITY
-#
-#	# Get the input direction and handle the movement/deceleration.
-#	# As good practice, you should replace UI actions with custom gameplay actions.
-#	var direction = Input.get_axis("left", "right")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)	# I don't understand what this does. It seems useless.
-#	#velocity.x = direction * SPEED	# Not in the template.
-#	#print(move_toward(velocity.x, 0, SPEED))	# Not in the template.
-	# // End of the template.
-	
+# Replaces the _physics_process() procedure so that the body can be queue freed in the superclass.
+func character_physics_process(delta):
 	# Allows for falling mechanic.
 	velocity.y += get_gravity() * delta
-	
 	# Allows movement of the player. 
 	var direction = get_input_direction()	# Get the direction of the input.
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
 	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
-	# This doesn't do anything yet, because the sprites are symetrical.
-	# Maybe this doesn't work at all. It seems to be working.
-	# I think it can be done better, like the body sprite should flip with the mouse cursor I think,
-	# this would solve the idle issue (when not moving, the spite always looks to the right).
-#	body_sprite_2d.flip_h = direction < 0
 	# Flipping the spite so it looks the right direction.
 	body_sprite_2d.flip_h = get_local_mouse_position().x < 0
 	# Flipping the gun so it's not upside down.
 	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0
-#
-#	if Input.is_action_just_pressed("jump"):
-#		if is_on_floor():
-##			jump()
-#			pass
-##		elif air_jumps_current > 0:
-##			pass
-##			air_jump()
+	# Apply the above changes.
+	move_and_slide()
 
-	move_and_slide()	# Apply the above changes.
+
+
+# This should not be used anymore, keeping it just in case (and to have the history).
+#func _physics_process(delta):
+#	# // Template from the editor:
+##	# Add the gravity.
+##	if not is_on_floor():
+##		velocity.y += gravity * delta
+##
+##	# Handle Jump.
+##	if Input.is_action_just_pressed("jump") and is_on_floor():
+##		velocity.y = JUMP_VELOCITY
+##
+##	# Get the input direction and handle the movement/deceleration.
+##	# As good practice, you should replace UI actions with custom gameplay actions.
+##	var direction = Input.get_axis("left", "right")
+##	if direction:
+##		velocity.x = direction * SPEED
+##	else:
+##		velocity.x = move_toward(velocity.x, 0, SPEED)	# I don't understand what this does. It seems useless.
+##	#velocity.x = direction * SPEED	# Not in the template.
+##	#print(move_toward(velocity.x, 0, SPEED))	# Not in the template.
+#	# // End of the template.
+#
+#	# Allows for falling mechanic.
+#	velocity.y += get_gravity() * delta
+#
+#	# Allows movement of the player. 
+#	var direction = get_input_direction()	# Get the direction of the input.
+#	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
+#	# and then by whether the player can move or not.
+#	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
+#	# This doesn't do anything yet, because the sprites are symetrical.
+#	# Maybe this doesn't work at all. It seems to be working.
+#	# I think it can be done better, like the body sprite should flip with the mouse cursor I think,
+#	# this would solve the idle issue (when not moving, the sprite always looks to the right).
+##	body_sprite_2d.flip_h = direction < 0
+#	# Flipping the spite so it looks the right direction.
+#	body_sprite_2d.flip_h = get_local_mouse_position().x < 0
+#	# Flipping the gun so it's not upside down.
+#	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0
+##
+##	if Input.is_action_just_pressed("jump"):
+##		if is_on_floor():
+###			jump()
+##			pass
+###		elif air_jumps_current > 0:
+###			pass
+###			air_jump()
+#
+#	move_and_slide()	# Apply the above changes.
 
 
 # Computes the gravity to use for the player.

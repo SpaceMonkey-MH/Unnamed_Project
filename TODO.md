@@ -8,6 +8,12 @@ NOT DONE :
 - Handle the part where the characters fall when they die (animation).
 - Handle the part where the characters fall when they die (sound).
 - Handle the part where the characters fall when they die (make them disappear when out of the screen).
+- Give legs to the enemies.
+- Give a brain to the enemies.
+- Make the enemies stackable on each other ?
+- Make it so that you can't shoot when clicking on the UI.
+- Add easter eggs, such as a button that screams.
+- Add funny descriptions to the weapons.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

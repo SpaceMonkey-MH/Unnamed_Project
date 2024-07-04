@@ -3,25 +3,38 @@ extends CharacterBody2D
 # Base class for the character, that is to say the player and the enemies.
 
 
-# No magic numbers.
-var death_animation_timer = 1.5
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-# This is a bad idea...
+# HitBox as a variable, so that it can be disabled.
 @export var hit_box : CollisionShape2D
+# No magic numbers.
+var death_animation_timer : float = 1.5
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
+# Whether or not the character is dead.
+var character_is_dead : bool = false
+
+
+# Creating a _physics_process() function so that it regroups the test if the body is outside of the screen
+# inside the superclass.
+func _physics_process(delta):
+	character_physics_process(delta)
+#	print("Hello from _physics_process in character_class.")
+
+
+func character_physics_process(_delta):
+	pass
 
 
 # Base function used for the death of the character, to be overwritten but useful if I forget to do so
 # (or if I'm lazy). Or if it just works better that way, kind of like how the bullet
 # _physics_process() function works.
 func death():
-	print("hello")
+	print("Death of the character: ", self)
 	# We need to deactivate the character node without freeing it, so that it doesn't interact too much anymore,
 	# but it's still there for the damage label.
 	deactivate_node()
 	# This is temporary, it is used to simulate the animation.
 	# Also, should allow the damage label to exist on death.
-	# Actually, I have a better idea, let's put it in another function.
+	# Actually, I have a better idea, let's put it in another function, and withdraw it when needed.
 	await wait()
 	# Calling the animation anyway.
 	death_animation()
@@ -30,6 +43,8 @@ func death():
 
 
 func deactivate_node():
+	# Idk why, but it showed errors when killing that way, so I deferred it instead. Actually,
+	# it doesn't work with deferred. IDK.
 	hit_box.disabled = true
 
 
@@ -37,9 +52,9 @@ func deactivate_node():
 # This is a separate function so that it can be overwritten in extending classes.
 # This doesn't work, and I don't know why...
 func wait():
-	print("Hello from wait() in character_class, before the await call.")
+#	print("Hello from wait() in character_class, before the await call.")
 	await get_tree().create_timer(death_animation_timer).timeout
-	print("Hello from wait() in character_class, after the await call.")
+#	print("Hello from wait() in character_class, after the await call.")
 
 
 # This is meant to be overwritten.

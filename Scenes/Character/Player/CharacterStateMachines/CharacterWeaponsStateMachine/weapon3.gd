@@ -7,7 +7,7 @@ class_name Weapon3
 @export var previous_weapon_state : Weapon2
 @export var bullet_3_scene : PackedScene
 @export var attack_damage : float = 0
-@export var aoe_attack_damage : float = 50
+@export var aoe_attack_damage : float = 40
 @export var speed_factor : float = 5
 
 var wait_time : float = 1.5

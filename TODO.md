@@ -7,7 +7,6 @@ NOT DONE :
 - To do when the options are set up: try to move the self_damage assign in bullet_3.gd to _ready() instead.
 - Handle the part where the characters fall when they die (animation).
 - Handle the part where the characters fall when they die (sound).
-- Handle the part where the characters fall when they die (make them disappear when out of the screen).
 - Give legs to the enemies.
 - Give a brain to the enemies.
 - Make the enemies stackable on each other ?
@@ -26,3 +25,4 @@ DONE :
 - Solve the issue of the player body sprite flip. //DONE.
 - Solve the issue where the damage label doesn't show on the killing hit. // DONE.
 - Solve the issue where the dead characters can still be hit after their death. //DONE.
+- Handle the part where the characters fall when they die (make them disappear when out of the screen). //DONE.

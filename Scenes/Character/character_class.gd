@@ -33,7 +33,7 @@ func character_physics_process(_delta):
 # (or if I'm lazy). Or if it just works better that way, kind of like how the bullet
 # _physics_process() function works.
 func death():
-	print("Death of the character: ", self)
+#	print("Death of the character: ", self)
 	# We need to deactivate the character node without freeing it, so that it doesn't interact too much anymore,
 	# but it's still there for the damage label.
 	deactivate_node()
@@ -50,7 +50,7 @@ func death():
 
 func deactivate_node():
 	# Idk why, but it showed errors when killing that way, so I deferred it instead. Actually,
-	# it doesn't work with deferred. IDK.
+	# it doesn't work with deferred. IDK. Mayeb I was using it wrong.
 	hit_box.disabled = true
 
 
@@ -75,4 +75,4 @@ func handle_character_out_of_screen():
 	if character_is_dead:
 		await get_tree().create_timer(out_of_screen_death_timer).timeout
 		queue_free()
-		print("queue_free() of ", self)
+#		print("queue_free() of ", self)

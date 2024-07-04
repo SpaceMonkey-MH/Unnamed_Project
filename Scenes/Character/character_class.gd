@@ -11,15 +11,20 @@ var death_animation_timer : float = 1.5
 var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Whether or not the character is dead.
 var character_is_dead : bool = false
+# Timer before queue_free() when the dead characters fall out of the screen.
+var out_of_screen_death_timer : float = 1.5
+## Attempt.
+#var character_node
 
 
 # Creating a _physics_process() function so that it regroups the test if the body is outside of the screen
-# inside the superclass.
+# inside the superclass. This is useless for now.
 func _physics_process(delta):
 	character_physics_process(delta)
 #	print("Hello from _physics_process in character_class.")
 
 
+# Just a placeholder.
 func character_physics_process(_delta):
 	pass
 
@@ -32,14 +37,15 @@ func death():
 	# We need to deactivate the character node without freeing it, so that it doesn't interact too much anymore,
 	# but it's still there for the damage label.
 	deactivate_node()
-	# This is temporary, it is used to simulate the animation.
-	# Also, should allow the damage label to exist on death.
-	# Actually, I have a better idea, let's put it in another function, and withdraw it when needed.
-	await wait()
-	# Calling the animation anyway.
-	death_animation()
-	# Freeing the queue (== death).
-	queue_free()
+	character_is_dead = true
+#	# This is temporary, it is used to simulate the animation.
+#	# Also, should allow the damage label to exist on death.
+#	# Actually, I have a better idea, let's put it in another function, and withdraw it when needed.
+#	await wait()
+#	# Calling the animation anyway.
+#	death_animation()
+#	# Freeing the queue (== death).
+#	queue_free()
 
 
 func deactivate_node():
@@ -51,6 +57,7 @@ func deactivate_node():
 # This is used to wait before the node is queue-freed.
 # This is a separate function so that it can be overwritten in extending classes.
 # This doesn't work, and I don't know why...
+# Ok now I know why, I had to await the call to wait() in death().
 func wait():
 #	print("Hello from wait() in character_class, before the await call.")
 	await get_tree().create_timer(death_animation_timer).timeout
@@ -60,3 +67,12 @@ func wait():
 # This is meant to be overwritten.
 func death_animation():
 	pass
+
+
+# Procedure that handles what happens when a character is out of screen; called by the procedure connected
+# to the VisibleOnScreenNotifier2D of the character.
+func handle_character_out_of_screen():
+	if character_is_dead:
+		await get_tree().create_timer(out_of_screen_death_timer).timeout
+		queue_free()
+		print("queue_free() of ", self)

@@ -182,3 +182,11 @@ func take_damage():
 
 #func deactivate_node():
 #	print("deactivate_node")
+
+
+# Don't know if it is a good idea to queue_free() the player, idk how it's gonna go with the respawn and all.
+## Procedure that is connected to the screen exited signal of the VisibleOnScreenNotifier2D, and that
+## calls the procedure that handles what happens when the character is off-screen (queue_free() it if it's dead).
+#func _on_visible_on_screen_notifier_2d_screen_exited():
+##	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
+#	handle_character_out_of_screen()

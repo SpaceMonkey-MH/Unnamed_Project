@@ -7,7 +7,7 @@ class_name Weapon2
 @export var previous_weapon_state : DesertEagleState
 @export var bullet_2_scene : PackedScene
 @export var attack_damage : float = 10
-@export var speed_factor : float = 10
+@export var speed_factor : float = 12
 
 
 var wait_time : float = 0.2

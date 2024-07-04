@@ -4,8 +4,12 @@ extends CharacterClass
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-@export var flashing_time : float = 0.1	# The amount of time the sprite will be flashing a color.
-@export var flashing_color : Color = Color.RED	# The color the sprite will be flashing.
+# The amount of time the sprite will be flashing a color.
+@export var flashing_time : float = 0.1
+# The color the sprite will be flashing.
+@export var flashing_color : Color = Color.RED
+# The default color of the dummy. 
+@export var base_color : Color = Color.WHITE
 # Sprite2D as a variable so it can be modulated (and flipped, I don't know if it's gonna be used).
 @export var sprite_2d : Sprite2D
 ## Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -53,7 +57,7 @@ func take_damage():
 	sprite_2d.modulate = flashing_color
 #	print("hello")
 	await get_tree().create_timer(flashing_time).timeout
-	sprite_2d.modulate = Color.WHITE
+	sprite_2d.modulate = base_color
 
 
 #func death():
@@ -64,3 +68,10 @@ func take_damage():
 #	print("deactivate_node")
 #	# What this does is it makes the thing fall. Should not be taking any more damage.
 #	hit_box.disabled = true
+
+
+# Procedure that is connected to the screen exited signal of the VisibleOnScreenNotifier2D, and that
+# calls the procedure that handles what happens when the character is off-screen (queue_free() it if it's dead).
+func _on_visible_on_screen_notifier_2d_screen_exited():
+#	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
+	handle_character_out_of_screen()

@@ -14,6 +14,7 @@ NOT DONE :
 - Make it so that you can't shoot when clicking on the UI.
 - Add easter eggs, such as a button that screams.
 - Add funny descriptions to the weapons.
+- Solve window size issue.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

@@ -95,4 +95,13 @@
 				 melee_weapon.gd:28 @ _on_body_entered()
 
 	It worked, but it is important to note that call_deferred has to be "x.call_deferred("y", args)" and not
-	"call_deferred("x.y", args). Idiot boy.
+	"call_deferred("x.y", args). Stupid fat Hobbit.
+	
+	Will have to solve the issue of the window size at some point.
+	
+	Will have to do something about the fact that the player can still move after dying. What about respawn?
+	
+	Trying to do the disappear trick, not managing to do it in the superclass (yet). I don't think it is
+	possible to do it in character_class fully, because I need to somehow connect to the VisibleOnScreenNotifier2D
+	and I don't know if it is possible. The middle-of-the-road thing to do is to connect to the signals in each
+	subclass, and then call a procedure of the superclass that does the thing. That is what I'm going to do.

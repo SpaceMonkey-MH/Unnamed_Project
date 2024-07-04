@@ -192,3 +192,7 @@ offset_bottom = -32.0
 text = "Movement State:"
 script = ExtResource("9_vkggd")
 state_machine = NodePath("../CharacterMovementStateMachine")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

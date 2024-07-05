@@ -105,3 +105,15 @@
 	possible to do it in character_class fully, because I need to somehow connect to the VisibleOnScreenNotifier2D
 	and I don't know if it is possible. The middle-of-the-road thing to do is to connect to the signals in each
 	subclass, and then call a procedure of the superclass that does the thing. That is what I'm going to do.
+- 2024/07/05:
+	I don't think I'm gonna use HitState in the long run, like I think I should not have a specific state for when
+	the enemy is hit, but rather do the hit code in the main script or something, not to affect the behavior.
+	Maybe a knockback or a stun, but than can be done otherwise. Keeping it there for now though.
+	I think there is something wrong with the variables of player.gd and movement_state.gd, might need to fix that
+	later.
+	I'm having trouble understanding an issue with move_speed. Maybe it would be better to use character.move_speed
+	in the scripts.
+	I don't know if it is correct to use the state variable as they are currently. Like it's really ugly when I
+	affect them all in the character state machine, but if not I have to call character.x each time (instead of
+	just x).
+	I'm gonna commit as is, even though the character.move_speed issue is not resolved.

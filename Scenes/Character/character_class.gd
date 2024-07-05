@@ -15,6 +15,8 @@ var character_is_dead : bool = false
 var out_of_screen_death_timer : float = 1.5
 ## Attempt.
 #var character_node
+# Move speed of the character, here so it can be added to all the relative states. In pixels/second.
+var move_speed : float = 0.0
 
 
 # Creating a _physics_process() function so that it regroups the test if the body is outside of the screen

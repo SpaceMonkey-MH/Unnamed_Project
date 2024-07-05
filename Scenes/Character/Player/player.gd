@@ -5,9 +5,12 @@ extends CharacterClass
 ### Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
 ## Defining variables:
-@export var move_speed : float = 300.0	# Speed on the movement of the character, in pixels/second.
-@export var air_jumps_max : int = 3	# Maximum number of air jumps.
-var air_jumps_current : int = air_jumps_max	# Counter of the air jumps done, initialized at air_jumps_max.
+# Speed on the movement of the player, in pixels/second.
+@export var player_move_speed : float = 300.0
+# Maximum number of air jumps.
+@export var air_jumps_max : int = 3
+# Counter of the air jumps done, initialized at air_jumps_max.
+var air_jumps_current : int = air_jumps_max
 
 ## Base variables, not used directly for the jump.
 # Height of the jump, in pixels.
@@ -62,6 +65,10 @@ var damage_multiplier : float = 1	# Applied to every attack.
 
 
 func _ready():
+	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
+	# declared in superclass.
+	move_speed = player_move_speed
+#	print("player: ", move_speed)
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 	body_animation_tree.active = true	# Activating the animation trees so that the animations play.
 	weapons_animation_tree.active = true	# Activating the animation trees so that the animations play.
@@ -73,10 +80,12 @@ func _process(_delta):
 #	print("Player velocity: ", velocity)
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)
+#	print("player: ", move_speed)
 
 
 # Replaces the _physics_process() procedure so that the body can be queue freed in the superclass.
 func character_physics_process(delta):
+#	print("Player velocity: ", velocity)
 	# Allows for falling mechanic.
 	velocity.y += get_gravity() * delta
 	# Allows movement of the player. 

@@ -14,6 +14,8 @@ const JUMP_VELOCITY = -400.0
 
 func _ready():
 	anitmation_tree.active = true
+	move_speed = SPEED
+#	print(move_speed)
 
 
 # Replaces the _physics_process() procedure so that the body can be queue freed in the superclass.

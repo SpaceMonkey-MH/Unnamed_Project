@@ -4,7 +4,7 @@ extends Node
 
 signal interrupt_state(new_state : State)
 
-var character : CharacterBody2D
+var character : CharacterClass
 var playback : AnimationNodeStateMachinePlayback
 var next_state : State
 

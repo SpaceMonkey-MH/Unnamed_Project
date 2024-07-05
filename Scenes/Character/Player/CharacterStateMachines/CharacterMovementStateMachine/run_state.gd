@@ -13,6 +13,7 @@ class_name RunState
 
 
 func state_process(_delta):
+#	print(move_speed)
 	if character.velocity.x == 0:
 		next_state = idle_state
 		playback.travel(idle_animation_name)

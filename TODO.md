@@ -14,6 +14,9 @@ NOT DONE :
 - Add easter eggs, such as a button that screams.
 - Add funny descriptions to the weapons.
 - Solve window size issue.
+- Fix the variables of player.gd and movement_state.gd.
+- Solve possible issue: jump animation playing when falling (at beginning).
+- Fix the rolling (landing) animation when going backwards. 
 
 ------------------------------------------------------------------------------------------------------
 DONE :

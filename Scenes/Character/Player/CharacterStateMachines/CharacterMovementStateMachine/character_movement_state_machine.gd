@@ -2,7 +2,7 @@ extends Node
 
 class_name CharacterMovementStateMachine
 
-@export var character : CharacterBody2D
+@export var character : CharacterClass
 @export var animation_tree : AnimationTree
 @export var current_state : State
 
@@ -21,11 +21,14 @@ func _ready():
 			
 			# Set the states up with what they need to function.
 			child.character = character
+			child.move_speed= character.move_speed
+			print(child.move_speed, " ", self, "\n", child)
+			print("1 ", character.move_speed)
+			print("character: ", character)
+#			print(child.move_speed)
 			if character is Player:
 				child.playback = animation_tree["parameters/playback"]
 	#			print(child)
-				child.move_speed= character.move_speed
-	#			print(child.move_speed)
 				child.air_jumps_max = character.air_jumps_max
 	#			print(child.air_jumps_max)
 				child.air_jumps_current = child.air_jumps_max
@@ -36,9 +39,14 @@ func _ready():
 	#			print(child.jump_time_to_peak)
 				child.jump_time_to_descent = character.jump_time_to_descent
 	#			print(child.jump_time_to_descent)
-				child.jump_velocity = ((2.0 * child.jump_height) / child.jump_time_to_peak) * -1.0
-				child.jump_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_peak * child.jump_time_to_peak)) * -1.0
-				child.fall_gravity = ((-2.0 * child.jump_height) / (child.jump_time_to_descent * child.jump_time_to_descent)) * -1.0
+				child.jump_velocity = ((2.0 * child.jump_height) /
+				child.jump_time_to_peak) * -1.0
+				child.jump_gravity = ((-2.0 * child.jump_height) /
+				(child.jump_time_to_peak * child.jump_time_to_peak)) * -1.0
+				child.fall_gravity = ((-2.0 * child.jump_height) /
+				(child.jump_time_to_descent * child.jump_time_to_descent)) * -1.0
+			
+#			if character is 
 				
 			# Connect to interrupt signal
 			child.connect("interrupt_state", on_state_interrupt_state)
@@ -56,6 +64,12 @@ func _physics_process(delta):
 		switch_states(current_state.next_state)
 		
 	current_state.state_process(delta)
+	# This should be outdated.
+#	# This is ugly, but I don't know how to do it better.
+#	if not character is Player and current_state is WanderState:
+##		print("current_state is: ", current_state)
+#		current_state.wander(character)
+		
 
 # Used for the landing animation (the player can't move during this), this isn't very useful here.
 func check_if_can_move():

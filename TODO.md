@@ -17,6 +17,8 @@ NOT DONE :
 - Solve possible issue: jump animation playing when falling (at beginning).
 - Fix the rolling (landing) animation when going backwards.
 - Fix the melee weapon AoE bug (cf 2024/07/06)?
+- Unit tests? Asserts.
+- Make anemies stop between two wanderings.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

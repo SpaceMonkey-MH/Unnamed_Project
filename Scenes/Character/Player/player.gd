@@ -64,12 +64,17 @@ var damage_multiplier : float = 1	# Applied to every attack.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
+# Executed at the beginning of runtime.
 func _enter_tree():
 	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
 	# declared in superclass.
 	move_speed = player_move_speed
+	assert(move_speed == 300, "move_speed is not equal to 300.")
+	assert(move_speed != 300, "move_speed is equal to 300.")
+	assert(move_speed == 0)
 
 
+# Executed at the beginning of runtime, after _enter_tree().
 func _ready():
 #	print("Player is ready.")
 #	# This is ugly, but I can't find a better way to have the speed exported in this script while making it

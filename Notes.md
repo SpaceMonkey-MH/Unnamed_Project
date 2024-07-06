@@ -140,3 +140,4 @@
 	for instance, and I would like to make it a superclass variable, and it should be different for the different
 	enemies. Idea: have the speed be randomized, in a range of like speed/2 to speed, idk. That way, it can
 	vary during runtime, and it can be fixed in the enemy script.
+	Unit tests? Asserts instead.

@@ -12,9 +12,16 @@ const JUMP_VELOCITY = -400.0
 @export var anitmation_tree : AnimationTree
 
 
-func _ready():
-	anitmation_tree.active = true
+func _enter_tree():
+	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
+	# declared in superclass.
 	move_speed = SPEED
+
+
+func _ready():
+	print("TestMovingEnemy is ready.")
+	anitmation_tree.active = true
+#	move_speed = SPEED
 #	print(move_speed)
 
 

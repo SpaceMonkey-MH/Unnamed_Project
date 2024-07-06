@@ -12,6 +12,7 @@ var states : Array[State]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("CharacterMovementStateMachine is ready.")
 #	print(get_parent())
 #	print(animation_tree)
 	for child in get_children():
@@ -22,9 +23,9 @@ func _ready():
 			# Set the states up with what they need to function.
 			child.character = character
 			child.move_speed= character.move_speed
-			print(child.move_speed, " ", self, "\n", child)
-			print("1 ", character.move_speed)
-			print("character: ", character)
+#			print(child.move_speed, " ", self, "\n", child)
+#			print("1 ", character.move_speed)
+#			print("character: ", character)
 #			print(child.move_speed)
 			if character is Player:
 				child.playback = animation_tree["parameters/playback"]

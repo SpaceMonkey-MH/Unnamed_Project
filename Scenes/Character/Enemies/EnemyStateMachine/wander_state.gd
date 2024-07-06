@@ -2,14 +2,13 @@ class_name WanderState
 extends EnemyState
 
 # The direction of movement of the character: -1 left, 0 idle, 1 right.
-var direction : int = 1
+var direction : int = 0
 
 
 # Called in _physics_process in state machine. 
 func state_process(_delta):
-	character.velocity.x = direction * character.move_speed
+	character.velocity.x = direction * move_speed
 #	print(direction, "\n", move_speed, "\n")
-
 
 
 #func wander():

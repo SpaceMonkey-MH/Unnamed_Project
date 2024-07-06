@@ -64,10 +64,17 @@ var damage_multiplier : float = 1	# Applied to every attack.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 
-func _ready():
+func _enter_tree():
 	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
 	# declared in superclass.
 	move_speed = player_move_speed
+
+
+func _ready():
+#	print("Player is ready.")
+#	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
+#	# declared in superclass.
+#	move_speed = player_move_speed
 #	print("player: ", move_speed)
 #	print(jump_velocity, " ", jump_gravity, " ", fall_gravity)
 	body_animation_tree.active = true	# Activating the animation trees so that the animations play.

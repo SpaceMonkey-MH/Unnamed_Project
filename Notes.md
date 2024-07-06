@@ -88,12 +88,12 @@
 	__Error:__
 		E 0:00:04:0551   character_class.gd:48 @ deactivate_node(): Can't change this state while flushing queries.
 		Use call_deferred() or set_deferred() to change monitoring state instead.
-  <C++ Error>    Condition "body->get_space() && flushing_queries" is true.
-  <C++ Source>   servers/physics_2d/godot_physics_server_2d.cpp:654 @ body_set_shape_disabled()
-  <Stack Trace>  character_class.gd:48 @ deactivate_node()
-				 character_class.gd:34 @ death()
-				 health_component.gd:36 @ damage()
-				 melee_weapon.gd:28 @ _on_body_entered()
+		  <C++ Error>    Condition "body->get_space() && flushing_queries" is true.
+		  <C++ Source>   servers/physics_2d/godot_physics_server_2d.cpp:654 @ body_set_shape_disabled()
+		  <Stack Trace>  character_class.gd:48 @ deactivate_node()
+						 character_class.gd:34 @ death()
+						 health_component.gd:36 @ damage()
+						 melee_weapon.gd:28 @ _on_body_entered()
 
 	It worked, but it is important to note that call_deferred has to be "x.call_deferred("y", args)" and not
 	"call_deferred("x.y", args). Stupid fat Hobbit.
@@ -118,8 +118,25 @@
 	affect them all in the character state machine, but if not I have to call character.x each time (instead of
 	just x).
 	I'm gonna commit as is, even though the character.move_speed issue is not resolved.
+	(the following may be on the wrong day)
 	Maybe the move_speed issue is casued by the fact that the character state machine is ready before the
 	character class (player and enemy). Not sure.
 	## __IMPORTANT NOTE:__
 		_ready() is called in the children nodes first, then in the parent node. This is the cause of the above
 		issue.
+# - __2024/07/06:__
+	Changing the map so that the tupid enemies don't fall off of it.
+	Changed the viewport and all the shit (Changed the parameters of display, from a 960 * 540 Viewport to
+	1920 * 1080, from windowed to fullscreen, stretch mode canvas_item and aspect expand, and from canvas texture
+	filter linear to nearest. Basically, the window is bigger, the pixel art is rendered better, and the game is
+	not too zoomed in, but maybe this is a mistake, I'm not too sure. Anyway, this can always be changed later
+	(it might be necessary, for compatibility with smaller and bigger screens.)). I don't really know what to do
+	about that, but the good news is it can always be changed later if need be. Actually this is a bad idea for now,
+	I need the small window to debug.
+	When using the melee weapon, if you press against enemies and kill them, you can, by advancing, hit an enemy
+	farther behind. This means that the AoE stays for longer than it should, I think. Does it need fixing, or is it
+	a feature? Technically, an AoE can be extended in time, it is not stupid to think.
+	I was trying to solve the issue to move_speed, because it should be different for wander and follow,
+	for instance, and I would like to make it a superclass variable, and it should be different for the different
+	enemies. Idea: have the speed be randomized, in a range of like speed/2 to speed, idk. That way, it can
+	vary during runtime, and it can be fixed in the enemy script.

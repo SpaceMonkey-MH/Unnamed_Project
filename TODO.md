@@ -9,14 +9,14 @@ NOT DONE :
 - Handle the part where the characters fall when they die (sound).
 - Give legs to the enemies.
 - Give a brain to the enemies.
-- Make the enemies stackable on each other ?
 - Make it so that you can't shoot when clicking on the UI.
 - Add easter eggs, such as a button that screams.
 - Add funny descriptions to the weapons.
 - Solve window size issue.
 - Fix the variables of player.gd and movement_state.gd.
 - Solve possible issue: jump animation playing when falling (at beginning).
-- Fix the rolling (landing) animation when going backwards. 
+- Fix the rolling (landing) animation when going backwards.
+- Fix the melee weapon AoE bug (cf 2024/07/06)?
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -29,3 +29,4 @@ DONE :
 - Solve the issue where the damage label doesn't show on the killing hit. // DONE.
 - Solve the issue where the dead characters can still be hit after their death. //DONE.
 - Handle the part where the characters fall when they die (make them disappear when out of the screen). //DONE.
+- Make the enemies stackable on each other ? // DONE I think.

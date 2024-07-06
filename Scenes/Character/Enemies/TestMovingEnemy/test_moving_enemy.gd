@@ -2,20 +2,23 @@ class_name TestMovingEnemy
 extends CharacterClass
 
 
-const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-@export var flashing_time : float = 0.1	# The amount of time the sprite will be flashing a color.
-@export var flashing_color : Color = Color.RED	# The color the sprite will be flashing.
+# The speed of the enemy, in pixels/second.
+@export var enemy_move_speed = 100.0
+# The amount of time the sprite will be flashing a color.
+@export var flashing_time : float = 0.1
+# The color the sprite will be flashing.
+@export var flashing_color : Color = Color.RED
 # Sprite2D as a variable so it can be modulated (and flipped, I don't know if it's gonna be used).
 @export var sprite_2d : Sprite2D
-
+# AnimationTree as a variable, not used for now I think.
 @export var anitmation_tree : AnimationTree
 
 
 func _enter_tree():
 	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
 	# declared in superclass.
-	move_speed = SPEED
+	move_speed = enemy_move_speed
 
 
 func _ready():

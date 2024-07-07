@@ -1,5 +1,5 @@
 class_name AttackDummy
-extends CharacterClass
+extends EnemyClass
 
 
 const SPEED = 300.0

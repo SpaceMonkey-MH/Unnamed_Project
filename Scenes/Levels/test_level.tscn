@@ -1468,5 +1468,6 @@ position = Vector2(571, 123)
 [node name="AttackDummy3" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(1239, 1003)
 
-[node name="TestMovingEnemy" parent="." instance=ExtResource("6_vfolm")]
-position = Vector2(964, 994)
+[node name="TestMovingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_vfolm")]
+position = Vector2(362, 989)
+player = NodePath("../Player")

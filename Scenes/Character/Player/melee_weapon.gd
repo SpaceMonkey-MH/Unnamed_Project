@@ -18,7 +18,7 @@ func _on_body_entered(body):
 	var attack = Attack.new()
 	attack.attack_damage = melee_weapon_state.attack_damage
 	# Could this be an easter egg that the melee weapon does self damage?
-	if body is Player:
+	if body is PlayerClass:
 		return
 	for child in body.get_children():
 		if child is HealthComponent:

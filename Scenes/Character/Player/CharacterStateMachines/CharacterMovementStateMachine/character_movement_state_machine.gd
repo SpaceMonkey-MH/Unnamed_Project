@@ -12,7 +12,7 @@ var states : Array[State]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("CharacterMovementStateMachine is ready.")
+#	print("CharacterMovementStateMachine is ready.")
 #	print(get_parent())
 #	print(animation_tree)
 	for child in get_children():
@@ -27,7 +27,7 @@ func _ready():
 #			print("1 ", character.move_speed)
 #			print("character: ", character)
 #			print(child.move_speed)
-			if character is Player:
+			if character is PlayerClass:
 				child.playback = animation_tree["parameters/playback"]
 	#			print(child)
 				child.air_jumps_max = character.air_jumps_max
@@ -46,14 +46,20 @@ func _ready():
 				(child.jump_time_to_peak * child.jump_time_to_peak)) * -1.0
 				child.fall_gravity = ((-2.0 * child.jump_height) /
 				(child.jump_time_to_descent * child.jump_time_to_descent)) * -1.0
-			
+			# If the character the state machine is for is an enemy.
+			if character is EnemyClass:
+				# Assign the player value of the states to the player value of the character,
+				# which should be the Player.
+				child.player = character.player
+#				print(child.player)
 #			if character is 
 				
 			# Connect to interrupt signal
 			child.connect("interrupt_state", on_state_interrupt_state)
 #			print(child)
 #			print(states)
-#			print(child.is_connected("interrupt_state", on_state_interrupt_state))	# Prints false. Hum... All good now.
+#			print(child.is_connected("interrupt_state", on_state_interrupt_state))	# Prints false.
+#			Hum... All good now.
 
 
 		else:

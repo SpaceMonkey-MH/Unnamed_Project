@@ -1,10 +1,10 @@
 class_name TestMovingEnemy
-extends CharacterClass
+extends EnemyClass
 
 
 const JUMP_VELOCITY = -400.0
 # The speed of the enemy, in pixels/second.
-@export var enemy_move_speed = 200.0
+@export var enemy_move_speed = 100.0
 # The amount of time the sprite will be flashing a color.
 @export var flashing_time : float = 0.1
 # The color the sprite will be flashing.
@@ -12,7 +12,7 @@ const JUMP_VELOCITY = -400.0
 # Sprite2D as a variable so it can be modulated (and flipped, I don't know if it's gonna be used).
 @export var sprite_2d : Sprite2D
 # AnimationTree as a variable, not used for now I think.
-@export var anitmation_tree : AnimationTree
+@export var animation_tree : AnimationTree
 
 
 func _enter_tree():
@@ -22,8 +22,8 @@ func _enter_tree():
 
 
 func _ready():
-	print("TestMovingEnemy is ready.")
-	anitmation_tree.active = true
+#	print("TestMovingEnemy is ready.")
+	animation_tree.active = true
 #	move_speed = SPEED
 #	print(move_speed)
 

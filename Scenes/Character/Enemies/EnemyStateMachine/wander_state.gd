@@ -3,6 +3,10 @@ extends EnemyState
 
 # The maximum amount of wander_time.
 @export var max_wander_time : float = 10.0
+# The distance to start following the player. So far it is a 1D follow, so a 1D distance, whatever that means.
+@export var follow_distance : float = 200.0
+# The Follow state as a variable, so it can be put in next_state.
+@export var follow_state : EnemyState
 # The direction of movement of the character: -1 left, 0 idle, 1 right. To be randomized.
 var wander_direction : int = 0
 # Time during which the enemy wanders in that direction. To be randomized.
@@ -25,6 +29,10 @@ func state_process(delta):
 	if wander_time <= 0:
 		randomize_variables()
 #	print(direction, "\n", move_speed, "\n")
+#	print(player.position.x)
+	# If the enemy is closer than the fixed distance to the player. Setting to <= because idk.
+	if abs(player.position.x - character.position.x) <= follow_distance:
+		next_state = follow_state
 
 
 # Procedure that randomizes the values of wander_direction, wander_time and wander_speed, so that the wander

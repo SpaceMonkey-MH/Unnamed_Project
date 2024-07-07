@@ -6,7 +6,7 @@ class_name Bullet3
 
 @export var area_of_effect_zone : Area2D
 var self_damage : bool = true
-var player : CharacterBody2D
+var player : PlayerClass
 
 
 func _ready():
@@ -32,7 +32,7 @@ func area_of_effect():
 #			return
 		# Instead, we can incorporate the if statement. This works, but I'd like to give the player
 		# the choice of having or not self damage. This will be an option.
-		if not parent is Player or self_damage:
+		if not parent is PlayerClass or self_damage:
 			for child in parent.get_children():
 				if child is HealthComponent:
 	#				print("bullet3: ", attack.attack_damage)

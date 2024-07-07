@@ -1,4 +1,4 @@
-class_name Player
+class_name PlayerClass
 extends CharacterClass
 
 

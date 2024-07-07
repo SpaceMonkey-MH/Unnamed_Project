@@ -70,8 +70,8 @@ func _enter_tree():
 	# declared in superclass.
 	move_speed = player_move_speed
 	assert(move_speed == 300, "move_speed is not equal to 300.")
-	assert(move_speed != 300, "move_speed is equal to 300.")
-	assert(move_speed == 0)
+#	assert(move_speed != 300, "move_speed is equal to 300.")
+#	assert(move_speed == 0)
 
 
 # Executed at the beginning of runtime, after _enter_tree().

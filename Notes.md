@@ -141,3 +141,13 @@
 	enemies. Idea: have the speed be randomized, in a range of like speed/2 to speed, idk. That way, it can
 	vary during runtime, and it can be fixed in the enemy script.
 	Unit tests? Asserts instead.
+# - __2024/07/07:__
+	The max health issue: is there a maximum amount of health? I think yes, because if would be harder to make a
+	health bar otherwise. But Maybe I shouldn't make a health bar, I don't know. If so, where is the check?
+	In the setter? In the value assignment? Let's try in the setter; that way, it is done each time, no questions
+	asked. Seems to be working.
+	Also, what to do with this healh setting issue? Like, how to make it so that there is no weird error, nor
+	a weird heal pop up at the beginning of the program? I'll try and give arguments to the setter. Or, I could
+	assign the value @onready. Let's try that. Seems to be working.
+	Should everything be centralized ? For instance, should the max_health be a variable of the character, or
+	of the health_component? I just put it in character superclass, seems fine.

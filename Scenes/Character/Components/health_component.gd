@@ -7,19 +7,26 @@ class_name HealthComponent
 
 signal damaged(node : Node, damage_taken : float)
 
-
-@export var max_health : float = 100
-@export var character : PhysicsBody2D
-var health : float = 100 :
+## I'm gonna need to find a solution to the issue of the max health (cf Notes.md).
+# Trying to have this in the character code.
+## The maximum amount of health the character can have.
+#@export var max_health : float = 100
+# The character as a variable, so that it can be damaged.
+@export var character : CharacterClass
+# The health of the character, initialized to the max health, with a setter and a getter.
+@onready var health : float = character.max_health :
 	get:
 		return health
 	set(value):
 		# Goes (for now) to health_changed_manager.
 		SignalBus.emit_signal("health_changed", get_parent(), value - health)
-		health = value
+		if value > character.max_health:
+			health = character.max_health
+		else:
+			health = value
 #		print("Set health in HealthComponent in ", get_parent(), " to: ", health)
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 #func _ready():
 #	health = max_health
 

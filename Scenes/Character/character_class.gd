@@ -5,7 +5,10 @@ extends CharacterBody2D
 
 # HitBox as a variable, so that it can be disabled.
 @export var hit_box : CollisionShape2D
-# No magic numbers.
+# The maximum health of the character.
+@export var max_health : float = 100.0
+# No magic numbers. This is the time during which the death animation is supposedly plaed (this is just
+# a placeholder).
 var death_animation_timer : float = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")

@@ -4,7 +4,7 @@ extends CharacterClass
 
 const JUMP_VELOCITY = -400.0
 # The speed of the enemy, in pixels/second.
-@export var enemy_move_speed = 100.0
+@export var enemy_move_speed = 200.0
 # The amount of time the sprite will be flashing a color.
 @export var flashing_time : float = 0.1
 # The color the sprite will be flashing.

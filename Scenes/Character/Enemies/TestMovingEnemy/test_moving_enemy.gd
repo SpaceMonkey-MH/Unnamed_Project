@@ -1,7 +1,7 @@
 class_name TestMovingEnemy
 extends EnemyClass
 
-
+# Not used currently
 const JUMP_VELOCITY = -400.0
 # The speed of the enemy, in pixels/second.
 @export var enemy_move_speed = 100.0
@@ -11,9 +11,13 @@ const JUMP_VELOCITY = -400.0
 @export var follow_stop_distance : float = 400.0
 # The range of the enemy, meaning the distance below which the enemy starts attacking the player,
 # thus transitioning to attack_state.
-@export var attack_distance : float = 100.0
+@export var attack_range : float = 100.0
 # The maximum amount of wander_time.
 @export var max_wander_time : float = 10.0
+# The amount of damage the enemy deals.
+@export var damage : float = 25.0
+# The time between two attacks, to be assigned to timer.wait_time. To be set in editor.
+@export var attack_wait_time : float = 20
 # The amount of time the sprite will be flashing a color.
 @export var flashing_time : float = 0.1
 # The color the sprite will be flashing.
@@ -24,13 +28,13 @@ const JUMP_VELOCITY = -400.0
 @export var animation_tree : AnimationTree
 
 
-func _enter_tree():
+func _enter_tree() -> void:
 	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
 	# declared in superclass.
 	move_speed = enemy_move_speed
 
 
-func _ready():
+func _ready() -> void:
 #	print("TestMovingEnemy is ready.")
 	animation_tree.active = true
 #	move_speed = SPEED
@@ -38,7 +42,7 @@ func _ready():
 
 
 # Replaces the _physics_process() procedure so that the body can be queue freed in the superclass.
-func character_physics_process(delta):
+func character_physics_process(delta) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -66,7 +70,7 @@ func character_physics_process(delta):
 #	move_and_slide()
 
 
-func take_damage():
+func take_damage() -> void:
 	sprite_2d.modulate = flashing_color
 #	print("hello")
 	await get_tree().create_timer(flashing_time).timeout
@@ -83,6 +87,6 @@ func take_damage():
 
 # Procedure that is connected to the screen exited signal of the VisibleOnScreenNotifier2D, and that
 # calls the procedure that handles what happens when the character is off-screen (queue_free() it if it's dead).
-func _on_visible_on_screen_notifier_2d_screen_exited():
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 #	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
 	handle_character_out_of_screen()

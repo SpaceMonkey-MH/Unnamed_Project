@@ -1,27 +1,29 @@
-extends Bullet
-
-
 class_name Bullet3
-
+extends Bullet
 
 @export var area_of_effect_zone : Area2D
 var self_damage : bool = true
 var player : PlayerClass
 
 
-func _ready():
+func _ready() -> void:
+	# Getting the player as a variable.
 	player = get_parent().get_parent().get_parent()
-
-
-func _process(_delta):
-	# Not sure if this is the right place, maybe should go in _ready(), but I can't really test right now.
+	# Getting the value of self_damage from player.
 	self_damage = player.self_damage
+
+
+func _process(_delta) -> void:
+	# Not sure if this is the right place, maybe should go in _ready(), but I can't really test right now.
+	# It does.
+#	self_damage = player.self_damage
+	pass
 #	print(self_damage)
 #	print(get_parent().get_parent().get_parent())
 #	print(area_of_effect_zone.get_overlapping_areas())
 
 
-func area_of_effect():
+func area_of_effect() -> void:
 	area_of_effect_zone.monitoring = true
 	var attack = Attack.new()
 	attack.attack_damage = aoe_attack_damage

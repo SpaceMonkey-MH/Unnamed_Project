@@ -167,17 +167,23 @@ character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 current_state = NodePath("Wander")
 
-[node name="Wander" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("follow_state")]
+[node name="Wander" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("follow_state", "character_movement_state_machine")]
 script = ExtResource("4_0ysqk")
 follow_state = NodePath("../Follow")
+character_movement_state_machine = NodePath("..")
 
 [node name="Follow" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("attack_state", "wander_state")]
 script = ExtResource("5_4vjxa")
 attack_state = NodePath("../Attack")
 wander_state = NodePath("../Wander")
 
-[node name="Attack" type="Node" parent="CharacterMovementStateMachine"]
+[node name="Attack" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("follow_state", "timer", "character_movement_state_machine")]
 script = ExtResource("6_40nwy")
+follow_state = NodePath("../Follow")
+timer = NodePath("AttackCooldownTimer")
+character_movement_state_machine = NodePath("..")
+
+[node name="AttackCooldownTimer" type="Timer" parent="CharacterMovementStateMachine/Attack"]
 
 [node name="Dead" type="Node" parent="CharacterMovementStateMachine"]
 script = ExtResource("7_en48c")
@@ -198,4 +204,5 @@ state_machine = NodePath("../CharacterMovementStateMachine")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
+[connection signal="timeout" from="CharacterMovementStateMachine/Attack/AttackCooldownTimer" to="CharacterMovementStateMachine/Attack" method="_on_attack_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

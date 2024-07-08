@@ -11,7 +11,7 @@ var states : Array[State]
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 #	print("CharacterMovementStateMachine is ready.")
 #	print(get_parent())
 #	print(animation_tree)
@@ -57,10 +57,12 @@ func _ready():
 				# Assign the follow_stop_distance value of the states to the follow_stop_distance
 				# value of the character.
 				child.follow_stop_distance = character.follow_stop_distance
-				# Assign the attack_distance value of the states to the attack_distance value of the character.
-				child.attack_distance = character.attack_distance
+				# Assign the attack_range value of the states to the attack_range value of the character.
+				child.attack_range = character.attack_range
 				# Assign the max_wander_time value of the states to the max_wander_time value of the character.
 				child.max_wander_time = character.max_wander_time
+				# Assign the attack_wait_time value of the states to the attack_wait_time value of the character.
+				child.attack_wait_time = character.attack_wait_time
 				
 #			if character is # ?
 				
@@ -76,7 +78,7 @@ func _ready():
 			push_warning("Child " + child.name + " is not a State for CharacterStateMachine.")
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if(current_state.next_state != null):
 		switch_states(current_state.next_state)
 		
@@ -89,11 +91,11 @@ func _physics_process(delta):
 		
 
 # Used for the landing animation (the player can't move during this), this isn't very useful here.
-func check_if_can_move():
+func check_if_can_move() -> bool:
 	return current_state.can_move
 
 
-func switch_states(new_state : State):
+func switch_states(new_state : State) -> void:
 	if(current_state != null):
 		current_state.on_exit()
 		current_state.next_state = null
@@ -102,10 +104,10 @@ func switch_states(new_state : State):
 	current_state.on_enter()
 
 
-func _input(event : InputEvent):
+func _input(event : InputEvent) -> void:
 	current_state.state_input(event)
 
 # Used to switch to state Hit.
-func on_state_interrupt_state(new_state : State):
+func on_state_interrupt_state(new_state : State) -> void:
 #	print("hello")
 	switch_states(new_state)

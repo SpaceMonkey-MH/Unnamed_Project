@@ -158,3 +158,12 @@
 	going after changing state, maybe I could transition back to this state after each attack. To be tested.
 	I think there is not need for a transition from WanderState to AttackState, as it goes through FollowState
 	anyway.
+	I think i'm gonna confine myself to one attack (animation, damage, etc) per enemy type. I'm not gonna
+	add several state machines to the enemies.
+	The Player falls faster than the other characters, this is intended, it adds to the nervosity.
+	There is something wrong with the attack state of the enemy: if the player leaves the range, then enters
+	it again, the attack resets. I need to find a better way. Also, the attack happens after the leave. Could try
+	and stop the timer in on_leave(), but I don't think that solves the issue of the reset. Will have to see.
+	Actually, it's "on_exit()", you dumbfuck.
+	Yeah, I'm gonna switch Godot versions mid-project, let's see how it goes. Seems fine.
+	The stopping the timer or whatnot shit worked! Actually it is more complicated than that, but whatever.

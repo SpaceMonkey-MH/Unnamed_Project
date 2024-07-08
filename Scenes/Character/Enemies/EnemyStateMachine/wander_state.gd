@@ -16,7 +16,7 @@ var wander_speed : float = 0.0
 
 
 # Called in _physics_process in state machine. 
-func state_process(delta):
+func state_process(delta) -> void:
 	# Move the enemy.
 	character.velocity.x = wander_direction * wander_speed
 	# Reduce the time of wandering remaining by the time elapsed since the last call (delta).
@@ -26,14 +26,16 @@ func state_process(delta):
 		randomize_variables()
 #	print(direction, "\n", move_speed, "\n")
 #	print(player.position.x)
+	# Using an auxilliary variable to compute the distance to player.
+	var relative_distance_to_player = player.position.x - character.position.x
 	# If the enemy is closer than the fixed distance to the player. Setting to <= because idk.
-	if abs(player.position.x - character.position.x) <= follow_distance:
+	if abs(relative_distance_to_player) <= follow_distance:
 		next_state = follow_state
 
 
 # Procedure that randomizes the values of wander_direction, wander_time and wander_speed, so that the wander
 # movement is more random and thus less predictable (?).
-func randomize_variables():
+func randomize_variables() -> void:
 	# Randomizing the wander direction to -1, 0 or 1.
 	wander_direction = randi_range(-1, 1)
 	# Randomizing the wander time to a range from 0 to max_wander_time.
@@ -44,7 +46,7 @@ func randomize_variables():
 #	print(wander_direction, " ", wander_time, " ", wander_speed)
 
 
-#func wander():
+#func wander() -> void:
 #	# I don't know how to print correctly xd.
 #	print(direction, "\n", move_speed, "\n\n")
 ##	print_rich("Hello from wander() in WanderState.\nDirection: %d.\nMove speed: %f.", direction, move_speed)

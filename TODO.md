@@ -20,6 +20,7 @@ NOT DONE :
 - Unit tests? Asserts.
 - Make enemies stop between two wanderings.
 - Change the z-order of labels so that they are in front of tile map (or change the z-order of the tile map).
+- Complete the AttackState script.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -34,3 +35,4 @@ DONE :
 - Handle the part where the characters fall when they die (make them disappear when out of the screen). //DONE.
 - Make the enemies stackable on each other ? // DONE I think.
 - Give legs to the enemies. //DONE.
+- Make transitions to AttackState. //DONE.

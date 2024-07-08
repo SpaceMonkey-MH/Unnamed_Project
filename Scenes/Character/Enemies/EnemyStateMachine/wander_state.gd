@@ -1,12 +1,8 @@
 class_name WanderState
 extends EnemyState
 
-# The maximum amount of wander_time.
-@export var max_wander_time : float = 10.0
-# The distance to start following the player. So far it is a 1D follow, so a 1D distance, whatever that means.
-@export var follow_distance : float = 200.0
 # The Follow state as a variable, so it can be put in next_state.
-@export var follow_state : EnemyState
+@export var follow_state : FollowState
 # The direction of movement of the character: -1 left, 0 idle, 1 right. To be randomized.
 var wander_direction : int = 0
 # Time during which the enemy wanders in that direction. To be randomized.

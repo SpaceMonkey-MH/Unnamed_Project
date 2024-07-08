@@ -171,8 +171,9 @@ current_state = NodePath("Wander")
 script = ExtResource("4_0ysqk")
 follow_state = NodePath("../Follow")
 
-[node name="Follow" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("wander_state")]
+[node name="Follow" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("attack_state", "wander_state")]
 script = ExtResource("5_4vjxa")
+attack_state = NodePath("../Attack")
 wander_state = NodePath("../Wander")
 
 [node name="Attack" type="Node" parent="CharacterMovementStateMachine"]

@@ -5,6 +5,15 @@ extends EnemyClass
 const JUMP_VELOCITY = -400.0
 # The speed of the enemy, in pixels/second.
 @export var enemy_move_speed = 100.0
+# The distance to start following the player. So far it is a 1D follow, so a 1D distance, whatever that means.
+@export var follow_distance : float = 200.0
+# The distance beyond which the enemy stops following the player, thus transitioning to wander_state.
+@export var follow_stop_distance : float = 400.0
+# The range of the enemy, meaning the distance below which the enemy starts attacking the player,
+# thus transitioning to attack_state.
+@export var attack_distance : float = 100.0
+# The maximum amount of wander_time.
+@export var max_wander_time : float = 10.0
 # The amount of time the sprite will be flashing a color.
 @export var flashing_time : float = 0.1
 # The color the sprite will be flashing.

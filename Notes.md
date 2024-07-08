@@ -151,3 +151,10 @@
 	assign the value @onready. Let's try that. Seems to be working.
 	Should everything be centralized ? For instance, should the max_health be a variable of the character, or
 	of the health_component? I just put it in character superclass, seems fine.
+# - __2024/07/08:__
+	Not sure whether I should put the enemy states variables, such as follow_distance, in the states, so that it is
+	as local as possible, or in the main enemy script, so that it is easier to set up.
+	About FollowState: I could reset character.velocity.x, but I think it's not that bad if the enemy keeps
+	going after changing state, maybe I could transition back to this state after each attack. To be tested.
+	I think there is not need for a transition from WanderState to AttackState, as it goes through FollowState
+	anyway.

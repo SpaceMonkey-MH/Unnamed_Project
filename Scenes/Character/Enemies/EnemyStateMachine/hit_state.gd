@@ -1,9 +1,7 @@
+class_name HitState
 extends EnemyState
 
-
-class_name HitState
-
-
+# I'm not sure if this should be here, like maybe we don't need a HitState, idk.
 # Getting the HealthComponent as an export variable so signals can be connected and helth can be gotten. 
 @export var health_component : HealthComponent
 @export var dead_state : DeadState

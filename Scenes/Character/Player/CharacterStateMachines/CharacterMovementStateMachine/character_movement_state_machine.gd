@@ -52,9 +52,19 @@ func _ready():
 				# which should be the Player.
 				child.player = character.player
 #				print(child.player)
-#			if character is 
+				# Assign the follow_distance value of the states to the follow_distance value of the character.
+				child.follow_distance = character.follow_distance
+				# Assign the follow_stop_distance value of the states to the follow_stop_distance
+				# value of the character.
+				child.follow_stop_distance = character.follow_stop_distance
+				# Assign the attack_distance value of the states to the attack_distance value of the character.
+				child.attack_distance = character.attack_distance
+				# Assign the max_wander_time value of the states to the max_wander_time value of the character.
+				child.max_wander_time = character.max_wander_time
 				
-			# Connect to interrupt signal
+#			if character is # ?
+				
+			# Connect to interrupt signal. I d'ont know what interrupt signal does.
 			child.connect("interrupt_state", on_state_interrupt_state)
 #			print(child)
 #			print(states)

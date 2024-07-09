@@ -15,7 +15,7 @@ var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Whether or not the character is dead.
 var character_is_dead : bool = false
 # Timer before queue_free() when the dead characters fall out of the screen.
-var out_of_screen_death_timer : float = 1.5
+@export var out_of_screen_death_timer : float = 1.5
 ## Attempt.
 #var character_node
 # Move speed of the character, here so it can be added to all the relative states. In pixels/second.

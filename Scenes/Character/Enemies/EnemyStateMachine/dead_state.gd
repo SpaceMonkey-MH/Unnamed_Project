@@ -3,4 +3,4 @@ extends EnemyState
 
 
 func on_enter():
-	print("Enter DeadState.")
+	print("DeadState entered.")

@@ -26,6 +26,9 @@ const JUMP_VELOCITY = -400.0
 @export var sprite_2d : Sprite2D
 # AnimationTree as a variable, not used for now I think.
 @export var animation_tree : AnimationTree
+# Half the x size of this enemy plus half the x size of the player plus 1.
+# Maybe I need to do this in a  cleaner way.
+@export var x_size_ep : float = 20 + 20 + 1
 
 
 func _enter_tree() -> void:
@@ -90,3 +93,4 @@ func take_damage() -> void:
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 #	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
 	handle_character_out_of_screen()
+

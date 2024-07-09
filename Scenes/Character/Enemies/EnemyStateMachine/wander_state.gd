@@ -27,9 +27,9 @@ func state_process(delta) -> void:
 #	print(direction, "\n", move_speed, "\n")
 #	print(player.position.x)
 	# Using an auxilliary variable to compute the distance to player.
-	var relative_distance_to_player = player.position.x - character.position.x
+	var relative_x_distance_to_player = player.position.x - character.position.x
 	# If the enemy is closer than the fixed distance to the player. Setting to <= because idk.
-	if abs(relative_distance_to_player) <= follow_distance:
+	if abs(relative_x_distance_to_player) <= follow_distance:
 		next_state = follow_state
 
 

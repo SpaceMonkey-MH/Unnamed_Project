@@ -63,6 +63,9 @@ func _ready() -> void:
 				child.max_wander_time = character.max_wander_time
 				# Assign the attack_wait_time value of the states to the attack_wait_time value of the character.
 				child.attack_wait_time = character.attack_wait_time
+				# Assign the x_size_ep value of the states to the 
+				# x_size_ep value of the character.
+				child.x_size_ep = character.x_size_ep
 				
 #			if character is # ?
 				

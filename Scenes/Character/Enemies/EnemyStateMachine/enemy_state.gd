@@ -17,3 +17,6 @@ var max_wander_time : float
 var damage : float
 # The time between two attacks, to be assigned to timer.wait_time. To be set at player.attack_wait_time.
 var attack_wait_time : float
+# Half the x size of this enemy plus half the x size of the player plus 1.
+# Maybe I need to do this in a  cleaner way.
+var x_size_ep : float

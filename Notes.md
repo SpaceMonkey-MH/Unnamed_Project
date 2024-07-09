@@ -174,4 +174,7 @@
 	I think the enemies sould stop when hit, but I can always change it later.
 	At some point, I'm gonna need to figure out a way to avoid glitching when pressed against wall by enemy.
 	Maybe by making the enemy and the player stackable? Or by checking if the enemy is angainst the player
-	in the enemy script?
+	in the enemy script? I prefer the second option, as it allows the player to jump on the enemies.
+	I think that technically, I only need to do that check in attack_state, because it is the only state in which
+	the enemy could be close enough to the player. It works. I am proud of myself.
+	Method overriding.

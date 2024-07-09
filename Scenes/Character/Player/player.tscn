@@ -471,7 +471,7 @@ weapons_sprite_2d = NodePath("WeaponsSprite2D")
 hit_box = NodePath("HitBox")
 
 [node name="BodySprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_xbbwc")
+texture = ExtResource("2_j5og1")
 hframes = 4
 
 [node name="HitBox" type="CollisionShape2D" parent="."]

@@ -1,3 +1,6 @@
+class_name DeadState
 extends EnemyState
 
-class_name DeadState
+
+func on_enter():
+	print("Enter DeadState.")

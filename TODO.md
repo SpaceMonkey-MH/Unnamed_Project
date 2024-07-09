@@ -21,6 +21,8 @@ NOT DONE :
 - Make enemies stop between two wanderings.
 - Change the z-order of labels so that they are in front of tile map (or change the z-order of the tile map).
 - Complete the AttackState script.
+- Solve the "pressed against wall" glitch. Cf Notes.md (line 175).
+- Implement blast of the explosion of rockets and so on, like move the characters when hit.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

@@ -167,3 +167,11 @@
 	Actually, it's "on_exit()", you dumbfuck.
 	Yeah, I'm gonna switch Godot versions mid-project, let's see how it goes. Seems fine.
 	The stopping the timer or whatnot shit worked! Actually it is more complicated than that, but whatever.
+# - __2024/07/09:__
+	The enemy take_damage() procedure is not good. I need to handle it with HitState somehow.
+	Should I put the x_state variables in superclass to avoid boilerplate code? I think not, because that would
+	lead to useless stuff in editor (@export variables).
+	I think the enemies sould stop when hit, but I can always change it later.
+	At some point, I'm gonna need to figure out a way to avoid glitching when pressed against wall by enemy.
+	Maybe by making the enemy and the player stackable? Or by checking if the enemy is angainst the player
+	in the enemy script?

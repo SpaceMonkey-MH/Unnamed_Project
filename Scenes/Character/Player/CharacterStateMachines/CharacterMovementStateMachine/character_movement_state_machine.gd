@@ -107,7 +107,7 @@ func switch_states(new_state : State) -> void:
 func _input(event : InputEvent) -> void:
 	current_state.state_input(event)
 
-# Used to switch to state Hit.
+# Used to switch to state Hit. Necessary because we use current_state.next_state for state transitions.
 func on_state_interrupt_state(new_state : State) -> void:
 #	print("hello")
 	switch_states(new_state)

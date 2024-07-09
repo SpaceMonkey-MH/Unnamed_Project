@@ -172,10 +172,11 @@ script = ExtResource("4_0ysqk")
 follow_state = NodePath("../Follow")
 character_movement_state_machine = NodePath("..")
 
-[node name="Follow" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("attack_state", "wander_state")]
+[node name="Follow" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("attack_state", "wander_state", "character_movement_state_machine")]
 script = ExtResource("5_4vjxa")
 attack_state = NodePath("../Attack")
 wander_state = NodePath("../Wander")
+character_movement_state_machine = NodePath("..")
 
 [node name="Attack" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("follow_state", "timer", "character_movement_state_machine")]
 script = ExtResource("6_40nwy")
@@ -185,13 +186,16 @@ character_movement_state_machine = NodePath("..")
 
 [node name="AttackCooldownTimer" type="Timer" parent="CharacterMovementStateMachine/Attack"]
 
-[node name="Dead" type="Node" parent="CharacterMovementStateMachine"]
-script = ExtResource("7_en48c")
-
-[node name="Hit" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("health_component", "dead_state")]
+[node name="Hit" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("health_component", "dead_state", "wander_state", "character_movement_state_machine")]
 script = ExtResource("8_f3jqe")
 health_component = NodePath("../../HealthComponent")
 dead_state = NodePath("../Dead")
+wander_state = NodePath("../Wander")
+character_movement_state_machine = NodePath("..")
+
+[node name="Dead" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("character_movement_state_machine")]
+script = ExtResource("7_en48c")
+character_movement_state_machine = NodePath("..")
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -107.0

@@ -76,6 +76,7 @@ func _enter_tree():
 
 # Executed at the beginning of runtime, after _enter_tree().
 func _ready():
+	#print(85 * 191)
 #	print("Player is ready.")
 #	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
 #	# declared in superclass.

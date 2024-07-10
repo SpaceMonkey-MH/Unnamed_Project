@@ -13,6 +13,8 @@ class_name RunState
 
 
 func state_process(_delta):
+	# This is a test, not meant to stay. I don't know what I am doing here.
+	#interrupt_state.emit(idle_state)
 #	print(move_speed)
 	if character.velocity.x == 0:
 		next_state = idle_state

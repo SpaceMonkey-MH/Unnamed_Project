@@ -178,3 +178,14 @@
 	I think that technically, I only need to do that check in attack_state, because it is the only state in which
 	the enemy could be close enough to the player. It works. I am proud of myself.
 	Method overriding.
+# - __2024/07/10:__
+	First, there is an issue with the "stun" of the enemy (when hit), it doesn't seem to refresh properly.
+	Second, maybe I don't need to stun, idk. Guess it would depend on the type of weapon.
+	So, the HitState gets entered, and left immediatly. Why? So, when hit again before the end of the "stun",
+	the enemy enters some kind of a bugged state where, if the state is WanderState, the enemy is impervious
+	to stuns, it does enter HitState, but only for a split second. Solved using interrupt_state() instead of 
+	next_state.
+	Other issue: the enemy hugs too close, the player can still get stuck against walls. Increasing the margin
+	did it. Solved.
+	Just had an idea for the direction code: divide distance by abs(distance) (except if 0 ofc). Nah,
+	that doesn't work with the margin.

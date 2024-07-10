@@ -99,6 +99,7 @@ func check_if_can_move() -> bool:
 
 
 func switch_states(new_state : State) -> void:
+	#print("swtich_state of ", character, " to: ", new_state)
 	if(current_state != null):
 		current_state.on_exit()
 		current_state.next_state = null
@@ -113,4 +114,5 @@ func _input(event : InputEvent) -> void:
 # Used to switch to state Hit. Necessary because we use current_state.next_state for state transitions.
 func on_state_interrupt_state(new_state : State) -> void:
 #	print("hello")
+	#print("on_state_interrupt_state to: ", new_state)
 	switch_states(new_state)

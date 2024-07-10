@@ -36,7 +36,7 @@ func on_enter() -> void:
 func state_process(_delta) -> void:
 	# Using an auxilliary variable to compute the distance to player.
 	var relative_x_distance_to_player = player.position.x - character.position.x
-	print("relative_x_distance_to_player: ", relative_x_distance_to_player)
+	#print("relative_x_distance_to_player: ", relative_x_distance_to_player)
 	# If the player is too far away.
 	if abs(relative_x_distance_to_player) > attack_range:
 		# Transition to FollowState.
@@ -49,7 +49,8 @@ func state_process(_delta) -> void:
 
 # Called by the StateMachine on transition to another state.
 func on_exit() ->void:
-	print("AttackState exited.")
+	pass
+	#print("AttackState exited.")
 	# Stop the timer so that it doesn't continuously call attack(). Doesn't work properly, I need to stop
 	# the attack() calls from happening while out of range.
 #	timer.stop()
@@ -60,7 +61,7 @@ func on_exit() ->void:
 func attack() -> void:
 	# Attack placeholder.
 	var time = Time.get_datetime_dict_from_system()
-	print("%d: Attack!" % [time.second])	# %d" % [10])
+	#print("%d: Attack!" % [time.second])	# %d" % [10])
 	# Setting the can_attack variable to false so that the enemy can't attack before the end of the timer.
 	can_attack = false
 

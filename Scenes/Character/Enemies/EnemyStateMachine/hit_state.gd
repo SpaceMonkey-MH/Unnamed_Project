@@ -51,6 +51,7 @@ func on_health_component_damaged(_node : Node, _damage_amount : float):
 	character.velocity.x = 0
 	#next_state = # Not needed.
 	#print("hello")
+	# This is a bit weird, as it is only half of the code for the death (counting DeadState as here).
 	if health_component.health > 0:
 		#next_state = self	# This does not work, because the next_state is taken only from the current_state.
 		# Placeholder for hit animation. That acts as a stun, but maybe it shouldn't stun.
@@ -61,7 +62,7 @@ func on_health_component_damaged(_node : Node, _damage_amount : float):
 		#next_state = wander_state
 		# Same as above. This solved the double stun -> impervious to stun in WanderState (line 182 of Notes.md).
 		interrupt_state.emit(wander_state)
-		print("hello2")
+		#print("hello2")
 	else:
 		# Used to change state when self is not the current_state.
 		interrupt_state.emit(dead_state)

@@ -189,3 +189,6 @@
 	did it. Solved.
 	Just had an idea for the direction code: divide distance by abs(distance) (except if 0 ofc). Nah,
 	that doesn't work with the margin.
+	Issue: the enemy can still attack the player after dying. Solution (?): check the 2D distance for the
+	attack, instead of the 1D distance. Other solution: have the attack stop when dead. Maybe cleaner.
+	Both worked, gonna keep the second one.

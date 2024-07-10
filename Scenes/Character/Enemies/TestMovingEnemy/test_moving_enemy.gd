@@ -13,11 +13,11 @@ const JUMP_VELOCITY = -400.0
 # thus transitioning to attack_state.
 @export var attack_range : float = 100.0
 # The maximum amount of wander_time.
-@export var max_wander_time : float = 10.0
+@export var max_wander_time : float = 5.0
 # The amount of damage the enemy deals.
 @export var damage : float = 25.0
 # The time between two attacks, to be assigned to timer.wait_time. To be set in editor.
-@export var attack_wait_time : float = 20
+@export var attack_wait_time : float = 1
 # The amount of time the sprite will be flashing a color.
 @export var flashing_time : float = 0.1
 # The color the sprite will be flashing.
@@ -27,7 +27,7 @@ const JUMP_VELOCITY = -400.0
 # AnimationTree as a variable, not used for now I think.
 @export var animation_tree : AnimationTree
 # Half the x size of this enemy plus half the x size of the player plus 5.
-# Maybe I need to do this in a  cleaner way.
+# Maybe I need to do this in a cleaner way.
 @export var x_size_ep : float = 20 + 20 + 5
 
 

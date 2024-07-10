@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://fi71b5nrxf28"]
+[gd_scene load_steps=21 format=3 uid="uid://fi71b5nrxf28"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.gd" id="1_cmmdb"]
 [ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_16f2o"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="7_en48c"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/hit_state.gd" id="8_f3jqe"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="9_vkggd"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/tme_weapon.gd" id="12_1uuhp"]
 
 [sub_resource type="Animation" id="Animation_yhjyi"]
 length = 0.001
@@ -123,6 +124,9 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrylo"]
 size = Vector2(40, 40)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ltm7h"]
+radius = 60.0
+
 [node name="TestMovingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "animation_tree", "hit_box")]
 collision_layer = 3
 collision_mask = 4
@@ -208,5 +212,12 @@ state_machine = NodePath("../CharacterMovementStateMachine")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
+[node name="MeleeWeapon" type="Area2D" parent="."]
+script = ExtResource("12_1uuhp")
+
+[node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+shape = SubResource("CircleShape2D_ltm7h")
+
 [connection signal="timeout" from="CharacterMovementStateMachine/Attack/AttackCooldownTimer" to="CharacterMovementStateMachine/Attack" method="_on_attack_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]

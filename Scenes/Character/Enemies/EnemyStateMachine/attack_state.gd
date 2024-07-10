@@ -20,12 +20,10 @@ func on_enter() -> void:
 	# Setting the attack_wait_time of the cooldown timer to the export variable attack_wait_time set in superclass
 	# and StateMachine and main Enemy script.
 	timer.wait_time = attack_wait_time
-	# If the enemy can attack.
-	if can_attack:
+	# If the enemy can attack, and if he is not dead (otherwise, it continues attacking after dying).
+	if can_attack and not character.character_is_dead:
 		# Calling an attack.
 		attack()
-	# Starting the attack cooldown timer.
-	timer.start()
 
 
 #func _process(_delta) -> void:
@@ -35,14 +33,17 @@ func on_enter() -> void:
 # The state version of the _physics_process() procedure, called by the StateMachine.
 func state_process(_delta) -> void:
 	# Using an auxilliary variable to compute the distance to player.
-	var relative_x_distance_to_player = player.position.x - character.position.x
+	#var relative_x_distance_to_player = player.position.x - character.position.x
+	# This is better (+ same as above).
+	var distance_to_player = (player.position - character.position).length()
+	#print((player.position - character.position).length())
 	#print("relative_x_distance_to_player: ", relative_x_distance_to_player)
 	# If the player is too far away.
-	if abs(relative_x_distance_to_player) > attack_range:
+	if distance_to_player > attack_range:
 		# Transition to FollowState.
 		next_state = follow_state
 	# If the distance between enemy and player is shorter than the sum of half the size of both + 1.
-	elif abs(relative_x_distance_to_player) <= x_size_ep:
+	elif distance_to_player <= x_size_ep:
 		# Nullify the x velocity. This is to prevent the enemy from forcing the player into walls and glitching.
 		character.velocity.x = 0
 
@@ -59,9 +60,11 @@ func on_exit() ->void:
 
 # The procedure used to create the attacks. I think I'm gonna overwrite this in a subclass or something.
 func attack() -> void:
+	# Starting the attack cooldown timer.
+	timer.start()
 	# Attack placeholder.
 	var time = Time.get_datetime_dict_from_system()
-	#print("%d: Attack!" % [time.second])	# %d" % [10])
+	print("%d: Attack!" % [time.second])
 	# Setting the can_attack variable to false so that the enemy can't attack before the end of the timer.
 	can_attack = false
 

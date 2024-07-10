@@ -8,20 +8,19 @@ NOT DONE :
 	(Use a global signal? That would be swag for sure.).
 - Handle the part where the characters fall when they die (animation).
 - Handle the part where the characters fall when they die (sound).
-- Give a brain to the enemies.
 - Make it so that you can't shoot when clicking on the UI.
 - Add easter eggs, such as a button that screams.
 - Add funny descriptions to the weapons.
 - Solve window size issue.
-- Fix the variables of player.gd and movement_state.gd.
+- Fix the variables of player.gd and movement_state.gd (find them a place).
 - Solve possible issue: jump animation playing when falling (at beginning).
 - Fix the rolling (landing) animation when going backwards.
 - Fix the melee weapon AoE bug (cf 2024/07/06)?
 - Unit tests? Asserts.
 - Make enemies stop between two wanderings.
 - Change the z-order of labels so that they are in front of tile map (or change the z-order of the tile map).
-- Complete the AttackState script.
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
+- Complete the AttackState script (make a proper attack).
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -39,3 +38,4 @@ DONE :
 - Make transitions to AttackState. //DONE.
 - Solve the "pressed against wall" glitch. Cf Notes.md (line 175). // DONE (twice).
 - Solve the HitState issue when it leaves the state immediatly. // DONE.
+- Give a brain to the enemies. // Kinda DONE.

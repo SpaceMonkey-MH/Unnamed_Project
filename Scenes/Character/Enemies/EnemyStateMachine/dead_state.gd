@@ -5,6 +5,6 @@ extends EnemyState
 
 
 func on_enter():
-	print("DeadState entered.")
+	#print("DeadState entered.")
 	# Just in case, idk.
 	character.velocity.x = 0

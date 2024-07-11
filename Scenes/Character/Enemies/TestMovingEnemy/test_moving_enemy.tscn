@@ -190,6 +190,7 @@ melee_weapon = NodePath("../../MeleeWeapon")
 character_movement_state_machine = NodePath("..")
 
 [node name="AttackCooldownTimer" type="Timer" parent="CharacterMovementStateMachine/Attack"]
+one_shot = true
 
 [node name="Hit" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("health_component", "dead_state", "wander_state", "character_movement_state_machine")]
 script = ExtResource("8_f3jqe")

@@ -198,5 +198,7 @@
 	Fixed the way the player melee attack works, but there still is the issue of the attack lasting after its end
 	(when attacking while moving, the player can attack farther than its range). Is it really an issue ? That
 	the attack lasts for the whole "animation" ? Idk, might cause issues if the cooldown gets longer.
-	Fixed it by adding an await timer, bu it's not pretty that way, and might lead to issues.
-	
+	Fixed it by adding an await timer, but it's not pretty that way, and might lead to issues. Also, moved
+	the monitoring set to false to just after the timer and the set to true,
+	here because otherwise it collides with a new timer, I think.
+	Fixed the melee enemy attack, made it the same way the player's is.

@@ -34,6 +34,7 @@ func on_enter() -> void:
 
 # The state version of the _physics_process() procedure, called by the StateMachine.
 func state_process(_delta) -> void:
+	#print("melee_weapon.monitoring: ", melee_weapon.monitoring)
 	# Using an auxilliary variable to compute the distance to player.
 	#var relative_x_distance_to_player = player.position.x - character.position.x
 	# This is better (+ same as above).
@@ -64,13 +65,18 @@ func on_exit() ->void:
 func attack() -> void:
 	# Starting the attack cooldown timer.
 	timer.start()
-	# Attack placeholder.
-	var time = Time.get_datetime_dict_from_system()
-	print("%d: Attack!" % [time.second])
+	# Attack placeholder. Not needed anymore.
+	#var time = Time.get_datetime_dict_from_system()
+	#print("%d: Attack!" % [time.second])
+	# Setting the Effective attack.
 	melee_weapon.monitoring = true
 	# Setting the can_attack variable to false so that the enemy can't attack before the end of the timer.
 	can_attack = false
-
+	# Waiting a bit for the area monitoring to do its thing.
+	await get_tree().create_timer(0.05).timeout
+	# Stopping the monitoring thus the attack. Here because otherwise it collides with a new timer, I think.
+	melee_weapon.monitoring = false
+	
 
 # Connected to the timeout signal of the AttackTimer. Supposed to be the start of a new attack, but there is
 # a problem: it attacks continuously, even out of range. 
@@ -82,4 +88,4 @@ func _on_attack_timer_timeout() -> void:
 		attack()
 	# Setting the can_attack variable back to true so that the enemy can attack again.
 	can_attack = true
-	melee_weapon.monitoring = false
+	#melee_weapon.monitoring = false

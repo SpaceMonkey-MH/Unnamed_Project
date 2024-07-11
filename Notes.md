@@ -195,4 +195,8 @@
 # - __2024/07/11:__
 	There is something weird with the melee attack of the player, and thus of the enemy. Will have to solve
 	that. Maybe the melee weapon does not need a cooldown?
+	Fixed the way the player melee attack works, but there still is the issue of the attack lasting after its end
+	(when attacking while moving, the player can attack farther than its range). Is it really an issue ? That
+	the attack lasts for the whole "animation" ? Idk, might cause issues if the cooldown gets longer.
+	Fixed it by adding an await timer, bu it's not pretty that way, and might lead to issues.
 	

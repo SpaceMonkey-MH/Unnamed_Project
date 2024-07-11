@@ -40,7 +40,10 @@ func state_input(event : InputEvent):
 		melee_weapon.monitoring = true
 		# Start the timer of the cooldown.
 		timer.start()
-		#melee_weapon.monitoring = false
+		# Waiting for the monitoring to do its thing. It's not pretty that way, and might lead to issues.
+		await get_tree().create_timer(0.05).timeout
+		# Stop the monitoring of the area, so that it doesn't damage anymore.
+		melee_weapon.monitoring = false
 		
 #	if event.is_action_pressed("fire"):	# Not working as intended, too many or too few "fire".
 #		print("fire")
@@ -55,4 +58,4 @@ func _on_melee_weapon_cool_down_timeout():
 	# Set can_fire back to true so that the player can fire again.
 	can_fire = true
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
-	melee_weapon.monitoring = false
+	#melee_weapon.monitoring = false

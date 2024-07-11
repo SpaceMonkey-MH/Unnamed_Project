@@ -22,7 +22,7 @@ NOT DONE :
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
 - Complete the AttackState script (make a proper attack).
 - Make a story.
-- Repair the MeleeWeapon attack.
+- Solve the issue of the melee attack (lasting longer than it should).
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -41,3 +41,4 @@ DONE :
 - Solve the "pressed against wall" glitch. Cf Notes.md (line 175). // DONE (twice).
 - Solve the HitState issue when it leaves the state immediatly. // DONE.
 - Give a brain to the enemies. // Kinda DONE.
+- Repair the MeleeWeapon attack. // DONE.

@@ -29,6 +29,8 @@ const JUMP_VELOCITY = -400.0
 # Half the x size of this enemy plus half the x size of the player plus 5.
 # Maybe I need to do this in a cleaner way.
 @export var x_size_ep : float = 20 + 20 + 5
+# The damage dealt by this enemy.
+@export var attack_damage : float = 20.0
 
 
 func _enter_tree() -> void:

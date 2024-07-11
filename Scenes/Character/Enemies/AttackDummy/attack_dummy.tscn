@@ -33,9 +33,9 @@ offset_right = 58.0
 offset_bottom = -20.0
 text = "Attack Dummy"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Necessary for AoE" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AoE"]
 shape = SubResource("RectangleShape2D_rca0a")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

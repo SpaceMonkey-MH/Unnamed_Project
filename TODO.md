@@ -21,6 +21,8 @@ NOT DONE :
 - Change the z-order of labels so that they are in front of tile map (or change the z-order of the tile map).
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
 - Complete the AttackState script (make a proper attack).
+- Make a story.
+- Repair the MeleeWeapon attack.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

@@ -20,3 +20,5 @@ var attack_wait_time : float
 # Half the x size of this enemy plus half the x size of the player plus 1.
 # Maybe I need to do this in a  cleaner way.
 var x_size_ep : float
+# The damage dealt by this enemy.
+var attack_damage : float

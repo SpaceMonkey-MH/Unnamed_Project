@@ -16,7 +16,7 @@ func _ready():
 	timer.wait_time = wait_time
 
 func state_process(_delta):
-	if Input.is_action_pressed("fire") && can_fire:
+	if Input.is_action_pressed("fire") and can_fire:
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_2_scene,
 		attack_damage, speed_factor)
 		can_fire = false

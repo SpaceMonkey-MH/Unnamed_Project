@@ -552,14 +552,16 @@ script = ExtResource("18_gi4pl")
 character = NodePath("..")
 current_state = NodePath("Melee")
 
-[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
+[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer", "character_movement_state_machine")]
 script = ExtResource("19_lk4n7")
 melee_weapon = NodePath("../../MeleeWeapon")
 next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../Weapon8")
 timer = NodePath("MeleeWeaponCoolDown")
+character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 
 [node name="MeleeWeaponCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]
+one_shot = true
 
 [node name="DesertEagle" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("21_o8ar2")

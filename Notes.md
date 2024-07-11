@@ -192,3 +192,7 @@
 	Issue: the enemy can still attack the player after dying. Solution (?): check the 2D distance for the
 	attack, instead of the 1D distance. Other solution: have the attack stop when dead. Maybe cleaner.
 	Both worked, gonna keep the second one.
+# - __2024/07/11:__
+	There is something weird with the melee attack of the player, and thus of the enemy. Will have to solve
+	that. Maybe the melee weapon does not need a cooldown?
+	

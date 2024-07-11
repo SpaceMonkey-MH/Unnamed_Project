@@ -66,6 +66,8 @@ func _ready() -> void:
 				# Assign the x_size_ep value of the states to the 
 				# x_size_ep value of the character.
 				child.x_size_ep = character.x_size_ep
+				# Assign the ad value of the states to the ad value of the character.
+				child.attack_damage = character.attack_damage
 				
 #			if character is # ?
 				

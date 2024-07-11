@@ -5,6 +5,8 @@ extends EnemyState
 @export var follow_state : FollowState
 # The cooldwown timer as a variable, so it can be controlled. To be set in editor.
 @export var timer : Timer
+# MeleeWeapon as a variable, so the monitoring can be toggled.
+@export var melee_weapon : Area2D
 # I wanted to avoid this but(t): whether or not the enemy can attack.
 var can_attack : bool = true
 
@@ -65,6 +67,7 @@ func attack() -> void:
 	# Attack placeholder.
 	var time = Time.get_datetime_dict_from_system()
 	print("%d: Attack!" % [time.second])
+	melee_weapon.monitoring = true
 	# Setting the can_attack variable to false so that the enemy can't attack before the end of the timer.
 	can_attack = false
 
@@ -79,3 +82,4 @@ func _on_attack_timer_timeout() -> void:
 		attack()
 	# Setting the can_attack variable back to true so that the enemy can attack again.
 	can_attack = true
+	melee_weapon.monitoring = false

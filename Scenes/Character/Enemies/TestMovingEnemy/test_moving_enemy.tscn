@@ -160,9 +160,9 @@ offset_right = 75.0
 offset_bottom = -20.0
 text = "Test Moving Enemy"
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Necessary for AoE" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AoE"]
 shape = SubResource("RectangleShape2D_mrylo")
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
@@ -182,10 +182,11 @@ attack_state = NodePath("../Attack")
 wander_state = NodePath("../Wander")
 character_movement_state_machine = NodePath("..")
 
-[node name="Attack" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("follow_state", "timer", "character_movement_state_machine")]
+[node name="Attack" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("follow_state", "timer", "melee_weapon", "character_movement_state_machine")]
 script = ExtResource("6_40nwy")
 follow_state = NodePath("../Follow")
 timer = NodePath("AttackCooldownTimer")
+melee_weapon = NodePath("../../MeleeWeapon")
 character_movement_state_machine = NodePath("..")
 
 [node name="AttackCooldownTimer" type="Timer" parent="CharacterMovementStateMachine/Attack"]
@@ -212,8 +213,9 @@ state_machine = NodePath("../CharacterMovementStateMachine")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="MeleeWeapon" type="Area2D" parent="."]
+[node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("attack_state")]
 script = ExtResource("12_1uuhp")
+attack_state = NodePath("../CharacterMovementStateMachine/Attack")
 
 [node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
 shape = SubResource("CircleShape2D_ltm7h")

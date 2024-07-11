@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var melee_weapon_state : MeleeWeaponState
+@export var attack_state : AttackState
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,12 +13,16 @@ func _ready():
 #	print(monitoring)
 
 
+#func damage_component(attack : Attack):
+	
+
+
 func _on_body_entered(body):
-#	print("Body entered: ", body)
+	print("Body entered: ", body)
 	var attack = Attack.new()
-	attack.attack_damage = melee_weapon_state.attack_damage
+	attack.attack_damage = attack_state.attack_damage
 	# Could this be an easter egg that the melee weapon does self damage?
-	if body is PlayerClass:
+	if not body is PlayerClass:
 		return
 	for child in body.get_children():
 		if child is HealthComponent:

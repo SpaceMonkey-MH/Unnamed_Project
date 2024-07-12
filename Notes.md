@@ -1,27 +1,27 @@
-# - __Unknown date:__
+## - __Unknown date:__
 	I think it is better to stick with 1920*1080 with a stretch scale of 1 for the viewport,
 	because the other options (making it small and scaling, or stretching) are not satisfying.
 	This makes everything very zoomed out but it is ok.
 
-# - __2023/12/06:__
+## - __2023/12/06:__
 	The animations are set up, but there is a lot of dupplication in the code. It's not a big deal.
 
 # - __2023/12/08:__
 	I created a new level of State scripts so that the jump variables aren't shared by all States.
 	Can Move is useless for now.
 
-# - __2023/12/10:__
+## - __2023/12/10:__
 	I have to make a choice between letting the player cancel the landing animation
 	to jump again or not. I think it is better if he can do it.
 
-# - __2023/12/11:__
+## - __2023/12/11:__
 	get_global_mouse_position() is a funtion of CanvasItem, so it can't be used directly by
 	a simple Node, I had to find a workaround. Another solution could be to change the type of the StateMachine
 	parts form Node to Node2D. The firing part is working, but the bullets are moving the player, so I had to
 	change the collision mask/layer, I don't know how this will work out but it seems to be a hassle.
 	The attack component seems useless.
 
-# - __2023/12/17:__
+## - __2023/12/17:__
 	For the melee attack, it seems difficult to rotate or flip the player so that it hits on the left,
 	I think I'm going to have the attack all around the player. The problem of having a big square
 	CollisionShape2D is that it detects the player as well, so I go for a ring of 4 different shapes.
@@ -29,16 +29,16 @@
 	from the check). Something will have to be done for the animation.
 	I think the components aren't done correctly, like the HBC needs a reference to the HB, but doesn't use it.
 
-# - __2023/12/18:__
+## - __2023/12/18:__
 	Trying to make an explosion for Weapon3. The solution I'm implementing is to add an Area2D with
 	a CollisionShape2D to every enemy so that the exploding bullet can detect them. (2023/12/21) Apparently it
 	might work with toggling the monitoring of an Area2D and await keyword. Idk.
 
-# - __2023/12/20:__
+## - __2023/12/20:__
 	The HitBoxComponent seems useless, I'll keep it in the files just in case but I'll remove it's use
 	from the actual game.
 
-# - __2024/06/26:__
+## - __2024/06/26:__
 	Having a weird error, that doesn't lead to a piece of code: 
 	":E 0:00:18:0410   emit_signalp: Error calling from signal 'body_entered' to callable: 
 	'Area2D(area_of_effect.gd)::_on_body_entered': Method not found.
@@ -46,7 +46,7 @@
 	It seems to be caused when a rocket (Weapon 3) hits a target. Idk.
 	I think I fixed it now, it was because I commented a script but not all the references (cf commit).
 
-# - __2024/07/01:__
+## - __2024/07/01:__
 	Currently, when the rocket (bullet_3) of weapon_3 hits a target while the player is in range
 	of the explosion, it damages only the main target, not in an AoE, because when the algorithm
 	finds the Player it returns. Leaving it as is would be nonsensical, so I see three solutions:
@@ -58,7 +58,7 @@
 		- Do both, but putting it in the difficulty settings or something, like "allow self damaging".
 	I think I'll try the third option. Aftermaths : IT WORKS! For some reason I had almost all the parts
 	I needed, now I "just" need to connect it to the options. LoL.
-# - __2024/07/03:__
+## - __2024/07/03:__
 	I need to correct the fact that the damage label (health_changed_label) does not appear when on the killing
 	blow on the concerned scene, probably because the main node is queue-freed when it dies. I think I should
 	try and make it so that the label and the manager can exist without its parent node, ergo a way to find them
@@ -78,7 +78,7 @@
 	see them when they fall; if I was to put them in the back, we wouldn't I think see them through the ground,
 	that would require a script to change the z order during runtime. I don't know what is best.
 	## __IMPORTANT NOTE:__ THE Area2D AND THE CollisionShape2D ATTACHED TO THE ENEMIES ARE IMPORTANT FOR BULLET 3.
-# - __2024/07/04:__
+## - __2024/07/04:__
 	I'm trying to make the falling dead bodies disappear when out of the screen, but I just stumbled upon a weird
 	bug: killing with the melee weapon does not make the body fall. Hum...
 	There is an error when the enemy is killed by the melee weapon, but not if it is killed by another weapon.
@@ -106,7 +106,7 @@
 	possible to do it in character_class fully, because I need to somehow connect to the VisibleOnScreenNotifier2D
 	and I don't know if it is possible. The middle-of-the-road thing to do is to connect to the signals in each
 	subclass, and then call a procedure of the superclass that does the thing. That is what I'm going to do.
-# - __2024/07/05:__
+## - __2024/07/05:__
 	I don't think I'm gonna use HitState in the long run, like I think I should not have a specific state for when
 	the enemy is hit, but rather do the hit code in the main script or something, not to affect the behavior.
 	Maybe a knockback or a stun, but than can be done otherwise. Keeping it there for now though.
@@ -124,7 +124,7 @@
 	## __IMPORTANT NOTE:__
 		_ready() is called in the children nodes first, then in the parent node. This is the cause of the above
 		issue.
-# - __2024/07/06:__
+## - __2024/07/06:__
 	Changing the map so that the tupid enemies don't fall off of it.
 	Changed the viewport and all the shit (Changed the parameters of display, from a 960 * 540 Viewport to
 	1920 * 1080, from windowed to fullscreen, stretch mode canvas_item and aspect expand, and from canvas texture
@@ -141,7 +141,7 @@
 	enemies. Idea: have the speed be randomized, in a range of like speed/2 to speed, idk. That way, it can
 	vary during runtime, and it can be fixed in the enemy script.
 	Unit tests? Asserts instead.
-# - __2024/07/07:__
+## - __2024/07/07:__
 	The max health issue: is there a maximum amount of health? I think yes, because if would be harder to make a
 	health bar otherwise. But Maybe I shouldn't make a health bar, I don't know. If so, where is the check?
 	In the setter? In the value assignment? Let's try in the setter; that way, it is done each time, no questions
@@ -151,7 +151,7 @@
 	assign the value @onready. Let's try that. Seems to be working.
 	Should everything be centralized ? For instance, should the max_health be a variable of the character, or
 	of the health_component? I just put it in character superclass, seems fine.
-# - __2024/07/08:__
+## - __2024/07/08:__
 	Not sure whether I should put the enemy states variables, such as follow_distance, in the states, so that it is
 	as local as possible, or in the main enemy script, so that it is easier to set up.
 	About FollowState: I could reset character.velocity.x, but I think it's not that bad if the enemy keeps
@@ -167,7 +167,7 @@
 	Actually, it's "on_exit()", you dumbfuck.
 	Yeah, I'm gonna switch Godot versions mid-project, let's see how it goes. Seems fine.
 	The stopping the timer or whatnot shit worked! Actually it is more complicated than that, but whatever.
-# - __2024/07/09:__
+## - __2024/07/09:__
 	The enemy take_damage() procedure is not good. I need to handle it with HitState somehow.
 	Should I put the x_state variables in superclass to avoid boilerplate code? I think not, because that would
 	lead to useless stuff in editor (@export variables).
@@ -178,7 +178,7 @@
 	I think that technically, I only need to do that check in attack_state, because it is the only state in which
 	the enemy could be close enough to the player. It works. I am proud of myself.
 	Method overriding.
-# - __2024/07/10:__
+## - __2024/07/10:__
 	First, there is an issue with the "stun" of the enemy (when hit), it doesn't seem to refresh properly.
 	Second, maybe I don't need to stun, idk. Guess it would depend on the type of weapon.
 	So, the HitState gets entered, and left immediatly. Why? So, when hit again before the end of the "stun",
@@ -192,7 +192,7 @@
 	Issue: the enemy can still attack the player after dying. Solution (?): check the 2D distance for the
 	attack, instead of the 1D distance. Other solution: have the attack stop when dead. Maybe cleaner.
 	Both worked, gonna keep the second one.
-# - __2024/07/11:__
+## - __2024/07/11:__
 	There is something weird with the melee attack of the player, and thus of the enemy. Will have to solve
 	that. Maybe the melee weapon does not need a cooldown?
 	Fixed the way the player melee attack works, but there still is the issue of the attack lasting after its end
@@ -202,3 +202,6 @@
 	the monitoring set to false to just after the timer and the set to true,
 	here because otherwise it collides with a new timer, I think.
 	Fixed the melee enemy attack, made it the same way the player's is.
+## - __2024/07/12:__
+	I think it is time to consider the story, and more generally the global vision for the game.
+	I'll go and create a Story.md document.

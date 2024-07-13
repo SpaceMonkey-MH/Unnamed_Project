@@ -74,9 +74,9 @@
 	I need to find a way to make the deactivate_node() function do its thing inside the class script and not
 	the extended scripts.
 	What I have done currently, is that the enemy's hitbox is disabled when it dies, so it falls through the map.
-	I kinda like it. It raises the issue of the z axis for the enemies: currently, they are at the front, so we can
+	I kinda like it. It raises the issue of the Z axis for the enemies: currently, they are at the front, so we can
 	see them when they fall; if I was to put them in the back, we wouldn't I think see them through the ground,
-	that would require a script to change the z order during runtime. I don't know what is best.
+	that would require a script to change the Z index during runtime. I don't know what is best.
 	## __IMPORTANT NOTE:__ THE Area2D AND THE CollisionShape2D ATTACHED TO THE ENEMIES ARE IMPORTANT FOR BULLET 3.
 ## - __2024/07/04:__
 	I'm trying to make the falling dead bodies disappear when out of the screen, but I just stumbled upon a weird
@@ -196,8 +196,8 @@
 	There is something weird with the melee attack of the player, and thus of the enemy. Will have to solve
 	that. Maybe the melee weapon does not need a cooldown?
 	Fixed the way the player melee attack works, but there still is the issue of the attack lasting after its end
-	(when attacking while moving, the player can attack farther than its range). Is it really an issue ? That
-	the attack lasts for the whole "animation" ? Idk, might cause issues if the cooldown gets longer.
+	(when attacking while moving, the player can attack farther than its range). Is it really an issue? That
+	the attack lasts for the whole "animation"? Idk, might cause issues if the cooldown gets longer.
 	Fixed it by adding an await timer, but it's not pretty that way, and might lead to issues. Also, moved
 	the monitoring set to false to just after the timer and the set to true,
 	here because otherwise it collides with a new timer, I think.
@@ -205,3 +205,18 @@
 ## - __2024/07/12:__
 	I think it is time to consider the story, and more generally the global vision for the game.
 	I'll go and create a Story.md document.
+## - __2024/07/14:__
+	(following line 76) I changed the Z index of the labels of the characters, thus making them in front
+	of the tile map (the walls and ground), so they can be seen even when the character is close to a wall
+	or falling through the ground. I didn't change the index of the tile map, because it had to be in front of
+	the characters so that they are behind the grass.
+	Change the Z index of the enemies. Done, I actually solved a potential issue where the player was displayed
+	behind the grass not because of its set Z index, but because of the load oreder of the level scene. Now,
+	all the characters are displayed as behind the grass no matter the order of the scenes in the level. Also,
+	this broke line 209, so I fixed it again.
+	Check what happens with the attack of the enemy (weird timings). The attack of the enemy seems to come
+	only a while after the player entered the range. This is the objective, but it shouldn't be the case
+	right now, so it is weird. Like, what I want to do, is a system where there is a pre-attack cooldown and
+	a post-attack cooldown (and only the post is running when out of range), so that the enemy can be kited,
+	but this is not it. First of all, it shouldn't be in place as of now, and second of all, it doesn't seem
+	to be the right thing here, like it is only sometimes that it does it. Weird. Problem for tomorrow me.

@@ -11,6 +11,7 @@ size = Vector2(40, 40)
 size = Vector2(40, 40)
 
 [node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "hit_box")]
+z_index = -1
 collision_layer = 3
 collision_mask = 4
 script = ExtResource("1_x5k5i")
@@ -27,6 +28,7 @@ shape = SubResource("RectangleShape2D_pmp6b")
 character = NodePath("..")
 
 [node name="Label" type="Label" parent="."]
+z_index = 2
 offset_left = -57.0
 offset_top = -46.0
 offset_right = 58.0

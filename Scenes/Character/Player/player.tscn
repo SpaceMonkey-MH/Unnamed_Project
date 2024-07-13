@@ -463,6 +463,7 @@ transitions = ["Start", "desert_eagle", SubResource("AnimationNodeStateMachineTr
 radius = 60.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "hit_box")]
+z_index = -1
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
@@ -530,7 +531,7 @@ air_animation_name = null
 can_move = null
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-z_index = 1
+z_index = 2
 offset_left = -107.0
 offset_top = -58.0
 offset_right = 25.0
@@ -620,7 +621,7 @@ next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Weapon7")
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
-z_index = 1
+z_index = 2
 offset_left = -108.0
 offset_top = -80.0
 offset_right = 12.0

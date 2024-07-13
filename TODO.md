@@ -21,6 +21,7 @@ NOT DONE :
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
 - Complete the AttackState script (make a proper attack).
 - Make a story.
+- Check what happens with the attack of the enemy (weird timings).
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -43,3 +44,4 @@ DONE :
 - Solve the issue of the melee attack (lasting longer than it should). // DONE (I think).
 - Change the Z index of labels so that they are in front of tile map (or change the Z index of the tile map). // DONE
 	(increased the Z index of the labels, so that the character are still behind the grass).
+- Change the Z index of the enemies. //DONE.

@@ -18,22 +18,22 @@
 	or a standalone.
 
 # Story for the game:
-	## Version 1:
-		Cuby goes to live in a new neighborhood, which seems plaisant at first, but then reveals to be. Nah.
-	## Version 2 (Cuby's origin story):
-		Nah. Not yet.
-	## Version 3:
-		The bad guys are somewhat racist or intolerant. Cuby then goes on a rampaging vengeance, killing them all.
-		He is helped in his quest by O-Ren, a friendly doggo, who digs out ammunitions in exchange for treats and
-		other good things for dogs, which are obtained by finishing a level.
-	## Version 4:
-		Same as version 3, but instead of being racist, the bad guys are polluting and destroying
-		what O-Ren likes, so we go through fire and blood to retrieve it. It can be things like cattle that
-		produces cheese, woods that bring sticks, nice spots for naps, routes for walks, the ability to watch
-		over horses (somehow, idk yet), nice people, etc.
-		So, basically, Cuby was chilling somewhere, and then O-Ren arrived all panicked, telling him that the bad
-		guys had taken over the world, en-work-slaved the people, destroyed the forests, put the cattle in industrial
-		farms, polluted the nap spots and the walk routes, did something with the horses.
-		Wait, maybe that's too ambitious, idk.
-	## Version 5:
-		
+## Version 1:
+	Cuby goes to live in a new neighborhood, which seems plaisant at first, but then reveals to be. Nah.
+## Version 2 (Cuby's origin story):
+	Nah. Not yet.
+## Version 3:
+	The bad guys are somewhat racist or intolerant. Cuby then goes on a rampaging vengeance, killing them all.
+	He is helped in his quest by O-Ren, a friendly doggo, who digs out ammunitions in exchange for treats and
+	other good things for dogs, which are obtained by finishing a level.
+## Version 4:
+	Same as version 3, but instead of being racist, the bad guys are polluting and destroying
+	what O-Ren likes, so we go through fire and blood to retrieve it. It can be things like cattle that
+	produces cheese, woods that bring sticks, nice spots for naps, routes for walks, the ability to watch
+	over horses (somehow, idk yet), nice people, etc.
+	So, basically, Cuby was chilling somewhere, and then O-Ren arrived all panicked, telling him that the bad
+	guys had taken over the world, en-work-slaved the people, destroyed the forests, put the cattle in industrial
+	farms, polluted the nap spots and the walk routes, did something with the horses.
+	Wait, maybe that's too ambitious, idk.
+## Version 5:
+	

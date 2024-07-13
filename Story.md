@@ -14,6 +14,8 @@
 	starting from some point, and then later making the origin story, or not.
 	I need to find a way to connect the plot to the fact that Cuby has weapons and whatnot. Let's say Cuby is a he.
 	What we're going with is that he has the weapons on him all along, he just lacks the ammunitions to supply them.
+	The issue I have, is that my idea would be better suited for a sequel or a prequel than for an opening title
+	or a standalone.
 
 # Story for the game:
 	## Version 1:
@@ -21,4 +23,17 @@
 	## Version 2 (Cuby's origin story):
 		Nah. Not yet.
 	## Version 3:
+		The bad guys are somewhat racist or intolerant. Cuby then goes on a rampaging vengeance, killing them all.
+		He is helped in his quest by O-Ren, a friendly doggo, who digs out ammunitions in exchange for treats and
+		other good things for dogs, which are obtained by finishing a level.
+	## Version 4:
+		Same as version 3, but instead of being racist, the bad guys are polluting and destroying
+		what O-Ren likes, so we go through fire and blood to retrieve it. It can be things like cattle that
+		produces cheese, woods that bring sticks, nice spots for naps, routes for walks, the ability to watch
+		over horses (somehow, idk yet), nice people, etc.
+		So, basically, Cuby was chilling somewhere, and then O-Ren arrived all panicked, telling him that the bad
+		guys had taken over the world, en-work-slaved the people, destroyed the forests, put the cattle in industrial
+		farms, polluted the nap spots and the walk routes, did something with the horses.
+		Wait, maybe that's too ambitious, idk.
+	## Version 5:
 		

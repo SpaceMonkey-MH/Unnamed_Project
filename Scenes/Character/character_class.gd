@@ -43,6 +43,7 @@ func death() -> void:
 	# We need to deactivate the character node without freeing it, so that it doesn't interact too much anymore,
 	# but it's still there for the damage label.
 	deactivate_node()
+	#print("deactivate_node() of ", self)
 	character_is_dead = true
 #	# This is temporary, it is used to simulate the animation.
 #	# Also, should allow the damage label to exist on death.
@@ -56,7 +57,7 @@ func death() -> void:
 
 func deactivate_node() -> void:
 	# Idk why, but it showed errors when killing that way, so I deferred it instead. Actually,
-	# it doesn't work with deferred. IDK. Mayeb I was using it wrong.
+	# it doesn't work with deferred. IDK. Maybe I was using it wrong.
 	hit_box.disabled = true
 
 
@@ -81,4 +82,4 @@ func handle_character_out_of_screen() -> void:
 	if character_is_dead:
 		await get_tree().create_timer(out_of_screen_death_timer).timeout
 		queue_free()
-#		print("queue_free() of ", self)
+		#print("queue_free() of ", self)

@@ -1,6 +1,7 @@
+class_name AttackComponent
 extends Node2D
 
-class_name AttackComponent
+# Pretty sure this script is useless.
 
 @export var hit_box : CollisionShape2D
 @export var attack_value : float = 1

@@ -154,6 +154,7 @@ shape = SubResource("RectangleShape2D_f7sae")
 character = NodePath("..")
 
 [node name="Label" type="Label" parent="."]
+z_index = 1
 offset_left = -75.0
 offset_top = -46.0
 offset_right = 75.0
@@ -204,6 +205,7 @@ script = ExtResource("7_en48c")
 character_movement_state_machine = NodePath("..")
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+z_index = 1
 offset_left = -107.0
 offset_top = -58.0
 offset_right = 25.0

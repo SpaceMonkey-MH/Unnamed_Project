@@ -530,6 +530,7 @@ air_animation_name = null
 can_move = null
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+z_index = 1
 offset_left = -107.0
 offset_top = -58.0
 offset_right = 25.0
@@ -619,6 +620,7 @@ next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Weapon7")
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+z_index = 1
 offset_left = -108.0
 offset_top = -80.0
 offset_right = 12.0

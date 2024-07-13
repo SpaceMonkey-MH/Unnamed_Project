@@ -1,7 +1,7 @@
 class_name CharacterClass
 extends CharacterBody2D
-# Base class for the character, that is to say the player and the enemies.
 
+# Base class for the characters, that is to say the player and the enemies.
 
 # HitBox as a variable, so that it can be disabled.
 @export var hit_box : CollisionShape2D

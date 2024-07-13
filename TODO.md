@@ -18,27 +18,28 @@ NOT DONE :
 - Fix the melee weapon AoE bug (cf 2024/07/06)?
 - Unit tests? Asserts.
 - Make enemies stop between two wanderings.
-- Change the z-order of labels so that they are in front of tile map (or change the z-order of the tile map).
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
 - Complete the AttackState script (make a proper attack).
 - Make a story.
-- Solve the issue of the melee attack (lasting longer than it should).
 
 ------------------------------------------------------------------------------------------------------
 DONE :
 
 - Fix the issue with the heal popping up when the health is set at the beginning of the game. // DONE.
 - Make it so that the double jump animation resets when triple jumping quickly. // DONE.
-- Fix the error of AoE in bullet 3. //DONE.
+- Fix the error of AoE in bullet 3. // DONE.
 - Fix the AoE of bullet 3 when the player is close to the explosion. // DONE.
-- Solve the issue of the player body sprite flip. //DONE.
+- Solve the issue of the player body sprite flip. // DONE.
 - Solve the issue where the damage label doesn't show on the killing hit. // DONE.
-- Solve the issue where the dead characters can still be hit after their death. //DONE.
-- Handle the part where the characters fall when they die (make them disappear when out of the screen). //DONE.
-- Make the enemies stackable on each other ? // DONE I think.
-- Give legs to the enemies. //DONE.
-- Make transitions to AttackState. //DONE.
+- Solve the issue where the dead characters can still be hit after their death. // DONE.
+- Handle the part where the characters fall when they die (make them disappear when out of the screen). // DONE.
+- Make the enemies stackable on each other ? // DONE (I think).
+- Give legs to the enemies. // DONE.
+- Make transitions to AttackState. // DONE.
 - Solve the "pressed against wall" glitch. Cf Notes.md (line 175). // DONE (twice).
 - Solve the HitState issue when it leaves the state immediatly. // DONE.
 - Give a brain to the enemies. // Kinda DONE.
 - Repair the MeleeWeapon attack. // DONE.
+- Solve the issue of the melee attack (lasting longer than it should). // DONE (I think).
+- Change the Z index of labels so that they are in front of tile map (or change the Z index of the tile map). // DONE
+	(increased the Z index of the labels, so that the character are still behind the grass).

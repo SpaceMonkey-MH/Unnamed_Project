@@ -31,6 +31,10 @@ signal damaged(node : Node, damage_taken : float)
 #	health = max_health
 
 
+#func _process(_delta) -> void:
+	#print("%s has %s health left!" % [get_parent(), health])
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func damage(attack : Attack):
 	health -= attack.attack_damage

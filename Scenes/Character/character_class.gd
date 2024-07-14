@@ -22,12 +22,25 @@ var character_is_dead : bool = false
 var move_speed : float = 0.0
 
 
-# Creating a _physics_process() function so that it regroups the test if the body is outside of the screen
+# Creating a _process() procedure so that there can be code inside it and inside the functions in subclasses.
+# This is useless for now.
+func _process(delta) -> void:
+#	print("Move speed of ", self, " from character_class.gd: ", move_speed)
+	character_process(delta)
+#	print("Hello from _physics_process in character_class.")
+
+
+# Creating a _physics_process() procedure so that it regroups the test if the body is outside of the screen
 # inside the superclass. This is useless for now.
 func _physics_process(delta) -> void:
 #	print("Move speed of ", self, " from character_class.gd: ", move_speed)
 	character_physics_process(delta)
 #	print("Hello from _physics_process in character_class.")
+
+
+# Just a placeholder.
+func character_process(_delta) -> void:
+	pass
 
 
 # Just a placeholder.

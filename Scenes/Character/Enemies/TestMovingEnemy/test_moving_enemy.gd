@@ -46,6 +46,11 @@ func _ready() -> void:
 #	print(move_speed)
 
 
+# I don't know what I'm doing.
+func character_process(_delta) -> void:
+	pass
+
+
 # Replaces the _physics_process() procedure so that the body can be queue freed in the superclass.
 func character_physics_process(delta) -> void:
 	# Add the gravity.

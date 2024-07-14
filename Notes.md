@@ -58,6 +58,7 @@
 		- Do both, but putting it in the difficulty settings or something, like "allow self damaging".
 	I think I'll try the third option. Aftermaths : IT WORKS! For some reason I had almost all the parts
 	I needed, now I "just" need to connect it to the options. LoL.
+
 ## - __2024/07/03:__
 	I need to correct the fact that the damage label (health_changed_label) does not appear when on the killing
 	blow on the concerned scene, probably because the main node is queue-freed when it dies. I think I should
@@ -78,6 +79,7 @@
 	see them when they fall; if I was to put them in the back, we wouldn't I think see them through the ground,
 	that would require a script to change the Z index during runtime. I don't know what is best.
 	## __IMPORTANT NOTE:__ THE Area2D AND THE CollisionShape2D ATTACHED TO THE ENEMIES ARE IMPORTANT FOR BULLET 3.
+
 ## - __2024/07/04:__
 	I'm trying to make the falling dead bodies disappear when out of the screen, but I just stumbled upon a weird
 	bug: killing with the melee weapon does not make the body fall. Hum...
@@ -106,6 +108,7 @@
 	possible to do it in character_class fully, because I need to somehow connect to the VisibleOnScreenNotifier2D
 	and I don't know if it is possible. The middle-of-the-road thing to do is to connect to the signals in each
 	subclass, and then call a procedure of the superclass that does the thing. That is what I'm going to do.
+
 ## - __2024/07/05:__
 	I don't think I'm gonna use HitState in the long run, like I think I should not have a specific state for when
 	the enemy is hit, but rather do the hit code in the main script or something, not to affect the behavior.
@@ -124,6 +127,7 @@
 	## __IMPORTANT NOTE:__
 		_ready() is called in the children nodes first, then in the parent node. This is the cause of the above
 		issue.
+
 ## - __2024/07/06:__
 	Changing the map so that the tupid enemies don't fall off of it.
 	Changed the viewport and all the shit (Changed the parameters of display, from a 960 * 540 Viewport to
@@ -141,6 +145,7 @@
 	enemies. Idea: have the speed be randomized, in a range of like speed/2 to speed, idk. That way, it can
 	vary during runtime, and it can be fixed in the enemy script.
 	Unit tests? Asserts instead.
+
 ## - __2024/07/07:__
 	The max health issue: is there a maximum amount of health? I think yes, because if would be harder to make a
 	health bar otherwise. But Maybe I shouldn't make a health bar, I don't know. If so, where is the check?
@@ -151,6 +156,7 @@
 	assign the value @onready. Let's try that. Seems to be working.
 	Should everything be centralized ? For instance, should the max_health be a variable of the character, or
 	of the health_component? I just put it in character superclass, seems fine.
+
 ## - __2024/07/08:__
 	Not sure whether I should put the enemy states variables, such as follow_distance, in the states, so that it is
 	as local as possible, or in the main enemy script, so that it is easier to set up.
@@ -167,6 +173,7 @@
 	Actually, it's "on_exit()", you dumbfuck.
 	Yeah, I'm gonna switch Godot versions mid-project, let's see how it goes. Seems fine.
 	The stopping the timer or whatnot shit worked! Actually it is more complicated than that, but whatever.
+
 ## - __2024/07/09:__
 	The enemy take_damage() procedure is not good. I need to handle it with HitState somehow.
 	Should I put the x_state variables in superclass to avoid boilerplate code? I think not, because that would
@@ -178,6 +185,7 @@
 	I think that technically, I only need to do that check in attack_state, because it is the only state in which
 	the enemy could be close enough to the player. It works. I am proud of myself.
 	Method overriding.
+
 ## - __2024/07/10:__
 	First, there is an issue with the "stun" of the enemy (when hit), it doesn't seem to refresh properly.
 	Second, maybe I don't need to stun, idk. Guess it would depend on the type of weapon.
@@ -192,6 +200,7 @@
 	Issue: the enemy can still attack the player after dying. Solution (?): check the 2D distance for the
 	attack, instead of the 1D distance. Other solution: have the attack stop when dead. Maybe cleaner.
 	Both worked, gonna keep the second one.
+
 ## - __2024/07/11:__
 	There is something weird with the melee attack of the player, and thus of the enemy. Will have to solve
 	that. Maybe the melee weapon does not need a cooldown?
@@ -202,9 +211,11 @@
 	the monitoring set to false to just after the timer and the set to true,
 	here because otherwise it collides with a new timer, I think.
 	Fixed the melee enemy attack, made it the same way the player's is.
+
 ## - __2024/07/12:__
 	I think it is time to consider the story, and more generally the global vision for the game.
 	I'll go and create a Story.md document.
+
 ## - __2024/07/14:__
 	(following line 76) I changed the Z index of the labels of the characters, thus making them in front
 	of the tile map (the walls and ground), so they can be seen even when the character is close to a wall
@@ -220,3 +231,8 @@
 	a post-attack cooldown (and only the post is running when out of range), so that the enemy can be kited,
 	but this is not it. First of all, it shouldn't be in place as of now, and second of all, it doesn't seem
 	to be the right thing here, like it is only sometimes that it does it. Weird. Problem for tomorrow me.
+	Weird issue: the TME only needs 2 40dmg hits to die, or 5 20dmg, which doesnt make no sense. So, the damage
+	is applied twice, but not tot the others, which is strange. So, the issue was that the aoe damage checks
+	for overlapping areas, but TME had two: the regular one, and the weapon. The dummies have the regular one,
+	and the player has a melee weapon, but the TME has both, so it gets hits twice. I need to check if it is the
+	regular one. Solved now.

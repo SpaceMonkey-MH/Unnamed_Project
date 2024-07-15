@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var hit_box : CollisionShape2D
 # The maximum health of the character.
 @export var max_health : float = 100.0
-# No magic numbers. This is the time during which the death animation is supposedly plaed (this is just
+# No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
 var death_animation_timer : float = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -16,8 +16,6 @@ var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var character_is_dead : bool = false
 # Timer before queue_free() when the dead characters fall out of the screen.
 @export var out_of_screen_death_timer : float = 1.5
-## Attempt.
-#var character_node
 # Move speed of the character, here so it can be added to all the relative states. In pixels/second.
 var move_speed : float = 0.0
 

@@ -246,3 +246,12 @@
 		shenanigans with varying enemy range, don't know yet if it is a big deal.
 		-> Link the follow_distance to the attack_range. I don't know what this does.
 	I think I'm gonna go with the first option. This is still weird, but less weird.
+	Issue with the dist_to_explosion in bullet_3.gd: the distance is taken from the center of the character,
+	so big enemies won't be hit as much as small ones, which is bad. Possible solution: try and get the size
+	of the enemy. Other lead: try to hit on the edge. Will need help for that one, so I'll save it for later.
+	For the first solution, I think I'll go and get the size of the "HitBox" node, and let's hope there's one.
+	Leading to another issue: the HitBox can be of many shapes. The easiest one would be circle, as it is
+	the same distance everywhere. The rectangle is tougher, beacause the size depends on the direction. Maybe
+	I need help.
+	Alternative solution: have various damaging circles. I don't think it solves it.
+	Solution: Ray-casting? Maybe this could replace the follow_range shit as well. Idk.

@@ -5,7 +5,7 @@ NOT DONE :
 - Finish the code in hit_state.
 - Finish the code for test_moving_enemy, should be a state machine and all the tintouin.
 - To do when the options are set up: try to move the self_damage assign in bullet_3.gd to _ready() instead
-	(Use a global signal? That would be swag for sure.).
+	(Use a global signal? That would be swag for sure.) (idk what this means, maybe it is done).
 - Handle the part where the characters fall when they die (animation).
 - Handle the part where the characters fall when they die (sound).
 - Make it so that you can't shoot when clicking on the UI.
@@ -20,7 +20,10 @@ NOT DONE :
 - Make enemies stop between two wanderings.
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
 - Make a story.
-- Check what happens with the attack of the enemy (weird timings).
+- Make it so that the player can't shoot after death. Or just handle after-death.
+- Put self_damage in options.
+- Solve the issue of the Z index when dying (need to be seen through the ground).
+- Blink?
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -47,3 +50,4 @@ DONE :
 - Fix the issue of the TME dying to only two rockets. // DONE.
 - Solve the issue of the melee attack (lasting longer than it should). // DONE.
 - Complete the AttackState script (make a proper attack). //DONE.
+- Check what happens with the attack of the enemy (weird timings). // DONE.

@@ -24,14 +24,16 @@ func _process(_delta) -> void:
 
 
 # Procedure that handles the damage in an AoE of the missile.
-func area_of_effect() -> void:
+func area_of_effect(collision_pos) -> void:
 	area_of_effect_zone.monitoring = true
+	# Create a new attack.
 	var attack = Attack.new()
+	# With the aoe damage as damage.
 	attack.attack_damage = aoe_attack_damage
 	# This causes an issue where the explosion can damage twice or more, because it counts each area.
 	# I need to check if it is the right one.
 	for area in area_of_effect_zone.get_overlapping_areas():
-		# Check if the area met is the hit box for AoE.
+		# Check if the area met is the hit box for AoE, so that it damages exactly once per attack.
 		if area is AOEHitBox:
 			var parent = area.get_parent()
 			#print(area)
@@ -39,8 +41,20 @@ func area_of_effect() -> void:
 	#		if parent is Player:
 	#			return
 			# Instead, we can incorporate the if statement. This works, but I'd like to give the player
-			# the choice of having or not self damage. This will be an option.
-			if not parent is PlayerClass or self_damage:
+			# the choice of having or not self damage. This will be an option (self_damage).
+			if self_damage or not parent is PlayerClass:
+				# This may be used some day, it was an attempt at damaging in a matrix.
+				## The distance between the collision (explosion) and the receiver. This is from the center.
+				#var dist_to_explosion = (collision_pos - parent.position).length()
+				##print("dist_to_explosion: ", dist_to_explosion)
+				## This should crash if the hit box is not a rectangle.
+				##print('parent.get_node("HitBox").shape.size: ', parent.get_node("HitBox").shape.size)
+				#var parent_shape = parent.get_node("HitBox").shape
+				#var parent_size
+				##push_error("Oui")
+				##print("parent_shape: ", parent_shape)
+				#if parent_shape is RectangleShape2D:
+					#
 				for child in parent.get_children():
 					if child is HealthComponent:
 		#				print("bullet3: ", attack.attack_damage)

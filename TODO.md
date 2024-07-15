@@ -19,7 +19,6 @@ NOT DONE :
 - Unit tests? Asserts.
 - Make enemies stop between two wanderings.
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
-- Complete the AttackState script (make a proper attack).
 - Make a story.
 - Check what happens with the attack of the enemy (weird timings).
 
@@ -46,3 +45,5 @@ DONE :
 	(increased the Z index of the labels, so that the character are still behind the grass).
 - Change the Z index of the enemies. // DONE.
 - Fix the issue of the TME dying to only two rockets. // DONE.
+- Solve the issue of the melee attack (lasting longer than it should). // DONE.
+- Complete the AttackState script (make a proper attack). //DONE.

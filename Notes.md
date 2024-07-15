@@ -236,3 +236,13 @@
 	for overlapping areas, but TME had two: the regular one, and the weapon. The dummies have the regular one,
 	and the player has a melee weapon, but the TME has both, so it gets hits twice. I need to check if it is the
 	regular one. Solved now.
+
+## - __2024/07/15:__
+	(cf line 228) The issue was that the attack_range was different from the radius of the weapon's CollisionShape2D.
+	Now, both are linked. But there is a different issue: if the attack_range is longer than the follow_range,
+	the enemy starts attacking only after entering the follow_range, and continues after leaving it, which
+	feels weird. Two possible solutions: 
+		-> Adding state transition from wander to attack. That is clean, but a bit weird. Also, blocks potential
+		shenanigans with varying enemy range, don't know yet if it is a big deal.
+		-> Link the follow_distance to the attack_range. I don't know what this does.
+	I think I'm gonna go with the first option. This is still weird, but less weird.

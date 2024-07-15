@@ -63,6 +63,8 @@ func on_exit() ->void:
 
 # The procedure used to create the attacks. I think I'm gonna overwrite this in a subclass or something.
 func attack() -> void:
+	## Adding a timer so that the enemy can hit right on entrance (otherwise it. Useless.
+	#await get_tree().create_timer(0.05).timeout
 	# Starting the attack cooldown timer.
 	timer.start()
 	# Attack placeholder. Not needed anymore.

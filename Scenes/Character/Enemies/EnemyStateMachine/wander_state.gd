@@ -3,6 +3,8 @@ extends EnemyState
 
 # The Follow state as a variable, so it can be put in next_state.
 @export var follow_state : FollowState
+# The Attack state as a variable, so it can be put in next_state.
+@export var attack_state : AttackState
 # The direction of movement of the character: -1 left, 0 idle, 1 right. To be randomized.
 var wander_direction : int = 0
 # Time during which the enemy wanders in that direction. To be randomized.
@@ -31,6 +33,8 @@ func state_process(delta) -> void:
 	# If the enemy is closer than the fixed distance to the player. Setting to <= because idk.
 	if abs(relative_x_distance_to_player) <= follow_distance:
 		next_state = follow_state
+	elif abs(relative_x_distance_to_player) <= attack_range:
+		next_state = attack_state
 
 
 # Procedure that randomizes the values of wander_direction, wander_time and wander_speed, so that the wander

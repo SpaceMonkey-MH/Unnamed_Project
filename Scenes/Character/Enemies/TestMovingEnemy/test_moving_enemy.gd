@@ -31,6 +31,8 @@ const JUMP_VELOCITY = -400.0
 @export var x_size_ep : float = 20 + 20 + 5
 # The damage dealt by this enemy.
 @export var attack_damage : float = 20.0
+# The AttackHitBox as a variable, so that its radius can be changed.
+@export var attack_hit_box : CollisionShape2D
 
 
 func _enter_tree() -> void:
@@ -42,6 +44,8 @@ func _enter_tree() -> void:
 func _ready() -> void:
 #	print("TestMovingEnemy is ready.")
 	animation_tree.active = true
+	attack_hit_box.shape.radius = attack_range
+	#print("attack_hit_box.shape.radius: ", attack_hit_box.shape.radius)
 #	move_speed = SPEED
 #	print(move_speed)
 

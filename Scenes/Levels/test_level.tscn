@@ -1431,7 +1431,7 @@ sources/0 = SubResource("TileSetAtlasSource_ykabh")
 [node name="HUD" parent="." instance=ExtResource("1_kv158")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(960, 0)
+position = Vector2(1095, 942)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 50.0
@@ -1439,7 +1439,7 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_xkfwj")]
-position = Vector2(960, 0)
+position = Vector2(1095, 942)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -1463,11 +1463,11 @@ position = Vector2(1208, 1008)
 position = Vector2(1172, 1006)
 
 [node name="AttackDummy2" parent="." instance=ExtResource("5_pn2ls")]
-position = Vector2(571, 123)
+position = Vector2(236, 928)
 
 [node name="AttackDummy3" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(1239, 1003)
 
 [node name="TestMovingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_vfolm")]
-position = Vector2(362, 989)
+position = Vector2(458, 957)
 player = NodePath("../Player")

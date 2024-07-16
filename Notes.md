@@ -262,3 +262,11 @@
 	the rate at which the ray-cast will be checking) is (for a ray length of L and a character size (chord) of l):
 	theta = arcsin(l / 2 * L).
 	(Cf https://www.youtube.com/watch?v=GY43DI8e4jM)
+	It is broken for now, but there still is the old code so it is an easy fix. I don't think the code needs
+	much more to function. Let me explain: I tried to make the AoE damage depend on the distance from the
+	explosion, but it was difficult or impossible by using overlapping areas, so I tried ray-casting.
+	It is not working as it should yet, but it is on the right tracks. However, it might not be the
+	expected result, as the ray, thus the damage, stops at the first encounter. This might work for a
+	different weapon, possibility to be explored. I think I'll do both, in two separate weapons.
+	Or, I could try and pierce through the collided characters by cycling ray-cast and adding the found dudes
+	to the exception list. I'll keep both just in case

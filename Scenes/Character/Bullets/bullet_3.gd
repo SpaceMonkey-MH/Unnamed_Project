@@ -11,6 +11,7 @@ func _ready() -> void:
 	player = get_parent().get_parent().get_parent()
 	# Getting the value of self_damage from player.
 	self_damage = player.self_damage
+	#print({"oui" : 1}.non)	# Crashes.
 
 
 func _process(_delta) -> void:
@@ -27,29 +28,42 @@ func _process(_delta) -> void:
 func area_of_effect(collision_pos) -> void:
 	area_of_effect_zone.monitoring = true
 	# Create a new attack.
-	var attack :Attack = Attack.new()
+	var attack : Attack = Attack.new()
 	# With the aoe damage as damage.
 	attack.attack_damage = aoe_attack_damage
-	# According to my findings, the angle I'm looking for (the rotation angle for the ray-cast, that is to say
-	# the rate at which the ray-cast will be checking) is (for a ray length of L and a character size of l
-	# (chord)): theta = 2 * arcsin(l / 2 * L).
+	
 	var space_state : PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
 	# Here, I'm not sure if it's better to use a single variable rotated by a bit each time,
 	# or redeclare the variable each time. I (Julien) think(s) I should use a single variable (first option).
-	var vector_to_target : Vector2 = Vector2(100, 0)
+	# 
+	var vector_to_target : Vector2 = Vector2(aoe_size, 0)
 	var rotation_angle : float = 2 * asin(minimum_character_size / (2 * aoe_size))
-	for angle in range(0, (2 * PI) / rotation_angle):
+	# According to my findings, the angle I'm looking for (the rotation angle for the ray-cast, that is to say
+	# the rate at which the ray-cast will be checking) is (for a ray length of L and a character size of l
+	# (chord)): theta = 2 * arcsin(l / 2 * L).
+	# It seems a little high, idk (so, the angle is big, and the number or rays is low).
+	for angle : float in range(0, ceil((2 * PI) / rotation_angle)):
+		#print("rotation_angle: ", rotation_angle)
 		#print(angle)
 		# We only need to rotate the translation vector, not the position one.
 		vector_to_target = vector_to_target.rotated(rotation_angle)
-		var target_position = global_position - vector_to_target
+		var target_position : Vector2 = global_position - vector_to_target
+		#print("target_position: ", target_position)
 		#print(target_position.rotate(angle))
 		#target_position = target_position.rotated(angle / 100)
-		var query = PhysicsRayQueryParameters2D.create(global_position, target_position)
+		var query : PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(global_position,
+																					target_position)
 		query.exclude = [self]
-		var result = space_state.intersect_ray(query)
-		if result and not result.collider is TileMap:
-			print("Ray-casting result: ", result)
+		var result : Dictionary = space_state.intersect_ray(query)
+		if result:
+			var collider = result.collider
+			#print("collider.get_children(): ", collider.get_children())
+			#print("Ray-casting result: ", result)
+			if self_damage or not collider is PlayerClass:
+				for child in collider.get_children():
+					if child is HealthComponent:
+		#				print("bullet3: ", attack.attack_damage)
+						child.damage(attack)
 	
 	
 	# This causes an issue where the explosion can damage twice or more, because it counts each area.

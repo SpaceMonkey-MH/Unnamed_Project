@@ -8,7 +8,7 @@ var speed_factor : float = 10.0
 var direction : Vector2 = Vector2.ZERO
 # Putting this here because I don't know where to put it. This is the size of the smallest character in the game,
 # used for ray-casting.
-var minimum_character_size : float = 40.0
+@export var minimum_character_size : float = 40.0
 # The size of the AoE/explosion.
 var aoe_size : float = 80.0
 

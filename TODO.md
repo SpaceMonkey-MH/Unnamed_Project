@@ -24,6 +24,8 @@ NOT DONE :
 - Put self_damage in options.
 - Solve the issue of the Z index when dying (need to be seen through the ground).
 - Blink?
+- Balancing.
+- Piercing shot (I think I'd need to move the queue_free in bullet.gd to the subclasses or smth).
 
 ------------------------------------------------------------------------------------------------------
 DONE :

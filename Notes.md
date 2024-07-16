@@ -255,3 +255,6 @@
 	I need help.
 	Alternative solution: have various damaging circles. I don't think it solves it.
 	Solution: Ray-casting? Maybe this could replace the follow_range shit as well. Idk.
+## - __2024/07/16:__
+	Ray-casting. Idk how many rays to cast, but that's okay. However, I need to make sure that the targets aren't
+	hit multiple times. I'm thinking about a list of already hit targets.

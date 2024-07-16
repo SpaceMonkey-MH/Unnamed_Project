@@ -27,7 +27,7 @@ func _process(_delta) -> void:
 func area_of_effect(collision_pos) -> void:
 	area_of_effect_zone.monitoring = true
 	# Create a new attack.
-	var attack = Attack.new()
+	var attack :Attack = Attack.new()
 	# With the aoe damage as damage.
 	attack.attack_damage = aoe_attack_damage
 	# This causes an issue where the explosion can damage twice or more, because it counts each area.

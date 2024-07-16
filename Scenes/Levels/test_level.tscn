@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ofmg46djwodl"]
+[gd_scene load_steps=10 format=3 uid="uid://ofmg46djwodl"]
 
 [ext_resource type="PackedScene" uid="uid://bq653xirgnv8k" path="res://Scenes/UI/ui.tscn" id="1_kv158"]
 [ext_resource type="PackedScene" uid="uid://cthsy2erljdkt" path="res://Scenes/Character/Player/player.tscn" id="2_xkfwj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://deft3xydco1mh" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="4_vwdav"]
 [ext_resource type="PackedScene" uid="uid://cv6wtd2pqvjb5" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.tscn" id="5_pn2ls"]
 [ext_resource type="PackedScene" uid="uid://fi71b5nrxf28" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.tscn" id="6_vfolm"]
+[ext_resource type="PackedScene" uid="uid://bdawrbt0v2h1o" path="res://Testings/ray_casting_test_character.tscn" id="7_0ow6q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykabh"]
 texture = ExtResource("3_dlphg")
@@ -1471,3 +1472,6 @@ position = Vector2(1239, 1003)
 [node name="TestMovingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_vfolm")]
 position = Vector2(458, 957)
 player = NodePath("../Player")
+
+[node name="RayCastingTestCharacter" parent="." instance=ExtResource("7_0ow6q")]
+position = Vector2(1538, 949)

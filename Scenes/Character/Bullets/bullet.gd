@@ -14,7 +14,7 @@ func _physics_process(_delta) -> void:
 	attack.attack_damage = attack_damage
 	if collision != null:
 		#print("collision.get_position(): ", collision.get_position())
-		var collider = collision.get_collider()
+		var collider : Object = collision.get_collider()
 #		print(collider.has_node("HitBoxComponent"))
 #		print(collider.get_node("HitBoxComponent"))
 #		print(collider)

@@ -258,3 +258,7 @@
 ## - __2024/07/16:__
 	Ray-casting. Idk how many rays to cast, but that's okay. However, I need to make sure that the targets aren't
 	hit multiple times. I'm thinking about a list of already hit targets.
+	According to my findings, the angle I'm looking for (the rotation angle for the ray-cast, that is to say
+	the rate at which the ray-cast will be checking) is (for a ray length of L and a character size (chord) of l):
+	theta = arcsin(l / 2 * L).
+	(Cf https://www.youtube.com/watch?v=GY43DI8e4jM)

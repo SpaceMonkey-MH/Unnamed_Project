@@ -7,6 +7,8 @@ extends WeaponsState
 @export var bullet_3_scene : PackedScene
 @export var attack_damage : float = 0
 @export var aoe_attack_damage : float = 40
+# The size of the explosion, used for ray-casting.
+@export var aoe_size : float = 80.0
 @export var speed_factor : float = 5
 
 var wait_time : float = 1.5
@@ -21,7 +23,7 @@ func state_process(_delta) -> void:
 #	print(can_fire)
 	if Input.is_action_just_pressed("fire") and can_fire:
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_3_scene,
-		attack_damage, speed_factor, aoe_attack_damage)
+		attack_damage, speed_factor, aoe_attack_damage, aoe_size)
 		can_fire = false
 		reload_timer.start()
 

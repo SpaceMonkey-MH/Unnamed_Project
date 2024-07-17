@@ -269,4 +269,6 @@
 	expected result, as the ray, thus the damage, stops at the first encounter. This might work for a
 	different weapon, possibility to be explored. I think I'll do both, in two separate weapons.
 	Or, I could try and pierce through the collided characters by cycling ray-cast and adding the found dudes
-	to the exception list. I'll keep both just in case
+	to the exception list. I'll keep both just in case.
+	Or, or, or, I could leave the ray-casting as is, without evading dupplicate damage, and thus allowing for
+	more damage close, less damage far, which is what I wanted from the beginning. Would require balancing though.

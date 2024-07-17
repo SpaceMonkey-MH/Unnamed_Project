@@ -272,3 +272,17 @@
 	to the exception list. I'll keep both just in case.
 	Or, or, or, I could leave the ray-casting as is, without evading dupplicate damage, and thus allowing for
 	more damage close, less damage far, which is what I wanted from the beginning. Would require balancing though.
+# - __2024/07/17:__
+	Water? Inverted gravity?
+	Achievements? Will be hard.
+	I was thinking about the way the levels will work, and maybe I could have one level per weapon other that the
+	basic one, accessible in any order wanted, and then when all weapons are unlocked, the final level. That would
+	require the ability to have different saves, which is hard, but interesting.
+	RayCastingTestCharacter is full broken, but I have the flemme to fix it, for now it is ok, anyway I won't use
+	it in the game.
+	(cf line 273) Or I could use this technology to make a shotgun. Hum... Both?
+	The damaging of the AoE with ray-casting is not consistent. This is concerning.
+	Apparently there's this thing called "shape-casting", seems promising.
+	Okay, this shit is boring me. i'll try the shape-casting, and if it doesn't work, fuck it, I'll do the
+	overlapping areas.
+	Or, I could have a fragmentation thing, creating several other projectiles.

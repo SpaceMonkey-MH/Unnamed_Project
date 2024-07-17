@@ -1474,4 +1474,4 @@ position = Vector2(458, 957)
 player = NodePath("../Player")
 
 [node name="RayCastingTestCharacter" parent="." instance=ExtResource("7_0ow6q")]
-position = Vector2(1538, 949)
+position = Vector2(1565, 943)

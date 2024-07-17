@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://fi71b5nrxf28"]
+[gd_scene load_steps=21 format=3 uid="uid://fi71b5nrxf28"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.gd" id="1_cmmdb"]
 [ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_16f2o"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="3_v7f25"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/wander_state.gd" id="4_0ysqk"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/follow_state.gd" id="5_4vjxa"]
-[ext_resource type="Script" path="res://Scenes/Character/aoe_hit_box.gd" id="5_kj20k"]
+[ext_resource type="PackedScene" uid="uid://ca2l0ymruytnq" path="res://Scenes/Character/Components/necessary_for_aoe.tscn" id="5_efx3k"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/attack_state.gd" id="6_40nwy"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="7_en48c"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/hit_state.gd" id="8_f3jqe"]
@@ -122,9 +122,6 @@ graph_offset = Vector2(4, 11)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7sae"]
 size = Vector2(40, 40)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mrylo"]
-size = Vector2(40, 40)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltm7h"]
 radius = 100.0
 
@@ -164,11 +161,7 @@ offset_right = 75.0
 offset_bottom = -20.0
 text = "Test Moving Enemy"
 
-[node name="Necessary for AoE" type="Area2D" parent="."]
-script = ExtResource("5_kj20k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AoE"]
-shape = SubResource("RectangleShape2D_mrylo")
+[node name="Necessary for AOE" parent="." instance=ExtResource("5_efx3k")]
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("3_v7f25")

@@ -9,11 +9,12 @@ height = 40.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_4h6q7"]
 radius = 80.0
 
-[node name="Bullet3" type="CharacterBody2D" node_paths=PackedStringArray("area_of_effect_zone")]
+[node name="Bullet3" type="CharacterBody2D" node_paths=PackedStringArray("area_of_effect_zone", "shape")]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_tdb7g")
 area_of_effect_zone = NodePath("AreaOfEffect")
+shape = NodePath("AreaOfEffect/AOEZone")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0
@@ -23,12 +24,12 @@ offset_bottom = 5.0
 color = Color(0.760784, 0.054902, 0.156863, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="HitBox" type="CollisionShape2D" parent="."]
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_1nl0b")
 
 [node name="AreaOfEffect" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaOfEffect"]
+[node name="AOEZone" type="CollisionShape2D" parent="AreaOfEffect"]
 position = Vector2(20, 0)
 shape = SubResource("CircleShape2D_4h6q7")

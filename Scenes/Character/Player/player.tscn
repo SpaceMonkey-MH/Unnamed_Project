@@ -646,10 +646,10 @@ character = NodePath("..")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="Necessary for AoE" type="Area2D" parent="."]
+[node name="Necessary for AOE" type="Area2D" parent="."]
 script = ExtResource("33_qq2yg")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AoE"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AOE"]
 shape = SubResource("RectangleShape2D_hmk86")
 
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]

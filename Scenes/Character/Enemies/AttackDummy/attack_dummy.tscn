@@ -36,10 +36,10 @@ offset_right = 58.0
 offset_bottom = -20.0
 text = "Attack Dummy"
 
-[node name="Necessary for AoE" type="Area2D" parent="."]
+[node name="Necessary for AOE" type="Area2D" parent="."]
 script = ExtResource("4_we0yj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AoE"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AOE"]
 shape = SubResource("RectangleShape2D_rca0a")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

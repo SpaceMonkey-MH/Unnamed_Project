@@ -40,13 +40,13 @@ var air_jumps_current : int = air_jumps_max
 @export var body_sprite_2d : Sprite2D
 # WeaponsSprite2D as a variable so it can be flipped.
 @export var weapons_sprite_2d : Sprite2D
-# Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
-var smoothed_mouse_pos : Vector2
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
 @export var self_damage : bool = true	# Should ultimately be likend to options. Might have to move it, Idk.
 # Flashing is when the player takes damage.
-var flashing_color : Color = Color.CHOCOLATE
-var flashing_time : float = 0.1
+@export var flashing_color : Color = Color.CHOCOLATE
+@export var flashing_time : float = 0.1
+# Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
+var smoothed_mouse_pos : Vector2
 
 ######################
 # Gameplay variables #

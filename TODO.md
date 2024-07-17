@@ -26,6 +26,10 @@ NOT DONE :
 - Blink?
 - Balancing.
 - Piercing shot (I think I'd need to move the queue_free in bullet.gd to the subclasses or smth).
+- Add inverted gravity mechanic.
+- Add water mechanic.
+- Achievements.
+- Death animations.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

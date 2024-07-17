@@ -47,9 +47,8 @@ func on_health_component_damaged(_node : Node, _damage_amount : float):
 	# This should stop (stun) the enemy when hit, but it doesn't work consistently.
 	# When hit again before the end of the stun, the enemy becomes impervious to stun. Seemingly
 	# only when hit during WanderState.
-	#print("character.velocity.x = 0 in on_health_component_damaged of HitState.")
+	print("character.velocity.x = 0 in on_health_component_damaged of HitState.")
 	character.velocity.x = 0
-	#next_state = # Not needed.
 	#print("hello")
 	# This is a bit weird, as it is only half of the code for the death (counting DeadState as here).
 	if health_component.health > 0:
@@ -61,6 +60,7 @@ func on_health_component_damaged(_node : Node, _damage_amount : float):
 		# Transition to WanderState, because it should cycle back to FollowState or AttackState anyway.
 		#next_state = wander_state
 		# Same as above. This solved the double stun -> impervious to stun in WanderState (line 182 of Notes.md).
+		# Used to change state when self is not the current_state.
 		interrupt_state.emit(wander_state)
 		#print("hello2")
 	else:

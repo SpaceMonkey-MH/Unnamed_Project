@@ -286,3 +286,7 @@
 	Okay, this shit is boring me. i'll try the shape-casting, and if it doesn't work, fuck it, I'll do the
 	overlapping areas.
 	Or, I could have a fragmentation thing, creating several other projectiles.
+	Or I could do a nova, progressively expanding and damaging (creating dictionaries of
+	[character_hit : point_hit]).
+	I changed the hitbox of the tilemap, it is now less realistic but should not cause head-bumping issues as
+	before (it did on the left side of the column).

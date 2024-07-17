@@ -36,7 +36,7 @@ func _physics_process(delta):
 		var target_position = global_position + vector_to_target
 		var query = PhysicsRayQueryParameters2D.create(global_position, target_position)
 		query.exclude = [self]
-		var result = space_state.intersect_ray(query)
+		var _result = space_state.intersect_ray(query)
 		#if result and not result.collider is TileMap:
 			#if nb_it >= 1:
 				#print("Ray-casting result: ", result.collider)

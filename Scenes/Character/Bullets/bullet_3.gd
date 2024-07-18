@@ -91,12 +91,27 @@ func area_of_effect(_collision_pos) -> void:
 	var hit_array : Array = []
 	# We iterate on the size of the aoe, to have the nova (expanding damaging area).
 	for size in range(1, aoe_size + 1):
-		print("size: ", size, "\n aoe_attack_damage: ", aoe_attack_damage / (
-									aoe_attack_damage / (aoe_size / size)))
+		# - Try this: 
+		# - ad = (aoe_ad / size) * (aoe_size / aoe_ad): (size = 1): (40 / 1) * (80 / 40) = 40 (actually, 80)
+		# and (size = 80): (40 / 80) * (80 / 40) = 1, this seems fine (nope)!
+		# - Or, ad = (aoe_ad / size) * (aoe_size / size): (size = 1): (40 / 1) * (80 / 1) = 3200,
+		# (size = 80): (40 / 80) * (80 / 80) = 0.5. This is not it.
+		# Nope.
+		#print("size: ", size, "\n aoe_attack_damage: ", aoe_attack_damage / (
+									#aoe_attack_damage / (aoe_size / size)))
+		# Maybe. Nope.
+		#print("size: ", size, "\n aoe_attack_damage: ", (aoe_attack_damage / size) * (
+			#aoe_size / aoe_attack_damage))
+		# Nope. Fuck it, see below.
+		#print("size: ", size, "\n aoe_attack_damage: ", (aoe_attack_damage / size) * (
+			#aoe_attack_damage / aoe_size))
+		#attack.attack_damage = aoe_attack_damage - size / (aoe_size / aoe_attack_damage)
+		#print(size, "\n", attack.attack_damage)
 		#print(hit_dictionary)
 		area_of_effect_zone.shape.radius = size
 		#print(area_of_effect_zone.shape.radius)
 		for area : Area2D in area_of_effect_2d.get_overlapping_areas():
+			print("area_of_effect_zone.shape.radius: ", area_of_effect_zone.shape.radius)
 			# Check if the area met is the hit box for AoE, so that it damages exactly once per attack.
 			if area is AOEHitBox:
 				var parent : CharacterClass = area.get_parent()
@@ -130,14 +145,31 @@ func area_of_effect(_collision_pos) -> void:
 						# If the child is a HealthComponent, meaning the damageable part of the character.
 						if child is HealthComponent:
 			#				print("bullet3: ", attack.attack_damage)
-							if size == 0:
-								attack.attack_damage = aoe_attack_damage
-							else:
-								# So, I need to have the following: when size is 1, ad must be aoe_ad,
-								# but when size is aoe_size, ad must be 1.
-								attack.attack_damage = aoe_attack_damage / (
-									aoe_attack_damage / (size / aoe_size))
-							print(size, "\n", attack.attack_damage)
+							#if size == 0:
+								#attack.attack_damage = aoe_attack_damage
+							#else:
+								## So, I need to have the following: when size is 1, ad must be aoe_ad,
+								## but when size is aoe_size, ad must be 1. I can't find it (see above),
+								## I'll do an ugly loop instead.
+								#attack.attack_damage = aoe_attack_damage / (
+									#aoe_attack_damage / (size / aoe_size))
+							## Ugly array and loop to compute the attack.attack_damage.
+							# Actually I don't need that.
+							#var array : Array = []
+							#for i in range(aoe_size + 1):
+								## aoe_attack_damage - i / (aoe_size / aoe_attack_damage)
+								## (i = 0) (we want 40): 40 - 0 / (80 / 40) = 40
+								## (i = 1) (we want something like 39.5): 40 - 1 / 2 = 39.5
+								## (i = 80 (we want 0): 40 - 80 / (80 / 40) = 0
+								## (aoe_size = 100, i = 1) (we want 39.6): 40 - 1 / (100 / 40) = 39.6
+								## (aoe_ad = 80, i = 1) (we want 79): 80 - 1 / (80 / 80) = 79
+								#array.append(aoe_attack_damage - )
+							# This is my beaucoup attempt at this, but this time it should work.
+							# So, I need to have the following: when size is 1, ad must be aoe_ad,
+							# but when size is aoe_size, ad must be 1. This works!
+							attack.attack_damage = aoe_attack_damage - size / (aoe_size / aoe_attack_damage)
+							# This works! Except for the actual AoE part ofc xd.
+							print("size: ", size, "\nattack.attack_damage: ", attack.attack_damage)
 							# We damage the child, thus the parent.
 							child.damage(attack)
 							# What I need is to get the point on the line from self to parent, that is at size

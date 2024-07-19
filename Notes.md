@@ -298,7 +298,7 @@
 		attack.attack_damage = aoe_attack_damage - size / (aoe_size / aoe_attack_damage)
 	Now, it is:
 		attack.attack_damage = aoe_attack_damage / (aoe_size / prog_index)
-	IMPORTANT FOR TOMORROW: What I'm trying to do, it to create the "matrix" damage. For that, I'm iterating
+	IMPORTANT FOR TOMORROW: What I'm trying to do, is to create the "matrix" damage. For that, I'm iterating
 	over aoe_size to create a new CollisionShape2D inside a new Area2D inside the AOEList Node, each time.
 	Then, I would iterate again, on the children of AOEList, to get overlapping bodies and then damaging them.
 	SHOULD work.

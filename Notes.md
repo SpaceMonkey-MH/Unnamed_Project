@@ -290,3 +290,15 @@
 	[character_hit : point_hit]).
 	I changed the hitbox of the tilemap, it is now less realistic but should not cause head-bumping issues as
 	before (it did on the left side of the column).
+# - __2024/07/19:__
+	It seems like I didn't need to have Area2D to get the overlapping, that could be done on bodies instead. Yay...
+	I'm sick of this shit, I'm gonna go with the successive overlapping areas to do the trick. If this doesn't work,
+	I don't know what I'm gonna do.
+	For the record, the correct formula for the damage was:
+		attack.attack_damage = aoe_attack_damage - size / (aoe_size / aoe_attack_damage)
+	Now, it is:
+		attack.attack_damage = aoe_attack_damage / (aoe_size / prog_index)
+	IMPORTANT FOR TOMORROW: What I'm trying to do, it to create the "matrix" damage. For that, I'm iterating
+	over aoe_size to create a new CollisionShape2D inside a new Area2D inside the AOEList Node, each time.
+	Then, I would iterate again, on the children of AOEList, to get overlapping bodies and then damaging them.
+	SHOULD work.

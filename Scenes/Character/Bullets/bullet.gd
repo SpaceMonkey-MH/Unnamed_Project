@@ -30,14 +30,14 @@ func _physics_process(_delta) -> void:
 				child.damage(attack)
 	#			print("hello")
 				explosion_fx()
-				area_of_effect(collision.get_position())
+				area_of_effect()
 				# Creates a crash because it hits twice so it can hit something queue_freed. <-Idk what this means.
 #				await get_tree().create_timer(0.001).timeout
 				queue_free()
 		if collider is TileMap:
 #			print("hello2")
 			explosion_fx()
-			area_of_effect(collision.get_position())
+			area_of_effect()
 			queue_free()
 
 
@@ -45,7 +45,7 @@ func explosion_fx() -> void:
 	pass
 
 
-func area_of_effect(_collision_pos):
+func area_of_effect() -> void:
 	pass
 
 #

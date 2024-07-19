@@ -44,9 +44,9 @@ func area_of_effect() -> void:
 	# Testing just the simple AoE, because the rest isn't working.
 	aoe_area_exported.monitoring = true
 	var overlapping_areas : Array[Area2D] = aoe_area_exported.get_overlapping_areas()
-	for overlapping_area : Area2D in overlapping_areas:
-		if overlapping_area is AOEHitBox:
-			print("overlapping_area.get_parent(): ", overlapping_area.get_parent())
+	#for overlapping_area : Area2D in overlapping_areas:
+		#if overlapping_area is AOEHitBox:
+			#print("overlapping_area.get_parent(): ", overlapping_area.get_parent())
 	
 	
 	# Create a new attack.
@@ -56,6 +56,8 @@ func area_of_effect() -> void:
 	#print("attack.attack_damage: ", attack.attack_damage)
 	# I separated the area-creating part from the damaging part for clarity and "wanting to try it" reasons.
 	for area : Area2D in aoe_list.get_children():
+		for child : CollisionShape2D in area.get_children():
+			print("collision_shape radius: ", child.shape.radius)
 		area.monitoring = true
 		## For some reason, that does not work.
 		#print("area.get_overlapping_bodies(): ", area.get_overlapping_bodies())	# Prints [].

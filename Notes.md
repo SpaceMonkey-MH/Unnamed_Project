@@ -302,3 +302,28 @@
 	over aoe_size to create a new CollisionShape2D inside a new Area2D inside the AOEList Node, each time.
 	Then, I would iterate again, on the children of AOEList, to get overlapping bodies and then damaging them.
 	SHOULD work.
+# - __2024/07/20:__
+	The player doesn't get queue_free() when out of screen because he doesn't have a VisibleOnScreenNotifier2D node
+	attached, unlike the enemies. This is fine for now, but death will have to be dealt with.
+	The Aoe finally works! has two issues though: 
+		- Only a part of the damage is applied (the outer circles),
+		and I fear it is because it only hit enemies which have their center inside the AoE.
+		- The damage label thingy doesn't correctly show the damage, as they are all grouped up.
+		Will commit nonetheless.
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5

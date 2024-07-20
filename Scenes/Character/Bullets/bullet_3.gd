@@ -3,9 +3,6 @@ extends Bullet
 
 # The older versions and their explanations can be found in old_bullet_3.gd.
 
-# The AOEList Node as a variable, so that children can be added to it.
-@export var aoe_list : Node
-@export var aoe_area_exported : Area2D
 # Whether or not the player can be damaged by the explosion.
 var self_damage : bool = true
 # The player as a variable, so we can get self_damage value from it. Should be replaced when options come out.
@@ -27,44 +24,42 @@ func _ready() -> void:
 		var aoe_collision_shape : CollisionShape2D = CollisionShape2D.new()
 		aoe_collision_shape.shape = CircleShape2D.new()
 		aoe_collision_shape.shape.radius = radius
-		#print("aoe_collision_shape.shape.radius: ", aoe_collision_shape.shape.radius)
 		aoe_area.add_child(aoe_collision_shape)
-		aoe_list.add_child(aoe_area)
-	#print("aoe_list children:", aoe_list.get_children())
-	#for child : Area2D in aoe_list.get_children():
-		#print("aoe_area children: ", child.get_children())
-		#print("aoe_collision_shape radius: ", child.get_children()[0].shape.radius)
+		add_child(aoe_area)
 
 
 # Procedure that handles the damage of the missile in an AoE.
 # As is, the enemy is hit twice: by the bullet itself, actually dealing 0 damage, and by the explosion.
-func area_of_effect() -> void:
-	
-	
-	# Testing just the simple AoE, because the rest isn't working.
-	aoe_area_exported.monitoring = true
-	var overlapping_areas : Array[Area2D] = aoe_area_exported.get_overlapping_areas()
-	#for overlapping_area : Area2D in overlapping_areas:
-		#if overlapping_area is AOEHitBox:
-			#print("overlapping_area.get_parent(): ", overlapping_area.get_parent())
-	
-	
+func area_of_effect() -> void:	
 	# Create a new attack.
 	var attack : Attack = Attack.new()
 	# With the AoE damage as damage. What I want, is for it to be aoe_ad / times_hit.
 	attack.attack_damage = aoe_attack_damage / (aoe_size / prog_index)
-	#print("attack.attack_damage: ", attack.attack_damage)
-	# I separated the area-creating part from the damaging part for clarity and "wanting to try it" reasons.
-	for area : Area2D in aoe_list.get_children():
-		for child : CollisionShape2D in area.get_children():
-			print("collision_shape radius: ", child.shape.radius)
-		area.monitoring = true
-		## For some reason, that does not work.
-		#print("area.get_overlapping_bodies(): ", area.get_overlapping_bodies())	# Prints [].
-		## But this does. Actually, it doesn't really.
-		#print("area.get_overlapping_areas(): ", area.get_overlapping_areas())
-		for overlapping_area : Area2D in area.get_overlapping_areas():
-			if overlapping_area is AOEHitBox:
-				print("overlapping_area.get_parent(): ", overlapping_area.get_parent())
-		
+	print("\n")
+	# I separated the area-creating part from the damaging part for clarity and "wanting to try it before" reasons.
+	for bullet_child : Node in get_children():
+		if bullet_child is Area2D:
+			bullet_child.monitoring = true
+			# Version with the overlapping areas calling get_overlapping_areas() and not bodies. Works.
+			# We get the overlapping areas of the current area.
+			for overlapping_area : Area2D in bullet_child.get_overlapping_areas():
+				if overlapping_area is AOEHitBox:
+					var character : CharacterClass = overlapping_area.get_parent()
+					if self_damage or not character is PlayerClass:
+						for character_child : Node in character.get_children():
+							if character_child is HealthComponent:
+								character_child.damage(attack)
+								print(attack.attack_damage)
+			## Get the overlapping bodies, and not the areas, because it is simpler that way.
+			#for overlapping_body : Node2D in bullet_child.get_overlapping_bodies():
+				## Check if is not the player, or if self_damage is activated.
+				#if self_damage or not overlapping_body is PlayerClass:
+					## Iterate over the children of the character (or tile map, but that doesn't really matter).
+					#for character_child : Node in overlapping_body.get_children():
+						## If it is the damageable part of the character.
+						#if character_child is HealthComponent:
+							## Damage it with the attack set up above.
+							#print(attack.attack_damage)
+							#character_child.damage(attack)
+							## Can't await timeout for some reason.
 

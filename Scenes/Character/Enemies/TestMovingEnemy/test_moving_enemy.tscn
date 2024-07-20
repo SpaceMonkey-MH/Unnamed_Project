@@ -213,6 +213,8 @@ script = ExtResource("9_vkggd")
 state_machine = NodePath("../CharacterMovementStateMachine")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(2, 2)
 
 [node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("attack_state")]
 script = ExtResource("12_1uuhp")

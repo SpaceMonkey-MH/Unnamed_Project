@@ -1459,23 +1459,27 @@ texture = ExtResource("4_vwdav")
 hframes = 4
 
 [node name="AttackDummy" parent="." instance=ExtResource("5_pn2ls")]
-position = Vector2(1210, 1025)
+position = Vector2(1364, 1030)
 
 [node name="AttackDummy4" parent="." instance=ExtResource("5_pn2ls")]
-position = Vector2(1101, 1023)
+position = Vector2(1323, 1030)
 
 [node name="AttackDummy2" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(236, 928)
 
 [node name="AttackDummy3" parent="." instance=ExtResource("5_pn2ls")]
-position = Vector2(1316, 1021)
+position = Vector2(1406, 1030)
 
 [node name="TestMovingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_vfolm")]
 position = Vector2(458, 957)
 player = NodePath("../Player")
 
 [node name="RayCastingTestCharacter" parent="." instance=ExtResource("7_0ow6q")]
-position = Vector2(1565, 943)
+position = Vector2(3546, 915)
 
 [node name="ShapeCastingTestCharacter" parent="." instance=ExtResource("8_6g7in")]
-position = Vector2(2620, 960)
+position = Vector2(3626, 901)
+
+[node name="AttackDummy5" parent="." instance=ExtResource("5_pn2ls")]
+position = Vector2(2203, 917)
+scale = Vector2(5, 5)

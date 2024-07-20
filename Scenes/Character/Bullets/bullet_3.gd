@@ -10,6 +10,8 @@ var player : PlayerClass
 # The index of progression of the for loop setting the AoE shapes. Also, the minimum value of the AoE size.
 # WARNING: If it is highier than aoe_size, the damage will not work as there will be no areas created.
 var prog_index : int = 10
+# The position of the tip of the missile.
+var area_pos : Vector2 = Vector2(20, 0)
 
 
 func _ready() -> void:
@@ -25,6 +27,8 @@ func _ready() -> void:
 		aoe_collision_shape.shape = CircleShape2D.new()
 		aoe_collision_shape.shape.radius = radius
 		aoe_area.add_child(aoe_collision_shape)
+		# Repositioning so that it is on the tip of the missile.
+		aoe_area.position = area_pos
 		add_child(aoe_area)
 
 

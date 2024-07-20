@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq653xirgnv8k"]
+[gd_scene load_steps=5 format=3 uid="uid://bq653xirgnv8k"]
 
 [ext_resource type="Script" path="res://Scenes/UI/ui.gd" id="1_46hi4"]
 [ext_resource type="PackedScene" uid="uid://c65hlaxsl81uq" path="res://Scenes/UI/health_changed_manager.tscn" id="2_163mr"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_bc573"]
+action = &"pause"
+
+[sub_resource type="Shortcut" id="Shortcut_6xb6l"]
+events = [SubResource("InputEventAction_bc573")]
+
 [node name="HUD" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_46hi4")
 
 [node name="QuitButton" type="Button" parent="."]
@@ -17,4 +24,11 @@ text = "Quit Game"
 
 [node name="HealthChangedManager" parent="." instance=ExtResource("2_163mr")]
 
+[node name="PauseButton" type="Button" parent="."]
+offset_right = 68.0
+offset_bottom = 38.0
+shortcut = SubResource("Shortcut_6xb6l")
+text = "Pause"
+
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

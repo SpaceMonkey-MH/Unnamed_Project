@@ -13,3 +13,7 @@ func _process(_delta):
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_pause_button_pressed():
+	get_tree().paused = not get_tree().paused

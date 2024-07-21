@@ -310,20 +310,7 @@
 		and I fear it is because it only hit enemies which have their center inside the AoE.
 		- The damage label thingy doesn't correctly show the damage, as they are all grouped up.
 		Will commit nonetheless.
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
-5
+# - __2024/07/21:__
+	Fixed the explosion yesterday, but the label was still fucked. Fixed that.
+	This works, but the issue might be that it doesn't display heals and damages on the same frame, might have to
+	separate the two (like, have two dictionaries?). Will do that later.

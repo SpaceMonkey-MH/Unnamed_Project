@@ -21,14 +21,21 @@ func _ready() -> void:
 	self_damage = player.self_damage
 	# The goal here is to create aoe_size / prog_index concentric CollisionShape2D inside the Area2D.
 	# Actually, the goal is gonna be to create one Area2D per CollisionShape2D, all inside a Node.
+	# We iterate over the maximum size of the AoE, in order to set the radius of the CollisionShape2D.
 	for radius : int in range(prog_index, aoe_size + 1, prog_index):
+		# New variable for the area.
 		var aoe_area : Area2D = Area2D.new()
+		# And for the cs.
 		var aoe_collision_shape : CollisionShape2D = CollisionShape2D.new()
+		# Set a circle as a shape of the cs.
 		aoe_collision_shape.shape = CircleShape2D.new()
+		# Set the radius of the circle to the iteration variable.
 		aoe_collision_shape.shape.radius = radius
+		# Adding the cs as a child of the area.
 		aoe_area.add_child(aoe_collision_shape)
 		# Repositioning so that it is on the tip of the missile.
 		aoe_area.position = area_pos
+		# Adding the area as a child of the main node, so that it "appears" on the missile.
 		add_child(aoe_area)
 
 
@@ -44,26 +51,16 @@ func area_of_effect() -> void:
 	for bullet_child : Node in get_children():
 		if bullet_child is Area2D:
 			bullet_child.monitoring = true
-			# Version with the overlapping areas calling get_overlapping_areas() and not bodies. Works.
-			# We get the overlapping areas of the current area.
-			for overlapping_area : Area2D in bullet_child.get_overlapping_areas():
-				if overlapping_area is AOEHitBox:
-					var character : CharacterClass = overlapping_area.get_parent()
-					if self_damage or not character is PlayerClass:
-						for character_child : Node in character.get_children():
-							if character_child is HealthComponent:
-								character_child.damage(attack)
-								print(attack.attack_damage)
-			## Get the overlapping bodies, and not the areas, because it is simpler that way.
-			#for overlapping_body : Node2D in bullet_child.get_overlapping_bodies():
-				## Check if is not the player, or if self_damage is activated.
-				#if self_damage or not overlapping_body is PlayerClass:
-					## Iterate over the children of the character (or tile map, but that doesn't really matter).
-					#for character_child : Node in overlapping_body.get_children():
-						## If it is the damageable part of the character.
-						#if character_child is HealthComponent:
-							## Damage it with the attack set up above.
-							#print(attack.attack_damage)
-							#character_child.damage(attack)
-							## Can't await timeout for some reason.
+			# Get the overlapping bodies, and not the areas, because it is simpler that way.
+			# This seems to be working.
+			for overlapping_body : Node2D in bullet_child.get_overlapping_bodies():
+				# Check if is not the player, or if self_damage is activated.
+				if self_damage or not overlapping_body is PlayerClass:
+					# Iterate over the children of the character (or tile map, but that doesn't really matter).
+					for character_child : Node in overlapping_body.get_children():
+						# If it is the damageable part of the character.
+						if character_child is HealthComponent:
+							# Damage it with the attack set up above.
+							character_child.damage(attack)
+							# Can't await timeout for some reason.
 

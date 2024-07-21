@@ -1,7 +1,6 @@
 NOT DONE :
 
 - Comment the code.
-- Make the explosion of the rockets damage in a matrix.
 - Finish the code in hit_state.
 - Finish the code for test_moving_enemy, should be a state machine and all the tintouin.
 - To do when the options are set up: try to move the self_damage assign in bullet_3.gd to _ready() instead
@@ -30,6 +29,7 @@ NOT DONE :
 - Add water mechanic.
 - Achievements.
 - Death animations.
+- Fix the damage label when heal and damage occur at the same time.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -57,3 +57,5 @@ DONE :
 - Solve the issue of the melee attack (lasting longer than it should). // DONE.
 - Complete the AttackState script (make a proper attack). //DONE.
 - Check what happens with the attack of the enemy (weird timings). // DONE.
+- Make the explosion of the rockets damage in a matrix. // DONE (finally).
+- Fix the damage label when several damages occur at the same time. // DONE.

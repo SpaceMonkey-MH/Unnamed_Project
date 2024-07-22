@@ -19,20 +19,30 @@ signal damaged(node : Node, damage_taken : float)
 		return health
 	set(value):
 		# Goes (for now) to health_changed_manager.
-		SignalBus.emit_signal("health_changed", get_parent(), value - health)
 		if value > character.max_health:
+			#SignalBus.emit_signal("health_changed", get_parent(),
+				#min(value - health, character.max_health - health))
 			health = character.max_health
 		else:
+			SignalBus.emit_signal("health_changed", get_parent(), value - health)
+			print("Hello from health setter in health_component.")
 			health = value
 #		print("Set health in HealthComponent in ", get_parent(), " to: ", health)
+
+# Debug variable, used to execute code every second.
+var t : float = 0.0
+
 
 ## Called when the node enters the scene tree for the first time.
 #func _ready():
 #	health = max_health
 
 
-#func _process(_delta) -> void:
-	#print("%s has %s health left!" % [get_parent(), health])
+func _process(delta) -> void:
+	t += delta
+	if t >= 1:
+		health += 10
+		t = 0.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

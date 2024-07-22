@@ -8,8 +8,10 @@ extends Control
 # The color of the label when the amount changed is positive (heal).
 @export var heal_color : Color = Color.DARK_GREEN
 
-# The amount of health changed since the last frame for each node concerned.
-var health_changed_d : Dictionary = {}
+# The amount of heal since the last frame for each node concerned.
+var heal_d : Dictionary = {}
+# The amount of damage since the last frame for each node concerned.
+var damage_d : Dictionary = {}
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,20 +23,28 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:
 	# For each entry in the dictionary.
-	for node_id in health_changed_d.keys():
+	for node_id in heal_d.keys():
 		# Convert the key to a proper id.
-		node_id = int(node_id)
+		#node_id = int(node_id)
 		# Call update_label() on the node and value of the dictionary entry. 
-		update_label(instance_from_id(node_id), health_changed_d[node_id])
-	# We reset the dictionary to empty.
-	health_changed_d.clear()
+		update_label(instance_from_id(node_id), heal_d[node_id])
+	# Same but for damage.
+	# For each entry in the dictionary.
+	for node_id in damage_d.keys():
+		# Convert the key to a proper id.
+		#node_id = int(node_id)
+		# Call update_label() on the node and value of the dictionary entry. 
+		update_label(instance_from_id(node_id), damage_d[node_id])
+	# We reset the dictionaries to empty.
+	heal_d.clear()
+	damage_d.clear()
 
 
 # Procedure that handles the update of the health changed label.
 # The goal here is to aggregate the damage labels into one, following the changes on the explosion,
 # with the concentric overlapping areas, that made several damages at the same time.
 # This works, but the issue might be that it doesn't display heals and damages on the same frame, might have to
-# separate the two (like, have two dictionaries?).
+# separate the two (like, have two dictionaries?). Maybe it is not needed, but I'll do it nonetheless.
 func update_label(node : Node, amount_changed : float) -> void:
 	# Make it so that there isn't a floating 0 upon rocket explosion.
 	if amount_changed == 0:
@@ -58,10 +68,19 @@ func update_label(node : Node, amount_changed : float) -> void:
 func on_signal_health_changed(node : Node, amount_changed : float) -> void:
 	# Get the id of the node.
 	var node_id : int = node.get_instance_id()
-	# Add the value of the changed health to the value stored in the dictionary.
-	if node_id in health_changed_d:
-		health_changed_d[node_id] += amount_changed
-	# Or create a new entry if the key doesn't exist (else, it crashes).
+	if amount_changed > 0:
+		# Add the value of the changed health to the value stored in the dictionary.
+		if node_id in heal_d:
+			heal_d[node_id] += amount_changed
+		# Or create a new entry if the key doesn't exist (else, it crashes).
+		else:
+			heal_d[node_id] = amount_changed
+	# Same for damage.
 	else:
-		health_changed_d[node_id] = amount_changed
+		# Add the value of the changed health to the value stored in the dictionary.
+		if node_id in damage_d:
+			damage_d[node_id] += amount_changed
+		# Or create a new entry if the key doesn't exist (else, it crashes).
+		else:
+			damage_d[node_id] = amount_changed
 

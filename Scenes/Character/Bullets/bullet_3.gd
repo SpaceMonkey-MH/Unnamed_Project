@@ -46,7 +46,6 @@ func area_of_effect() -> void:
 	var attack : Attack = Attack.new()
 	# With the AoE damage as damage. What I want, is for it to be aoe_ad / times_hit.
 	attack.attack_damage = aoe_attack_damage / (aoe_size / prog_index)
-	print("\n")
 	# I separated the area-creating part from the damaging part for clarity and "wanting to try it before" reasons.
 	for bullet_child : Node in get_children():
 		if bullet_child is Area2D:

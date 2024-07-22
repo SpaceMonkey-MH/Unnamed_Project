@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.gd" id="1_cmmdb"]
 [ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_16f2o"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_kyko0"]
+[ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="2_mhakd"]
 [ext_resource type="Texture2D" uid="uid://cfkf6ths8tyv3" path="res://Assets/Sprites/Player/Player_V1_40p_pink.png" id="3_m4hrd"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="3_v7f25"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/wander_state.gd" id="4_0ysqk"]
@@ -119,9 +120,6 @@ _data = {
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1hkq0"]
 graph_offset = Vector2(4, 11)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f7sae"]
-size = Vector2(40, 40)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltm7h"]
 radius = 100.0
 
@@ -135,6 +133,8 @@ animation_tree = NodePath("AnimationTree")
 attack_hit_box = NodePath("MeleeWeapon/AttackHitBox")
 hit_box = NodePath("HitBox")
 
+[node name="HitBox" parent="." instance=ExtResource("2_mhakd")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_m4hrd")
 
@@ -146,9 +146,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_1hkq0")
 anim_player = NodePath("../AnimationPlayer")
-
-[node name="HitBox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_f7sae")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_kyko0")]
 character = NodePath("..")

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
 [ext_resource type="Texture2D" uid="uid://d1wlnwybx6ukd" path="res://Assets/Sprites/Player/Air_Jump/Player_Landing_Sheet_V3_6s_70p.png" id="2_kx3pl"]
+[ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="2_sm5m6"]
 [ext_resource type="Texture2D" uid="uid://b7oymg1jxabfp" path="res://Assets/Sprites/Player/Landing/Player_Landing_Sheet_V4Bis_6s_70p.png" id="2_v5avg"]
 [ext_resource type="Texture2D" uid="uid://u4hwuestn0bk" path="res://Assets/Sprites/Player/Run/Player_Run_Sheet_V1_4s_45p.png" id="2_xbbwc"]
 [ext_resource type="Texture2D" uid="uid://de3bv7571svru" path="res://Assets/Sprites/Player/Player_V1_40p_green.png" id="2_xw5x4"]
@@ -33,9 +34,6 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
 [ext_resource type="Script" path="res://Scenes/Character/aoe_hit_box.gd" id="33_qq2yg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w47ok"]
-size = Vector2(45, 45)
 
 [sub_resource type="Animation" id="Animation_0obfs"]
 length = 0.001
@@ -475,12 +473,11 @@ body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
 hit_box = NodePath("HitBox")
 
+[node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
+
 [node name="BodySprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_j5og1")
 hframes = 4
-
-[node name="HitBox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_w47ok")
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

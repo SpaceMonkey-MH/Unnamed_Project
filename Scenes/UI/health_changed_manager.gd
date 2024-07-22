@@ -59,7 +59,15 @@ func update_label(node : Node, amount_changed : float) -> void:
 	# Or red if it is a damage.
 	else:
 		label_instance.modulate = damage_color
-	
+	# Randomizing the spawn position to limit overlap. Values to be balanced.
+	#label_instance.position.x = randi_range(-12, 12)
+	#print("Node in update_label in health_changed_manager.gd: ", node)
+	# Still randomizing the spawn position to avoid overlap, but using the size of the node instead of magics.
+	for child : Node in node.get_children():
+		if child is HitBoxClass:
+			# To prevent a crash if it is a circle or other, to be completed later if needed.
+			if child.shape is RectangleShape2D:
+				label_instance.position.x = randi_range(-child.shape.size.x / 4, child.shape.size.x / 4)
 	node.add_child(label_instance)
 
 

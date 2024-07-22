@@ -25,7 +25,7 @@ signal damaged(node : Node, damage_taken : float)
 			health = character.max_health
 		else:
 			SignalBus.emit_signal("health_changed", get_parent(), value - health)
-			print("Hello from health setter in health_component.")
+			#print("Hello from health setter in health_component.")
 			health = value
 #		print("Set health in HealthComponent in ", get_parent(), " to: ", health)
 

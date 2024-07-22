@@ -4,7 +4,7 @@ extends CharacterBody2D
 # Base class for the characters, that is to say the player and the enemies.
 
 # HitBox as a variable, so that it can be disabled.
-@export var hit_box : CollisionShape2D
+@export var hit_box : HitBoxClass
 # The maximum health of the character.
 @export var max_health : float = 100.0
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just

@@ -29,7 +29,8 @@ NOT DONE :
 - Add water mechanic.
 - Achievements.
 - Death animations.
-- Fix the damage label when heal and damage occur at the same time.
+- Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy shapes
+	are added.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -59,3 +60,5 @@ DONE :
 - Check what happens with the attack of the enemy (weird timings). // DONE.
 - Make the explosion of the rockets damage in a matrix. // DONE (finally).
 - Fix the damage label when several damages occur at the same time. // DONE.
+- Fix the random crash when an enemy dies. // DONE.
+- Fix the damage label when heal and damage occur at the same time. // DONE.

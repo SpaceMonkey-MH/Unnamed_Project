@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://deaq0nigyrnxf"]
+
+[ext_resource type="Script" path="res://Scenes/Character/hit_box.gd" id="1_5ip7t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmp6b"]
+size = Vector2(40, 40)
+
+[node name="HitBox" type="CollisionShape2D"]
+shape = SubResource("RectangleShape2D_pmp6b")
+script = ExtResource("1_5ip7t")

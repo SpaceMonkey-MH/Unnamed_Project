@@ -3,10 +3,8 @@
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.gd" id="1_x5k5i"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_1oxxk"]
 [ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="2_assgn"]
+[ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="3_l1p6l"]
 [ext_resource type="Script" path="res://Scenes/Character/aoe_hit_box.gd" id="4_we0yj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmp6b"]
-size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rca0a"]
 size = Vector2(40, 40)
@@ -19,11 +17,10 @@ script = ExtResource("1_x5k5i")
 sprite_2d = NodePath("Sprite2D")
 hit_box = NodePath("HitBox")
 
+[node name="HitBox" parent="." instance=ExtResource("3_l1p6l")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_assgn")
-
-[node name="HitBox" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_pmp6b")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_1oxxk")]
 character = NodePath("..")

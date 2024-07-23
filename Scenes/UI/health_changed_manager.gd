@@ -46,6 +46,9 @@ func _process(_delta) -> void:
 # This works, but the issue might be that it doesn't display heals and damages on the same frame, might have to
 # separate the two (like, have two dictionaries?). Maybe it is not needed, but I'll do it nonetheless.
 func update_label(node : Node, amount_changed : float) -> void:
+	# Trying to avoid crash.
+	if not node:
+		return
 	# Make it so that there isn't a floating 0 upon rocket explosion.
 	if amount_changed == 0:
 		return

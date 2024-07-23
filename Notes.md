@@ -129,7 +129,7 @@
 		issue.
 
 ## - __2024/07/06:__
-	Changing the map so that the tupid enemies don't fall off of it.
+	Changing the map so that the stupid enemies don't fall off of it.
 	Changed the viewport and all the shit (Changed the parameters of display, from a 960 * 540 Viewport to
 	1920 * 1080, from windowed to fullscreen, stretch mode canvas_item and aspect expand, and from canvas texture
 	filter linear to nearest. Basically, the window is bigger, the pixel art is rendered better, and the game is

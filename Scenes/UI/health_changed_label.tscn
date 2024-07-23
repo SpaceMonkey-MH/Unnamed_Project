@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://Scenes/UI/health_changed_label.gd" id="1_5l8jl"]
 
 [node name="HealthChangedLabel" type="Label"]
-anchors_preset = -1
 grow_horizontal = 2
 grow_vertical = 2
 text = "1000"

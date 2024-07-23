@@ -37,6 +37,7 @@ func _ready() -> void:
 		aoe_area.position = area_pos
 		# Adding the area as a child of the main node, so that it "appears" on the missile.
 		add_child(aoe_area)
+	assert(get_child_count() >= floor(aoe_size / prog_index))
 
 
 # Procedure that handles the damage of the missile in an AoE.

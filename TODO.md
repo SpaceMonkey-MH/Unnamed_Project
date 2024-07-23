@@ -31,6 +31,7 @@ NOT DONE :
 - Death animations.
 - Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy shapes
 	are added.
+- Decide what weapons there will be.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

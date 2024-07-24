@@ -255,6 +255,7 @@
 	I need help.
 	Alternative solution: have various damaging circles. I don't think it solves it.
 	Solution: Ray-casting? Maybe this could replace the follow_range shit as well. Idk.
+
 ## - __2024/07/16:__
 	Ray-casting. Idk how many rays to cast, but that's okay. However, I need to make sure that the targets aren't
 	hit multiple times. I'm thinking about a list of already hit targets.
@@ -272,7 +273,8 @@
 	to the exception list. I'll keep both just in case.
 	Or, or, or, I could leave the ray-casting as is, without evading dupplicate damage, and thus allowing for
 	more damage close, less damage far, which is what I wanted from the beginning. Would require balancing though.
-# - __2024/07/17:__
+
+## - __2024/07/17:__
 	Water? Inverted gravity?
 	Achievements? Will be hard.
 	I was thinking about the way the levels will work, and maybe I could have one level per weapon other that the
@@ -290,7 +292,8 @@
 	[character_hit : point_hit]).
 	I changed the hitbox of the tilemap, it is now less realistic but should not cause head-bumping issues as
 	before (it did on the left side of the column).
-# - __2024/07/19:__
+
+## - __2024/07/19:__
 	It seems like I didn't need to have Area2D to get the overlapping, that could be done on bodies instead. Yay...
 	I'm sick of this shit, I'm gonna go with the successive overlapping areas to do the trick. If this doesn't work,
 	I don't know what I'm gonna do.
@@ -302,7 +305,8 @@
 	over aoe_size to create a new CollisionShape2D inside a new Area2D inside the AOEList Node, each time.
 	Then, I would iterate again, on the children of AOEList, to get overlapping bodies and then damaging them.
 	SHOULD work.
-# - __2024/07/20:__
+
+## - __2024/07/20:__
 	The player doesn't get queue_free() when out of screen because he doesn't have a VisibleOnScreenNotifier2D node
 	attached, unlike the enemies. This is fine for now, but death will have to be dealt with.
 	The Aoe finally works! has two issues though: 
@@ -310,7 +314,12 @@
 		and I fear it is because it only hit enemies which have their center inside the AoE.
 		- The damage label thingy doesn't correctly show the damage, as they are all grouped up.
 		Will commit nonetheless.
-# - __2024/07/21:__
+
+## - __2024/07/21:__
 	Fixed the explosion yesterday, but the label was still fucked. Fixed that.
 	This works, but the issue might be that it doesn't display heals and damages on the same frame, might have to
 	separate the two (like, have two dictionaries?). Will do that later.
+
+## - __2024/07/24:__
+	There is something weird with the way the input events are handled in the weapon scripts. I don't remember how
+	it works, will have to go down on that.

@@ -32,6 +32,8 @@ NOT DONE :
 - Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy shapes
 	are added.
 - Decide what weapons there will be.
+- Have "allumer le feu" when setting something on fire as an option.
+- Make it so you can't reload by switching weapons.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

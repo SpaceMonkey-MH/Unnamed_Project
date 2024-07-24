@@ -33,7 +33,6 @@ NOT DONE :
 	are added.
 - Decide what weapons there will be.
 - Have "allumer le feu" when setting something on fire as an option.
-- Make it so you can't reload by switching weapons.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -65,3 +64,4 @@ DONE :
 - Fix the damage label when several damages occur at the same time. // DONE.
 - Fix the random crash when an enemy dies. // DONE.
 - Fix the damage label when heal and damage occur at the same time. // DONE.
+- Make it so you can't reload by switching weapons. // DONE.

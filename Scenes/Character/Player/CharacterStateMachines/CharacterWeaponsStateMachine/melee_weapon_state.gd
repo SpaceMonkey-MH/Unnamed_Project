@@ -7,11 +7,11 @@ class_name MeleeWeaponState
 @export var previous_weapon_state : Weapon8
 @export var timer : Timer
 @export var attack_damage = 50
-@export var wait_time : float = 0.2
+@export var reload_time : float = 0.2
 
 
 func _ready():
-	timer.wait_time = wait_time
+	timer.wait_time = reload_time
 
 
 #func state_process(delta):

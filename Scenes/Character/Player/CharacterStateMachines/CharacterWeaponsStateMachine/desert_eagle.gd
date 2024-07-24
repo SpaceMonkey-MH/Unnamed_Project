@@ -8,24 +8,30 @@ class_name DesertEagleState
 @export var previous_weapon_state : MeleeWeaponState
 @export var attack_damage : float = 20
 @export var speed_factor : float = 10
-
-var wait_time : float = 0.8
+@export var reload_time : float = 0.8
 
 func _ready():
-	timer.wait_time = wait_time
+	timer.wait_time = reload_time
 
 func state_process(_delta):
-	if Input.is_action_just_pressed("fire") and can_fire:
-		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_1_scene,
-		attack_damage, speed_factor)
-		can_fire = false
-		timer.start()
+	# Moved it in state input becasue it is better suited for this purpose.
+	#if Input.is_action_just_pressed("fire") and can_fire:
+		#weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_1_scene,
+		#attack_damage, speed_factor)
+		#can_fire = false
+		#timer.start()
+		pass
 
 func state_input(event : InputEvent):
 	if event.is_action_pressed("next_weapon"):
 		next_state = next_weapon_state
 	if event.is_action_pressed("previous_weapon"):
 		next_state = previous_weapon_state
+	if event.is_action_pressed("fire") and can_fire:
+		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_1_scene,
+		attack_damage, speed_factor)
+		can_fire = false
+		timer.start()
 
 #
 #func weapon_fire(spawn_pos : Vector2, target_pos : Vector2):

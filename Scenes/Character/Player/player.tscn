@@ -572,6 +572,7 @@ timer = NodePath("Weapon1CoolDown")
 bullet_1_scene = ExtResource("20_fgewv")
 next_weapon_state = NodePath("../Weapon2")
 previous_weapon_state = NodePath("../Melee")
+reload_time = 0.2
 
 [node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/DesertEagle"]
 one_shot = true
@@ -582,6 +583,7 @@ timer = NodePath("Weapon2CoolDown")
 next_weapon_state = NodePath("../Weapon3")
 previous_weapon_state = NodePath("../DesertEagle")
 bullet_2_scene = ExtResource("20_fgewv")
+reload_time = 0.05
 
 [node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
 one_shot = true
@@ -592,6 +594,7 @@ reload_timer = NodePath("Weapon3CoolDown")
 next_weapon_state = NodePath("../Weapon4")
 previous_weapon_state = NodePath("../Weapon2")
 bullet_3_scene = ExtResource("25_hx2jg")
+reload_time = 10.0
 
 [node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon3"]
 one_shot = true

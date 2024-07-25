@@ -323,3 +323,17 @@
 ## - __2024/07/24:__
 	There is something weird with the way the input events are handled in the weapon scripts. I don't remember how
 	it works, will have to go down on that.
+
+## - __2024/07/25:__
+	When a character dies, it falls through the ground. But, because the character has to be behind the grass,
+	it is also behind the ground (else, it would require a second tile map or something; actually, super easy,
+	barely an inconvenience).
+	I was going for changing the Z-order of the characters at runtime when they die, but it is easier to change
+	that of the tile map, as it can be set for each individual tile, therefore can be low for the tile map, and
+	high for the grass tiles. Changed the Z-index of the player, don't know why it was at -1, might cause issues
+	in the future. Actually, it is weird that the character falls behind the grass but in front of the ground...
+	Should also work for the labels.
+	Idk. I think I should do both, it doesn't cost much.
+	Wait, no, now a part of the player can be seen below the grass during landing animation. I'm gonna go with the
+	first solution.
+	Still feels kinda weird, the character jumps in front of the grass, but meh.

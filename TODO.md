@@ -21,7 +21,6 @@ NOT DONE :
 - Make a story.
 - Make it so that the player can't shoot after death. Or just handle after-death.
 - Put self_damage in options.
-- Solve the issue of the Z index when dying (need to be seen through the ground).
 - Blink?
 - Balancing.
 - Piercing shot (I think I'd need to move the queue_free in bullet.gd to the subclasses or smth).
@@ -65,3 +64,4 @@ DONE :
 - Fix the random crash when an enemy dies. // DONE.
 - Fix the damage label when heal and damage occur at the same time. // DONE.
 - Make it so you can't reload by switching weapons. // DONE.
+- Solve the issue of the Z index when dying (need to be seen through the ground). // DONE.

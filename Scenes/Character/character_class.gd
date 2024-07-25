@@ -59,11 +59,14 @@ func death() -> void:
 #	# This is temporary, it is used to simulate the animation.
 #	# Also, should allow the damage label to exist on death.
 #	# Actually, I have a better idea, let's put it in another function, and withdraw it when needed.
+	# Actu-actually, it is useless now (see below), keeping just in case.
 #	await wait()
 #	# Calling the animation anyway.
 #	death_animation()
-#	# Freeing the queue (== death).
+#	# Freeing the queue (== death). It is better if it is after the character has exited the screen.
 #	queue_free()
+	# Changing the Z-index so that the character is visible when falling through the ground.
+	z_index += 2
 
 
 func deactivate_node() -> void:

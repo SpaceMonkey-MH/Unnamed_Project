@@ -41,7 +41,7 @@ var t : float = 0.0
 func _process(delta) -> void:
 	t += delta
 	if t >= 1:
-		health += 10
+		health += 1
 		t = 0.0
 
 

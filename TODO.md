@@ -34,6 +34,7 @@ NOT DONE :
 - Have "allumer le feu" when setting something on fire as an option.
 - Add powers, such as crits or smth.
 - Add indicator of reload time left.
+- Bosses (levels).
 
 ------------------------------------------------------------------------------------------------------
 DONE :

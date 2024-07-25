@@ -4,13 +4,13 @@ class_name MeleeWeaponState
 
 @export var melee_weapon : Area2D
 @export var next_weapon_state : DesertEagleState
-@export var previous_weapon_state : Weapon8
+@export var previous_weapon_state : RailgunState
 @export var timer : Timer
 @export var attack_damage = 50
 @export var reload_time : float = 0.2
 
 
-func _ready():
+func _ready() -> void:
 	timer.wait_time = reload_time
 
 
@@ -26,7 +26,7 @@ func _ready():
 #		print("firing")	# Will print continuesly during the hold.
 #		print(player.get_global_mouse_position())
 
-func state_input(event : InputEvent):
+func state_input(event : InputEvent) -> void:
 	if event.is_action_pressed("next_weapon"):
 		next_state = next_weapon_state
 	if event.is_action_pressed("previous_weapon"):
@@ -52,21 +52,22 @@ func state_input(event : InputEvent):
 
 
 # Called when the current_state becomes this state.
-func on_enter():
+func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = false
 
 
 # Called when the next_state becomes another.
-func on_exit():
+func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = true
 
 
 # Called by the timeout of the cooldown timer.
-func _on_melee_weapon_cool_down_timeout():
+func _on_melee_weapon_cool_down_timeout() -> void:
 	#print("melee_weapon_cool_down_timeout")
 	# Set can_fire back to true so that the player can fire again.
 	can_fire = true
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	#melee_weapon.monitoring = false
+

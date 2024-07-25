@@ -558,7 +558,7 @@ current_state = NodePath("Melee")
 script = ExtResource("19_lk4n7")
 melee_weapon = NodePath("../../MeleeWeapon")
 next_weapon_state = NodePath("../DesertEagle")
-previous_weapon_state = NodePath("../Weapon8")
+previous_weapon_state = NodePath("../Railgun")
 timer = NodePath("MeleeWeaponCoolDown")
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 
@@ -569,59 +569,59 @@ one_shot = true
 script = ExtResource("21_o8ar2")
 timer = NodePath("Weapon1CoolDown")
 bullet_1_scene = ExtResource("20_fgewv")
-next_weapon_state = NodePath("../Weapon2")
+next_weapon_state = NodePath("../Shotgun")
 previous_weapon_state = NodePath("../Melee")
 reload_time = 0.2
 
 [node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/DesertEagle"]
 one_shot = true
 
-[node name="Weapon2" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
-script = ExtResource("19_wela8")
-timer = NodePath("Weapon2CoolDown")
-next_weapon_state = NodePath("../Weapon3")
+[node name="Shotgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+script = ExtResource("21_uxfjm")
+next_weapon_state = NodePath("../RocketLauncher")
 previous_weapon_state = NodePath("../DesertEagle")
-bullet_2_scene = ExtResource("20_fgewv")
-reload_time = 0.05
 
-[node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon2"]
-one_shot = true
-
-[node name="Weapon3" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
+[node name="RocketLauncher" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("20_rfo25")
 timer = NodePath("Weapon3CoolDown")
-next_weapon_state = NodePath("../Weapon4")
-previous_weapon_state = NodePath("../Weapon2")
+next_weapon_state = NodePath("../FireSpitter")
+previous_weapon_state = NodePath("../Shotgun")
 bullet_3_scene = ExtResource("25_hx2jg")
 reload_time = 10.0
 
-[node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Weapon3"]
+[node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/RocketLauncher"]
 one_shot = true
 
-[node name="Weapon4" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
-script = ExtResource("21_uxfjm")
-next_weapon_state = NodePath("../Weapon5")
-previous_weapon_state = NodePath("../Weapon3")
-
-[node name="Weapon5" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="FireSpitter" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("22_umggx")
-next_weapon_state = NodePath("../Weapon6")
-previous_weapon_state = NodePath("../Weapon4")
+next_weapon_state = NodePath("../MachineGun")
+previous_weapon_state = NodePath("../RocketLauncher")
 
-[node name="Weapon6" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="MachineGun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
+script = ExtResource("19_wela8")
+timer = NodePath("Weapon2CoolDown")
+next_weapon_state = NodePath("../GrenadeLauncher")
+previous_weapon_state = NodePath("../FireSpitter")
+bullet_2_scene = ExtResource("20_fgewv")
+reload_time = 0.05
+
+[node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/MachineGun"]
+one_shot = true
+
+[node name="GrenadeLauncher" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("23_lvog5")
-next_weapon_state = NodePath("../Weapon7")
-previous_weapon_state = NodePath("../Weapon5")
+next_weapon_state = NodePath("../FlameThrower")
+previous_weapon_state = NodePath("../MachineGun")
 
-[node name="Weapon7" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="FlameThrower" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("24_spe2t")
-next_weapon_state = NodePath("../Weapon8")
-previous_weapon_state = NodePath("../Weapon6")
+next_weapon_state = NodePath("../Railgun")
+previous_weapon_state = NodePath("../GrenadeLauncher")
 
-[node name="Weapon8" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="Railgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("25_6vkpp")
 next_weapon_state = NodePath("../Melee")
-previous_weapon_state = NodePath("../Weapon7")
+previous_weapon_state = NodePath("../FlameThrower")
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 z_index = 2
@@ -655,7 +655,7 @@ shape = SubResource("RectangleShape2D_hmk86")
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/Weapon1CoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_weapon_1_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon2/Weapon2CoolDown" to="CharacterWeaponsStateMachine/Weapon2" method="_on_weapon_2_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/Weapon3/Weapon3CoolDown" to="CharacterWeaponsStateMachine/Weapon3" method="_on_weapon_3_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/Weapon3CoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/Weapon2CoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_weapon_2_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

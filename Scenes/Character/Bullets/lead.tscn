@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjprwo4qxqarf"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/lead.gd" id="1_chqb1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ki541"]
+radius = 5.0
+
+[node name="Lead" type="CharacterBody2D"]
+script = ExtResource("1_chqb1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(0, 0, 0, 1)
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ki541")

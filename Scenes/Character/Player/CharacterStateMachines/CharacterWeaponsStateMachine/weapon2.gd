@@ -1,9 +1,9 @@
-class_name Weapon2
+class_name MachineGunState
 extends WeaponsState
 
 @export var timer : Timer
-@export var next_weapon_state : Weapon3
-@export var previous_weapon_state : DesertEagleState
+@export var next_weapon_state : GrenadeLauncherState
+@export var previous_weapon_state : FireSpitterState
 @export var bullet_2_scene : PackedScene
 @export var attack_damage : float = 10
 @export var speed_factor : float = 12
@@ -38,13 +38,13 @@ func state_input(event : InputEvent) -> void:
 
 
 # Called when the current_state becomes this state.
-func on_enter():
+func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = false
 
 
 # Called when the next_state becomes another.
-func on_exit():
+func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = true
 

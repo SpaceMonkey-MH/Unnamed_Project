@@ -1,9 +1,9 @@
-class_name Weapon3
+class_name RocketLauncherState
 extends WeaponsState
 
 @export var timer : Timer
-@export var next_weapon_state : Weapon4
-@export var previous_weapon_state : Weapon2
+@export var next_weapon_state : FireSpitterState
+@export var previous_weapon_state : ShotgunState
 @export var bullet_3_scene : PackedScene
 @export var attack_damage : float = 0
 @export var aoe_attack_damage : float = 40
@@ -43,14 +43,14 @@ func state_input(event : InputEvent) -> void:
 
 
 # Called when the current_state becomes this state.
-func on_enter():
+func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = false
 	#print("Time left on timer in weapon3.gd: ", timer.time_left)
 
 
 # Called when the next_state becomes another.
-func on_exit():
+func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = true
 	#print("Time left on timer in weapon3.gd: ", timer.time_left)

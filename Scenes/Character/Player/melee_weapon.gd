@@ -16,6 +16,7 @@ func _ready():
 func _on_body_entered(body):
 #	print("Body entered: ", body)
 	var attack = Attack.new()
+	#print("attack: ", attack, "\nmelee_weapon_state: ", melee_weapon_state)
 	attack.attack_damage = melee_weapon_state.attack_damage
 	# Could this be an easter egg that the melee weapon does self damage?
 	if body is PlayerClass:

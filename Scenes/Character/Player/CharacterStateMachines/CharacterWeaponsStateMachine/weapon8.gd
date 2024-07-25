@@ -1,13 +1,13 @@
+class_name RailgunState
 extends WeaponsState
 
-class_name Weapon8
-
-
 @export var next_weapon_state : MeleeWeaponState
-@export var previous_weapon_state : Weapon7
+@export var previous_weapon_state : FlameThrowerState
 
-func state_input(event : InputEvent):
+
+func state_input(event : InputEvent) -> void:
 	if event.is_action_pressed("next_weapon"):
 		next_state = next_weapon_state
 	if event.is_action_pressed("previous_weapon"):
 		next_state = previous_weapon_state
+

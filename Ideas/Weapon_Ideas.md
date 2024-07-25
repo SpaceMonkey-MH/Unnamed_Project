@@ -67,4 +67,3 @@
 	- Grenade launcher.
 	- Flame thrower.
 	- Railgun.
-	

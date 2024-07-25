@@ -33,7 +33,19 @@ func state_input(event : InputEvent):
 		can_fire = false
 		timer.start()
 
-#
+
+# Called when the current_state becomes this state.
+func on_enter():
+	# This is so that the player can't reload a weapon that is not "equipped".
+	timer.paused = false
+
+
+# Called when the next_state becomes another.
+func on_exit():
+	# This is so that the player can't reload a weapon that is not "equipped".
+	timer.paused = true
+
+
 #func weapon_fire(spawn_pos : Vector2, target_pos : Vector2):
 #	var bullet = bullet_1_scene.instantiate()
 #	var rotation = spawn_pos.angle_to_point(target_pos)

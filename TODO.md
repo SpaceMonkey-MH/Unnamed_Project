@@ -32,6 +32,8 @@ NOT DONE :
 	are added.
 - Decide what weapons there will be.
 - Have "allumer le feu" when setting something on fire as an option.
+- Add powers, such as crits or smth.
+- Add indicator of reload time left.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -65,3 +67,4 @@ DONE :
 - Fix the damage label when heal and damage occur at the same time. // DONE.
 - Make it so you can't reload by switching weapons. // DONE.
 - Solve the issue of the Z index when dying (need to be seen through the ground). // DONE.
+- Stop reload when on a different weapon. // DONE (paused the timer).

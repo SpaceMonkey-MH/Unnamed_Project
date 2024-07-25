@@ -1,7 +1,7 @@
 class_name Weapon3
 extends WeaponsState
 
-@export var reload_timer : Timer
+@export var timer : Timer
 @export var next_weapon_state : Weapon4
 @export var previous_weapon_state : Weapon2
 @export var bullet_3_scene : PackedScene
@@ -14,7 +14,7 @@ extends WeaponsState
 
 
 func _ready() -> void:
-	reload_timer.wait_time = reload_time
+	timer.wait_time = reload_time
 #	print(timer.wait_time)
 
 
@@ -25,7 +25,7 @@ func state_process(_delta) -> void:
 		#weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_3_scene,
 		#attack_damage, speed_factor, aoe_attack_damage, aoe_size)
 		#can_fire = false
-		#reload_timer.start()
+		#timer.start()
 
 
 func state_input(event : InputEvent) -> void:
@@ -39,7 +39,21 @@ func state_input(event : InputEvent) -> void:
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_3_scene,
 		attack_damage, speed_factor, aoe_attack_damage, aoe_size)
 		can_fire = false
-		reload_timer.start()
+		timer.start()
+
+
+# Called when the current_state becomes this state.
+func on_enter():
+	# This is so that the player can't reload a weapon that is not "equipped".
+	timer.paused = false
+	#print("Time left on timer in weapon3.gd: ", timer.time_left)
+
+
+# Called when the next_state becomes another.
+func on_exit():
+	# This is so that the player can't reload a weapon that is not "equipped".
+	timer.paused = true
+	#print("Time left on timer in weapon3.gd: ", timer.time_left)
 
 
 func _on_weapon_3_cool_down_timeout() -> void:

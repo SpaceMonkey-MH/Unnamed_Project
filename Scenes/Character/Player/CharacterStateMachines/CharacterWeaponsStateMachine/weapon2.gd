@@ -37,6 +37,18 @@ func state_input(event : InputEvent) -> void:
 		#timer.start()
 
 
+# Called when the current_state becomes this state.
+func on_enter():
+	# This is so that the player can't reload a weapon that is not "equipped".
+	timer.paused = false
+
+
+# Called when the next_state becomes another.
+func on_exit():
+	# This is so that the player can't reload a weapon that is not "equipped".
+	timer.paused = true
+
+
 func _on_weapon_2_cool_down_timeout() -> void:
 	can_fire = true
 #	print("hello2")

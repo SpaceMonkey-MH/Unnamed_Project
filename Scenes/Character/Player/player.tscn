@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=72 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -20,16 +20,17 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/firing.gd" id="16_nowjs"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/character_weapons_state_machine.gd" id="18_gi4pl"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon_state.gd" id="19_lk4n7"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon2.gd" id="19_wela8"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/machine_gun.gd" id="19_wela8"]
 [ext_resource type="PackedScene" uid="uid://bylc6wriv4awj" path="res://Scenes/Character/Bullets/bullet_1.tscn" id="20_fgewv"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon3.gd" id="20_rfo25"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/rocket_launcher.gd" id="20_rfo25"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/melee_weapon.gd" id="21_cr6j0"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/desert_eagle.gd" id="21_o8ar2"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon4.gd" id="21_uxfjm"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon5.gd" id="22_umggx"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon6.gd" id="23_lvog5"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon7.gd" id="24_spe2t"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapon8.gd" id="25_6vkpp"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/shotgun.gd" id="21_uxfjm"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/fire_spitter.gd" id="22_umggx"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/grenade_launcher.gd" id="23_lvog5"]
+[ext_resource type="PackedScene" uid="uid://cjprwo4qxqarf" path="res://Scenes/Character/Bullets/lead.tscn" id="24_njnma"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/flame_thrower.gd" id="24_spe2t"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/railgun.gd" id="25_6vkpp"]
 [ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
@@ -567,29 +568,34 @@ one_shot = true
 
 [node name="DesertEagle" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("21_o8ar2")
-timer = NodePath("Weapon1CoolDown")
+timer = NodePath("DesertEagleCoolDown")
 bullet_1_scene = ExtResource("20_fgewv")
 next_weapon_state = NodePath("../Shotgun")
 previous_weapon_state = NodePath("../Melee")
 reload_time = 0.2
 
-[node name="Weapon1CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/DesertEagle"]
+[node name="DesertEagleCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/DesertEagle"]
 one_shot = true
 
-[node name="Shotgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="Shotgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("21_uxfjm")
+timer = NodePath("ShotgunCoolDown")
+bullet_1_scene = ExtResource("24_njnma")
 next_weapon_state = NodePath("../RocketLauncher")
 previous_weapon_state = NodePath("../DesertEagle")
 
+[node name="ShotgunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Shotgun"]
+one_shot = true
+
 [node name="RocketLauncher" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("20_rfo25")
-timer = NodePath("Weapon3CoolDown")
+timer = NodePath("RocketLauncherCoolDown")
 next_weapon_state = NodePath("../FireSpitter")
 previous_weapon_state = NodePath("../Shotgun")
 bullet_3_scene = ExtResource("25_hx2jg")
 reload_time = 10.0
 
-[node name="Weapon3CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/RocketLauncher"]
+[node name="RocketLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/RocketLauncher"]
 one_shot = true
 
 [node name="FireSpitter" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
@@ -597,15 +603,17 @@ script = ExtResource("22_umggx")
 next_weapon_state = NodePath("../MachineGun")
 previous_weapon_state = NodePath("../RocketLauncher")
 
+[node name="FireSpitterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FireSpitter"]
+
 [node name="MachineGun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("19_wela8")
-timer = NodePath("Weapon2CoolDown")
+timer = NodePath("MachineGunCoolDown")
 next_weapon_state = NodePath("../GrenadeLauncher")
 previous_weapon_state = NodePath("../FireSpitter")
 bullet_2_scene = ExtResource("20_fgewv")
 reload_time = 0.05
 
-[node name="Weapon2CoolDown" type="Timer" parent="CharacterWeaponsStateMachine/MachineGun"]
+[node name="MachineGunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/MachineGun"]
 one_shot = true
 
 [node name="GrenadeLauncher" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
@@ -613,15 +621,21 @@ script = ExtResource("23_lvog5")
 next_weapon_state = NodePath("../FlameThrower")
 previous_weapon_state = NodePath("../MachineGun")
 
+[node name="GrenadeLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/GrenadeLauncher"]
+
 [node name="FlameThrower" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("24_spe2t")
 next_weapon_state = NodePath("../Railgun")
 previous_weapon_state = NodePath("../GrenadeLauncher")
 
+[node name="FlameThrowerCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FlameThrower"]
+
 [node name="Railgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("25_6vkpp")
 next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../FlameThrower")
+
+[node name="RailgunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Railgun"]
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 z_index = 2
@@ -654,8 +668,9 @@ shape = SubResource("RectangleShape2D_hmk86")
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/Weapon1CoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_weapon_1_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/Weapon3CoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/Weapon2CoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_weapon_2_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/DesertEagleCoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_desert_eagle_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/Shotgun/ShotgunCoolDown" to="CharacterWeaponsStateMachine/Shotgun" method="_on_shotgun_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/RocketLauncherCoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_weapon_2_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

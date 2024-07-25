@@ -340,3 +340,4 @@
 	For the shotgun, I hesitate between creating small projectiles and using ray-casting to emulate them. I would
 	like to use ray-casting, which would be easier for the damage, but it would leave a difficulty for the visual
 	part. I think I'll go for the multiple projectiles one.
+	Need to decide if sawed-off barrel or pump-action shotgun.

@@ -40,7 +40,8 @@
 		- Multiple shots, semi-automatic weapon.
 		- High damage, moderate RoF, very fast projectile speed (not visible?).
 		- "AoE". Damage depends on distance to player (Ray-casting).
-		- Limited range, projectile doesn't falls.
+		- Limited range, projectile doesn't falls. Maybe the range could be unlimited, as I am using the multiple
+			projectiles technique.
 		- Nothing done but basis of ray-casting.
 	- Fire spitter:
 		- Continuously damages (flames) in front of the player. Sets on fire.

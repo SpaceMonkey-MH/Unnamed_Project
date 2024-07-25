@@ -2,6 +2,7 @@
 	- Melee weapon:
 		- An AoE centered on the player. Same damage everywhere.
 		- Probably an axe.
+		- Very high damage, rather high RoF.
 		- Code done, needs sprite and animations.
 	- Desert Eagle:
 		- Single shot, semi-automatic weapon.
@@ -42,12 +43,28 @@
 		- Limited range, projectile doesn't falls.
 		- Nothing done but basis of ray-casting.
 	- Fire spitter:
-		- Continuously damages (flames) in front of the player.
+		- Continuously damages (flames) in front of the player. Sets on fire.
+		- High damage, 
 	- Railgun:
 		- Shoots a piercing projectile through the map and enemies.
-		
+	Sniper-rifle:
+		- Deals critical damage when hitting head/when lucky (?).
+		- Maybe redundant with railgun.
 
-## Radom ideas:
-	- From Julien: Smoke at the tip on fire of the firearms.
+## Random ideas:
+	- From Julien: Smoke at the tip of the firearms on fire.
 	- The player never needs to reload, because it is badass, I guess.
 	- Make every weapon automatic (fire continuously when button pressed)?
+	- Melee weapon is unlocked from the beginning, others have to be unlocked through a specific level.
+
+## Retained weapon list and order:
+	- Melee weapon (unlocked from the beginning).
+	- Desert Eagle (tutorial level?).
+	- Shotgun.
+	- Rocket launcher.
+	- Fire spitter
+	- Machine gun.
+	- Grenade launcher.
+	- Flame thrower.
+	- Railgun.
+	

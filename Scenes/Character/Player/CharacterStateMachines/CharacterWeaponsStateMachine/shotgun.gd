@@ -6,10 +6,10 @@ extends WeaponsState
 @export var next_weapon_state : RocketLauncherState
 @export var previous_weapon_state : DesertEagleState
 @export var attack_damage : float = 10
-@export var speed_factor : float = 50
+@export var speed_factor : float = 25
 @export var reload_time : float = 2
 # The spread of the leads, so the total angle of maximum dispersion of the projectiles.
-@export var lead_spread : float = PI / 4
+@export var lead_spread : float = PI / 8
 # The number of leads (projectiles) fired at each shot.
 # If even and not 0, there will be two shots in the middle. If odd, there will be one shot in the middle. 
 @export var nb_leads : int = 10
@@ -52,14 +52,31 @@ func state_input(event : InputEvent) -> void:
 		var char_pos : Vector2 = character.position
 		# The vector from the character pos to mouse_pos.
 		var dir_vector : Vector2 = character.get_global_mouse_position() - char_pos
+		# If the number of leads is even (and not 0, 0 has been handled above).
 		if nb_leads % 2 == 0:
+			# We iterate on half that number.
 			for shot_angle in range (nb_leads / 2):
 				#print("shot_angle: ", shot_angle)
 				#print("incr_angle: ", incr_angle)
+				# We fire the leads below dir_vector.
 				weapon_fire(char_pos, char_pos + dir_vector.rotated(incr_angle * shot_angle),
 					lead_scene, attack_damage, speed_factor)
+				# We fire the leads above dir_vector.
 				weapon_fire(char_pos, char_pos + dir_vector.rotated(-incr_angle * shot_angle),
 					lead_scene, attack_damage, speed_factor)
+		# If the number of leads is odd.
+		else:
+			# We fire the middle lead.
+			weapon_fire(char_pos, char_pos + dir_vector, lead_scene, attack_damage, speed_factor)
+			# We iterate over half the number of leads, starting from 1.
+			for shot_angle in range (1, (nb_leads + 1) / 2):
+				# We fire above dir_vector.
+				weapon_fire(char_pos, char_pos + dir_vector.rotated(incr_angle * (shot_angle)),
+					lead_scene, attack_damage, speed_factor)
+				# We fire below dir_vector.
+				weapon_fire(char_pos, char_pos + dir_vector.rotated(-incr_angle * (shot_angle)),
+					lead_scene, attack_damage, speed_factor)
+				
 		can_fire = false
 		timer.start()
 

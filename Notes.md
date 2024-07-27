@@ -341,3 +341,9 @@
 	like to use ray-casting, which would be easier for the damage, but it would leave a difficulty for the visual
 	part. I think I'll go for the multiple projectiles one.
 	Need to decide if sawed-off barrel or pump-action shotgun.
+
+## - __2024/07/28:__
+	Finished shotgun.gd, raised a potential issue that the character die instantly, so if they are hit by multiple
+	projectiles for more than their health, the remaining projectiles might pass through. Don't know if it's a
+	good thing. Also, the health changed manager is kinda lost with this, might display several hits instead of
+	one, idk what to think about that.

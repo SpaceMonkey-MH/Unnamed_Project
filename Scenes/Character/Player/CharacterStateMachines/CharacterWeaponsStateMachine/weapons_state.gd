@@ -19,3 +19,4 @@ func weapon_fire(spawn_pos : Vector2, target_pos : Vector2, bullet_scene : Packe
 	bullet.speed_factor = speed_factor
 	bullet.aoe_size = aoe_size
 	add_child(bullet)
+	#print("Hello from weapon_fire in weapon_state.gd.")

@@ -60,10 +60,6 @@ func state_input(event : InputEvent) -> void:
 					lead_scene, attack_damage, speed_factor)
 				weapon_fire(char_pos, char_pos + dir_vector.rotated(-incr_angle * shot_angle),
 					lead_scene, attack_damage, speed_factor)
-			
-		
-		#weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), lead_scene,
-			#attack_damage, speed_factor)
 		can_fire = false
 		timer.start()
 

@@ -30,7 +30,7 @@ func state_input(event : InputEvent) -> void:
 	if event.is_action_pressed("previous_weapon"):
 		next_state = previous_weapon_state
 	if event.is_action_pressed("fire") and can_fire:
-		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_1_scene,
+		weapon_fire(character.position, character.get_global_mouse_position(), bullet_1_scene,
 		attack_damage, speed_factor)
 		can_fire = false
 		timer.start()

@@ -580,7 +580,7 @@ one_shot = true
 [node name="Shotgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("21_uxfjm")
 timer = NodePath("ShotgunCoolDown")
-bullet_1_scene = ExtResource("24_njnma")
+lead_scene = ExtResource("24_njnma")
 next_weapon_state = NodePath("../RocketLauncher")
 previous_weapon_state = NodePath("../DesertEagle")
 

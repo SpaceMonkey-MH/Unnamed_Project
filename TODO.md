@@ -35,6 +35,7 @@ NOT DONE :
 - Add powers, such as crits or smth.
 - Add indicator of reload time left.
 - Bosses (levels).
+- Navigate through weapons via # keys.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

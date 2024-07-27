@@ -31,22 +31,39 @@ func state_input(event : InputEvent) -> void:
 		next_state = previous_weapon_state
 	if event.is_action_pressed("fire") and can_fire:
 		# I feel like it might be easier to refactor the weapon_fire() procedure, Idk.
-		# The position of the mouse as a variable, so it is easier to manipulate.
+		# The position of the mouse as a variable, so it is easier to manipulate. It is a vector from the origin
+		# to the mouse position.
 		var mouse_pos : Vector2 = character.get_global_mouse_position()
+		# What we want here, is, for each lead, to call weapon_fire() on a point that depends on the angle
+		# computed by: the vector between the character pos and mouse_pos rotated by plus or minus the index of the
+		# current lead times the dispersion of the leads divided by the total number of leads. That being said,
+		# it is worth noting that when there is an even number of leads, there are two in the "middle", and only
+		# one when odd. That means that, when even, we iterate twice, on half the range each time, and when odd we
+		# iterate onces on the whole thing.
+		# So, we want to take the vector from character to mouse, rotate it, then apply it again to character pos.
 		# Computing helper variables for the number of shots.
 		# Trying to avoid boilerplate.
 		# We don't want to divide by 0, so we exclude this case.
 		if nb_leads <= 0:
 			return
+		# The increment of the angle during the iterations.
 		var incr_angle : float = lead_spread / nb_leads
+		# The position of the character as a variable so it is easier to manipulate.
+		var char_pos : Vector2 = character.position
+		# The vector from the character pos to mouse_pos.
+		var dir_vector : Vector2 = character.get_global_mouse_position() - char_pos
 		if nb_leads % 2 == 0:
 			for shot_angle in range (nb_leads / 2):
-				print("shot_angle: ", shot_angle)
-				print("incr_angle: ", incr_angle)
+				#print("shot_angle: ", shot_angle)
+				#print("incr_angle: ", incr_angle)
+				weapon_fire(char_pos, char_pos + dir_vector.rotated(incr_angle * shot_angle),
+					lead_scene, attack_damage, speed_factor)
+				weapon_fire(char_pos, char_pos + dir_vector.rotated(-incr_angle * shot_angle),
+					lead_scene, attack_damage, speed_factor)
 			
 		
-		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), lead_scene,
-			attack_damage, speed_factor)
+		#weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), lead_scene,
+			#attack_damage, speed_factor)
 		can_fire = false
 		timer.start()
 

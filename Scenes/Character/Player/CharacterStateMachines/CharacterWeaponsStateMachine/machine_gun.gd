@@ -20,6 +20,7 @@ func state_process(_delta) -> void:
 		attack_damage, speed_factor)
 		can_fire = false
 		timer.start()
+		#print("mg.gd: ", get_parent().get_parent(), "\n", character)
 		#pass
 
 

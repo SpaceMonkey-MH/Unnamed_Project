@@ -47,14 +47,14 @@ DONE :
 - Solve the issue where the damage label doesn't show on the killing hit. // DONE.
 - Solve the issue where the dead characters can still be hit after their death. // DONE.
 - Handle the part where the characters fall when they die (make them disappear when out of the screen). // DONE.
-- Make the enemies stackable on each other ? // DONE (I think).
+- Make the enemies stackable on each other ? // (I think) DONE.
 - Give legs to the enemies. // DONE.
 - Make transitions to AttackState. // DONE.
-- Solve the "pressed against wall" glitch. Cf Notes.md (line 175). // DONE (twice).
+- Solve the "pressed against wall" glitch. Cf Notes.md (line 175). // (twice) DONE.
 - Solve the HitState issue when it leaves the state immediatly. // DONE.
 - Give a brain to the enemies. // Kinda DONE.
 - Repair the MeleeWeapon attack. // DONE.
-- Solve the issue of the melee attack (lasting longer than it should). // DONE (I think).
+- Solve the issue of the melee attack (lasting longer than it should). // (I think) DONE.
 - Change the Z index of labels so that they are in front of tile map (or change the Z index of the tile map). // DONE
 	(increased the Z index of the labels, so that the character are still behind the grass).
 - Change the Z index of the enemies. // DONE.
@@ -62,12 +62,12 @@ DONE :
 - Solve the issue of the melee attack (lasting longer than it should). // DONE.
 - Complete the AttackState script (make a proper attack). //DONE.
 - Check what happens with the attack of the enemy (weird timings). // DONE.
-- Make the explosion of the rockets damage in a matrix. // DONE (finally).
+- Make the explosion of the rockets damage in a matrix. // (finally) DONE.
 - Fix the damage label when several damages occur at the same time. // DONE.
 - Fix the random crash when an enemy dies. // DONE.
 - Fix the damage label when heal and damage occur at the same time. // DONE.
 - Make it so you can't reload by switching weapons. // DONE.
 - Solve the issue of the Z index when dying (need to be seen through the ground). // DONE.
-- Stop reload when on a different weapon. // DONE (paused the timer).
+- Stop reload when on a different weapon. // (paused the timer) DONE.
 - Add shotgun weapon. // DONE.
-- Make it so that you can't shoot when clicking on the UI. // DONE.
+- Make it so that you can't shoot when clicking on the UI. // (unhandled input) DONE.

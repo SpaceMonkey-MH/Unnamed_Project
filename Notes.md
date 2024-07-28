@@ -347,3 +347,7 @@
 	projectiles for more than their health, the remaining projectiles might pass through. Don't know if it's a
 	good thing. Also, the health changed manager is kinda lost with this, might display several hits instead of
 	one, Idk what to think about that.
+	For the shotgun, I implemented something a bit odd: When an even number of leads is shot, there are two in the
+	middle, and only one when odd. This is so that the shots are always symetrical, and there is always at least
+	one in the middle (if any). What I could do it to try and make the two middle separate but parallel. I'll try
+	that. Actually, it is very complex, for almost nothing.

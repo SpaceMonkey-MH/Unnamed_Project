@@ -54,15 +54,18 @@ func state_input(event : InputEvent) -> void:
 		var dir_vector : Vector2 = character.get_global_mouse_position() - char_pos
 		# If the number of leads is even (and not 0, 0 has been handled above).
 		if nb_leads % 2 == 0:
+			# I'm trying to make the two middle projectiles parallel, so I offset the whole thing, or maybe not,
+			# I'll see. FF this, too complex to handle for nothing.
+			var offset : Vector2 = Vector2(0, 0)
 			# We iterate on half that number.
 			for shot_angle in range (nb_leads / 2):
 				#print("shot_angle: ", shot_angle)
 				#print("incr_angle: ", incr_angle)
-				# We fire the leads below dir_vector.
-				weapon_fire(char_pos, char_pos + dir_vector.rotated(incr_angle * shot_angle),
+				# We fire the leads below dir_vector. I'm trying some stuff.
+				weapon_fire(char_pos + offset, char_pos + dir_vector.rotated(incr_angle * shot_angle) + offset,
 					lead_scene, attack_damage, speed_factor)
 				# We fire the leads above dir_vector.
-				weapon_fire(char_pos, char_pos + dir_vector.rotated(-incr_angle * shot_angle),
+				weapon_fire(char_pos - offset, char_pos + dir_vector.rotated(-incr_angle * shot_angle) - offset,
 					lead_scene, attack_damage, speed_factor)
 		# If the number of leads is odd.
 		else:

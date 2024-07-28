@@ -38,7 +38,7 @@ func switch_states(new_state : WeaponsState):
 #	print("SM: ", current_state)
 
 
-func _input(event : InputEvent):
+func _unhandled_input(event : InputEvent):
 	#if Input.is_action_pressed("fire"):
 		#print("event of _input() in CWSM: ", event)
 	current_state.state_input(event)

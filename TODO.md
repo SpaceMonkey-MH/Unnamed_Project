@@ -7,7 +7,6 @@ NOT DONE :
 	(Use a global signal? That would be swag for sure.) (idk what this means, maybe it is done).
 - Handle the part where the characters fall when they die (animation).
 - Handle the part where the characters fall when they die (sound).
-- Make it so that you can't shoot when clicking on the UI.
 - Add easter eggs, such as a button that screams.
 - Add funny descriptions to the weapons.
 - Solve window size issue.
@@ -31,7 +30,7 @@ NOT DONE :
 - Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy shapes
 	are added.
 - Decide what weapons there will be.
-- Have "allumer le feu" when setting something on fire as an option.
+- Have "allumer le feu" when setting something on fire as an option. Hard because of copyright.
 - Add powers, such as crits or smth.
 - Add indicator of reload time left.
 - Bosses (levels).
@@ -70,3 +69,5 @@ DONE :
 - Make it so you can't reload by switching weapons. // DONE.
 - Solve the issue of the Z index when dying (need to be seen through the ground). // DONE.
 - Stop reload when on a different weapon. // DONE (paused the timer).
+- Add shotgun weapon. // DONE.
+- Make it so that you can't shoot when clicking on the UI. // DONE.

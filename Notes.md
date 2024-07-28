@@ -346,4 +346,4 @@
 	Finished shotgun.gd, raised a potential issue that the character die instantly, so if they are hit by multiple
 	projectiles for more than their health, the remaining projectiles might pass through. Don't know if it's a
 	good thing. Also, the health changed manager is kinda lost with this, might display several hits instead of
-	one, idk what to think about that.
+	one, Idk what to think about that.

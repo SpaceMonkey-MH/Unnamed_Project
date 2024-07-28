@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=72 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -34,6 +34,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr7k"]
 size = Vector2(45, 45)
@@ -464,12 +465,13 @@ transitions = ["Start", "desert_eagle", SubResource("AnimationNodeStateMachineTr
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "hit_box")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "hit_box")]
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
 body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
+fire_spitter_area_2D = NodePath("FireSpitterWeapon")
 hit_box = NodePath("HitBox")
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
@@ -659,10 +661,20 @@ character = NodePath("..")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-22, -22, 44, 44)
 
-[node name="FireSpitterWeapon" type="Area2D" parent="."]
-position = Vector2(20, 0)
+[node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state")]
+script = ExtResource("35_p6h3e")
+fire_spitter_state = NodePath("../CharacterWeaponsStateMachine/FireSpitter")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="FireSpitterWeapon"]
+position = Vector2(22, 0)
+polygon = PackedVector2Array(0, 0, 10, -22, 40, -22, 40, 22, 10, 22)
+
+[node name="PlaceHolder" type="ColorRect" parent="FireSpitterWeapon"]
+offset_left = 23.0
+offset_top = -22.0
+offset_right = 62.0
+offset_bottom = 22.0
+color = Color(1, 0.682353, 0, 1)
 
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
@@ -673,3 +685,4 @@ position = Vector2(20, 0)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_weapon_2_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]

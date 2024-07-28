@@ -354,4 +354,5 @@
 	Now, the fire spitter.
 	When firing a rocket (and maybe other projectiles) directly into the ground (vertically towards bottom when
 	on ground), nothing happens. I'm not sure whether it makes sense or not. Apparently the reason is that they
-	are too fast. I don't think I wanna fix that, seems a lot of work for low reward to me.
+	are too fast. I don't think I wanna fix that, seems a lot of work for low reward to me. I wouldn't even know
+	how to do it.

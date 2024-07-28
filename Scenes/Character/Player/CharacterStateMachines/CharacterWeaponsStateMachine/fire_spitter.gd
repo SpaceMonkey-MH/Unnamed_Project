@@ -3,6 +3,8 @@ extends WeaponsState
 
 @export var next_weapon_state : MachineGunState
 @export var previous_weapon_state : RocketLauncherState
+@export var attack_damage : float = 50.0
+@export var reload_time : float = 0.5
 
 
 func state_input(event : InputEvent) -> void:

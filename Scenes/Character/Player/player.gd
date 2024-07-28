@@ -38,8 +38,10 @@ var air_jumps_current : int = air_jumps_max
 @export var weapons_animation_tree : AnimationTree 
 # BodySprite2D as a variable so it can be flipped and modulated.
 @export var body_sprite_2d : Sprite2D
-# WeaponsSprite2D as a variable so it can be flipped.
+# WeaponsSprite2D as a variable so it can be flipped and rotated.
 @export var weapons_sprite_2d : Sprite2D
+# FireSpitterWeapon as a variable so it can be flipped and rotated.
+@export var fire_spitter_area_2D : Area2D
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
 @export var self_damage : bool = true	# Should ultimately be likend to options. Might have to move it, Idk.
 # Flashing is when the player takes damage.
@@ -47,6 +49,8 @@ var air_jumps_current : int = air_jumps_max
 @export var flashing_time : float = 0.1
 # Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
 var smoothed_mouse_pos : Vector2
+## Just testing smth.
+#var angle = 0
 
 ######################
 # Gameplay variables #
@@ -93,6 +97,15 @@ func _process(_delta):
 #	print("Player velocity: ", velocity)
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)
+	fire_spitter_area_2D.look_at(smoothed_mouse_pos)
+	# Flipping the sprite so it looks the right direction.
+	body_sprite_2d.flip_h = get_local_mouse_position().x < 0
+	# Flipping the gun so it's not upside down.
+	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0
+	# I don't think I need to flip the fire spitter, as it is symetrical, but it might change.
+	## Testings.
+	#angle += 0.05
+	#rotate(angle)
 #	print("player: ", move_speed)
 
 
@@ -106,10 +119,6 @@ func character_physics_process(delta):
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
 	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
-	# Flipping the spite so it looks the right direction.
-	body_sprite_2d.flip_h = get_local_mouse_position().x < 0
-	# Flipping the gun so it's not upside down.
-	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0
 	# Apply the above changes.
 	move_and_slide()
 

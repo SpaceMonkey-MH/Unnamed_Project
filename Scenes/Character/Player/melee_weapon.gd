@@ -14,13 +14,13 @@ func _ready():
 
 
 func _on_body_entered(body):
+	# Could this be an easter egg that the melee weapon does self damage?
+	if body is PlayerClass:
+		return
 #	print("Body entered: ", body)
 	var attack = Attack.new()
 	#print("attack: ", attack, "\nmelee_weapon_state: ", melee_weapon_state)
 	attack.attack_damage = melee_weapon_state.attack_damage
-	# Could this be an easter egg that the melee weapon does self damage?
-	if body is PlayerClass:
-		return
 	for child in body.get_children():
 		if child is HealthComponent:
 #			print("call_deferred(\"child.damage\", attack)")

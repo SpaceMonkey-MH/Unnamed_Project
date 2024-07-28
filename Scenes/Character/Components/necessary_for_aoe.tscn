@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ca2l0ymruytnq"]
 
-[ext_resource type="Script" path="res://Scenes/Character/aoe_hit_box.gd" id="1_u5ujs"]
+[ext_resource type="Script" path="res://Scenes/Character/Components/necessary_for_aoe.gd" id="1_u5ujs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mrylo"]
 size = Vector2(40, 40)

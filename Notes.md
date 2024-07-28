@@ -351,3 +351,7 @@
 	middle, and only one when odd. This is so that the shots are always symetrical, and there is always at least
 	one in the middle (if any). What I could do it to try and make the two middle separate but parallel. I'll try
 	that. Actually, it is very complex, for almost nothing.
+	Now, the fire spitter.
+	When firing a rocket (and maybe other projectiles) directly into the ground (vertically towards bottom when
+	on ground), nothing happens. I'm not sure whether it makes sense or not. Apparently the reason is that they
+	are too fast. I don't think I wanna fix that, seems a lot of work for low reward to me.

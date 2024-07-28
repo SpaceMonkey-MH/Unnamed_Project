@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cv6wtd2pqvjb5"]
+[gd_scene load_steps=5 format=3 uid="uid://cv6wtd2pqvjb5"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.gd" id="1_x5k5i"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_1oxxk"]
 [ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="2_assgn"]
 [ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="3_l1p6l"]
-[ext_resource type="Script" path="res://Scenes/Character/aoe_hit_box.gd" id="4_we0yj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rca0a"]
-size = Vector2(40, 40)
 
 [node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "hit_box")]
 z_index = -1
@@ -32,12 +28,6 @@ offset_top = -46.0
 offset_right = 58.0
 offset_bottom = -20.0
 text = "Attack Dummy"
-
-[node name="Necessary for AOE" type="Area2D" parent="."]
-script = ExtResource("4_we0yj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Necessary for AOE"]
-shape = SubResource("RectangleShape2D_rca0a")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-9.53674e-07, -9.53674e-07)

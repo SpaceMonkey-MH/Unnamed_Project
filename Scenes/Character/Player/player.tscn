@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=73 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -35,6 +35,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
+[ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr7k"]
 size = Vector2(45, 45)
@@ -465,13 +466,14 @@ transitions = ["Start", "desert_eagle", SubResource("AnimationNodeStateMachineTr
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "hit_box")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "hit_box")]
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
 body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
 fire_spitter_area_2D = NodePath("FireSpitterWeapon")
+fire_spitter_sprite_2d = NodePath("FireSpitterWeapon/FireSpitterSprite")
 hit_box = NodePath("HitBox")
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
@@ -599,10 +601,12 @@ bullet_3_scene = ExtResource("25_hx2jg")
 [node name="RocketLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/RocketLauncher"]
 one_shot = true
 
-[node name="FireSpitter" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="FireSpitter" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("fire_spitter_weapon", "next_weapon_state", "previous_weapon_state", "timer")]
 script = ExtResource("22_umggx")
+fire_spitter_weapon = NodePath("../../FireSpitterWeapon")
 next_weapon_state = NodePath("../MachineGun")
 previous_weapon_state = NodePath("../RocketLauncher")
+timer = NodePath("FireSpitterCoolDown")
 
 [node name="FireSpitterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FireSpitter"]
 
@@ -652,7 +656,7 @@ state_machine = NodePath("../CharacterWeaponsStateMachine")
 script = ExtResource("21_cr6j0")
 melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
 
-[node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+[node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
 shape = SubResource("CircleShape2D_odl77")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("32_5aed7")]
@@ -665,16 +669,14 @@ rect = Rect2(-22, -22, 44, 44)
 script = ExtResource("35_p6h3e")
 fire_spitter_state = NodePath("../CharacterWeaponsStateMachine/FireSpitter")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="FireSpitterWeapon"]
+[node name="FireSpitterHitBox" type="CollisionPolygon2D" parent="FireSpitterWeapon"]
 position = Vector2(22, 0)
 polygon = PackedVector2Array(0, 0, 10, -22, 40, -22, 40, 22, 10, 22)
 
-[node name="PlaceHolder" type="ColorRect" parent="FireSpitterWeapon"]
-offset_left = 23.0
-offset_top = -22.0
-offset_right = 62.0
-offset_bottom = 22.0
-color = Color(1, 0.682353, 0, 1)
+[node name="FireSpitterSprite" type="Sprite2D" parent="FireSpitterWeapon"]
+position = Vector2(45, -5.96046e-08)
+scale = Vector2(0.341797, 0.341797)
+texture = ExtResource("36_sj2j0")
 
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
@@ -682,7 +684,7 @@ color = Color(1, 0.682353, 0, 1)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/DesertEagleCoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_desert_eagle_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Shotgun/ShotgunCoolDown" to="CharacterWeaponsStateMachine/Shotgun" method="_on_shotgun_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/RocketLauncherCoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
-[connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_weapon_2_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_machine_gun_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]

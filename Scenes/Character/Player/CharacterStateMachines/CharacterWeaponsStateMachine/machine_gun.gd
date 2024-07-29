@@ -14,12 +14,12 @@ func _ready() -> void:
 	timer.wait_time = reload_time
 
 
-func state_process(_delta) -> void:
-	if Input.is_action_pressed("fire") and can_fire:
-		weapon_fire(character.position, character.get_global_mouse_position(), bullet_2_scene,
-		attack_damage, speed_factor)
-		can_fire = false
-		timer.start()
+#func state_process(_delta) -> void:
+	#if Input.is_action_pressed("fire") and can_fire:
+		#weapon_fire(character.position, character.get_global_mouse_position(), bullet_2_scene,
+		#attack_damage, speed_factor)
+		#can_fire = false
+		#timer.start()
 		#print("mg.gd: ", get_parent().get_parent(), "\n", character)
 		#pass
 
@@ -36,6 +36,11 @@ func state_input(event : InputEvent) -> void:
 		#attack_damage, speed_factor)
 		#can_fire = false
 		#timer.start()
+	if event.is_action_pressed("fire") and can_fire:
+		weapon_fire(character.position, character.get_global_mouse_position(), bullet_2_scene,
+		attack_damage, speed_factor)
+		can_fire = false
+		timer.start()
 
 
 # Called when the current_state becomes this state.
@@ -50,7 +55,7 @@ func on_exit() -> void:
 	timer.paused = true
 
 
-func _on_weapon_2_cool_down_timeout() -> void:
+func _on_machine_gun_cool_down_timeout() -> void:
 	can_fire = true
 #	print("hello2")
 

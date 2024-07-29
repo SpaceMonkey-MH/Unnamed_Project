@@ -356,3 +356,7 @@
 	on ground), nothing happens. I'm not sure whether it makes sense or not. Apparently the reason is that they
 	are too fast. I don't think I wanna fix that, seems a lot of work for low reward to me. I wouldn't even know
 	how to do it.
+
+## - __2024/07/29:__
+	I have an issue with the input events for the weapons. They need to be unhandled for them not to happen when
+	clicking on the UI, but this doesn't work with the machine gun.

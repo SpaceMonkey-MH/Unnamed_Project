@@ -40,8 +40,10 @@ var air_jumps_current : int = air_jumps_max
 @export var body_sprite_2d : Sprite2D
 # WeaponsSprite2D as a variable so it can be flipped and rotated.
 @export var weapons_sprite_2d : Sprite2D
-# FireSpitterWeapon as a variable so it can be flipped and rotated.
+# FireSpitterWeapon as a variable so it can be rotated.
 @export var fire_spitter_area_2D : Area2D
+# FireSpitter sprite (for now, a color rect) as a variable so it can be flipped.
+@export var fire_spitter_sprite_2d : Sprite2D
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
 @export var self_damage : bool = true	# Should ultimately be likend to options. Might have to move it, Idk.
 # Flashing is when the player takes damage.
@@ -103,6 +105,10 @@ func _process(_delta):
 	# Flipping the gun so it's not upside down.
 	weapons_sprite_2d.flip_v = get_local_mouse_position().x < 0
 	# I don't think I need to flip the fire spitter, as it is symetrical, but it might change.
+	# This doesn't work.
+	#fire_spitter_area_2D.flip_v = get_local_mouse_position().x < 0
+	# This does work. And I think I need to flip it, otherwise the flames will be upside down.
+	fire_spitter_sprite_2d.flip_v = get_local_mouse_position().x < 0
 	## Testings.
 	#angle += 0.05
 	#rotate(angle)

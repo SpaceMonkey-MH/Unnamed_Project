@@ -37,7 +37,7 @@ func state_input(event : InputEvent) -> void:
 	# Does it work here?
 	if event.is_action_pressed("fire") and can_fire:
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_3_scene,
-		attack_damage, speed_factor, aoe_attack_damage, aoe_size)
+			attack_damage, speed_factor, aoe_attack_damage, aoe_size)
 		can_fire = false
 		timer.start()
 

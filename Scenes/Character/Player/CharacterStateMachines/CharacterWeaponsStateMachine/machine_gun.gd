@@ -9,19 +9,28 @@ extends WeaponsState
 @export var speed_factor : float = 12
 @export var reload_time : float = 0.2
 
+# A variable to store whether or not the fire button is pressed. This is used to go around the fact that
+# _unhandled_input() doesn't do continuous input (click hold is just a click).
+var fire_pressed : bool = false
+
 
 func _ready() -> void:
 	timer.wait_time = reload_time
 
 
-#func state_process(_delta) -> void:
+func state_process(_delta) -> void:
 	#if Input.is_action_pressed("fire") and can_fire:
 		#weapon_fire(character.position, character.get_global_mouse_position(), bullet_2_scene,
-		#attack_damage, speed_factor)
+			#attack_damage, speed_factor)
 		#can_fire = false
 		#timer.start()
 		#print("mg.gd: ", get_parent().get_parent(), "\n", character)
 		#pass
+	if fire_pressed and can_fire:
+		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_2_scene,
+			attack_damage, speed_factor)
+		can_fire = false
+		timer.start()
 
 
 func state_input(event : InputEvent) -> void:
@@ -29,18 +38,20 @@ func state_input(event : InputEvent) -> void:
 		next_state = next_weapon_state
 	if event.is_action_pressed("previous_weapon"):
 		next_state = previous_weapon_state
-	# This does not work here, event is only the new ones, not continuous.
-	#if Input.is_action_pressed("fire") and can_fire:
+	# This does not work here, event is only the new ones, not continuous. Trying to go around that.
+	# Someone online said I sould add a true argument to is_action_pressed(), but it doesn't work here idk.
+	#if event.is_action_pressed("fire") and can_fire:
 		#print("Fired in state_input() in weapon2.gd.")
 		#weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), bullet_2_scene,
-		#attack_damage, speed_factor)
+			#attack_damage, speed_factor)
 		#can_fire = false
 		#timer.start()
-	if event.is_action_pressed("fire") and can_fire:
-		weapon_fire(character.position, character.get_global_mouse_position(), bullet_2_scene,
-		attack_damage, speed_factor)
-		can_fire = false
-		timer.start()
+	# Testing something.
+	if event.is_action_pressed("fire"):
+		fire_pressed = true
+	if event.is_action_released("fire"):
+		fire_pressed = false
+			
 
 
 # Called when the current_state becomes this state.

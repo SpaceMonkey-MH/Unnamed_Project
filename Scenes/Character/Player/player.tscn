@@ -616,7 +616,6 @@ timer = NodePath("MachineGunCoolDown")
 next_weapon_state = NodePath("../GrenadeLauncher")
 previous_weapon_state = NodePath("../FireSpitter")
 bullet_2_scene = ExtResource("20_fgewv")
-reload_time = 0.05
 
 [node name="MachineGunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/MachineGun"]
 one_shot = true

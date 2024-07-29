@@ -31,7 +31,7 @@ func state_input(event : InputEvent) -> void:
 		next_state = previous_weapon_state
 	if event.is_action_pressed("fire") and can_fire:
 		weapon_fire(character.position, character.get_global_mouse_position(), bullet_1_scene,
-		attack_damage, speed_factor)
+			attack_damage, speed_factor)
 		can_fire = false
 		timer.start()
 

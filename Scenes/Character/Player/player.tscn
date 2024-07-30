@@ -20,17 +20,17 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/firing.gd" id="16_nowjs"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/character_weapons_state_machine.gd" id="18_gi4pl"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon_state.gd" id="19_lk4n7"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/machine_gun.gd" id="19_wela8"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/machine_gun_state.gd" id="19_wela8"]
 [ext_resource type="PackedScene" uid="uid://bylc6wriv4awj" path="res://Scenes/Character/Bullets/bullet_1.tscn" id="20_fgewv"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/rocket_launcher.gd" id="20_rfo25"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/rocket_launcher_state.gd" id="20_rfo25"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/melee_weapon.gd" id="21_cr6j0"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/desert_eagle.gd" id="21_o8ar2"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/shotgun.gd" id="21_uxfjm"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/fire_spitter.gd" id="22_umggx"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/grenade_launcher.gd" id="23_lvog5"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/desert_eagle_state.gd" id="21_o8ar2"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/shotgun_state.gd" id="21_uxfjm"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/fire_spitter_state.gd" id="22_umggx"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/grenade_launcher_state.gd" id="23_lvog5"]
 [ext_resource type="PackedScene" uid="uid://cjprwo4qxqarf" path="res://Scenes/Character/Bullets/lead.tscn" id="24_njnma"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/flame_thrower.gd" id="24_spe2t"]
-[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/railgun.gd" id="25_6vkpp"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/flame_thrower_state.gd" id="24_spe2t"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/railgun_state.gd" id="25_6vkpp"]
 [ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
@@ -664,15 +664,18 @@ character = NodePath("..")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-22, -22, 44, 44)
 
-[node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state")]
+[node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state", "fire_spitter_sprite", "fire_spitter_hit_box")]
 script = ExtResource("35_p6h3e")
 fire_spitter_state = NodePath("../CharacterWeaponsStateMachine/FireSpitter")
+fire_spitter_sprite = NodePath("FireSpitterSprite")
+fire_spitter_hit_box = NodePath("FireSpitterHitBox")
 
 [node name="FireSpitterHitBox" type="CollisionPolygon2D" parent="FireSpitterWeapon"]
 position = Vector2(22, 0)
 polygon = PackedVector2Array(0, 0, 10, -22, 40, -22, 40, 22, 10, 22)
 
 [node name="FireSpitterSprite" type="Sprite2D" parent="FireSpitterWeapon"]
+self_modulate = Color(1, 1, 1, 0.25098)
 position = Vector2(45, -5.96046e-08)
 scale = Vector2(0.341797, 0.341797)
 texture = ExtResource("36_sj2j0")
@@ -683,6 +686,7 @@ texture = ExtResource("36_sj2j0")
 [connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/DesertEagleCoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_desert_eagle_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Shotgun/ShotgunCoolDown" to="CharacterWeaponsStateMachine/Shotgun" method="_on_shotgun_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/RocketLauncherCoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/FireSpitter/FireSpitterCoolDown" to="CharacterWeaponsStateMachine/FireSpitter" method="_on_fire_spitter_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_machine_gun_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

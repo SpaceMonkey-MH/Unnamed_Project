@@ -36,6 +36,8 @@ NOT DONE :
 - Bosses (levels).
 - Navigate through weapons via # keys.
 - User key mapping?
+- Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
+	target).
 
 ------------------------------------------------------------------------------------------------------
 DONE :

@@ -82,6 +82,7 @@ func state_input(event : InputEvent) -> void:
 				
 		can_fire = false
 		timer.start()
+		#print("can_fire in shotgun_state.gd: ", can_fire)
 
 
 # Called when the current_state becomes this state.

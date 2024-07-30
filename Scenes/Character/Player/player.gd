@@ -97,6 +97,8 @@ func character_ready():
 #	flip_h = true
 	# I think it is useless for now.
 	out_of_screen = not notifier.is_on_screen()
+	# Adding this so the player doesn't get queue freed.
+	out_of_screen = false
 
 
 func _process(_delta):

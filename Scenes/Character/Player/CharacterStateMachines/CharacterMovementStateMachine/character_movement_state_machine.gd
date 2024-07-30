@@ -93,7 +93,7 @@ func _physics_process(delta) -> void:
 #	if not character is Player and current_state is WanderState:
 ##		print("current_state is: ", current_state)
 #		current_state.wander(character)
-		
+	current_state.enemy_state_process(delta)
 
 # Used for the landing animation (the player can't move during this), this isn't very useful here.
 func check_if_can_move() -> bool:

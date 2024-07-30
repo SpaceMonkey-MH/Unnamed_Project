@@ -527,20 +527,13 @@ landing_state = NodePath("../Landing")
 
 [node name="Landing" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("idle_state", "air_state")]
 script = ExtResource("11_p7vgs")
-landing_animation_name = null
-jump_animation_name = null
 idle_state = NodePath("../Idle")
 air_state = NodePath("../Air")
-can_move = null
 
 [node name="Idle" type="Node" parent="CharacterMovementStateMachine" node_paths=PackedStringArray("air_state", "run_state")]
 script = ExtResource("12_4t18e")
 air_state = NodePath("../Air")
 run_state = NodePath("../Run")
-run_animation_name = null
-jump_animation_name = null
-air_animation_name = null
-can_move = null
 
 [node name="MovementStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 z_index = 2

@@ -123,5 +123,5 @@ func handle_character_out_of_screen() -> void:
 	#if character_is_dead:
 	await get_tree().create_timer(out_of_screen_death_timer).timeout
 	queue_free()
-	print("queue_free() of ", self)
+	#print("queue_free() of ", self)
 

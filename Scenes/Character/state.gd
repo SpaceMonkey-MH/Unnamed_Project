@@ -24,3 +24,7 @@ func on_enter() -> void:
 
 func on_exit() -> void:
 	pass
+
+
+func enemy_state_process(_delta):
+	pass

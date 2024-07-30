@@ -2,7 +2,7 @@ class_name EnemyState
 extends State
 
 # Player as a variable, so that it can be used by the states. To be assigned in the state machine.
-var player : CharacterClass
+var player : PlayerClass
 var move_speed : float
 # The distance to start following the player. So far it is a 1D follow, so a 1D distance, whatever that means.
 var follow_distance : float
@@ -22,3 +22,13 @@ var attack_wait_time : float
 var x_size_ep : float
 # The damage dealt by this enemy.
 var attack_damage : float
+
+
+# Just a safety, in case the player dies and gets queue freed, which should maybe not happen.
+# It doesn't work xd, so that means that I can't queue free the player, unless I want to do something complicated
+# like queue freeing the whole gang.
+#func enemy_state_process(_delta):
+	#print("player in enemy_state: ", player)
+	#if not player:
+		#player = PlayerClass.new()
+		#player.position = Vector2.ZERO

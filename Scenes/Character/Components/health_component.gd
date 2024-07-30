@@ -46,14 +46,15 @@ func _ready():
 	#print("Hello from health_component.gd with parent: ", get_parent())
 	#print("Health Component Timer: ", on_fire_timer)
 	# Just here to simulate a call.
-	set_on_fire(2.0, 10.0)
+	#set_on_fire(2.0, 10.0)
 	#on_fire_timer.wait_time = on_fire_wait_time
+	pass
 
 
 func _process(delta) -> void:
 	t += delta
 	if t >= 1:
-		var time = Time.get_datetime_dict_from_system()
+		#var time = Time.get_datetime_dict_from_system()
 		#print(time.second, " ", get_parent(), ": ", on_fire)
 		if on_fire:
 			# Creating an attack.

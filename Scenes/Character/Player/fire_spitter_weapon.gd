@@ -34,3 +34,4 @@ func _on_body_entered(body):
 		if child is HealthComponent:
 			# Deferring the call otherwise it doesn't work with the collision shape or smth.
 			child.call_deferred("damage", attack)
+			child.set_on_fire(fire_spitter_state.fire_duration, fire_spitter_state.fire_damage)

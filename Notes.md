@@ -370,3 +370,5 @@
 	this will ever happen.
 	Just thought about how I could have left the dead bodies on the ground by changing the collision mask instead
 	of disabling the hit box. Oh well.
+	Question: Should the enemies be allowed to move while on fire? FOr now, they stop at each hit for longer than
+	the time between two burns.

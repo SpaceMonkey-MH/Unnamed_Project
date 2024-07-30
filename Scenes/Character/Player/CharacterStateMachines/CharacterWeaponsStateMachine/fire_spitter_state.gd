@@ -11,7 +11,9 @@ extends WeaponsState
 @export var attack_damage : float = 20.0
 # I think the minimum effective cool down is 0.05, lower is useless as there is an await call in state_process()
 # that I don't think can be much lower.
-@export var reload_time : float = 0.1
+@export var reload_time : float = 0.2
+@export var fire_duration : float = 5.0
+@export var fire_damage : float = 10.0
 
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).

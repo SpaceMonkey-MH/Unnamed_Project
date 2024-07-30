@@ -13,6 +13,10 @@ signal damaged(node : Node, damage_taken : float)
 #@export var max_health : float = 100
 # The character as a variable, so that it can be damaged.
 @export var character : CharacterClass
+# The timer storing the time of "on fire" left as a variable so it can be started.
+@export var on_fire_timer : Timer
+## The wait time of that timer.
+#@export var on_fire_wait_time : float = 5.0
 # The health of the character, initialized to the max health, with a setter and a getter.
 @onready var health : float = character.max_health :
 	get:
@@ -31,18 +35,40 @@ signal damaged(node : Node, damage_taken : float)
 
 # Debug variable, used to execute code every second.
 var t : float = 0.0
+# Whether or not the character is on fire.
+var on_fire : bool = false
+# The value of the fire damage, which will be applied to health.
+var fire_damage : float = 10.0
 
 
-## Called when the node enters the scene tree for the first time.
-#func _ready():
-#	health = max_health
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	#print("Hello from health_component.gd with parent: ", get_parent())
+	#print("Health Component Timer: ", on_fire_timer)
+	# Just here to simulate a call.
+	set_on_fire(2.0, 10.0)
+	#on_fire_timer.wait_time = on_fire_wait_time
 
 
 func _process(delta) -> void:
 	t += delta
 	if t >= 1:
+		var time = Time.get_datetime_dict_from_system()
+		#print(time.second, " ", get_parent(), ": ", on_fire)
+		if on_fire:
+			# Creating an attack.
+			var attack : Attack = Attack.new()
+			attack.attack_damage = fire_damage
+			damage(attack)
 		health += 1
 		t = 0.0
+
+
+# Should be a function that handles the setting target on fire part, taking a duration and a damage for the burn.
+func set_on_fire(fire_duration : float, damage : float):
+	on_fire_timer.wait_time = fire_duration
+	on_fire_timer.start()
+	on_fire = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,3 +81,7 @@ func damage(attack : Attack):
 	
 	if health <= 0 and character.has_method("death"):
 		character.death()
+
+
+func _on_fire_duration_timer_timeout():
+	on_fire = false

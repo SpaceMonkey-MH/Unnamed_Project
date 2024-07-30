@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ofmg46djwodl"]
+[gd_scene load_steps=9 format=3 uid="uid://ofmg46djwodl"]
 
 [ext_resource type="PackedScene" uid="uid://bq653xirgnv8k" path="res://Scenes/UI/ui.tscn" id="1_kv158"]
 [ext_resource type="PackedScene" uid="uid://cthsy2erljdkt" path="res://Scenes/Character/Player/player.tscn" id="2_xkfwj"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://deft3xydco1mh" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="4_vwdav"]
 [ext_resource type="PackedScene" uid="uid://cv6wtd2pqvjb5" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.tscn" id="5_pn2ls"]
 [ext_resource type="PackedScene" uid="uid://fi71b5nrxf28" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.tscn" id="6_vfolm"]
-[ext_resource type="PackedScene" uid="uid://bdawrbt0v2h1o" path="res://Testings/ray_casting_test_character.tscn" id="7_0ow6q"]
-[ext_resource type="PackedScene" uid="uid://dmsf33ck3u60v" path="res://Testings/shape_casting_test_character.tscn" id="8_6g7in"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykabh"]
 texture = ExtResource("3_dlphg")
@@ -1460,26 +1458,45 @@ hframes = 4
 
 [node name="AttackDummy" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(1364, 1030)
+flashing_time = 0.1
+flashing_color = Color(1, 0, 0, 1)
+base_color = Color(1, 1, 1, 1)
+max_health = 100.0
+out_of_screen_death_timer = 1.5
 
 [node name="AttackDummy4" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(1323, 1030)
+flashing_time = 0.1
+flashing_color = Color(1, 0, 0, 1)
+base_color = Color(1, 1, 1, 1)
+max_health = 100.0
+out_of_screen_death_timer = 1.5
 
 [node name="AttackDummy2" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(236, 928)
+flashing_time = 0.1
+flashing_color = Color(1, 0, 0, 1)
+base_color = Color(1, 1, 1, 1)
+max_health = 100.0
+out_of_screen_death_timer = 1.5
 
 [node name="AttackDummy3" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(1406, 1030)
+flashing_time = 0.1
+flashing_color = Color(1, 0, 0, 1)
+base_color = Color(1, 1, 1, 1)
+max_health = 100.0
+out_of_screen_death_timer = 1.5
 
 [node name="TestMovingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_vfolm")]
 position = Vector2(458, 957)
 player = NodePath("../Player")
 
-[node name="RayCastingTestCharacter" parent="." instance=ExtResource("7_0ow6q")]
-position = Vector2(3546, 915)
-
-[node name="ShapeCastingTestCharacter" parent="." instance=ExtResource("8_6g7in")]
-position = Vector2(3626, 901)
-
 [node name="AttackDummy5" parent="." instance=ExtResource("5_pn2ls")]
 position = Vector2(2203, 917)
 scale = Vector2(5, 5)
+flashing_time = 0.1
+flashing_color = Color(1, 0, 0, 1)
+base_color = Color(1, 1, 1, 1)
+max_health = 100.0
+out_of_screen_death_timer = 1.5

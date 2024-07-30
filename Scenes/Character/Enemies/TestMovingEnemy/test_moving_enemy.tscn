@@ -122,7 +122,7 @@ graph_offset = Vector2(4, 11)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ltm7h"]
 radius = 100.0
 
-[node name="TestMovingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "animation_tree", "attack_hit_box", "hit_box")]
+[node name="TestMovingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "animation_tree", "attack_hit_box", "notifier", "hit_box")]
 z_index = -1
 collision_layer = 3
 collision_mask = 4
@@ -130,6 +130,7 @@ script = ExtResource("1_cmmdb")
 sprite_2d = NodePath("Sprite2D")
 animation_tree = NodePath("AnimationTree")
 attack_hit_box = NodePath("MeleeWeapon/AttackHitBox")
+notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
 
 [node name="HitBox" parent="." instance=ExtResource("2_mhakd")]
@@ -146,8 +147,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_1hkq0")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_kyko0")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "on_fire_timer") instance=ExtResource("2_kyko0")]
 character = NodePath("..")
+on_fire_timer = NodePath("FireDurationTimer")
+
+[node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
 
 [node name="Label" type="Label" parent="."]
 z_index = 2
@@ -206,10 +210,6 @@ text = "Movement State:"
 script = ExtResource("9_vkggd")
 state_machine = NodePath("../CharacterMovementStateMachine")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(9.53674e-07, 9.53674e-07)
-scale = Vector2(2, 2)
-
 [node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("attack_state")]
 script = ExtResource("12_1uuhp")
 attack_state = NodePath("../CharacterMovementStateMachine/Attack")
@@ -217,6 +217,12 @@ attack_state = NodePath("../CharacterMovementStateMachine/Attack")
 [node name="AttackHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
 shape = SubResource("CircleShape2D_ltm7h")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(2, 2)
+
+[connection signal="timeout" from="HealthComponent/FireDurationTimer" to="HealthComponent" method="_on_fire_duration_timer_timeout"]
 [connection signal="timeout" from="CharacterMovementStateMachine/Attack/AttackCooldownTimer" to="CharacterMovementStateMachine/Attack" method="_on_attack_timer_timeout"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

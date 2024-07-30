@@ -49,6 +49,8 @@ var air_jumps_current : int = air_jumps_max
 # Flashing is when the player takes damage.
 @export var flashing_color : Color = Color.CHOCOLATE
 @export var flashing_time : float = 0.1
+# I think it is useless for now.
+@export var notifier : VisibleOnScreenNotifier2D
 # Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
 var smoothed_mouse_pos : Vector2
 ## Just testing smth.
@@ -81,7 +83,7 @@ func _enter_tree():
 
 
 # Executed at the beginning of runtime, after _enter_tree().
-func _ready():
+func character_ready():
 	#print(85 * 191)
 #	print("Player is ready.")
 #	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
@@ -93,6 +95,8 @@ func _ready():
 	weapons_animation_tree.active = true	# Activating the animation trees so that the animations play.
 #	rotation_degrees = 180
 #	flip_h = true
+	# I think it is useless for now.
+	out_of_screen = not notifier.is_on_screen()
 
 
 func _process(_delta):
@@ -226,4 +230,4 @@ func take_damage():
 ## calls the procedure that handles what happens when the character is off-screen (queue_free() it if it's dead).
 #func _on_visible_on_screen_notifier_2d_screen_exited():
 ##	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
-#	handle_character_out_of_screen()
+	#handle_character_out_of_screen()

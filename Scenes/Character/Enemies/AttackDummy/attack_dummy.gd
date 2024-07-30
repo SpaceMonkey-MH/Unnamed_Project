@@ -16,6 +16,12 @@ const JUMP_VELOCITY = -400.0
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 ## HitBox as a variable, so that it can be disabled.
 #@export var hit_box : CollisionShape2D
+# Trying to use the notifier in export.
+@export var notifier : VisibleOnScreenNotifier2D
+
+
+func character_ready():
+	out_of_screen = not notifier.is_on_screen()
 
 
 #func _process(_delta):
@@ -74,4 +80,12 @@ func take_damage():
 # calls the procedure that handles what happens when the character is off-screen (queue_free() it if it's dead).
 func _on_visible_on_screen_notifier_2d_screen_exited():
 #	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
-	handle_character_out_of_screen()
+	## Should not be used anymore, but not sure.
+	#handle_character_out_of_screen()
+	out_of_screen = true
+	if character_is_dead:
+		handle_character_out_of_screen()
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	out_of_screen = false

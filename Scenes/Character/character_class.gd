@@ -5,19 +5,28 @@ extends CharacterBody2D
 
 # HitBox as a variable, so that it can be disabled.
 @export var hit_box : HitBoxClass
+# I'm trying stuff with the visible on screen notifier, in oreder to properly queue free the characters when dead.
+#@export var notifier = VisibleOnScreenNotifier2D
 # The maximum health of the character.
 @export var max_health : float = 100.0
+# Timer before queue_free() when the dead characters fall out of the screen.
+@export var out_of_screen_death_timer : float = 1.5
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
 var death_animation_timer : float = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
-# Whether or not the character is dead.
+# Whether or not the character is dead. I think this is useless? Maybe not.
 var character_is_dead : bool = false
-# Timer before queue_free() when the dead characters fall out of the screen.
-@export var out_of_screen_death_timer : float = 1.5
 # Move speed of the character, here so it can be added to all the relative states. In pixels/second.
 var move_speed : float = 0.0
+# Whether or not the character is out of screen. Used to queue free it when dead. Initialized here for placeholder
+# but really set in _ready() in subclasses.
+@export var out_of_screen : bool = false
+
+
+func _ready():
+	character_ready()
 
 
 # Creating a _process() procedure so that there can be code inside it and inside the functions in subclasses.
@@ -26,6 +35,8 @@ func _process(delta) -> void:
 #	print("Move speed of ", self, " from character_class.gd: ", move_speed)
 	character_process(delta)
 #	print("Hello from _physics_process in character_class.")
+	# Doesn't seem to work. I Apparently cannot do this in superclass, idk.
+	#print(notifier.is_on_screen())
 
 
 # Creating a _physics_process() procedure so that it regroups the test if the body is outside of the screen
@@ -34,6 +45,11 @@ func _physics_process(delta) -> void:
 #	print("Move speed of ", self, " from character_class.gd: ", move_speed)
 	character_physics_process(delta)
 #	print("Hello from _physics_process in character_class.")
+
+
+# Just a placeholder.
+func character_ready():
+	pass
 
 
 # Just a placeholder.
@@ -67,6 +83,16 @@ func death() -> void:
 #	queue_free()
 	# Changing the Z-index so that the character is visible when falling through the ground.
 	z_index += 2
+	## Trying to queue free when out of screen.
+	#while not out_of_screen:
+		## Passing the time to allow the character to fall out of the screen.
+		#await get_tree().create_timer(0.1)
+	#await get_tree().create_timer(out_of_screen_death_timer).timeout
+	#queue_free()
+	#print("queue_free() of ", self)
+	if out_of_screen:
+		handle_character_out_of_screen()
+	
 
 
 func deactivate_node() -> void:
@@ -90,10 +116,12 @@ func death_animation() -> void:
 	pass
 
 
+# I think this is useless now, Idk.
 # Procedure that handles what happens when a character is out of screen; called by the procedure connected
 # to the VisibleOnScreenNotifier2D of the character.
 func handle_character_out_of_screen() -> void:
-	if character_is_dead:
-		await get_tree().create_timer(out_of_screen_death_timer).timeout
-		queue_free()
-		#print("queue_free() of ", self)
+	#if character_is_dead:
+	await get_tree().create_timer(out_of_screen_death_timer).timeout
+	queue_free()
+	print("queue_free() of ", self)
+

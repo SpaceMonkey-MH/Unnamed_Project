@@ -466,7 +466,7 @@ transitions = ["Start", "desert_eagle", SubResource("AnimationNodeStateMachineTr
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "hit_box")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "notifier", "hit_box")]
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
@@ -474,6 +474,7 @@ body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
 fire_spitter_area_2D = NodePath("FireSpitterWeapon")
 fire_spitter_sprite_2d = NodePath("FireSpitterWeapon/FireSpitterSprite")
+notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
@@ -502,6 +503,12 @@ libraries = {
 [node name="WeaponsAnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_0orfo")
 anim_player = NodePath("../WeaponsAnimationPlayer")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "on_fire_timer") instance=ExtResource("32_5aed7")]
+character = NodePath("..")
+on_fire_timer = NodePath("FireDurationTimer")
+
+[node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("8_8i88a")
@@ -658,12 +665,6 @@ melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
 [node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
 shape = SubResource("CircleShape2D_odl77")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("32_5aed7")]
-character = NodePath("..")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-22, -22, 44, 44)
-
 [node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state", "fire_spitter_sprite", "fire_spitter_hit_box")]
 script = ExtResource("35_p6h3e")
 fire_spitter_state = NodePath("../CharacterWeaponsStateMachine/FireSpitter")
@@ -680,8 +681,12 @@ position = Vector2(45, -5.96046e-08)
 scale = Vector2(0.341797, 0.341797)
 texture = ExtResource("36_sj2j0")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-22, -22, 44, 44)
+
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="HealthComponent/FireDurationTimer" to="HealthComponent" method="_on_fire_duration_timer_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/DesertEagleCoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_desert_eagle_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Shotgun/ShotgunCoolDown" to="CharacterWeaponsStateMachine/Shotgun" method="_on_shotgun_cool_down_timeout"]
@@ -689,5 +694,5 @@ texture = ExtResource("36_sj2j0")
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FireSpitter/FireSpitterCoolDown" to="CharacterWeaponsStateMachine/FireSpitter" method="_on_fire_spitter_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_machine_gun_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -5,12 +5,13 @@
 [ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="2_assgn"]
 [ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="3_l1p6l"]
 
-[node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "hit_box")]
+[node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "notifier", "hit_box")]
 z_index = -1
 collision_layer = 3
 collision_mask = 4
 script = ExtResource("1_x5k5i")
 sprite_2d = NodePath("Sprite2D")
+notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
 
 [node name="HitBox" parent="." instance=ExtResource("3_l1p6l")]
@@ -18,8 +19,11 @@ hit_box = NodePath("HitBox")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_assgn")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("2_1oxxk")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "on_fire_timer") instance=ExtResource("2_1oxxk")]
 character = NodePath("..")
+on_fire_timer = NodePath("FireDurationTimer")
+
+[node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
 
 [node name="Label" type="Label" parent="."]
 z_index = 2
@@ -33,4 +37,6 @@ text = "Attack Dummy"
 position = Vector2(-9.53674e-07, -9.53674e-07)
 scale = Vector2(2, 2)
 
+[connection signal="timeout" from="HealthComponent/FireDurationTimer" to="HealthComponent" method="_on_fire_duration_timer_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

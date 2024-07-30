@@ -360,3 +360,13 @@
 ## - __2024/07/29:__
 	I have an issue with the input events for the weapons. They need to be unhandled for them not to happen when
 	clicking on the UI, but this doesn't work with the machine gun.
+
+## - __2024/07/30:__
+	Uncovered a new bug: the enemies that die out of screen, of burn damage for instance, don't get queue freed
+	because they don't leave the screen while dead. Trying to fix this. Fixing this is not that hard, but it will
+	result in a lot of boilerplate code. That's ok I think, I don't see how to do better than that. I think it
+	worked, but I don't know how to be sure. I could also replace the await by a real timer, so that should the
+	dead bodies come back on screen, theywould not dissapear on screen. Would use Timer.paused. I don't think
+	this will ever happen.
+	Just thought about how I could have left the dead bodies on the ground by changing the collision mask instead
+	of disabling the hit box. Oh well.

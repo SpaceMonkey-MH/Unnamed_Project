@@ -33,6 +33,8 @@ const JUMP_VELOCITY = -400.0
 @export var attack_damage : float = 20.0
 # The AttackHitBox as a variable, so that its radius can be changed.
 @export var attack_hit_box : CollisionShape2D
+# Trying to use the notifier in export.
+@export var notifier : VisibleOnScreenNotifier2D
 
 
 func _enter_tree() -> void:
@@ -41,17 +43,20 @@ func _enter_tree() -> void:
 	move_speed = enemy_move_speed
 
 
-func _ready() -> void:
+func character_ready() -> void:
 #	print("TestMovingEnemy is ready.")
 	animation_tree.active = true
 	attack_hit_box.shape.radius = attack_range
 	#print("attack_hit_box.shape.radius: ", attack_hit_box.shape.radius)
 #	move_speed = SPEED
 #	print(move_speed)
+	out_of_screen = not notifier.is_on_screen()
 
 
 # I don't know what I'm doing.
 func character_process(_delta) -> void:
+	## This should work, but I'd like to try something else.
+	#print(notifier.is_on_screen())
 	pass
 
 
@@ -103,5 +108,11 @@ func take_damage() -> void:
 # calls the procedure that handles what happens when the character is off-screen (queue_free() it if it's dead).
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 #	print("Hello from _on_visible_on_screen_notifier_2d_screen_exited() in attack_dummy.gd (", self, ").")
-	handle_character_out_of_screen()
+	#print(self, " is out of screen.")
+	out_of_screen = true
+	if character_is_dead:
+		handle_character_out_of_screen()
 
+
+func _on_visible_on_screen_notifier_2d_screen_entered():
+	out_of_screen = false

@@ -609,6 +609,7 @@ previous_weapon_state = NodePath("../RocketLauncher")
 timer = NodePath("FireSpitterCoolDown")
 
 [node name="FireSpitterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FireSpitter"]
+one_shot = true
 
 [node name="MachineGun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("19_wela8")
@@ -626,6 +627,7 @@ next_weapon_state = NodePath("../FlameThrower")
 previous_weapon_state = NodePath("../MachineGun")
 
 [node name="GrenadeLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/GrenadeLauncher"]
+one_shot = true
 
 [node name="FlameThrower" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("24_spe2t")
@@ -633,6 +635,7 @@ next_weapon_state = NodePath("../Railgun")
 previous_weapon_state = NodePath("../GrenadeLauncher")
 
 [node name="FlameThrowerCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FlameThrower"]
+one_shot = true
 
 [node name="Railgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
 script = ExtResource("25_6vkpp")
@@ -640,6 +643,7 @@ next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../FlameThrower")
 
 [node name="RailgunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Railgun"]
+one_shot = true
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 z_index = 2

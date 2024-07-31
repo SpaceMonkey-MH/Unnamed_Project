@@ -56,6 +56,7 @@ func _process(delta) -> void:
 	if t >= 1:
 		#var time = Time.get_datetime_dict_from_system()
 		#print(time.second, " ", get_parent(), ": ", on_fire)
+		# I don't know how this doesn't overlap or whatever, but I'll take it.
 		if on_fire:
 			# Creating an attack.
 			var attack : Attack = Attack.new()
@@ -66,14 +67,15 @@ func _process(delta) -> void:
 
 
 # Should be a function that handles the setting target on fire part, taking a duration and a damage for the burn.
-func set_on_fire(fire_duration : float, damage : float):
+# I don't know how this doesn't overlap or whatever, but I'll take it.
+func set_on_fire(fire_duration : float = 5.0, damage : float = 10.0):
 	on_fire_timer.wait_time = fire_duration
 	on_fire_timer.start()
 	on_fire = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func damage(attack : Attack):
+func damage(attack : Attack = Attack.new()):
 	health -= attack.attack_damage
 	if character.has_method("take_damage"):
 		character.take_damage()
@@ -84,5 +86,6 @@ func damage(attack : Attack):
 		character.death()
 
 
+# I don't know how this doesn't overlap or whatever, but I'll take it.
 func _on_fire_duration_timer_timeout():
 	on_fire = false

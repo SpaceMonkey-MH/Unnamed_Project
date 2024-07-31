@@ -372,3 +372,7 @@
 	of disabling the hit box. Oh well.
 	Question: Should the enemies be allowed to move while on fire? FOr now, they stop at each hit for longer than
 	the time between two burns.
+
+## - __2024/07/31:__
+	I have kinda decided to put the tick rate of the burning to a fixed 1 per second, so I didn't put any way to
+	change this variable easily (it is not even a variable). I kinda can't be bothered to, Idk.

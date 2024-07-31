@@ -38,6 +38,8 @@ NOT DONE :
 - User key mapping?
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target).
+- Fix hit state for tme.
+- Add Flame Thrower.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -72,5 +74,6 @@ DONE :
 - Make it so you can't reload by switching weapons. // DONE.
 - Solve the issue of the Z index when dying (need to be seen through the ground). // DONE.
 - Stop reload when on a different weapon. // (paused the timer) DONE.
-- Add shotgun weapon. // DONE.
+- Add Shotgun. // DONE.
 - Make it so that you can't shoot when clicking on the UI. // (unhandled input) DONE.
+- Add Fire Spitter. // DONE.

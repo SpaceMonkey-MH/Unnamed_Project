@@ -1,15 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://bk6w5w8jhfplu"]
 
-[ext_resource type="Script" path="res://Scenes/Character/Bullets/bullet_3.gd" id="1_tdb7g"]
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/rocket.gd" id="1_c3jji"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nl0b"]
 radius = 5.0
 height = 40.0
 
-[node name="Bullet3" type="CharacterBody2D"]
+[node name="Rocket" type="CharacterBody2D"]
 collision_layer = 0
 collision_mask = 6
-script = ExtResource("1_tdb7g")
+script = ExtResource("1_c3jji")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_1nl0b")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0
@@ -18,7 +22,3 @@ offset_right = 20.0
 offset_bottom = 5.0
 color = Color(0.760784, 0.054902, 0.156863, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="HitBox" type="CollisionShape2D" parent="."]
-rotation = -1.5708
-shape = SubResource("CapsuleShape2D_1nl0b")

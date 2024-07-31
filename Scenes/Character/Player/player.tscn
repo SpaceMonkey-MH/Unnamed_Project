@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=74 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -31,9 +31,10 @@
 [ext_resource type="PackedScene" uid="uid://cjprwo4qxqarf" path="res://Scenes/Character/Bullets/lead.tscn" id="24_njnma"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/flame_thrower_state.gd" id="24_spe2t"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/railgun_state.gd" id="25_6vkpp"]
-[ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/bullet_3.tscn" id="25_hx2jg"]
+[ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/rocket.tscn" id="27_30sim"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
+[ext_resource type="PackedScene" uid="uid://dy3a7w7qbtgka" path="res://Scenes/Character/Bullets/napalm.tscn" id="32_gvwh5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
 
@@ -596,7 +597,7 @@ script = ExtResource("20_rfo25")
 timer = NodePath("RocketLauncherCoolDown")
 next_weapon_state = NodePath("../FireSpitter")
 previous_weapon_state = NodePath("../Shotgun")
-bullet_3_scene = ExtResource("25_hx2jg")
+bullet_3_scene = ExtResource("27_30sim")
 
 [node name="RocketLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/RocketLauncher"]
 one_shot = true
@@ -629,10 +630,12 @@ previous_weapon_state = NodePath("../MachineGun")
 [node name="GrenadeLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/GrenadeLauncher"]
 one_shot = true
 
-[node name="FlameThrower" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="FlameThrower" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("24_spe2t")
+timer = NodePath("FlameThrowerCoolDown")
 next_weapon_state = NodePath("../Railgun")
 previous_weapon_state = NodePath("../GrenadeLauncher")
+napalm_scene = ExtResource("32_gvwh5")
 
 [node name="FlameThrowerCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FlameThrower"]
 one_shot = true
@@ -690,6 +693,7 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/RocketLauncherCoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FireSpitter/FireSpitterCoolDown" to="CharacterWeaponsStateMachine/FireSpitter" method="_on_fire_spitter_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_machine_gun_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/FlameThrower/FlameThrowerCoolDown" to="CharacterWeaponsStateMachine/FlameThrower" method="_on_flame_thrower_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

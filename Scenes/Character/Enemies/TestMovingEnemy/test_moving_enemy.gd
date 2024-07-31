@@ -1,7 +1,7 @@
 class_name TestMovingEnemy
 extends EnemyClass
 
-# Not used currently
+# Not used currently.
 const JUMP_VELOCITY = -400.0
 # The speed of the enemy, in pixels/second.
 @export var enemy_move_speed = 100.0

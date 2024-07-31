@@ -1,4 +1,4 @@
-class_name Bullet3
+class_name Rocket
 extends Bullet
 
 # The older versions and their explanations can be found in old_bullet_3.gd.

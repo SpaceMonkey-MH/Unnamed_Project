@@ -2,19 +2,30 @@ extends CharacterBody2D
 
 class_name Bullet
 
+# Putting this here because I don't know where to put it. This is the size of the smallest character in the game,
+# used for ray-casting.
+@export var minimum_character_size : float = 40.0
 var attack_damage : float = 10.0
 var aoe_attack_damage : float = 10.0
 var speed_factor : float = 10.0
 var direction : Vector2 = Vector2.ZERO
-# Putting this here because I don't know where to put it. This is the size of the smallest character in the game,
-# used for ray-casting.
-@export var minimum_character_size : float = 40.0
 # The size of the AoE/explosion.
 var aoe_size : float = 80.0
+# The movement vector for the bullet.
+@onready var mov : Vector2 = direction.normalized() * speed_factor
 
 
-func _physics_process(_delta) -> void:
-	var collision = move_and_collide(direction.normalized() * speed_factor)
+# This stops rocket.gd from working normally.
+#func _ready() -> void:
+	#mov = direction.normalized() * speed_factor
+
+
+func _physics_process(delta) -> void:
+	# I'm working on a better way.
+	#var collision = move_and_collide(direction.normalized() * speed_factor)
+	mov.x = apply_x_mod(mov.x, delta)
+	mov.y = apply_y_mod(mov.y, delta)
+	var collision = move_and_collide(mov)
 	var attack = Attack.new()
 	attack.attack_damage = attack_damage
 	if collision != null:
@@ -48,6 +59,16 @@ func explosion_fx() -> void:
 func area_of_effect() -> void:
 	pass
 
-#
+
+# This is a placeholder, for air resistance for instance.
+func apply_x_mod(x_velocity : float, delta : float) -> float:
+	return x_velocity
+
+
+# This is a placeholder, for gravity for instance.
+func apply_y_mod(y_velocity : float, delta : float) -> float:
+	return y_velocity
+
+
 #func _on_area_entered(area):
 #	print(area)

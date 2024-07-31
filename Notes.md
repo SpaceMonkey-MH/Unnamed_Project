@@ -376,3 +376,9 @@
 ## - __2024/07/31:__
 	I have kinda decided to put the tick rate of the burning to a fixed 1 per second, so I didn't put any way to
 	change this variable easily (it is not even a variable). I kinda can't be bothered to, Idk.
+	Not sure how to handle the jump speed and gravity and so on of the enemies, because it would be long to
+	set individually, and I don't know if I can do it automatically.
+	There still is something weird about the hit state of tme.
+	The projectiles of the Flame Thrower are functionning correctly, with gravity and shit, but that raises an issue:
+	the projectiles always face the same direction, but maybe they should turn with their movement. Idk, for it
+	might be logical that they stay the same, being a fluid.

@@ -39,7 +39,7 @@ NOT DONE :
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target).
 - Fix hit state for tme.
-- Add Flame Thrower.
+- Add Flame Thrower. Connect the burning ground mechanic to the projectile.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

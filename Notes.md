@@ -381,4 +381,6 @@
 	There still is something weird about the hit state of tme.
 	The projectiles of the Flame Thrower are functionning correctly, with gravity and shit, but that raises an issue:
 	the projectiles always face the same direction, but maybe they should turn with their movement. Idk, for it
-	might be logical that they stay the same, being a fluid.
+	might be logical that they stay the same, being a fluid. I think I'll leave it that way.Also, it lacks the
+	connection of the damage from the weapon to the fire. Also, maybe it would be good to set the target on fire
+	just by touching them, not only when they walk over the burning ground.

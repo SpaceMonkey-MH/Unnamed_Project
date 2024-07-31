@@ -29,7 +29,7 @@ func state_process(_delta) -> void:
 	if fire_pressed and can_fire:
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), napalm_scene,
 			attack_damage, speed_factor)
-		print("Hello from state_process() in flame_thrower_state.gd.")
+		#print("Hello from state_process() in flame_thrower_state.gd.")
 		can_fire = false
 		timer.start()
 

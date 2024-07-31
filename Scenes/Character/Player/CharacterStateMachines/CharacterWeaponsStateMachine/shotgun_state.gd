@@ -51,13 +51,14 @@ func state_input(event : InputEvent) -> void:
 		# The position of the character as a variable so it is easier to manipulate.
 		var char_pos : Vector2 = character.position
 		# The vector from the character pos to mouse_pos.
-		var dir_vector : Vector2 = character.get_global_mouse_position() - char_pos
+		var dir_vector : Vector2 = mouse_pos - char_pos
 		# If the number of leads is even (and not 0, 0 has been handled above).
 		if nb_leads % 2 == 0:
 			# I'm trying to make the two middle projectiles parallel, so I offset the whole thing, or maybe not,
 			# I'll see. FF this, too complex to handle for nothing.
 			var offset : Vector2 = Vector2(0, 0)
 			# We iterate on half that number.
+			#print("nb_leads in shotgun_state.gd: ", nb_leads / 2)	# This, weirdly, gives a warning about int div.
 			for shot_angle in range (nb_leads / 2):
 				#print("shot_angle: ", shot_angle)
 				#print("incr_angle: ", incr_angle)

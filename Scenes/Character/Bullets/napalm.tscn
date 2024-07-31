@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy3a7w7qbtgka"]
+[gd_scene load_steps=4 format=3 uid="uid://dy3a7w7qbtgka"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Bullets/napalm.gd" id="1_xif7y"]
+[ext_resource type="PackedScene" uid="uid://k0s5hjh56ldw" path="res://Scenes/Character/Bullets/burning_ground.tscn" id="2_st8a8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3fbn1"]
 radius = 5.0
@@ -10,6 +11,7 @@ height = 40.0
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_xif7y")
+burning_ground_scene = ExtResource("2_st8a8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708

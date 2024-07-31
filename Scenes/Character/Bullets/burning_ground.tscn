@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://k0s5hjh56ldw"]
+[gd_scene load_steps=7 format=3 uid="uid://k0s5hjh56ldw"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Bullets/burning_ground.gd" id="1_i5h4d"]
 [ext_resource type="Texture2D" uid="uid://vssh7y81m56x" path="res://Assets/Sprites/Player/Player_V1_40p_black.png" id="1_qgmxf"]
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/burning_ground_area.gd" id="2_deklm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ygt3r"]
+size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6fuds"]
 size = Vector2(40, 40)
@@ -17,24 +21,33 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BurningGround" type="Area2D" node_paths=PackedStringArray("fire_duration_timer", "burn_check_timer")]
+[node name="BurningGround" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_i5h4d")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ygt3r")
+
+[node name="BurningGroundArea" type="Area2D" parent="." node_paths=PackedStringArray("fire_duration_timer", "burn_check_timer")]
+script = ExtResource("2_deklm")
 fire_duration_timer = NodePath("TimeBurningGroundTimer")
 burn_check_timer = NodePath("BurnCheckTimer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurningGroundArea"]
 shape = SubResource("RectangleShape2D_6fuds")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BurningGroundArea"]
+self_modulate = Color(1, 1, 1, 0.501961)
 sprite_frames = SubResource("SpriteFrames_jkqt6")
 animation = &"burning"
 
-[node name="TimeBurningGroundTimer" type="Timer" parent="."]
+[node name="TimeBurningGroundTimer" type="Timer" parent="BurningGroundArea"]
 one_shot = true
 
-[node name="BurnCheckTimer" type="Timer" parent="."]
+[node name="BurnCheckTimer" type="Timer" parent="BurningGroundArea"]
 one_shot = true
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="TimeBurningGroundTimer" to="." method="_on_time_burning_ground_timer_timeout"]
-[connection signal="timeout" from="BurnCheckTimer" to="." method="_on_burn_check_timer_timeout"]
+[connection signal="body_entered" from="BurningGroundArea" to="BurningGroundArea" method="_on_body_entered"]
+[connection signal="timeout" from="BurningGroundArea/TimeBurningGroundTimer" to="BurningGroundArea" method="_on_time_burning_ground_timer_timeout"]
+[connection signal="timeout" from="BurningGroundArea/BurnCheckTimer" to="BurningGroundArea" method="_on_burn_check_timer_timeout"]

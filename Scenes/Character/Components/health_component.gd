@@ -68,9 +68,10 @@ func _process(delta) -> void:
 
 # Should be a function that handles the setting target on fire part, taking a duration and a damage for the burn.
 # I don't know how this doesn't overlap or whatever, but I'll take it.
-func set_on_fire(fire_duration : float = 5.0, damage : float = 10.0):
+func set_on_fire(fire_duration : float = 5.0, f_damage : float = 10.0):
 	on_fire_timer.wait_time = fire_duration
 	on_fire_timer.start()
+	fire_damage = f_damage
 	on_fire = true
 
 

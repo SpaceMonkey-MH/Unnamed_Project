@@ -61,12 +61,12 @@ func area_of_effect() -> void:
 
 
 # This is a placeholder, for air resistance for instance.
-func apply_x_mod(x_velocity : float, delta : float) -> float:
+func apply_x_mod(x_velocity : float, _delta : float) -> float:
 	return x_velocity
 
 
 # This is a placeholder, for gravity for instance.
-func apply_y_mod(y_velocity : float, delta : float) -> float:
+func apply_y_mod(y_velocity : float, _delta : float) -> float:
 	return y_velocity
 
 

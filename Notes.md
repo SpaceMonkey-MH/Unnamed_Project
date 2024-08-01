@@ -381,6 +381,9 @@
 	There still is something weird about the hit state of tme.
 	The projectiles of the Flame Thrower are functionning correctly, with gravity and shit, but that raises an issue:
 	the projectiles always face the same direction, but maybe they should turn with their movement. Idk, for it
-	might be logical that they stay the same, being a fluid. I think I'll leave it that way.Also, it lacks the
-	connection of the damage from the weapon to the fire. Also, maybe it would be good to set the target on fire
-	just by touching them, not only when they walk over the burning ground.
+	might be logical that they stay the same, being a fluid. I think I'll leave it that way.
+	Also, it lacks the connection of the damage from the weapon to the fire. Also, maybe it would be good to set
+	the target on fire just by touching them, not only when they walk over the burning ground.
+	The set_on_fire() procedure is weird: its parameters are set as float, but, when called, it says variant. Idk.
+	The burning ground spawn just in front of the hit character, so it doesnt burn. Will have to fix that. Or
+	perhaps not, idk. The enemies will mostly be moving anyway. I think I should. Idk. Dad said I shouldn't.

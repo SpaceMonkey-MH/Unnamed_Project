@@ -37,9 +37,16 @@ func apply_y_mod(y_velocity : float, delta : float) -> float:
 	return y_velocity + (gravity / gravity_divider) * delta
 
 
+# Not really an AoE but whatever.
 func area_of_effect() -> void:
+	# hit_node was a parameter.
+	#for child in hit_node.get_children():
+		#if child is HealthComponent:
+			#child.set_on_fire()
 	var burning_ground_instance : Object = burning_ground_scene.instantiate()
 	burning_ground_instance.position = global_position
-	burning_ground_instance.show()
+	burning_ground_instance.burn_time = fire_duration
+	burning_ground_instance.burn_damage = fire_damage
+	#burning_ground_instance.show()
 	#print("Parent of napalm: ", get_parent().get_parent().get_parent().get_parent())
 	level.add_child(burning_ground_instance)

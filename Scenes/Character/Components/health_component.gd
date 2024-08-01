@@ -42,7 +42,7 @@ var fire_damage : float = 10.0
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	#print("Hello from health_component.gd with parent: ", get_parent())
 	#print("Health Component Timer: ", on_fire_timer)
 	# Just here to simulate a call.
@@ -62,21 +62,29 @@ func _process(delta) -> void:
 			var attack : Attack = Attack.new()
 			attack.attack_damage = fire_damage
 			damage(attack)
-		health += 1
+		health += 10
 		t = 0.0
 
 
 # Should be a function that handles the setting target on fire part, taking a duration and a damage for the burn.
 # I don't know how this doesn't overlap or whatever, but I'll take it.
-func set_on_fire(fire_duration : float = 5.0, f_damage : float = 10.0):
+func set_on_fire(fire_duration : float = 5.0, f_damage : float = 10.0) -> void:
 	on_fire_timer.wait_time = fire_duration
+	#if on_fire_timer.time_left == 0.0:
+		#on_fire_timer.start()
+	#else:
+		#print("Timer stopped and re-started in set_on_fire() in health_component.gd.")
+		#on_fire_timer.stop()
+		#on_fire_timer.start()
+	on_fire_timer.stop()
 	on_fire_timer.start()
 	fire_damage = f_damage
-	on_fire = true
+	if fire_duration != 0.0:
+		on_fire = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func damage(attack : Attack = Attack.new()):
+func damage(attack : Attack = Attack.new()) -> void:
 	health -= attack.attack_damage
 	if character.has_method("take_damage"):
 		character.take_damage()
@@ -88,5 +96,6 @@ func damage(attack : Attack = Attack.new()):
 
 
 # I don't know how this doesn't overlap or whatever, but I'll take it.
-func _on_fire_duration_timer_timeout():
+func _on_fire_duration_timer_timeout() -> void:
 	on_fire = false
+	#print("Timer timeout in _on_fire_duration_timer_timeout() in health_component.gd.")

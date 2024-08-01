@@ -8,6 +8,9 @@ extends WeaponsState
 @export var attack_damage : float = 10
 @export var speed_factor : float = 10
 @export var reload_time : float = 0.2
+# These are the variables for the burning of the characters.
+@export var fire_duration : float = 10.0
+@export var fire_damage : float = 10.0
 
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).
@@ -28,7 +31,7 @@ func state_process(_delta) -> void:
 		#pass
 	if fire_pressed and can_fire:
 		weapon_fire(get_parent().get_parent().position, character.get_global_mouse_position(), napalm_scene,
-			attack_damage, speed_factor)
+			attack_damage, speed_factor, 0.0, 0.0, fire_duration, fire_damage)
 		#print("Hello from state_process() in flame_thrower_state.gd.")
 		can_fire = false
 		timer.start()

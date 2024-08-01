@@ -11,6 +11,9 @@ var speed_factor : float = 10.0
 var direction : Vector2 = Vector2.ZERO
 # The size of the AoE/explosion.
 var aoe_size : float = 80.0
+var fire_duration : float = 0.0
+var fire_damage : float = 0.0
+var time_to_effect : float = 0.0
 # The movement vector for the bullet.
 @onready var mov : Vector2 = direction.normalized() * speed_factor
 
@@ -39,17 +42,22 @@ func _physics_process(delta) -> void:
 		for child in collider.get_children():
 			if child is HealthComponent:
 				child.damage(attack)
+				# We check if their is a fire_duration set, which would mean that we want to set on fire.
+				if fire_duration != 0.0:
+					child.set_on_fire(fire_duration, fire_damage)
 	#			print("hello")
-				explosion_fx()
-				area_of_effect()
+				#explosion_fx()
+				#area_of_effect()
 				# Creates a crash because it hits twice so it can hit something queue_freed. <-Idk what this means.
 #				await get_tree().create_timer(0.001).timeout
-				queue_free()
-		if collider is TileMap:
-#			print("hello2")
-			explosion_fx()
-			area_of_effect()
-			queue_free()
+		explosion_fx()
+		area_of_effect()
+		queue_free()
+		#if collider is TileMap:
+##			print("hello2")
+			#explosion_fx()
+			#area_of_effect()
+			#queue_free()
 
 
 func explosion_fx() -> void:

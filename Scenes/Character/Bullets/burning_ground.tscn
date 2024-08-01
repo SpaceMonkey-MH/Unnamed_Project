@@ -21,10 +21,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BurningGround" type="CharacterBody2D"]
+[node name="BurningGround" type="CharacterBody2D" node_paths=PackedStringArray("burning_ground_area")]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_i5h4d")
+burning_ground_area = NodePath("BurningGroundArea")
 
 [node name="HitBox" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ygt3r")

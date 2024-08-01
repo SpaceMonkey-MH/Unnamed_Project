@@ -32,10 +32,16 @@ func _ready():
 	#print("Hello from _ready() in burning_ground.gd.")
 
 
+#func _process(_delta):
+	#var time = Time.get_datetime_dict_from_system()
+	#print(time.second, ": ", monitoring, " burn_check_timer.time_left: ", burn_check_timer.time_left)
+
+
 func _on_burn_check_timer_timeout():
 	monitoring = false
 	await get_tree().create_timer(0.05).timeout
 	monitoring = true
+	burn_check_timer.start()
 
 
 func _on_time_burning_ground_timer_timeout():
@@ -48,5 +54,4 @@ func _on_body_entered(body):
 	#print("Body entered: ", body)
 	for child in body.get_children():
 		if child is HealthComponent:
-			# Deferring the call otherwise it doesn't work with the collision shape or smth.
 			child.set_on_fire(burn_time, burn_damage)

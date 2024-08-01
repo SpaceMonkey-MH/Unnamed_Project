@@ -608,6 +608,7 @@ fire_spitter_weapon = NodePath("../../FireSpitterWeapon")
 next_weapon_state = NodePath("../MachineGun")
 previous_weapon_state = NodePath("../RocketLauncher")
 timer = NodePath("FireSpitterCoolDown")
+fire_duration = 0.0
 
 [node name="FireSpitterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FireSpitter"]
 one_shot = true

@@ -39,7 +39,6 @@ NOT DONE :
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target).
 - Fix hit state for tme.
-- Add Flame Thrower. Connect the burning ground mechanic to the projectile.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -77,3 +76,7 @@ DONE :
 - Add Shotgun. // DONE.
 - Make it so that you can't shoot when clicking on the UI. // (unhandled input) DONE.
 - Add Fire Spitter. // DONE.
+- Add Flame Thrower. // DONE.
+	Connect the burning ground mechanic to the projectile. // DONE.
+	Connect the burning ground variables to the weapon variables. // DONE.
+	Have the enemies burn on projectile contact. // DONE.

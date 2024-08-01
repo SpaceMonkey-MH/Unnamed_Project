@@ -8,10 +8,13 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_1de03"]
 radius = 25.0
 
-[node name="GrenadeFragment" type="CharacterBody2D"]
+[node name="GrenadeFragment" type="CharacterBody2D" node_paths=PackedStringArray("aoe_area", "aoe_c_s", "fuse_timer")]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_qstn7")
+aoe_area = NodePath("Area2D")
+aoe_c_s = NodePath("Area2D/CollisionShape2D")
+fuse_timer = NodePath("FuseTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jntyq")
@@ -27,3 +30,7 @@ color = Color(0.117821, 0.329161, 9.62615e-08, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_1de03")
+
+[node name="FuseTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true

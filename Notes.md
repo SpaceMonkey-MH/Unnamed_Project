@@ -394,3 +394,5 @@
 	missing the target). The second one I forgot...
 	I think I want the grenades of the grenade launcher to be frag grenades. And the grenade to be a simple AoE,
 	not with damage based on distance.
+	The heal display doesn't handle the overheal correctly (it displays the full heal even when only a part is
+	applied).

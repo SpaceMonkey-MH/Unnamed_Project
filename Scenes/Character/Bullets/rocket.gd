@@ -46,6 +46,11 @@ func area_of_effect() -> void:
 	# Create a new attack.
 	var attack : Attack = Attack.new()
 	# With the AoE damage as damage. What I want, is for it to be aoe_ad / times_hit.
+	# This leads to bad behavior when it is not round. I think I need to round this up. Maybe to .01 precision?
+	# This feels kinda weird that the sum isn't aoe_attack_damage, but it is good enough. Maybe .1 precision.
+	#attack.attack_damage = aoe_attack_damage / (aoe_size / prog_index)
+	#attack.attack_damage = (floor((aoe_attack_damage / (aoe_size / prog_index)) * 10)) / 10
+	# Actually, I think it is better to apply the correct damage, but to round up at the display.
 	attack.attack_damage = aoe_attack_damage / (aoe_size / prog_index)
 	# I separated the area-creating part from the damaging part for clarity and "wanting to try it before" reasons.
 	for bullet_child : Node in get_children():

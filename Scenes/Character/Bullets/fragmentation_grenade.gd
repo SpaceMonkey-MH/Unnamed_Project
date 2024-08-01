@@ -5,6 +5,9 @@ extends Bullet
 @export var grenade_frag_scene : PackedScene
 # The Area2D that represents the AoE as a variable.
 @export var aoe_area : Area2D
+# Same but for the CollisionShape2D, so that the radius can be modified.
+# WARNING: need to change this if the shape is not a circle.
+@export var aoe_c_s : CollisionShape2D
 # How much the projectile penetrates the air (1 - air resistance). The x velocity is multiplied by that factor.
 var air_penetration_factor : float = 0.99
 # Get the gravity from the project settings to be synced with enemy character nodes.
@@ -28,6 +31,9 @@ func _ready():
 	# Here because I can't override _ready() in superclass.
 	fuse_timer.wait_time = time_to_effect
 	fuse_timer.start()
+	# WARNING: need to change this if the shape is not a circle.
+	aoe_c_s.shape.radius = aoe_size
+	
 
 
 func apply_x_mod(x_velocity : float, _delta : float) -> float:
@@ -58,6 +64,22 @@ func area_of_effect() -> void:
 				if character_child is HealthComponent:
 					# Damage it with the attack set up above.
 					character_child.damage(attack)
-	var frag_instance : Object = grenade_frag_scene.instantiate()
-	frag_instance.position = global_position
-	level.add_child(frag_instance)
+	# We arbitrarily set a vector from the position of self to a fixed arbitrary point in front of the node.
+	var vector_to_target : Vector2 = Vector2(100, 0)
+	# This is the angle by which the above vector will be rotated each iteration.
+	var rotation_angle : float = (2 * PI) / nb_frags
+	# We iterate over the number of fragments to be created.
+	for frag in nb_frags:
+		# This rotates the vector by the angle given, so that the direction angle of the vector gets increased.
+		vector_to_target = vector_to_target.rotated(rotation_angle)
+		# We translate this local position to a global one.
+		var target_position : Vector2 = global_position + vector_to_target
+		#print("target_position in frag gre code: ", target_position)
+		# Create a new fragment bullet from the same position, with the position computed above as target,
+		# no sub-fragmentation, no fuse and everything else half that of the grenade itself. Maybe the speed
+		# should be different, Idk.
+		get_parent().weapon_fire(global_position, target_position, grenade_frag_scene, attack_damage / 2,
+					speed_factor, aoe_attack_damage / 2, aoe_size / 2, fire_duration, fire_damage, 0.0, 0)
+	#var frag_instance : Object = grenade_frag_scene.instantiate()
+	#frag_instance.position = global_position
+	#level.add_child(frag_instance)

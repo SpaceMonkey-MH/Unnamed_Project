@@ -29,6 +29,7 @@ var nb_frags : int = 0
 
 
 func _physics_process(delta) -> void:
+	#print("time_to_effect in bullet.gd: ", time_to_effect)
 	mov.x = apply_x_mod(mov.x, delta)
 	mov.y = apply_y_mod(mov.y, delta)
 	# I don't know ho to make this simpler.

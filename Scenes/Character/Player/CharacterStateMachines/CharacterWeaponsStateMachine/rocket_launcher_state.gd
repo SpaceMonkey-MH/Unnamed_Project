@@ -8,7 +8,7 @@ extends WeaponsState
 @export var attack_damage : float = 0
 @export var aoe_attack_damage : float = 40
 # The size of the explosion, used for ray-casting.
-@export var aoe_size : float = 80.0
+@export var aoe_size : float = 120.0
 @export var speed_factor : float = 5
 @export var reload_time : float = 1.5
 

@@ -45,6 +45,8 @@ NOT DONE :
 	- Add frag mechanic.
 	- Connect variables (time, damage, number of frags, maybe more) from weapon to projectile. // DONE.
 - Make some kind of rampaging or score or whatever.
+- Fix heal display when overhealing.
+- FIx heal display when value is not round.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

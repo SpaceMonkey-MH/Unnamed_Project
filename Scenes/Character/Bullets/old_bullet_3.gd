@@ -112,6 +112,7 @@
 	### the rate at which the ray-cast will be checking) is (for a ray length of L and a character size of l
 	### (chord)): theta = 2 * arcsin(l / 2 * L).
 	### It seems a little high, idk (so, the angle is big, and the number or rays is low).
+	### This seems full of shite. What did I branle?
 	##for angle : float in range(0, ceil((2 * PI) / rotation_angle)):
 		###print("rotation_angle: ", rotation_angle)
 		###print(angle)

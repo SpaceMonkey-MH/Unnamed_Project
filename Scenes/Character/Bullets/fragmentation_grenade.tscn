@@ -8,12 +8,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_cq0r7"]
 radius = 50.0
 
-[node name="FragmentationGrenade" type="CharacterBody2D" node_paths=PackedStringArray("aoe_area", "fuse_timer")]
+[node name="FragmentationGrenade" type="CharacterBody2D" node_paths=PackedStringArray("aoe_area", "aoe_c_s", "fuse_timer")]
 collision_layer = 0
 collision_mask = 6
 script = ExtResource("1_d8n2t")
 grenade_frag_scene = ExtResource("2_nli6v")
 aoe_area = NodePath("Area2D")
+aoe_c_s = NodePath("Area2D/CollisionShape2D")
 fuse_timer = NodePath("FuseTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

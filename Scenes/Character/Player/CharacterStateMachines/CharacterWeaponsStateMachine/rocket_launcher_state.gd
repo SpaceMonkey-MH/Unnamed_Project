@@ -59,4 +59,3 @@ func on_exit() -> void:
 func _on_weapon_3_cool_down_timeout() -> void:
 	can_fire = true
 #	print("hello")
-

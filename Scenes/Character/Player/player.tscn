@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=75 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/railgun_state.gd" id="25_6vkpp"]
 [ext_resource type="PackedScene" uid="uid://bk6w5w8jhfplu" path="res://Scenes/Character/Bullets/rocket.tscn" id="27_30sim"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/weapons_state_debug_label.gd" id="28_fvbqe"]
+[ext_resource type="PackedScene" uid="uid://ohx6j76vc530" path="res://Scenes/Character/Bullets/fragmentation_grenade.tscn" id="31_bb01u"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
 [ext_resource type="PackedScene" uid="uid://dy3a7w7qbtgka" path="res://Scenes/Character/Bullets/napalm.tscn" id="32_gvwh5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
@@ -608,7 +609,6 @@ fire_spitter_weapon = NodePath("../../FireSpitterWeapon")
 next_weapon_state = NodePath("../MachineGun")
 previous_weapon_state = NodePath("../RocketLauncher")
 timer = NodePath("FireSpitterCoolDown")
-fire_duration = 0.0
 
 [node name="FireSpitterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FireSpitter"]
 one_shot = true
@@ -623,10 +623,12 @@ bullet_2_scene = ExtResource("20_fgewv")
 [node name="MachineGunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/MachineGun"]
 one_shot = true
 
-[node name="GrenadeLauncher" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="GrenadeLauncher" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
 script = ExtResource("23_lvog5")
+timer = NodePath("GrenadeLauncherCoolDown")
 next_weapon_state = NodePath("../FlameThrower")
 previous_weapon_state = NodePath("../MachineGun")
+frag_grenade_scene = ExtResource("31_bb01u")
 
 [node name="GrenadeLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/GrenadeLauncher"]
 one_shot = true
@@ -694,6 +696,7 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/RocketLauncherCoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FireSpitter/FireSpitterCoolDown" to="CharacterWeaponsStateMachine/FireSpitter" method="_on_fire_spitter_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_machine_gun_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/GrenadeLauncher/GrenadeLauncherCoolDown" to="CharacterWeaponsStateMachine/GrenadeLauncher" method="_on_grenade_launcher_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FlameThrower/FlameThrowerCoolDown" to="CharacterWeaponsStateMachine/FlameThrower" method="_on_flame_thrower_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]

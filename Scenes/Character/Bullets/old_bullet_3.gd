@@ -105,7 +105,7 @@
 	## This version is an attempt at using ray-casting, it kinda works but not great.
 	##var space_state : PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
 	### Here, I'm not sure if it's better to use a single variable rotated by a bit each time,
-	### or redeclare the variable each time. I (Julien) think(s) I should use a single variable (first option).
+	### or redeclare the variable each time. I (J.) think(s) I should use a single variable (first option).
 	##var vector_to_target : Vector2 = Vector2(aoe_size, 0)
 	##var rotation_angle : float = 2 * asin(minimum_character_size / (2 * aoe_size))
 	### According to my findings, the angle I'm looking for (the rotation angle for the ray-cast, that is to say

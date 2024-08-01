@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://ohx6j76vc530"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/fragmentation_grenade.gd" id="1_d8n2t"]
+[ext_resource type="PackedScene" uid="uid://cvp6qop2s12gg" path="res://Scenes/Character/Bullets/grenade_fragment.tscn" id="2_nli6v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gk0f7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cq0r7"]
+radius = 50.0
+
+[node name="FragmentationGrenade" type="CharacterBody2D" node_paths=PackedStringArray("aoe_area", "fuse_timer")]
+collision_layer = 0
+collision_mask = 6
+script = ExtResource("1_d8n2t")
+grenade_frag_scene = ExtResource("2_nli6v")
+aoe_area = NodePath("Area2D")
+fuse_timer = NodePath("FuseTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gk0f7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.14461, 0.407831, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cq0r7")
+
+[node name="FuseTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="FuseTimer" to="." method="_on_fuse_timer_timeout"]

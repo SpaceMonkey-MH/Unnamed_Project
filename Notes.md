@@ -386,4 +386,11 @@
 	the target on fire just by touching them, not only when they walk over the burning ground.
 	The set_on_fire() procedure is weird: its parameters are set as float, but, when called, it says variant. Idk.
 	The burning ground spawn just in front of the hit character, so it doesnt burn. Will have to fix that. Or
-	perhaps not, idk. The enemies will mostly be moving anyway. I think I should. Idk. Dad said I shouldn't.
+	perhaps not, idk. The enemies will mostly be moving anyway. I think I should. Idk. F. said I shouldn't, so I
+	won't.
+	I figured out with him that I was using the ray casting in AoE wrong, for two reasons. The first one, is that
+	the angle between two ray is calculated based on the size of the smallest enemy, but that depends on how much
+	inside of the area they are (if there is a single point inside, for instance, the rays have a high chance of
+	missing the target). The second one I forgot...
+	I think I want the grenades of the grenade launcher to be frag grenades. And the grenade to be a simple AoE,
+	not with damage based on distance.

@@ -18,9 +18,10 @@ var gravity_divider : float = 200
 #@onready var level : Object = get_parent()
 # The player as a variable, so we can get self_damage value from it. Should be replaced when options come out.
 #@onready var player : PlayerClass = level.get_node("Player")
-@onready var player : PlayerClass = get_parent().get_parent().get_parent()
-# Whether or not the player can be damaged by the explosion.
-@onready var self_damage : bool = player.self_damage
+#@onready var player : PlayerClass = get_parent().get_parent().get_parent()
+# Whether or not the player can be damaged by the explosion. This also crashes. Let's do it in _ready().
+#@onready var self_damage : bool = player.self_damage
+var self_damage : bool
 
 
 func _ready():
@@ -36,6 +37,7 @@ func _ready():
 	# WARNING: need to change this if the shape is not a circle.
 	aoe_c_s.shape.radius = aoe_size
 	#print("In grenade_fragment.gd: ", level)
+	self_damage = player.self_damage
 
 
 func apply_x_mod(x_velocity : float, _delta : float) -> float:

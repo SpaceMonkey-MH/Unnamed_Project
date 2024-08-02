@@ -11,7 +11,7 @@ var prog_index : int = 10
 # The position of the tip of the missile.
 var area_pos : Vector2 = Vector2(20, 0)
 # The player as a variable, so we can get self_damage value from it. Should be replaced when options come out.
-@onready var player : PlayerClass = get_parent().get_parent().get_parent()
+#@onready var player : PlayerClass = get_parent().get_parent().get_parent()
 
 
 func _ready() -> void:
@@ -38,6 +38,16 @@ func _ready() -> void:
 		# Adding the area as a child of the main node, so that it "appears" on the missile.
 		add_child(aoe_area)
 	assert(get_child_count() >= floor(aoe_size / prog_index))
+
+
+# Arbitrarily add a value (depending on the base speed) to the velocity, so that the rockect accelerates.
+func apply_x_mod(x_velocity : float, _delta : float) -> float:
+	return x_velocity + speed_factor * 0.01 * direction.normalized().x
+
+
+# Arbitrarily add a value (depending on the base speed) to the velocity, so that the rockect accelerates.
+func apply_y_mod(y_velocity : float, _delta : float) -> float:
+	return y_velocity + speed_factor * 0.01 * direction.normalized().y
 
 
 # Procedure that handles the damage of the missile in an AoE.

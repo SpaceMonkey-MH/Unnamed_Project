@@ -10,7 +10,7 @@ radius = 50.0
 
 [node name="FragmentationGrenade" type="CharacterBody2D" node_paths=PackedStringArray("aoe_area", "aoe_c_s", "fuse_timer")]
 collision_layer = 0
-collision_mask = 6
+collision_mask = 4
 script = ExtResource("1_d8n2t")
 grenade_frag_scene = ExtResource("2_nli6v")
 aoe_area = NodePath("Area2D")

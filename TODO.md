@@ -32,21 +32,16 @@ NOT DONE :
 - Decide what weapons there will be.
 - Have "allumer le feu" when setting something on fire as an option. Hard because of copyright.
 - Add powers, such as crits or smth.
-- Add indicator of reload time left.
+- Add indicator of reload time left. Make reload bar.
 - Bosses (levels).
 - Navigate through weapons via # keys.
 - User key mapping?
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target).
 - Fix hit state for tme.
-- Add Grenade Launcher.
-	- Add grenade mechanic. // DONE.
-	- Make grenade trajectory realistic. // DONE.
-	- Add frag mechanic.
-	- Connect variables (time, damage, number of frags, maybe more) from weapon to projectile. // DONE.
 - Make some kind of rampaging or score or whatever.
-- Fix heal display when overhealing.
-- FIx heal display when value is not round.
+- Make health bar.
+- Find a way to have global variables.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -88,3 +83,11 @@ DONE :
 	- Connect the burning ground mechanic to the projectile. // DONE.
 	- Connect the burning ground variables to the weapon variables. // DONE.
 	- Have the enemies burn on projectile contact. // DONE.
+- Add Grenade Launcher. // DONE.
+	- Add grenade mechanic. // DONE.
+	- Make grenade trajectory realistic. // DONE.
+	- Add frag mechanic. // DONE.
+	- Connect variables (time, damage, number of frags, maybe more) from weapon to projectile. // DONE.
+	- Make grenades noclip through enemies. // DONE.
+- Fix heal display when overhealing. // Actually, no.
+- Fix heal display when value is not round. // DONE.

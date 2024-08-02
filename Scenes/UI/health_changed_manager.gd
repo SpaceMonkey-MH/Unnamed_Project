@@ -33,8 +33,11 @@ func _process(_delta) -> void:
 	for node_id in damage_d.keys():
 		# Convert the key to a proper id.
 		#node_id = int(node_id)
-		# Call update_label() on the node and value of the dictionary entry. 
-		update_label(instance_from_id(node_id), damage_d[node_id])
+		# Call update_label() on the node and value of the dictionary entry. We need to round this up,
+		# otherwise it can display something like 10 digits, which takes too much place on the screen.
+		# I'm thinking .1 precision. Using snapped(). This means that the sum of the damage taken by a dead
+		# character might not be its max health (not taking healing into account).
+		update_label(instance_from_id(node_id), snapped(damage_d[node_id], 0.1))
 	# We reset the dictionaries to empty.
 	heal_d.clear()
 	damage_d.clear()

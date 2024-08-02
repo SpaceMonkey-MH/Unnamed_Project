@@ -33,6 +33,9 @@ func _ready():
 	fuse_timer.start()
 	# WARNING: need to change this if the shape is not a circle.
 	aoe_c_s.shape.radius = aoe_size
+	# So, the mask stores in a single int the whatever number of layers and mask values (true or false).
+	#set_collision_mask_value(8, true)
+	#print("collision_mask in frag gre _ready(): ", collision_mask)
 	
 
 

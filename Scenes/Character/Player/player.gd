@@ -1,7 +1,6 @@
 class_name PlayerClass
 extends CharacterClass
 
-
 ### Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
 ## Defining variables:
@@ -80,6 +79,8 @@ func _enter_tree():
 	assert(move_speed == 300, "move_speed is not equal to 300.")
 #	assert(move_speed != 300, "move_speed is equal to 300.")
 #	assert(move_speed == 0)
+	#print(PlayerClass.player)
+	#PlayerVariables.player = self
 
 
 # Executed at the beginning of runtime, after _enter_tree().

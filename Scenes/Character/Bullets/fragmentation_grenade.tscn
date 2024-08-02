@@ -15,6 +15,7 @@ script = ExtResource("1_d8n2t")
 grenade_frag_scene = ExtResource("2_nli6v")
 aoe_area = NodePath("Area2D")
 aoe_c_s = NodePath("Area2D/CollisionShape2D")
+minimum_character_size = null
 fuse_timer = NodePath("FuseTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

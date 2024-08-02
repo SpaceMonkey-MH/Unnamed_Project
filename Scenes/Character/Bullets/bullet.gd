@@ -27,6 +27,8 @@ var nb_frags : int = 0
 # the speed of the player on fire. Multiply arbitrarily because I can't get delta here.
 # WARNING: this creates issues if the speed of the bullet is too low compared to that of the player.
 #@onready var mov : Vector2 = direction.normalized() * speed_factor + player_velocity * 0.016
+#@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
+							#Engine.get_frames_per_second())
 @onready var mov : Vector2 = (direction.normalized() * speed_factor) + (player.velocity /
 							Engine.get_frames_per_second())
 

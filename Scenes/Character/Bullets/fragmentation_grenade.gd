@@ -38,6 +38,7 @@ func _ready():
 	# So, the mask stores in a single int the whatever number of layers and mask values (true or false).
 	#set_collision_mask_value(8, true)
 	#print("collision_mask in frag gre _ready(): ", collision_mask)
+	#self_damage = PlayerVariables.player.self_damage
 	self_damage = player.self_damage
 	
 

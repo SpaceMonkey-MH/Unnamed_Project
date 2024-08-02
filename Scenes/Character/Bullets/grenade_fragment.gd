@@ -37,6 +37,7 @@ func _ready():
 	# WARNING: need to change this if the shape is not a circle.
 	aoe_c_s.shape.radius = aoe_size
 	#print("In grenade_fragment.gd: ", level)
+	#self_damage = PlayerVariables.player.self_damage
 	self_damage = player.self_damage
 
 

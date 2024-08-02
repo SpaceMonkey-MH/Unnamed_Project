@@ -52,13 +52,16 @@ func update_label(node : Node, amount_changed : float) -> void:
 	# Trying to avoid crash.
 	if not node:
 		return
+	var amount_changed_str : String = str(amount_changed)
 	# Make it so that there isn't a floating 0 upon rocket explosion.
-	if amount_changed == 0:
+	if amount_changed == 0.0:
 		return
+	elif amount_changed >= 0.0:
+		amount_changed_str = "+" + amount_changed_str
 	# Instanciate the label.
 	var label_instance : Label = health_changed_label.instantiate()
 	# Give it the amount changed as displaying text.
-	label_instance.text = str(amount_changed)
+	label_instance.text = str(amount_changed_str)
 	# Color the label green if it is a heal.
 	if amount_changed > 0:
 		label_instance.modulate = heal_color

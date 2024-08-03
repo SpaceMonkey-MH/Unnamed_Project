@@ -19,7 +19,7 @@ func _ready() -> void:
 	#player = get_parent().get_parent().get_parent()
 	# Getting the value of self_damage from player.
 	#self_damage = PlayerVariables.player.self_damage
-	self_damage = player.self_damage
+	self_damage = PlayerVariables.player.self_damage
 	# The goal here is to create aoe_size / prog_index concentric CollisionShape2D inside the Area2D.
 	# Actually, the goal is gonna be to create one Area2D per CollisionShape2D, all inside a Node.
 	# We iterate over the maximum size of the AoE, in order to set the radius of the CollisionShape2D.

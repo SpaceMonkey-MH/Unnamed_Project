@@ -20,7 +20,7 @@ var time_to_effect : float = 0.0
 var nb_frags : int = 0
 
 # This is so that we can do stuff like getting the self_damage value.
-@onready var player : PlayerClass = get_parent().get_parent().get_parent()
+#@onready var player : PlayerClass = get_parent().get_parent().get_parent()
 # The velocity of the player at the time of the fire.
 #@onready var player_velocity : Vector2 = player.velocity
 # The movement vector for the bullet. We add the velocity of the player so that the bullet speed depends on
@@ -29,7 +29,7 @@ var nb_frags : int = 0
 #@onready var mov : Vector2 = direction.normalized() * speed_factor + player_velocity * 0.016
 #@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
 							#Engine.get_frames_per_second())
-@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (player.velocity /
+@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
 							Engine.get_frames_per_second())
 
 

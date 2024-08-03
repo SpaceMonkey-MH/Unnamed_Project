@@ -38,7 +38,7 @@ func _ready():
 	aoe_c_s.shape.radius = aoe_size
 	#print("In grenade_fragment.gd: ", level)
 	#self_damage = PlayerVariables.player.self_damage
-	self_damage = player.self_damage
+	self_damage = PlayerVariables.player.self_damage
 
 
 func apply_x_mod(x_velocity : float, _delta : float) -> float:

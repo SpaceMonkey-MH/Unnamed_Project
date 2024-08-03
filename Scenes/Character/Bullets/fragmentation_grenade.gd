@@ -39,7 +39,7 @@ func _ready():
 	#set_collision_mask_value(8, true)
 	#print("collision_mask in frag gre _ready(): ", collision_mask)
 	#self_damage = PlayerVariables.player.self_damage
-	self_damage = player.self_damage
+	self_damage = PlayerVariables.player.self_damage
 	
 
 

@@ -44,7 +44,8 @@ var air_jumps_current : int = air_jumps_max
 # FireSpitter sprite (for now, a color rect) as a variable so it can be flipped.
 @export var fire_spitter_sprite_2d : Sprite2D
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
-@export var self_damage : bool = true	# Should ultimately be likend to options. Might have to move it, Idk.
+# Should ultimately be likend to options. Might have to move it, Idk.
+@export var self_damage : bool = true
 # Flashing is when the player takes damage.
 @export var flashing_color : Color = Color.CHOCOLATE
 @export var flashing_time : float = 0.1
@@ -79,8 +80,8 @@ func _enter_tree():
 	assert(move_speed == 300, "move_speed is not equal to 300.")
 #	assert(move_speed != 300, "move_speed is equal to 300.")
 #	assert(move_speed == 0)
-	#print(PlayerClass.player)
-	#PlayerVariables.player = self
+	#print(PlayerVariables)
+	PlayerVariables.player = self
 
 
 # Executed at the beginning of runtime, after _enter_tree().

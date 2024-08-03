@@ -14,7 +14,7 @@ extends Area2D
 # Whether or not the player can be damaged by the flames.
 var self_damage : bool = true
 # The player as a variable, so we can get self_damage value from it. Should be replaced when options come out.
-var player : PlayerClass
+#var player : PlayerClass
 
 
 func _ready():
@@ -23,7 +23,8 @@ func _ready():
 	#player = get_parent().get_parent().get_parent()
 	# Getting the value of self_damage from player.
 	#self_damage = player.self_damage
-	self_damage = true
+	#self_damage = true
+	self_damage = PlayerVariables.player.self_damage
 	fire_duration_timer.wait_time = ground_fire_duration
 	burn_check_timer.wait_time = burn_check_rate
 	fire_duration_timer.start()

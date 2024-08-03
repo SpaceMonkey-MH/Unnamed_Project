@@ -42,6 +42,7 @@ NOT DONE :
 - Make some kind of rampaging or score or whatever.
 - Make health bar.
 - Find a way to queue free the bullets that go too far. Maybe box the level?
+- Find a way to have global variables. // I don't think it is possible.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -92,4 +93,3 @@ DONE :
 - Fix heal display when overhealing. // Actually, no.
 - Fix heal display when value is not round. // DONE.
 - Make bullets have speed relative to that of the player's. // DONE.
-- Find a way to have global variables. // I don't think it is possible.

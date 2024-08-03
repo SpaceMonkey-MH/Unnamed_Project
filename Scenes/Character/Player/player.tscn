@@ -476,6 +476,7 @@ body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
 fire_spitter_area_2D = NodePath("FireSpitterWeapon")
 fire_spitter_sprite_2d = NodePath("FireSpitterWeapon/FireSpitterSprite")
+self_damage = false
 notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
 

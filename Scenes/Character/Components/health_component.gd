@@ -15,8 +15,19 @@ signal damaged(node : Node, damage_taken : float)
 @export var character : CharacterClass
 # The timer storing the time of "on fire" left as a variable so it can be started.
 @export var on_fire_timer : Timer
+# The sound "allumer le feu" from the song, as a variable so it can be played. For now it is not the correct
+# but it will change soon. Be careful of copyrights.
+@export var allumer_le_feu_sound : AudioStreamPlayer
+# Whether or not the above sound should be played when something is set on fire.
+var allumer_le_feu_plays : bool = false
 ## The wait time of that timer.
 #@export var on_fire_wait_time : float = 5.0
+# Debug variable, used to execute code every second.
+var t : float = 0.0
+# Whether or not the character is on fire.
+var on_fire : bool = false
+# The value of the fire damage, which will be applied to health.
+var fire_damage : float = 10.0
 # The health of the character, initialized to the max health, with a setter and a getter.
 @onready var health : float = character.max_health :
 	get:
@@ -33,13 +44,6 @@ signal damaged(node : Node, damage_taken : float)
 			health = value
 #		print("Set health in HealthComponent in ", get_parent(), " to: ", health)
 
-# Debug variable, used to execute code every second.
-var t : float = 0.0
-# Whether or not the character is on fire.
-var on_fire : bool = false
-# The value of the fire damage, which will be applied to health.
-var fire_damage : float = 10.0
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,7 +52,8 @@ func _ready() -> void:
 	# Just here to simulate a call.
 	#set_on_fire(2.0, 10.0)
 	#on_fire_timer.wait_time = on_fire_wait_time
-	pass
+	allumer_le_feu_plays = PlayerVariables.player.special_sounds
+	#print("Allumer le feu: ", allumer_le_feu_sound)
 
 
 func _process(delta) -> void:
@@ -69,18 +74,20 @@ func _process(delta) -> void:
 # Should be a function that handles the setting target on fire part, taking a duration and a damage for the burn.
 # I don't know how this doesn't overlap or whatever, but I'll take it.
 func set_on_fire(fire_duration : float = 5.0, f_damage : float = 10.0) -> void:
-	on_fire_timer.wait_time = fire_duration
-	#if on_fire_timer.time_left == 0.0:
-		#on_fire_timer.start()
-	#else:
-		#print("Timer stopped and re-started in set_on_fire() in health_component.gd.")
-		#on_fire_timer.stop()
-		#on_fire_timer.start()
-	on_fire_timer.stop()
-	on_fire_timer.start()
-	fire_damage = f_damage
 	if fire_duration != 0.0:
+		on_fire_timer.wait_time = fire_duration
+		#if on_fire_timer.time_left == 0.0:
+			#on_fire_timer.start()
+		#else:
+			#print("Timer stopped and re-started in set_on_fire() in health_component.gd.")
+			#on_fire_timer.stop()
+			#on_fire_timer.start()
+		on_fire_timer.stop()
+		on_fire_timer.start()
+		fire_damage = f_damage
 		on_fire = true
+		if allumer_le_feu_plays:
+			allumer_le_feu_sound.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

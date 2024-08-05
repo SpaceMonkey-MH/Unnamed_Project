@@ -30,7 +30,6 @@ NOT DONE :
 - Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy shapes
 	are added.
 - Decide what weapons there will be.
-- Have "allumer le feu" when setting something on fire as an option. Hard because of copyright.
 - Add powers, such as crits or smth.
 - Add indicator of reload time left. Make reload bar.
 - Bosses (levels).
@@ -93,3 +92,6 @@ DONE :
 - Fix heal display when value is not round. // DONE.
 - Make bullets have speed relative to that of the player's. // DONE.
 - Find a way to have global variables. // I don't think it is possible. // DONE.
+- Fix AoE of Fire Spitter hitting farther targets at an angle than targets in direction of cursor. // DONE.
+- Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. // (the
+	copyrights part is still an issue) DONE.

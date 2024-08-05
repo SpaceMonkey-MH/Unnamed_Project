@@ -51,6 +51,8 @@ var air_jumps_current : int = air_jumps_max
 @export var flashing_time : float = 0.1
 # I think it is useless for now.
 @export var notifier : VisibleOnScreenNotifier2D
+# Whether or not the special sounds should be played. Should ultimately be set in options.
+@export var special_sounds : bool = false
 # Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
 var smoothed_mouse_pos : Vector2
 ## Just testing smth.

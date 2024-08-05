@@ -677,7 +677,7 @@ fire_spitter_hit_box = NodePath("FireSpitterHitBox")
 
 [node name="FireSpitterHitBox" type="CollisionPolygon2D" parent="FireSpitterWeapon"]
 position = Vector2(22, 0)
-polygon = PackedVector2Array(0, 0, 10, -22, 40, -22, 40, 22, 10, 22)
+polygon = PackedVector2Array(0, 0, 10, -22, 40, -22, 45, 0, 40, 22, 10, 22)
 
 [node name="FireSpitterSprite" type="Sprite2D" parent="FireSpitterWeapon"]
 self_modulate = Color(1, 1, 1, 0.25098)

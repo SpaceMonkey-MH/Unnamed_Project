@@ -42,10 +42,11 @@ NOT DONE :
 - Make health bar.
 - Find a way to queue free the bullets that go too far. Maybe box the level?
 - Find a last weapon to add.
+- Update the names of the projectiles.
 - Add a Railgun.
-	- Add a scene for the projectile.
-	- Add the code to launch the projectile.
-	- Add the code for the collisions of the projectile.
+	- Add a scene for the projectile. // DONE.
+	- Add the code to launch the projectile. // DONE.
+	- Add the code for the collisions of the projectile. // DONE.
 	- Add the code for the damage of the projectile.
 
 ------------------------------------------------------------------------------------------------------

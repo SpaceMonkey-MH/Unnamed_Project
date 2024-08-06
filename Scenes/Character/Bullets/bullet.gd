@@ -6,6 +6,8 @@ class_name Bullet
 # in the game, used for ray-casting.
 @export var minimum_character_size : float = 40.0
 @export var fuse_timer : Timer
+# The area for the damage of the Railgun.
+@export var area_2d : Area2D
 var attack_damage : float = 10.0
 var aoe_attack_damage : float = 10.0
 var speed_factor : float = 10.0
@@ -95,6 +97,8 @@ func _physics_process(delta) -> void:
 	#print("Player velocity in bullet.gd: ", player_velocity)
 	#print("delta in bullet.gd: ", delta)
 	#print("Player velocity times delta in bullet.gd: ", player.velocity * delta)
+	if area_2d:
+		damage()
 
 
 func explosion_fx() -> void:
@@ -106,17 +110,23 @@ func area_of_effect() -> void:
 
 
 # This is a placeholder, for air resistance for instance.
-func apply_x_mod(x_velocity : float, _delta : float) -> float:
+func apply_x_mod(x_velocity: float, _delta: float) -> float:
 	return x_velocity
 
 
 # This is a placeholder, for gravity for instance.
-func apply_y_mod(y_velocity : float, _delta : float) -> float:
+func apply_y_mod(y_velocity: float, _delta: float) -> float:
 	return y_velocity
 
 
 #func _on_area_entered(area):
-#	print(area)
+	#print(area)
+
+
+# Placeholder for damaging all along the course of the bullet.
+func damage() -> void:
+	print("Hello from bullet.gd.")
+	pass
 
 
 func _on_fuse_timer_timeout():

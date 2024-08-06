@@ -41,6 +41,12 @@ NOT DONE :
 - Make some kind of rampaging or score or whatever.
 - Make health bar.
 - Find a way to queue free the bullets that go too far. Maybe box the level?
+- Find a last weapon to add.
+- Add a Railgun.
+	- Add a scene for the projectile.
+	- Add the code to launch the projectile.
+	- Add the code for the collisions of the projectile.
+	- Add the code for the damage of the projectile.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=76 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="32_5aed7"]
 [ext_resource type="PackedScene" uid="uid://dy3a7w7qbtgka" path="res://Scenes/Character/Bullets/napalm.tscn" id="32_gvwh5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
+[ext_resource type="PackedScene" uid="uid://c2372plt8crlv" path="res://Scenes/Character/Bullets/railun_projectile.tscn" id="35_te0wa"]
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr7k"]
@@ -643,10 +644,12 @@ napalm_scene = ExtResource("32_gvwh5")
 [node name="FlameThrowerCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/FlameThrower"]
 one_shot = true
 
-[node name="Railgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state")]
+[node name="Railgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state", "timer")]
 script = ExtResource("25_6vkpp")
 next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../FlameThrower")
+timer = NodePath("RailgunCoolDown")
+railgun_projectile_scene = ExtResource("35_te0wa")
 
 [node name="RailgunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Railgun"]
 one_shot = true
@@ -698,6 +701,7 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/MachineGun/MachineGunCoolDown" to="CharacterWeaponsStateMachine/MachineGun" method="_on_machine_gun_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/GrenadeLauncher/GrenadeLauncherCoolDown" to="CharacterWeaponsStateMachine/GrenadeLauncher" method="_on_grenade_launcher_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FlameThrower/FlameThrowerCoolDown" to="CharacterWeaponsStateMachine/FlameThrower" method="_on_flame_thrower_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/Railgun/RailgunCoolDown" to="CharacterWeaponsStateMachine/Railgun" method="_on_railgun_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

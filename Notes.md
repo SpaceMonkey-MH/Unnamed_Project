@@ -395,4 +395,7 @@
 	I think I want the grenades of the grenade launcher to be frag grenades. And the grenade to be a simple AoE,
 	not with damage based on distance.
 	The heal display doesn't handle the overheal correctly (it displays the full heal even when only a part is
-	applied).
+	applied). I think it is better that way.
+## - __2024/08/06:__
+	About the copyright issues for the easter egg song, I think it is fine because of the laws about parody (in
+	France at least).

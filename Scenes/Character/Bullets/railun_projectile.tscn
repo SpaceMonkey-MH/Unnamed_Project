@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2372plt8crlv"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/railun_projectile.gd" id="1_22fmj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3gci0"]
+radius = 5.0
+height = 40.0
+
+[node name="RailunProjectile" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_22fmj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_3gci0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 20.0
+offset_bottom = 5.0
+color = Color(0.355314, 0.355314, 0.355314, 1)

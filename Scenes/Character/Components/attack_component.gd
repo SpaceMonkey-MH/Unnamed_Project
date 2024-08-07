@@ -3,14 +3,14 @@ extends Node2D
 
 # Pretty sure this script is useless.
 
-@export var hit_box : CollisionShape2D
-@export var attack_value : float = 1
+@export var hit_box: CollisionShape2D
+@export var attack_value: float = 1
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta: float) -> void:
 	pass

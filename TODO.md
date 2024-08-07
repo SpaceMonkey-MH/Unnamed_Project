@@ -40,9 +40,11 @@ NOT DONE :
 - Fix hit state for tme.
 - Make some kind of rampaging or score or whatever.
 - Make health bar.
-- Find a way to queue free the bullets that go too far. Maybe box the level?
 - Find a last weapon to add.
 - Update the names of the projectiles.
+- Update the names of the states.
+- Add knockback. Maybe.
+- Add reset position and reset level buttons.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -102,3 +104,4 @@ DONE :
 	- Add the code to launch the projectile. // DONE.
 	- Add the code for the collisions of the projectile. // DONE.
 	- Add the code for the damage of the projectile. // DONE.
+- Find a way to queue free the bullets that go too far. Maybe box the level? // DONE.

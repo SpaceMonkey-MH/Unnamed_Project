@@ -2,13 +2,13 @@ class_name AttackState
 extends EnemyState
 
 # The FollowState as a variable, so it can be transitioned to. To be set in editor.
-@export var follow_state : FollowState
+@export var follow_state: FollowState
 # The cooldwown timer as a variable, so it can be controlled. To be set in editor.
-@export var timer : Timer
+@export var timer: Timer
 # MeleeWeapon as a variable, so the monitoring can be toggled.
-@export var melee_weapon : Area2D
+@export var melee_weapon: Area2D
 # I wanted to avoid this but(t): whether or not the enemy can attack.
-var can_attack : bool = true
+var can_attack: bool = true
 
 
 # Called at the beginning of the scene.
@@ -38,7 +38,7 @@ func state_process(_delta) -> void:
 	# Using an auxilliary variable to compute the distance to player.
 	#var relative_x_distance_to_player = player.position.x - character.position.x
 	# This is better (+ same as above).
-	var distance_to_player = (player.position - character.position).length()
+	var distance_to_player: float = (player.position - character.position).length()
 	#print((player.position - character.position).length())
 	#print("relative_x_distance_to_player: ", relative_x_distance_to_player)
 	# If the player is too far away.
@@ -52,7 +52,7 @@ func state_process(_delta) -> void:
 
 
 # Called by the StateMachine on transition to another state.
-func on_exit() ->void:
+func on_exit() -> void:
 	pass
 	#print("AttackState exited.")
 	# Stop the timer so that it doesn't continuously call attack(). Doesn't work properly, I need to stop

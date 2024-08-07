@@ -4,22 +4,22 @@ class_name Bullet
 
 # Putting this here because I don't know where to put it. This is the size of the smallest character
 # in the game, used for ray-casting.
-@export var minimum_character_size : float = 40.0
-@export var fuse_timer : Timer
+@export var minimum_character_size: float = 40.0
+@export var fuse_timer: Timer
 # The area for the damage of the Railgun.
-@export var area_2d : Area2D
-var attack_damage : float = 10.0
-var aoe_attack_damage : float = 10.0
-var speed_factor : float = 10.0
-var direction : Vector2 = Vector2.ZERO
+@export var area_2d: Area2D
+var attack_damage: float = 10.0
+var aoe_attack_damage: float = 10.0
+var speed_factor: float = 10.0
+var direction: Vector2 = Vector2.ZERO
 # The size of the AoE/explosion.
-var aoe_size : float = 80.0
-var fire_duration : float = 0.0
-var fire_damage : float = 0.0
+var aoe_size: float = 80.0
+var fire_duration: float = 0.0
+var fire_damage: float = 0.0
 # The fuse timer, the time between the launch and the explosion or whatever effect.
-var time_to_effect : float = 0.0
+var time_to_effect: float = 0.0
 # The quantity of fragments emited by the 
-var nb_frags : int = 0
+var nb_frags: int = 0
 
 # This is so that we can do stuff like getting the self_damage value.
 #@onready var player : PlayerClass = get_parent().get_parent().get_parent()
@@ -31,7 +31,7 @@ var nb_frags : int = 0
 #@onready var mov : Vector2 = direction.normalized() * speed_factor + player_velocity * 0.016
 #@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
 							#Engine.get_frames_per_second())
-@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
+@onready var mov: Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
 							Engine.get_frames_per_second())
 
 
@@ -47,7 +47,7 @@ var nb_frags : int = 0
 	#print("mov 2 in bullet.gd: ", mov)
 
 
-func _physics_process(delta) -> void:
+func _physics_process(delta: float) -> void:
 	#print("time_to_effect in bullet.gd: ", time_to_effect)
 	mov.x = apply_x_mod(mov.x, delta)
 	mov.y = apply_y_mod(mov.y, delta)
@@ -62,18 +62,19 @@ func _physics_process(delta) -> void:
 		#print("mov in bullet.gd: ", mov)
 		# I'm working on a better way.
 		#var collision = move_and_collide(direction.normalized() * speed_factor)
-		var collision = move_and_collide(mov)
-		var attack = Attack.new()
+		var collision: KinematicCollision2D = move_and_collide(mov)
+		var attack: Attack = Attack.new()
 		attack.attack_damage = attack_damage
 		if collision != null:
 			#print("collision.get_position(): ", collision.get_position())
-			var collider : Object = collision.get_collider()
+			var collider: Object = collision.get_collider()
 	#		print(collider.has_node("HitBoxComponent"))
 	#		print(collider.get_node("HitBoxComponent"))
 	#		print(collider)
 	#		if collider.has_node("HitBoxComponent"):
 	#			collider.get_node("HitBoxComponent").damage(attack)
-			for child in collider.get_children():
+			for child: Node in collider.get_children():
+				#print("child in bullet.gd: ", child)
 				if child is HealthComponent:
 					child.damage(attack)
 					# We check if their is a fire_duration set, which would mean that we want to set on fire.
@@ -93,10 +94,11 @@ func _physics_process(delta) -> void:
 			#explosion_fx()
 			#area_of_effect()
 			#queue_free()
-	#print("Velocity of bullet.gd: ", velocity)
+	print("Velocity of bullet.gd: ", velocity)
 	#print("Player velocity in bullet.gd: ", player_velocity)
 	#print("delta in bullet.gd: ", delta)
 	#print("Player velocity times delta in bullet.gd: ", player.velocity * delta)
+	# Checking whether there is an Area2D set, so that the calls to damage_through() are limited.
 	if area_2d:
 		damage_through()
 
@@ -129,7 +131,7 @@ func damage_through() -> void:
 	pass
 
 
-func _on_fuse_timer_timeout():
+func _on_fuse_timer_timeout() -> void:
 	explosion_fx()
 	area_of_effect()
 	queue_free()

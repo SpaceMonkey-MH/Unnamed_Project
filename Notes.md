@@ -401,3 +401,8 @@
 	France at least).
 ## - __2024/08/07:__
 	Railgun is done, just raised the issue of what happens when the speed of the projectile is set too high.
+	I accidently set all the projectiles to collision with layer 4, which is only used by the BoxTileMap. Dunno
+	if it is a big deal.
+	I don't know why, but when you shoot directly under yourself while being on the floor, the projectile doesn't
+	appear.
+	

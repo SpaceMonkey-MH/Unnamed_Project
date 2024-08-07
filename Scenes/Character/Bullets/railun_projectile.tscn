@@ -13,7 +13,7 @@ height = 40.0
 [node name="RailunProjectile" type="CharacterBody2D" node_paths=PackedStringArray("area_2d")]
 z_index = 1
 collision_layer = 0
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_22fmj")
 area_2d = NodePath("Area2D")
 

@@ -399,3 +399,5 @@
 ## - __2024/08/06:__
 	About the copyright issues for the easter egg song, I think it is fine because of the laws about parody (in
 	France at least).
+## - __2024/08/07:__
+	Railgun is done, just raised the issue of what happens when the speed of the projectile is set too high.

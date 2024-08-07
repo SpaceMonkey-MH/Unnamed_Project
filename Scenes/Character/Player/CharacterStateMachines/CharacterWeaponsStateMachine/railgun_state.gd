@@ -6,6 +6,7 @@ extends WeaponsState
 @export var timer : Timer
 @export var railgun_projectile_scene : PackedScene
 @export var attack_damage : float = 200
+# WARNING: this should not be too high, otherwise the projectile doesn't have the time to damage the enemies.
 @export var speed_factor : float = 50
 @export var reload_time : float = 10
 

@@ -43,11 +43,6 @@ NOT DONE :
 - Find a way to queue free the bullets that go too far. Maybe box the level?
 - Find a last weapon to add.
 - Update the names of the projectiles.
-- Add a Railgun.
-	- Add a scene for the projectile. // DONE.
-	- Add the code to launch the projectile. // DONE.
-	- Add the code for the collisions of the projectile. // DONE.
-	- Add the code for the damage of the projectile.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -102,3 +97,8 @@ DONE :
 - Fix AoE of Fire Spitter hitting farther targets at an angle than targets in direction of cursor. // DONE.
 - Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. // (the
 	copyrights part is still an issue) DONE.
+- Add a Railgun. // DONE.
+	- Add a scene for the projectile. // DONE.
+	- Add the code to launch the projectile. // DONE.
+	- Add the code for the collisions of the projectile. // DONE.
+	- Add the code for the damage of the projectile. // DONE.

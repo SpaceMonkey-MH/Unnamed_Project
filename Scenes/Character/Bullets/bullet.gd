@@ -98,7 +98,7 @@ func _physics_process(delta) -> void:
 	#print("delta in bullet.gd: ", delta)
 	#print("Player velocity times delta in bullet.gd: ", player.velocity * delta)
 	if area_2d:
-		damage()
+		damage_through()
 
 
 func explosion_fx() -> void:
@@ -124,8 +124,8 @@ func apply_y_mod(y_velocity: float, _delta: float) -> float:
 
 
 # Placeholder for damaging all along the course of the bullet.
-func damage() -> void:
-	print("Hello from bullet.gd.")
+func damage_through() -> void:
+	#print("Hello from bullet.gd.")
 	pass
 
 

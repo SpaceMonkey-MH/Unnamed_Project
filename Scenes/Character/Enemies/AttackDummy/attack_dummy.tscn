@@ -13,6 +13,7 @@ script = ExtResource("1_x5k5i")
 sprite_2d = NodePath("Sprite2D")
 notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
+max_health = 10000.0
 
 [node name="HitBox" parent="." instance=ExtResource("3_l1p6l")]
 

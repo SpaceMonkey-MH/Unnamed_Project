@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=78 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
 [ext_resource type="PackedScene" uid="uid://c2372plt8crlv" path="res://Scenes/Character/Bullets/railun_projectile.tscn" id="35_te0wa"]
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
+[ext_resource type="Texture2D" uid="uid://bsd5aysnifj1t" path="res://Assets/Sprites/Weapons/Axe_1.png" id="38_dquvd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr7k"]
 size = Vector2(45, 45)
@@ -466,6 +467,9 @@ states/desert_eagle/node = SubResource("AnimationNodeAnimation_4pujj")
 states/desert_eagle/position = Vector2(397, 100)
 transitions = ["Start", "desert_eagle", SubResource("AnimationNodeStateMachineTransition_vjj2y")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rnn44"]
+radius = 22.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
@@ -562,15 +566,20 @@ script = ExtResource("18_gi4pl")
 character = NodePath("..")
 current_state = NodePath("Melee")
 
-[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon", "next_weapon_state", "previous_weapon_state", "timer", "character_movement_state_machine")]
+[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon_area", "melee_weapon_char", "next_weapon_state", "previous_weapon_state", "reload_timer", "throw_duration_timer", "character_movement_state_machine")]
 script = ExtResource("19_lk4n7")
-melee_weapon = NodePath("../../MeleeWeapon")
+melee_weapon_area = NodePath("../../MeleeWeaponChar/MeleeWeapon")
+melee_weapon_char = NodePath("../../MeleeWeaponChar")
 next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../Railgun")
-timer = NodePath("MeleeWeaponCoolDown")
+reload_timer = NodePath("MeleeWeaponCoolDown")
+throw_duration_timer = NodePath("MeleeWeaponThrowDuration")
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 
 [node name="MeleeWeaponCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]
+one_shot = true
+
+[node name="MeleeWeaponThrowDuration" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]
 one_shot = true
 
 [node name="DesertEagle" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("timer", "next_weapon_state", "previous_weapon_state")]
@@ -664,11 +673,23 @@ text = "Weapons State:"
 script = ExtResource("28_fvbqe")
 state_machine = NodePath("../CharacterWeaponsStateMachine")
 
-[node name="MeleeWeapon" type="Area2D" parent="." node_paths=PackedStringArray("melee_weapon_state")]
-script = ExtResource("21_cr6j0")
-melee_weapon_state = NodePath("../CharacterWeaponsStateMachine/Melee")
+[node name="MeleeWeaponChar" type="CharacterBody2D" parent="."]
+collision_layer = 0
+collision_mask = 6
 
-[node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeapon"]
+[node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeaponChar"]
+shape = SubResource("CircleShape2D_rnn44")
+
+[node name="MeleeWeaponSprite" type="Sprite2D" parent="MeleeWeaponChar"]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("38_dquvd")
+flip_h = true
+
+[node name="MeleeWeapon" type="Area2D" parent="MeleeWeaponChar" node_paths=PackedStringArray("melee_weapon_state")]
+script = ExtResource("21_cr6j0")
+melee_weapon_state = NodePath("../../CharacterWeaponsStateMachine/Melee")
+
+[node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeaponChar/MeleeWeapon"]
 shape = SubResource("CircleShape2D_odl77")
 
 [node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state", "fire_spitter_sprite", "fire_spitter_hit_box")]
@@ -694,6 +715,7 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="HealthComponent/FireDurationTimer" to="HealthComponent" method="_on_fire_duration_timer_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponCoolDown" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/Melee/MeleeWeaponThrowDuration" to="CharacterWeaponsStateMachine/Melee" method="_on_melee_weapon_throw_duration_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/DesertEagle/DesertEagleCoolDown" to="CharacterWeaponsStateMachine/DesertEagle" method="_on_desert_eagle_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Shotgun/ShotgunCoolDown" to="CharacterWeaponsStateMachine/Shotgun" method="_on_shotgun_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/RocketLauncher/RocketLauncherCoolDown" to="CharacterWeaponsStateMachine/RocketLauncher" method="_on_weapon_3_cool_down_timeout"]
@@ -702,6 +724,6 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/GrenadeLauncher/GrenadeLauncherCoolDown" to="CharacterWeaponsStateMachine/GrenadeLauncher" method="_on_grenade_launcher_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FlameThrower/FlameThrowerCoolDown" to="CharacterWeaponsStateMachine/FlameThrower" method="_on_flame_thrower_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Railgun/RailgunCoolDown" to="CharacterWeaponsStateMachine/Railgun" method="_on_railgun_cool_down_timeout"]
-[connection signal="body_entered" from="MeleeWeapon" to="MeleeWeapon" method="_on_body_entered"]
+[connection signal="body_entered" from="MeleeWeaponChar/MeleeWeapon" to="MeleeWeaponChar/MeleeWeapon" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

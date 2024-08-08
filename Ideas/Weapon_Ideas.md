@@ -52,13 +52,14 @@
 		- Deals critical damage when hitting head/when lucky (?).
 		- Maybe redundant with railgun.
 	- Boomerang Blades of smth:
-		- Blades that are thrown, fly, damage through, and then come back, still damaging.
+		- Blades that are thrown, fly, damage through, and then come back, still damaging. Could be the melee weapon
+			that is thrown and comes back.
 	- Sound Blaster or Wind Blower or smth:
 		- A weapon that pushes back the enemies. Maybe that should be knockback on other weapons, Idk.
 		- If sound, could be like music or smth, like death metal or Idk.
 
 ## Random ideas:
-	- From Julien: Smoke at the tip of the firearms on fire.
+	- From Julien: Smoke at the tip of the firearms on fire + fire + recoil.
 	- The player never needs to reload, because it is badass, I guess.
 	- Make every weapon automatic (fire continuously when button pressed)?
 	- Melee weapon is unlocked from the beginning, others have to be unlocked through a specific level.

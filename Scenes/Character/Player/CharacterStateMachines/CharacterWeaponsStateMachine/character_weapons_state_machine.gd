@@ -17,7 +17,7 @@ func _ready():
 			child.character = character
 			
 		else:
-			push_warning("Child " + child.name + "is not a WeaponsState for CharacterWeaponsStateMachine.")
+			push_warning("Child " + child.name + " is not a WeaponsState for CharacterWeaponsStateMachine.")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

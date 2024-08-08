@@ -53,7 +53,9 @@
 		- Maybe redundant with railgun.
 	- Boomerang Blades of smth:
 		- Blades that are thrown, fly, damage through, and then come back, still damaging. Could be the melee weapon
-			that is thrown and comes back.
+			that is thrown and comes back. Could be that the weapon does not rotate on its own, but rather can attack
+			as normal but far away. Maybe it doesn't go in a straight line, but rather follows the mouse cursor.
+			And then it comes back no-clipping through the map. Does it have collision at all when flying? Idk.
 	- Sound Blaster or Wind Blower or smth:
 		- A weapon that pushes back the enemies. Maybe that should be knockback on other weapons, Idk.
 		- If sound, could be like music or smth, like death metal or Idk.

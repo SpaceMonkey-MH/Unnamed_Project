@@ -13,8 +13,11 @@ class_name MeleeWeaponState
 @export var reload_time: float = 0.2
 # The time for which the thrown weapon is going to fly outwards.
 @export var throw_duration: float = 3.0
-# True if the weapon is flying outwards, false otherwise.
-var flying_away: bool = false
+# Speed of the flying weapon. Idk the unit.
+@export var flying_speed: float = 300
+# 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise.
+var flying_away: int = 0
+@onready var hit_box: Node = get_node("../../MeleeWeaponChar/MeleeWeaponHitBox")
 
 
 func _ready() -> void:
@@ -23,10 +26,10 @@ func _ready() -> void:
 	#print('get_node("../MeleeWeaponChar/MeleeWeaponHitBox"): ', get_node(
 		#"../../MeleeWeaponChar/MeleeWeaponHitBox"))
 	# Can't seem to get the hit box from melee_weapon_char.
-	get_node("../../MeleeWeaponChar/MeleeWeaponHitBox").disabled = true
+	hit_box.disabled = true
 
 
-#func state_process(delta):
+func state_process(_delta: float) -> void:
 	#print("WeaponState melee_weapon.monitoring is ", melee_weapon.monitoring)
 	#print("WeaponState can_fire is ", can_fire)
 	#print("Time remaining on timer: ", timer.time_left)
@@ -37,6 +40,21 @@ func _ready() -> void:
 #		weapon_fire(player.get_global_mouse_position())
 #		print("firing")	# Will print continuesly during the hold.
 #		print(player.get_global_mouse_position())
+	if flying_away == 1:
+		#var fly_angle: float = Vector2(1, 0).angle_to_point(character.get_local_mouse_position())
+		#print("angle in m_w_s.gd: ", fly_angle)
+		#melee_weapon_char.velocity = Vector2(100, 0).rotated(fly_angle)
+		#melee_weapon_char.velocity = melee_weapon_char.get_local_mouse_position().normalized() * flying_speed
+		var mouse_pos: Vector2 = melee_weapon_char.get_local_mouse_position()
+		# This is to avoid weird twitching when the cursor in near the pos.
+		if mouse_pos.length() < 5:
+			mouse_pos = Vector2.ZERO
+		#print("mouse_pos in m_w_s.gd: ", mouse_pos)
+		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
+			mouse_pos.normalized() * flying_speed, 0.3)
+		#if melee_weapon_char.velocity.length() >= 10:
+		melee_weapon_char.move_and_slide()
+		
 
 func state_input(event : InputEvent) -> void:
 	if event.is_action_pressed("next_weapon"):
@@ -68,6 +86,7 @@ func state_input(event : InputEvent) -> void:
 		melee_weapon_area.monitoring = false
 	if event.is_action_pressed("secondary_fire") and can_fire:
 		throw_weapon(character.get_global_mouse_position())
+		#print("mouse_pos in melee_w_s.gd", character.get_global_mouse_position())
 		
 #	if event.is_action_pressed("fire"):	# Not working as intended, too many or too few "fire".
 #		print("fire")
@@ -93,11 +112,13 @@ func throw_weapon(mouse_pos: Vector2) -> void:
 	can_fire = false
 	throw_duration_timer.start()
 	#melee_weapon.visible = false
-	flying_away = true
-	while flying_away:
+	flying_away = 1
+	#while flying_away:
 		#melee_weapon_char.velocity = Vector2(10, 0)
 		#melee_weapon_char.move_and_slide()
-		print("Hello from thrown_weapon() in melee_weapon_state.gd")
+		#print("Hello from thrown_weapon() in melee_weapon_state.gd")
+	melee_weapon_area.monitoring = true
+	hit_box.disabled = false
 	
 
 
@@ -110,7 +131,9 @@ func _on_melee_weapon_cool_down_timeout() -> void:
 	#melee_weapon.monitoring = false
 
 
-func _on_melee_weapon_throw_duration_timeout():
+func _on_melee_weapon_throw_duration_timeout() -> void:
 	reload_timer.start()
 	melee_weapon_char.visible = true
-	flying_away = false
+	flying_away = -1
+	melee_weapon_area.monitoring = false
+	hit_box.disabled = true

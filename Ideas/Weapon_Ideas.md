@@ -55,6 +55,7 @@
 		- Blades that are thrown, fly, damage through, and then come back, still damaging.
 	- Sound Blaster or Wind Blower or smth:
 		- A weapon that pushes back the enemies. Maybe that should be knockback on other weapons, Idk.
+		- If sound, could be like music or smth, like death metal or Idk.
 
 ## Random ideas:
 	- From Julien: Smoke at the tip of the firearms on fire.

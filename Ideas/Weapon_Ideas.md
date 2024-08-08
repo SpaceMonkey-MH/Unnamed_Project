@@ -48,15 +48,20 @@
 		- High damage, 
 	- Railgun:
 		- Shoots a piercing projectile through the map and enemies.
-	Sniper-rifle:
+	- Sniper-rifle:
 		- Deals critical damage when hitting head/when lucky (?).
 		- Maybe redundant with railgun.
+	- Boomerang Blades of smth:
+		- Blades that are thrown, fly, damage through, and then come back, still damaging.
+	- Sound Blaster or Wind Blower or smth:
+		- A weapon that pushes back the enemies. Maybe that should be knockback on other weapons, Idk.
 
 ## Random ideas:
 	- From Julien: Smoke at the tip of the firearms on fire.
 	- The player never needs to reload, because it is badass, I guess.
 	- Make every weapon automatic (fire continuously when button pressed)?
 	- Melee weapon is unlocked from the beginning, others have to be unlocked through a specific level.
+		Maybe they could be unlocked at the beginning of the level, the level serving as a tutorial. Idk.
 
 ## Retained weapon list and order:
 	- Melee weapon (unlocked from the beginning).

@@ -94,7 +94,7 @@ func _physics_process(delta: float) -> void:
 			#explosion_fx()
 			#area_of_effect()
 			#queue_free()
-	print("Velocity of bullet.gd: ", velocity)
+	#print("Velocity of bullet.gd: ", velocity)
 	#print("Player velocity in bullet.gd: ", player_velocity)
 	#print("delta in bullet.gd: ", delta)
 	#print("Player velocity times delta in bullet.gd: ", player.velocity * delta)

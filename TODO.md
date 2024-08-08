@@ -1,8 +1,6 @@
 NOT DONE :
 
 - Comment the code.
-- Finish the code in hit_state.
-- Finish the code for test_moving_enemy, should be a state machine and all the tintouin.
 - To do when the options are set up: try to move the self_damage assign in bullet_3.gd to _ready() instead
 	(Use a global signal? That would be swag for sure.) (idk what this means, maybe it is done).
 - Handle the part where the characters fall when they die (animation).
@@ -14,15 +12,13 @@ NOT DONE :
 - Solve possible issue: jump animation playing when falling (at beginning).
 - Fix the rolling (landing) animation when going backwards.
 - Fix the melee weapon AoE bug (cf 2024/07/06)?
-- Unit tests? Asserts.
-- Make enemies stop between two wanderings.
-- Implement blast of the explosion of rockets and so on, like move the characters when hit.
+- Unit tests? Asserts. // Probably not.
+- Make enemies stop between two wanderings. // Probably not.
 - Make a story.
 - Make it so that the player can't shoot after death. Or just handle after-death.
 - Put self_damage in options.
 - Blink?
 - Balancing.
-- Piercing shot (I think I'd need to move the queue_free in bullet.gd to the subclasses or smth).
 - Add inverted gravity mechanic.
 - Add water mechanic.
 - Achievements.
@@ -40,11 +36,16 @@ NOT DONE :
 - Fix hit state for tme.
 - Make some kind of rampaging or score or whatever.
 - Make health bar.
-- Find a last weapon to add.
 - Update the names of the projectiles.
 - Update the names of the states.
-- Add knockback. Maybe.
+- Implement blast of the explosion of rockets and so on, like move the characters when hit.
+	Add knockback. Maybe. // Will probably be done with the Sound Blaster.
 - Add reset position and reset level buttons.
+- Rework the names of the weapons and bullets (copyright issues).
+- Make healing trigger only out of combat.
+- Add blood splatter when character is hit or killed, on the terrain and the characters.
+- Add Sound Blaster.
+- 
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -105,3 +106,7 @@ DONE :
 	- Add the code for the collisions of the projectile. // DONE.
 	- Add the code for the damage of the projectile. // DONE.
 - Find a way to queue free the bullets that go too far. Maybe box the level? // DONE.
+- Find a last weapon to add. // DONE.
+- Piercing shot (I think I'd need to move the queue_free in bullet.gd to the subclasses or smth). // DONE.
+- Finish the code for test_moving_enemy, should be a state machine and all the tintouin. // DONE.
+- Finish the code in hit_state. // DONE.

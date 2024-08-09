@@ -678,7 +678,7 @@ z_index = 3
 collision_layer = 0
 collision_mask = 6
 
-[node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeaponChar"]
+[node name="MeleeWeaponCharHitBox" type="CollisionShape2D" parent="MeleeWeaponChar"]
 shape = SubResource("CircleShape2D_rnn44")
 
 [node name="MeleeWeaponSprite" type="Sprite2D" parent="MeleeWeaponChar"]
@@ -690,7 +690,7 @@ flip_h = true
 script = ExtResource("21_cr6j0")
 melee_weapon_state = NodePath("../../CharacterWeaponsStateMachine/Melee")
 
-[node name="MeleeWeaponHitBox" type="CollisionShape2D" parent="MeleeWeaponChar/MeleeWeapon"]
+[node name="MeleeWeaponAttackHitBox" type="CollisionShape2D" parent="MeleeWeaponChar/MeleeWeapon"]
 shape = SubResource("CircleShape2D_odl77")
 
 [node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state", "fire_spitter_sprite", "fire_spitter_hit_box")]

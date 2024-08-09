@@ -17,7 +17,8 @@ class_name MeleeWeaponState
 @export var flying_speed: float = 300
 # 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise.
 var flying_away: int = 0
-@onready var hit_box: Node = get_node("../../MeleeWeaponChar/MeleeWeaponHitBox")
+# Idk if this is better than @export var.
+@onready var hit_box: Node = get_node("../../MeleeWeaponChar/MeleeWeaponCharHitBox")
 
 
 func _ready() -> void:
@@ -54,7 +55,15 @@ func state_process(_delta: float) -> void:
 			mouse_pos.normalized() * flying_speed, 0.3)
 		#if melee_weapon_char.velocity.length() >= 10:
 		melee_weapon_char.move_and_slide()
-		
+	elif flying_away == -1:
+		# We return to the player. Divide by 100 is a magic number so that the return is slower.
+		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
+			(-1 * melee_weapon_char.position * flying_speed) / 100, 0.3)
+		melee_weapon_char.move_and_slide()
+	if melee_weapon_char.position.length() <= 1 and flying_away == -1:
+		melee_weapon_char.position = Vector2.ZERO
+		flying_away = 0
+	#print("flying_away in m_w_s.gd: ", flying_away)
 
 func state_input(event : InputEvent) -> void:
 	if event.is_action_pressed("next_weapon"):
@@ -85,7 +94,7 @@ func state_input(event : InputEvent) -> void:
 		# Stop the monitoring of the area, so that it doesn't damage anymore.
 		melee_weapon_area.monitoring = false
 	if event.is_action_pressed("secondary_fire") and can_fire:
-		throw_weapon(character.get_global_mouse_position())
+		throw_weapon()
 		#print("mouse_pos in melee_w_s.gd", character.get_global_mouse_position())
 		
 #	if event.is_action_pressed("fire"):	# Not working as intended, too many or too few "fire".
@@ -108,7 +117,7 @@ func on_exit() -> void:
 	melee_weapon_char.visible = false
 
 
-func throw_weapon(mouse_pos: Vector2) -> void:
+func throw_weapon() -> void:
 	can_fire = false
 	throw_duration_timer.start()
 	#melee_weapon.visible = false

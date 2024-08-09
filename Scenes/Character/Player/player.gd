@@ -5,56 +5,58 @@ extends CharacterClass
 
 ## Defining variables:
 # Speed on the movement of the player, in pixels/second.
-@export var player_move_speed : float = 300.0
+@export var player_move_speed: float = 300.0
 # Maximum number of air jumps.
-@export var air_jumps_max : int = 3
+@export var air_jumps_max: int = 3
 # Counter of the air jumps done, initialized at air_jumps_max.
-var air_jumps_current : int = air_jumps_max
+var air_jumps_current: int = air_jumps_max
 
 ## Base variables, not used directly for the jump.
 # Height of the jump, in pixels.
-@export var jump_height : float = 120.0
+@export var jump_height: float = 120.0
 # Time for the player to reach the peak of the jump, in seconds.
-@export var jump_time_to_peak : float = 0.5
+@export var jump_time_to_peak: float = 0.5
 # Time to reach the ground during the jump, in seconds.
-@export var jump_time_to_descent : float = 0.4
+@export var jump_time_to_descent: float = 0.4
 
 ## Variables directly used for the jump and the falling:
 # Velocity applied to the player when jumping.
-@onready var jump_velocity : float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
 # Gravity applied to the player during the rising part of the jump.
-@onready var jump_gravity : float = ((-2.0 * jump_height) /
+@onready var jump_gravity: float = ((-2.0 * jump_height) /
 									(jump_time_to_peak * jump_time_to_peak)) * -1.0
 # Gravity applied to the plyaer during the fall.
-@onready var fall_gravity : float = ((-2.0 * jump_height) /
+@onready var fall_gravity: float = ((-2.0 * jump_height) /
 									(jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 # CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
-@onready var movement_state_machine : CharacterMovementStateMachine = $CharacterMovementStateMachine
+@onready var movement_state_machine: CharacterMovementStateMachine = $CharacterMovementStateMachine
 # BodyAnimationTree as a variable so it can be activated.
-@export var body_animation_tree : AnimationTree 
+@export var body_animation_tree: AnimationTree 
 # WeaponsAnimationTree as a variable so it can be activated.
-@export var weapons_animation_tree : AnimationTree 
+@export var weapons_animation_tree: AnimationTree 
 # BodySprite2D as a variable so it can be flipped and modulated.
-@export var body_sprite_2d : Sprite2D
+@export var body_sprite_2d: Sprite2D
 # WeaponsSprite2D as a variable so it can be flipped and rotated.
-@export var weapons_sprite_2d : Sprite2D
+@export var weapons_sprite_2d: Sprite2D
 # FireSpitterWeapon as a variable so it can be rotated.
-@export var fire_spitter_area_2D : Area2D
+@export var fire_spitter_area_2D: Area2D
 # FireSpitter sprite (for now, a color rect) as a variable so it can be flipped.
-@export var fire_spitter_sprite_2d : Sprite2D
+@export var fire_spitter_sprite_2d: Sprite2D
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
 # Should ultimately be likend to options. Might have to move it, Idk.
-@export var self_damage : bool = true
+@export var self_damage: bool = true
+# Whether or not the game should go crazy, like drunk projectiles and things like that.
+@export var crazy_game: bool = false
 # Flashing is when the player takes damage.
-@export var flashing_color : Color = Color.CHOCOLATE
-@export var flashing_time : float = 0.1
+@export var flashing_color: Color = Color.CHOCOLATE
+@export var flashing_time: float = 0.1
 # I think it is useless for now.
-@export var notifier : VisibleOnScreenNotifier2D
+@export var notifier: VisibleOnScreenNotifier2D
 # Whether or not the special sounds should be played. Should ultimately be set in options.
-@export var special_sounds : bool = false
+@export var special_sounds: bool = false
 # Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
-var smoothed_mouse_pos : Vector2
+var smoothed_mouse_pos: Vector2
 ## Just testing smth.
 #var angle = 0
 
@@ -62,7 +64,7 @@ var smoothed_mouse_pos : Vector2
 # Gameplay variables #
 ######################
 
-var damage_multiplier : float = 1	# Applied to every attack.
+var damage_multiplier: float = 1	# Applied to every attack.
 
 
 # // From template:

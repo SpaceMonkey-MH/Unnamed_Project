@@ -45,7 +45,7 @@ NOT DONE :
 - Make healing trigger only out of combat.
 - Add blood splatter when character is hit or killed, on the terrain and the characters.
 - Add Sound Blaster.
-- 
+- Make the game crazy.
 
 ------------------------------------------------------------------------------------------------------
 DONE :

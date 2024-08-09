@@ -2,7 +2,6 @@ extends WeaponsState
 
 class_name MeleeWeaponState
 
-@export var melee_weapon_area: Area2D
 @export var melee_weapon_char: CharacterBody2D
 @export var next_weapon_state: DesertEagleState
 @export var previous_weapon_state: RailgunState
@@ -15,10 +14,14 @@ class_name MeleeWeaponState
 @export var throw_duration: float = 3.0
 # Speed of the flying weapon. Idk the unit.
 @export var flying_speed: float = 300
-# 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise.
+# 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise. Maybe there should be a fourth,
+# resting state mid air, between going out and going back in, Idk.
 var flying_away: int = 0
 # Idk if this is better than @export var.
-@onready var hit_box: Node = get_node("../../MeleeWeaponChar/MeleeWeaponCharHitBox")
+@onready var melee_weapon_hit_box: CollisionShape2D = melee_weapon_char.get_node("MeleeWeaponCharHitBox")
+@onready var melee_weapon_area: Area2D = melee_weapon_char.get_node("MeleeWeaponArea")
+@onready var melee_weapon_sprite: Sprite2D = melee_weapon_char.get_node("MeleeWeaponSprite")
+@onready var crazy_game: bool = PlayerVariables.player.crazy_game
 
 
 func _ready() -> void:
@@ -27,7 +30,7 @@ func _ready() -> void:
 	#print('get_node("../MeleeWeaponChar/MeleeWeaponHitBox"): ', get_node(
 		#"../../MeleeWeaponChar/MeleeWeaponHitBox"))
 	# Can't seem to get the hit box from melee_weapon_char.
-	hit_box.disabled = true
+	melee_weapon_hit_box.disabled = true
 
 
 func state_process(_delta: float) -> void:
@@ -60,7 +63,7 @@ func state_process(_delta: float) -> void:
 		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
 			(-1 * melee_weapon_char.position * flying_speed) / 100, 0.3)
 		melee_weapon_char.move_and_slide()
-	if melee_weapon_char.position.length() <= 1 and flying_away == -1:
+	if melee_weapon_char.position.length() <= 5 and flying_away == -1:
 		melee_weapon_char.position = Vector2.ZERO
 		flying_away = 0
 	#print("flying_away in m_w_s.gd: ", flying_away)
@@ -72,29 +75,10 @@ func state_input(event : InputEvent) -> void:
 		next_state = previous_weapon_state
 	# If the player fired, and if it can fire.
 	if event.is_action_pressed("fire") and can_fire:
-		# Set can_fire to false to prevent from firing again before the end of the cooldown.
-		can_fire = false
-		# Set the monitoring of the area of melee_weapon_area to true, so that it detects the overlapping
-		# areas (enemies)
-		melee_weapon_area.monitoring = true
-		# Start the timer of the cooldown.
-		reload_timer.start()
-		# The angle of progression of the rotation of the sprite. Two times PI divided by the base fps.
-		# This makes a rotation in one second, but it needs to be shorter. Idk how to make that relative to
-		# the "reload" time. Found it kinda, now taking the min between 1 and reload_time, so that the animation
-		# doesn't last longer than a second nor than the reload time. Breaks if the reload time is set too low
-		# (0.1 at least is fine).
-		var prog_angle: float = (2 * PI) / (60 * min(1, reload_time))
-		for i in range((2 * PI) / prog_angle):
-			melee_weapon_char.rotate(prog_angle)
-			# Divide by 60 for a 1 second or less animation.
-			await get_tree().create_timer(1 / 60).timeout
-		# Waiting for the monitoring to do its thing. It's not pretty that way, and might lead to issues.
-		await get_tree().create_timer(0.05).timeout
-		# Stop the monitoring of the area, so that it doesn't damage anymore.
-		melee_weapon_area.monitoring = false
+		hit()
 	if event.is_action_pressed("secondary_fire") and can_fire:
 		throw_weapon()
+		hit()
 		#print("mouse_pos in melee_w_s.gd", character.get_global_mouse_position())
 		
 #	if event.is_action_pressed("fire"):	# Not working as intended, too many or too few "fire".
@@ -107,14 +91,46 @@ func state_input(event : InputEvent) -> void:
 func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	reload_timer.paused = false
-	melee_weapon_char.visible = true
+	throw_duration_timer.paused = false
+	melee_weapon_sprite.visible = true
 
 
 # Called when the next_state becomes another.
 func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	reload_timer.paused = true
-	melee_weapon_char.visible = false
+	throw_duration_timer.paused = true
+	if flying_away == 0:
+		melee_weapon_sprite.visible = false
+
+
+func hit() -> void:
+	var time: Dictionary = Time.get_datetime_dict_from_system()
+	print("Hello from hit() in m_w_s.gd at %s." % time.second)
+	# Set can_fire to false to prevent from firing again before the end of the cooldown.
+	can_fire = false
+	# Set the monitoring of the area of melee_weapon_area to true, so that it detects the overlapping
+	# areas (enemies)
+	melee_weapon_area.monitoring = true
+	# Start the timer of the cooldown.
+	reload_timer.start()
+	# The angle of progression of the rotation of the sprite. Two times PI divided by the base fps.
+	# This makes a rotation in one second, but it needs to be shorter. Idk how to make that relative to
+	# the "reload" time. Found it kinda, now taking the min between 1 and reload_time, so that the animation
+	# doesn't last longer than a second nor than the reload time. Breaks if the reload time is set too low
+	# (0.1 at least is fine).
+	var prog_angle: float = (2 * PI) / (60 * min(1, reload_time))
+	for i in range((2 * PI) / prog_angle):
+		if crazy_game:
+			melee_weapon_char.rotate(prog_angle)
+		else:
+			melee_weapon_sprite.rotate(prog_angle)
+		# Divide by 60 for a 1 second or less animation.
+		await get_tree().create_timer(1 / 60).timeout
+	# Waiting for the monitoring to do its thing. It's not pretty that way, and might lead to issues.
+	await get_tree().create_timer(0.05).timeout
+	# Stop the monitoring of the area, so that it doesn't damage anymore.
+	melee_weapon_area.monitoring = false
 
 
 func throw_weapon() -> void:
@@ -127,7 +143,7 @@ func throw_weapon() -> void:
 		#melee_weapon_char.move_and_slide()
 		#print("Hello from thrown_weapon() in melee_weapon_state.gd")
 	melee_weapon_area.monitoring = true
-	hit_box.disabled = false
+	melee_weapon_hit_box.disabled = false
 	
 
 
@@ -138,6 +154,8 @@ func _on_melee_weapon_cool_down_timeout() -> void:
 	can_fire = true
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	#melee_weapon.monitoring = false
+	if flying_away != 0:
+		hit()
 
 
 func _on_melee_weapon_throw_duration_timeout() -> void:
@@ -145,4 +163,5 @@ func _on_melee_weapon_throw_duration_timeout() -> void:
 	melee_weapon_char.visible = true
 	flying_away = -1
 	melee_weapon_area.monitoring = false
-	hit_box.disabled = true
+	melee_weapon_hit_box.disabled = true
+	hit()

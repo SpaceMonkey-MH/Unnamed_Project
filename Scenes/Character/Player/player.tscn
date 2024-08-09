@@ -566,9 +566,8 @@ script = ExtResource("18_gi4pl")
 character = NodePath("..")
 current_state = NodePath("Melee")
 
-[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon_area", "melee_weapon_char", "next_weapon_state", "previous_weapon_state", "reload_timer", "throw_duration_timer", "character_movement_state_machine")]
+[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon_char", "next_weapon_state", "previous_weapon_state", "reload_timer", "throw_duration_timer", "character_movement_state_machine")]
 script = ExtResource("19_lk4n7")
-melee_weapon_area = NodePath("../../MeleeWeaponChar/MeleeWeapon")
 melee_weapon_char = NodePath("../../MeleeWeaponChar")
 next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../Railgun")
@@ -686,11 +685,11 @@ scale = Vector2(0.15, 0.15)
 texture = ExtResource("38_dquvd")
 flip_h = true
 
-[node name="MeleeWeapon" type="Area2D" parent="MeleeWeaponChar" node_paths=PackedStringArray("melee_weapon_state")]
+[node name="MeleeWeaponArea" type="Area2D" parent="MeleeWeaponChar" node_paths=PackedStringArray("melee_weapon_state")]
 script = ExtResource("21_cr6j0")
 melee_weapon_state = NodePath("../../CharacterWeaponsStateMachine/Melee")
 
-[node name="MeleeWeaponAttackHitBox" type="CollisionShape2D" parent="MeleeWeaponChar/MeleeWeapon"]
+[node name="MeleeWeaponAttackHitBox" type="CollisionShape2D" parent="MeleeWeaponChar/MeleeWeaponArea"]
 shape = SubResource("CircleShape2D_odl77")
 
 [node name="FireSpitterWeapon" type="Area2D" parent="." node_paths=PackedStringArray("fire_spitter_state", "fire_spitter_sprite", "fire_spitter_hit_box")]
@@ -725,6 +724,6 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/GrenadeLauncher/GrenadeLauncherCoolDown" to="CharacterWeaponsStateMachine/GrenadeLauncher" method="_on_grenade_launcher_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FlameThrower/FlameThrowerCoolDown" to="CharacterWeaponsStateMachine/FlameThrower" method="_on_flame_thrower_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Railgun/RailgunCoolDown" to="CharacterWeaponsStateMachine/Railgun" method="_on_railgun_cool_down_timeout"]
-[connection signal="body_entered" from="MeleeWeaponChar/MeleeWeapon" to="MeleeWeaponChar/MeleeWeapon" method="_on_body_entered"]
+[connection signal="body_entered" from="MeleeWeaponChar/MeleeWeaponArea" to="MeleeWeaponChar/MeleeWeaponArea" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

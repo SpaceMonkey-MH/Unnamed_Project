@@ -1,7 +1,7 @@
 class_name RailgunState
 extends WeaponsState
 
-@export var next_weapon_state : MeleeWeaponState
+@export var next_weapon_state : SoundBlasterState
 @export var previous_weapon_state : FlameThrowerState
 @export var timer : Timer
 @export var railgun_projectile_scene : PackedScene

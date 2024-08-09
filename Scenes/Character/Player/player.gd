@@ -43,6 +43,10 @@ var air_jumps_current: int = air_jumps_max
 @export var fire_spitter_area_2D: Area2D
 # FireSpitter sprite (for now, a color rect) as a variable so it can be flipped.
 @export var fire_spitter_sprite_2d: Sprite2D
+# SoundBlasterArea as a variable so it can be rotated.
+@export var sound_blaster_area: Area2D
+# SoundBlaster sprite (for now, a color rect) as a variable so it can be flipped.
+@export var sound_blaster_sprite: Sprite2D
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
 # Should ultimately be likend to options. Might have to move it, Idk.
 @export var self_damage: bool = true
@@ -112,6 +116,7 @@ func _process(_delta):
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)
 	fire_spitter_area_2D.look_at(smoothed_mouse_pos)
+	sound_blaster_area.look_at(smoothed_mouse_pos)
 	# Flipping the sprite so it looks the right direction.
 	body_sprite_2d.flip_h = get_local_mouse_position().x < 0
 	# Flipping the gun so it's not upside down.
@@ -121,6 +126,7 @@ func _process(_delta):
 	#fire_spitter_area_2D.flip_v = get_local_mouse_position().x < 0
 	# This does work. And I think I need to flip it, otherwise the flames will be upside down.
 	fire_spitter_sprite_2d.flip_v = get_local_mouse_position().x < 0
+	sound_blaster_sprite.flip_v = get_local_mouse_position().x < 0
 	## Testings.
 	#angle += 0.05
 	#rotate(angle)

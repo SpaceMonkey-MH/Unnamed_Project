@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=81 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -38,8 +38,10 @@
 [ext_resource type="PackedScene" uid="uid://dy3a7w7qbtgka" path="res://Scenes/Character/Bullets/napalm.tscn" id="32_gvwh5"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/fire_spitter_weapon.gd" id="35_p6h3e"]
 [ext_resource type="PackedScene" uid="uid://c2372plt8crlv" path="res://Scenes/Character/Bullets/railun_projectile.tscn" id="35_te0wa"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/sound_blaster.gd" id="36_hu6pj"]
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
 [ext_resource type="Texture2D" uid="uid://bsd5aysnifj1t" path="res://Assets/Sprites/Weapons/Axe_1.png" id="38_dquvd"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/sound_blaster_area.gd" id="42_6usw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr7k"]
 size = Vector2(45, 45)
@@ -473,7 +475,10 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "notifier", "hit_box")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7dft"]
+size = Vector2(86, 46)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box")]
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
@@ -481,6 +486,8 @@ body_sprite_2d = NodePath("BodySprite2D")
 weapons_sprite_2d = NodePath("WeaponsSprite2D")
 fire_spitter_area_2D = NodePath("FireSpitterWeapon")
 fire_spitter_sprite_2d = NodePath("FireSpitterWeapon/FireSpitterSprite")
+sound_blaster_area = NodePath("SoundBlasterArea")
+sound_blaster_sprite = NodePath("SoundBlasterArea/SoundBlasterSprite")
 notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
 
@@ -570,7 +577,7 @@ current_state = NodePath("Melee")
 script = ExtResource("19_lk4n7")
 melee_weapon_char = NodePath("../../MeleeWeaponChar")
 next_weapon_state = NodePath("../DesertEagle")
-previous_weapon_state = NodePath("../Railgun")
+previous_weapon_state = NodePath("../SoundBlaster")
 reload_timer = NodePath("MeleeWeaponCoolDown")
 throw_duration_timer = NodePath("MeleeWeaponThrowDuration")
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
@@ -654,12 +661,22 @@ one_shot = true
 
 [node name="Railgun" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("next_weapon_state", "previous_weapon_state", "timer")]
 script = ExtResource("25_6vkpp")
-next_weapon_state = NodePath("../Melee")
+next_weapon_state = NodePath("../SoundBlaster")
 previous_weapon_state = NodePath("../FlameThrower")
 timer = NodePath("RailgunCoolDown")
 railgun_projectile_scene = ExtResource("35_te0wa")
 
 [node name="RailgunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Railgun"]
+one_shot = true
+
+[node name="SoundBlaster" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("cd_timer", "next_weapon_state", "previous_weapon_state", "sound_blaster_area")]
+script = ExtResource("36_hu6pj")
+cd_timer = NodePath("SoundBlasterCoolDown")
+next_weapon_state = NodePath("../Melee")
+previous_weapon_state = NodePath("../Railgun")
+sound_blaster_area = NodePath("../../SoundBlasterArea")
+
+[node name="SoundBlasterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/SoundBlaster"]
 one_shot = true
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
@@ -673,6 +690,7 @@ script = ExtResource("28_fvbqe")
 state_machine = NodePath("../CharacterWeaponsStateMachine")
 
 [node name="MeleeWeaponChar" type="CharacterBody2D" parent="."]
+visible = false
 z_index = 3
 collision_layer = 0
 collision_mask = 6
@@ -711,6 +729,22 @@ texture = ExtResource("36_sj2j0")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-22, -22, 44, 44)
 
+[node name="SoundBlasterArea" type="Area2D" parent="." node_paths=PackedStringArray("sound_blaster_state", "sound_blaster_sprite", "sound_blaster_hit_box")]
+script = ExtResource("42_6usw2")
+sound_blaster_state = NodePath("../CharacterWeaponsStateMachine/SoundBlaster")
+sound_blaster_sprite = NodePath("SoundBlasterSprite")
+sound_blaster_hit_box = NodePath("SoundBlasterHitBox")
+
+[node name="SoundBlasterHitBox" type="CollisionShape2D" parent="SoundBlasterArea"]
+position = Vector2(66, 0)
+shape = SubResource("RectangleShape2D_i7dft")
+
+[node name="SoundBlasterSprite" type="Sprite2D" parent="SoundBlasterArea"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(66, 1.19209e-07)
+scale = Vector2(0.671875, 0.359375)
+texture = ExtResource("36_sj2j0")
+
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="HealthComponent/FireDurationTimer" to="HealthComponent" method="_on_fire_duration_timer_timeout"]
@@ -724,6 +758,7 @@ rect = Rect2(-22, -22, 44, 44)
 [connection signal="timeout" from="CharacterWeaponsStateMachine/GrenadeLauncher/GrenadeLauncherCoolDown" to="CharacterWeaponsStateMachine/GrenadeLauncher" method="_on_grenade_launcher_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/FlameThrower/FlameThrowerCoolDown" to="CharacterWeaponsStateMachine/FlameThrower" method="_on_flame_thrower_cool_down_timeout"]
 [connection signal="timeout" from="CharacterWeaponsStateMachine/Railgun/RailgunCoolDown" to="CharacterWeaponsStateMachine/Railgun" method="_on_railgun_cool_down_timeout"]
+[connection signal="timeout" from="CharacterWeaponsStateMachine/SoundBlaster/SoundBlasterCoolDown" to="CharacterWeaponsStateMachine/SoundBlaster" method="_on_sound_blaster_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeaponChar/MeleeWeaponArea" to="MeleeWeaponChar/MeleeWeaponArea" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

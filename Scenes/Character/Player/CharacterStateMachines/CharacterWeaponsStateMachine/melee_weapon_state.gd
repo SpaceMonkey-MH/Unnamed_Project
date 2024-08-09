@@ -4,7 +4,7 @@ class_name MeleeWeaponState
 
 @export var melee_weapon_char: CharacterBody2D
 @export var next_weapon_state: DesertEagleState
-@export var previous_weapon_state: RailgunState
+@export var previous_weapon_state: SoundBlasterState
 @export var reload_timer: Timer
 # The timer that controls the duration of the flight of the thrown weapon (only the outward part).
 @export var throw_duration_timer: Timer
@@ -16,7 +16,7 @@ class_name MeleeWeaponState
 @export var flying_speed: float = 300
 # 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise. Maybe there should be a fourth,
 # resting state mid air, between going out and going back in, Idk.
-var flying_away: int = 0
+var flying: int = 0
 # Idk if this is better than @export var.
 @onready var melee_weapon_hit_box: CollisionShape2D = melee_weapon_char.get_node("MeleeWeaponCharHitBox")
 @onready var melee_weapon_area: Area2D = melee_weapon_char.get_node("MeleeWeaponArea")
@@ -44,7 +44,7 @@ func state_process(_delta: float) -> void:
 #		weapon_fire(player.get_global_mouse_position())
 #		print("firing")	# Will print continuesly during the hold.
 #		print(player.get_global_mouse_position())
-	if flying_away == 1:
+	if flying == 1:
 		#var fly_angle: float = Vector2(1, 0).angle_to_point(character.get_local_mouse_position())
 		#print("angle in m_w_s.gd: ", fly_angle)
 		#melee_weapon_char.velocity = Vector2(100, 0).rotated(fly_angle)
@@ -58,15 +58,15 @@ func state_process(_delta: float) -> void:
 			mouse_pos.normalized() * flying_speed, 0.3)
 		#if melee_weapon_char.velocity.length() >= 10:
 		melee_weapon_char.move_and_slide()
-	elif flying_away == -1:
+	elif flying == -1:
 		# We return to the player. Divide by 100 is a magic number so that the return is slower.
 		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
 			(-1 * melee_weapon_char.position * flying_speed) / 100, 0.3)
 		melee_weapon_char.move_and_slide()
-	if melee_weapon_char.position.length() <= 5 and flying_away == -1:
+	if melee_weapon_char.position.length() <= 5 and flying == -1:
 		melee_weapon_char.position = Vector2.ZERO
-		flying_away = 0
-	#print("flying_away in m_w_s.gd: ", flying_away)
+		flying = 0
+	#print("flying in m_w_s.gd: ", flying)
 
 func state_input(event : InputEvent) -> void:
 	if event.is_action_pressed("next_weapon"):
@@ -100,13 +100,13 @@ func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	reload_timer.paused = true
 	throw_duration_timer.paused = true
-	if flying_away == 0:
+	if flying == 0:
 		melee_weapon_sprite.visible = false
 
 
 func hit() -> void:
-	var time: Dictionary = Time.get_datetime_dict_from_system()
-	print("Hello from hit() in m_w_s.gd at %s." % time.second)
+	#var time: Dictionary = Time.get_datetime_dict_from_system()
+	#print("Hello from hit() in m_w_s.gd at %s." % time.second)
 	# Set can_fire to false to prevent from firing again before the end of the cooldown.
 	can_fire = false
 	# Set the monitoring of the area of melee_weapon_area to true, so that it detects the overlapping
@@ -137,8 +137,8 @@ func throw_weapon() -> void:
 	can_fire = false
 	throw_duration_timer.start()
 	#melee_weapon.visible = false
-	flying_away = 1
-	#while flying_away:
+	flying = 1
+	#while flying:
 		#melee_weapon_char.velocity = Vector2(10, 0)
 		#melee_weapon_char.move_and_slide()
 		#print("Hello from thrown_weapon() in melee_weapon_state.gd")
@@ -154,14 +154,14 @@ func _on_melee_weapon_cool_down_timeout() -> void:
 	can_fire = true
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	#melee_weapon.monitoring = false
-	if flying_away != 0:
+	if flying != 0:
 		hit()
 
 
 func _on_melee_weapon_throw_duration_timeout() -> void:
 	reload_timer.start()
 	melee_weapon_char.visible = true
-	flying_away = -1
+	flying = -1
 	melee_weapon_area.monitoring = false
 	melee_weapon_hit_box.disabled = true
 	hit()

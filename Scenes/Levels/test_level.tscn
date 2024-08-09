@@ -2881,6 +2881,7 @@ drag_vertical_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_xkfwj")]
 position = Vector2(975, 971)
+flashing_color = Color(0.823529, 0.411765, 0.117647, 1)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

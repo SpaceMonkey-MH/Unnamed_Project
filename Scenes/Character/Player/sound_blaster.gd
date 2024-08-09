@@ -27,9 +27,12 @@ func state_process(_delta: float) -> void:
 		#print("mg.gd: ", get_parent().get_parent(), "\n", character)
 		#pass
 	if fire_pressed and can_fire:
+		sound_blaster_area.monitoring = true
 		can_fire = false
 		cd_timer.start()
-		print("Fire in sound_blaster.gd.")
+		await get_tree().create_timer(0.05).timeout
+		sound_blaster_area.monitoring = false
+		#print("Fire in sound_blaster.gd.")
 
 
 func state_input(event: InputEvent) -> void:

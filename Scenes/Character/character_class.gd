@@ -11,6 +11,9 @@ extends CharacterBody2D
 @export var max_health : float = 100.0
 # Timer before queue_free() when the dead characters fall out of the screen.
 @export var out_of_screen_death_timer : float = 1.5
+# Whether or not the character is out of screen. Used to queue free it when dead. Initialized here for placeholder
+# but really set in _ready() in subclasses.
+@export var out_of_screen : bool = false
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
 var death_animation_timer : float = 1.5
@@ -20,9 +23,8 @@ var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var character_is_dead : bool = false
 # Move speed of the character, here so it can be added to all the relative states. In pixels/second.
 var move_speed : float = 0.0
-# Whether or not the character is out of screen. Used to queue free it when dead. Initialized here for placeholder
-# but really set in _ready() in subclasses.
-@export var out_of_screen : bool = false
+# Whether or not the player can move, use for knockback.
+var can_move: bool = true
 
 
 func _ready():
@@ -125,3 +127,12 @@ func handle_character_out_of_screen() -> void:
 	queue_free()
 	#print("queue_free() of ", self)
 
+
+func knockback(source_pos: Vector2, knockback_force: float) -> void:
+	can_move = false
+	velocity += (global_position - source_pos).normalized() * knockback_force
+	move_and_slide()
+
+
+func stop_knockback() -> void:
+	can_move = true

@@ -57,6 +57,8 @@ func _ready() -> void:
 
 
 func _process(delta) -> void:
+	if get_parent().character_is_dead:
+		return
 	t += delta
 	if t >= 1:
 		#var time = Time.get_datetime_dict_from_system()

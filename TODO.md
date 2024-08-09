@@ -45,7 +45,29 @@ NOT DONE :
 - Make healing trigger only out of combat.
 - Add blood splatter when character is hit or killed, on the terrain and the characters.
 - Add Sound Blaster.
-- Make the game crazy.
+	- Add area for the damage/knockback. // DONE.
+	- Add sprite for the area. // DONE.
+	- Make area rotate around player to follow mouse. // DONE.
+	- Make the Sound Blaster fire like an automatic weapon. // DONE.
+	- Make the SB damage when firing. // DONE.
+	- Make the SB knock enemies back.
+		- Push them back. // DONE.
+		- Stop their movement.
+	- Add crazy game content.
+	- Add sound.
+		- Create a list of sounds to play. // DONE.
+		- Have the sound player choose randomly among that list.
+		- Play the sound while firing, stop when stopping the fire, starting a new one when resuming fire.
+- Make the game crazy (invert left and right, etc).
+- Solve the collision issue (enemies can force the player through walls).
+- Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. I think it is
+	fine, as it is parody kinda.
+	- Find the song. // DONE.
+	- Make the code to play it. // DONE.
+	- Cut the sample correctly. // DONE.
+	- Solve the multiple overlapping sounds issue. Maybe put the code in level.gd and use a signal? Or maybe just
+		don't do anything.
+- Add more sounds for the Sound Blaster.
 
 ------------------------------------------------------------------------------------------------------
 DONE :
@@ -98,8 +120,6 @@ DONE :
 - Make bullets have speed relative to that of the player's. // DONE.
 - Find a way to have global variables. // I don't think it is possible. // DONE.
 - Fix AoE of Fire Spitter hitting farther targets at an angle than targets in direction of cursor. // DONE.
-- Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. // (the
-	copyrights part is still an issue) DONE.
 - Add a Railgun. // DONE.
 	- Add a scene for the projectile. // DONE.
 	- Add the code to launch the projectile. // DONE.
@@ -110,3 +130,4 @@ DONE :
 - Piercing shot (I think I'd need to move the queue_free in bullet.gd to the subclasses or smth). // DONE.
 - Finish the code for test_moving_enemy, should be a state machine and all the tintouin. // DONE.
 - Finish the code in hit_state. // DONE.
+- Fix the characters healing after death. // DONE.

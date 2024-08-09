@@ -3,7 +3,9 @@ extends Area2D
 # We'll need to access some of its variables.
 @export var sound_blaster_state: SoundBlasterState
 @export var sound_blaster_sprite : Sprite2D
+# Need to try to see if this is of any use.
 @export var sound_blaster_hit_box : CollisionShape2D
+var crazy_game: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,6 +13,7 @@ func _ready():
 	sound_blaster_sprite.visible = false
 	# I think this is useless, but it might be useful so I keep it just in case.
 	sound_blaster_hit_box.visible = false
+	crazy_game = PlayerVariables.player.crazy_game
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,9 +26,10 @@ func toggle_visible():
 	sound_blaster_sprite.visible = !sound_blaster_sprite.visible
 
 
-func _on_body_entered(body):
-	# Could this be an easter egg that the fire spitter does self damage?
-	if body is PlayerClass:
+func _on_body_entered(body: Node):
+	#print("body in s_b_a.gd: ", body)
+	# Could this be an easter egg that the Sound Blaster does self damage and self knockback?
+	if body is PlayerClass and not crazy_game:
 		return
 	#print("Body entered: ", body)
 	var attack = Attack.new()
@@ -35,3 +39,7 @@ func _on_body_entered(body):
 			# Deferring the call otherwise it doesn't work with the collision shape or smth.
 			child.call_deferred("damage", attack)
 			#child.set_on_fire(sound_blaster_state.fire_duration, sound_blaster_state.fire_damage)
+	if body is CharacterClass:
+		body.knockback(global_position, sound_blaster_state.knockback_force)
+		await get_tree().create_timer(2).timeout
+		body.can_move = true

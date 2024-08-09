@@ -490,6 +490,7 @@ sound_blaster_area = NodePath("SoundBlasterArea")
 sound_blaster_sprite = NodePath("SoundBlasterArea/SoundBlasterSprite")
 notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
+max_health = 10000.0
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
 shape = SubResource("RectangleShape2D_7nr7k")
@@ -675,6 +676,7 @@ cd_timer = NodePath("SoundBlasterCoolDown")
 next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Railgun")
 sound_blaster_area = NodePath("../../SoundBlasterArea")
+knockback_force = 1000.0
 
 [node name="SoundBlasterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/SoundBlaster"]
 one_shot = true
@@ -690,7 +692,6 @@ script = ExtResource("28_fvbqe")
 state_machine = NodePath("../CharacterWeaponsStateMachine")
 
 [node name="MeleeWeaponChar" type="CharacterBody2D" parent="."]
-visible = false
 z_index = 3
 collision_layer = 0
 collision_mask = 6
@@ -762,3 +763,4 @@ texture = ExtResource("36_sj2j0")
 [connection signal="body_entered" from="MeleeWeaponChar/MeleeWeaponArea" to="MeleeWeaponChar/MeleeWeaponArea" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="body_entered" from="SoundBlasterArea" to="SoundBlasterArea" method="_on_body_entered"]

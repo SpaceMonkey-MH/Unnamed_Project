@@ -50,15 +50,16 @@ var air_jumps_current: int = air_jumps_max
 # Whether or not the player can damage themselves. Used (for now) in the bullet_3 script for the AoE.
 # Should ultimately be likend to options. Might have to move it, Idk.
 @export var self_damage: bool = true
-# Whether or not the game should go crazy, like drunk projectiles and things like that.
-@export var crazy_game: bool = false
 # Flashing is when the player takes damage.
 @export var flashing_color: Color = Color.CHOCOLATE
 @export var flashing_time: float = 0.1
+@export var normal_color: Color = Color.WHITE
 # I think it is useless for now.
 @export var notifier: VisibleOnScreenNotifier2D
 # Whether or not the special sounds should be played. Should ultimately be set in options.
 @export var special_sounds: bool = false
+# Whether or not the game should go crazy, like drunk projectiles and things like that.
+@export var crazy_game: bool = false
 # Variable used to smooth the rotation of weapons_sprite_2d in the _process(delta) function.
 var smoothed_mouse_pos: Vector2
 ## Just testing smth.
@@ -142,7 +143,8 @@ func character_physics_process(delta):
 	var direction = get_input_direction()	# Get the direction of the input.
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
-	velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
+	if can_move:
+		velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
 	# Apply the above changes.
 	move_and_slide()
 
@@ -228,8 +230,7 @@ func take_damage():
 	body_sprite_2d.modulate = flashing_color
 #	print("hello")
 	await get_tree().create_timer(flashing_time).timeout
-	body_sprite_2d.modulate = Color.WHITE
-
+	body_sprite_2d.modulate = normal_color
 
 #func death():
 #	queue_free()

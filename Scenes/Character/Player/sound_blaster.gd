@@ -9,11 +9,12 @@ extends WeaponsState
 @export var attack_damage: float = 10.0
 @export var reload_time: float = 0.2
 @export var knockback_force: float = 10.0
-@export var sound_path: String = "res://Assets/Sounds/SoundBlaster/Original"
-
+@export var sound_path: String = "res://Assets/Sounds/SoundBlaster/Original/"
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).
-var fire_pressed : bool = false
+var fire_pressed: bool = false
+# The sound player currently playing.
+var sound_playing: AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -33,8 +34,9 @@ func dir_contents(path):
 		while file_name != "":
 			if dir.current_is_dir():
 				print("Found directory: " + file_name)
+				pass
 			else:
-				print("Found file: " + file_name)
+				#print("Found file: " + file_name)
 				if file_name.get_extension() == "mp3":
 					content_array.append(file_name)
 			file_name = dir.get_next()
@@ -45,10 +47,15 @@ func dir_contents(path):
 
 func create_stream_players(audio_files: Array) -> void:
 	for audio_file_name in audio_files:
+		#print("audio_file_name in sound_blaster.gd: ", audio_file_name)
 		var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
 		audio_stream_player.stream = load(sound_path + audio_file_name)
+		#audio_stream_player.stream = load(
+			#"res://Assets/Sounds/SoundBlaster/Original/aggressive-metal-sinister-111839.mp3")
 		audio_stream_player.name = audio_file_name
+		audio_stream_player.connect("finished", _on_sound_blaster_player_finished)
 		sound_list.add_child(audio_stream_player)
+		#print("audio_stream_player.stream in sound_blaster.gd: ", audio_stream_player.stream)
 
 
 func state_process(_delta: float) -> void:
@@ -90,7 +97,7 @@ func state_input(event: InputEvent) -> void:
 	if event.is_action_released("fire"):
 		fire_pressed = false
 		sound_blaster_area.toggle_visible()
-			
+		sound_playing.stop()
 
 
 # Called when the current_state becomes this state.
@@ -106,11 +113,18 @@ func on_exit() -> void:
 
 
 func play_sound():
-	print("Sound list children: ", sound_list.get_children())
+	#print("Sound list children: ", sound_list.get_children())
 	var sound_index: int = randi_range(0, sound_list.get_child_count() - 1)
-	sound_list.get_children()[sound_index].play()
+	var sound_player = sound_list.get_children()[sound_index]
+	sound_player.play()
+	sound_playing = sound_player
 
 
 func _on_sound_blaster_cool_down_timeout() -> void:
 	can_fire = true
 #	print("hello2")
+
+
+func _on_sound_blaster_player_finished():
+	#print("Hello from sound_blaster.gd.")
+	sound_playing.play()

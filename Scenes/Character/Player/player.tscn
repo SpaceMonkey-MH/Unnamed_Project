@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=82 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://c2372plt8crlv" path="res://Scenes/Character/Bullets/railun_projectile.tscn" id="35_te0wa"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/sound_blaster.gd" id="36_hu6pj"]
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
+[ext_resource type="AudioStream" uid="uid://dsvi5q3am6h2h" path="res://Assets/Sounds/SoundBlaster/Original/amanita-muscaria-aggressive-dubstep-229945.mp3" id="37_jyrf0"]
 [ext_resource type="Texture2D" uid="uid://bsd5aysnifj1t" path="res://Assets/Sprites/Weapons/Axe_1.png" id="38_dquvd"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/sound_blaster_area.gd" id="42_6usw2"]
 
@@ -670,16 +671,22 @@ railgun_projectile_scene = ExtResource("35_te0wa")
 [node name="RailgunCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Railgun"]
 one_shot = true
 
-[node name="SoundBlaster" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("cd_timer", "next_weapon_state", "previous_weapon_state", "sound_blaster_area")]
+[node name="SoundBlaster" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("cd_timer", "next_weapon_state", "previous_weapon_state", "sound_blaster_area", "sound_list")]
 script = ExtResource("36_hu6pj")
 cd_timer = NodePath("SoundBlasterCoolDown")
 next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Railgun")
 sound_blaster_area = NodePath("../../SoundBlasterArea")
+sound_list = NodePath("SoundList")
 knockback_force = 1000.0
 
 [node name="SoundBlasterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/SoundBlaster"]
 one_shot = true
+
+[node name="SoundList" type="Node" parent="CharacterWeaponsStateMachine/SoundBlaster"]
+
+[node name="SoundBlasterSound1" type="AudioStreamPlayer" parent="CharacterWeaponsStateMachine/SoundBlaster/SoundList"]
+stream = ExtResource("37_jyrf0")
 
 [node name="WeaponsStateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 z_index = 2

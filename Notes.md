@@ -405,4 +405,8 @@
 	if it is a big deal.
 	I don't know why, but when you shoot directly under yourself while being on the floor, the projectile doesn't
 	appear.
+## - __2024/08/09:__
+	I'm not sure whether or not it is a good thing that several allumer le feu sounds can play at the same time. On
+	the one hand, it is kinda ugly, as the sounds overlap and shit. But on the other hand, it is not supposed to be
+	a playable mode, it is just a goofy ass one. Also, it is kinda logical that more than one sound can be played.
 	

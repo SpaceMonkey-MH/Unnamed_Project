@@ -29,7 +29,6 @@ NOT DONE :
 - Add powers, such as crits or smth.
 - Add indicator of reload time left. Make reload bar.
 - Bosses (levels).
-- Navigate through weapons via # keys.
 - User key mapping?
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target). // Unable to replicate for now.
@@ -137,3 +136,4 @@ DONE :
 - Make knockback depend on aimed at direction. // DONE.
 - Normalize the volume of the sounds. // DONE.
 - Solve the issue when changing weapon while firing Sound Blaster or Fire Spitter. // DONE.
+- Navigate through weapons via # keys. // DONE.

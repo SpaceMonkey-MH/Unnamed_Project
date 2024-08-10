@@ -14,6 +14,8 @@ class_name MeleeWeaponState
 @export var throw_duration: float = 3.0
 # Speed of the flying weapon. Idk the unit.
 @export var flying_speed: float = 300.0
+# WeaponsSprite2D as a variable so it can be hidden.
+@export var weapons_sprite_2d: Sprite2D
 # 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise. Maybe there should be a fourth,
 # resting state mid air, between going out and going back in, Idk.
 var flying: int = 0
@@ -34,6 +36,7 @@ func _ready() -> void:
 		#"../../MeleeWeaponChar/MeleeWeaponHitBox"))
 	# Can't seem to get the hit box from melee_weapon_char.
 	melee_weapon_hit_box.disabled = true
+	weapons_sprite_2d.visible = false
 
 
 func state_process(_delta: float) -> void:
@@ -96,6 +99,9 @@ func on_enter() -> void:
 	reload_timer.paused = false
 	throw_duration_timer.paused = false
 	melee_weapon_sprite.visible = true
+	# This doesn't work at the beginning of the scene, at least not if the default weapon is melee. Will change
+	# that for now.
+	weapons_sprite_2d.visible = false
 
 
 # Called when the next_state becomes another.
@@ -105,6 +111,7 @@ func on_exit() -> void:
 	throw_duration_timer.paused = true
 	if flying == 0:
 		melee_weapon_sprite.visible = false
+	weapons_sprite_2d.visible = true
 
 
 func hit() -> void:

@@ -566,18 +566,29 @@ script = ExtResource("15_b7158")
 [node name="Firing" type="Node" parent="CharacterFireStateMachine"]
 script = ExtResource("16_nowjs")
 
-[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
+[node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state", "weapon_0_state", "weapon_1_state", "weapon_2_state", "weapon_3_state", "weapon_4_state", "weapon_5_state", "weapon_6_state", "weapon_7_state", "weapon_8_state", "weapon_9_state")]
 script = ExtResource("18_gi4pl")
 character = NodePath("..")
 current_state = NodePath("Melee")
+weapon_0_state = NodePath("Melee")
+weapon_1_state = NodePath("DesertEagle")
+weapon_2_state = NodePath("Shotgun")
+weapon_3_state = NodePath("RocketLauncher")
+weapon_4_state = NodePath("FireSpitter")
+weapon_5_state = NodePath("MachineGun")
+weapon_6_state = NodePath("GrenadeLauncher")
+weapon_7_state = NodePath("FlameThrower")
+weapon_8_state = NodePath("Railgun")
+weapon_9_state = NodePath("SoundBlaster")
 
-[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon_char", "next_weapon_state", "previous_weapon_state", "reload_timer", "throw_duration_timer", "character_movement_state_machine")]
+[node name="Melee" type="Node" parent="CharacterWeaponsStateMachine" node_paths=PackedStringArray("melee_weapon_char", "next_weapon_state", "previous_weapon_state", "reload_timer", "throw_duration_timer", "weapons_sprite_2d", "character_movement_state_machine")]
 script = ExtResource("19_lk4n7")
 melee_weapon_char = NodePath("../../MeleeWeaponChar")
 next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../SoundBlaster")
 reload_timer = NodePath("MeleeWeaponCoolDown")
 throw_duration_timer = NodePath("MeleeWeaponThrowDuration")
+weapons_sprite_2d = NodePath("../../WeaponsSprite2D")
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 
 [node name="MeleeWeaponCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]

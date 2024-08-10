@@ -4,6 +4,17 @@ class_name CharacterWeaponsStateMachine
 
 @export var character : CharacterBody2D
 @export var current_state : WeaponsState
+# The different weapons as variables so they can be transitioned to.
+@export var weapon_0_state: MeleeWeaponState
+@export var weapon_1_state: DesertEagleState
+@export var weapon_2_state: ShotgunState
+@export var weapon_3_state: RocketLauncherState
+@export var weapon_4_state: FireSpitterState
+@export var weapon_5_state: MachineGunState
+@export var weapon_6_state: GrenadeLauncherState
+@export var weapon_7_state: FlameThrowerState
+@export var weapon_8_state: RailgunState
+@export var weapon_9_state: SoundBlasterState
 
 var states : Array[WeaponsState]
 
@@ -42,3 +53,23 @@ func _unhandled_input(event : InputEvent):
 	#if Input.is_action_pressed("fire"):
 		#print("event of _input() in CWSM: ", event)
 	current_state.state_input(event)
+	if event.is_action_pressed("weapon_0"):
+		switch_states(weapon_0_state)
+	if event.is_action_pressed("weapon_1"):
+		switch_states(weapon_1_state)
+	if event.is_action_pressed("weapon_2"):
+		switch_states(weapon_2_state)
+	if event.is_action_pressed("weapon_3"):
+		switch_states(weapon_3_state)
+	if event.is_action_pressed("weapon_4"):
+		switch_states(weapon_4_state)
+	if event.is_action_pressed("weapon_5"):
+		switch_states(weapon_5_state)
+	if event.is_action_pressed("weapon_6"):
+		switch_states(weapon_6_state)
+	if event.is_action_pressed("weapon_7"):
+		switch_states(weapon_7_state)
+	if event.is_action_pressed("weapon_8"):
+		switch_states(weapon_8_state)
+	if event.is_action_pressed("weapon_9"):
+		switch_states(weapon_9_state)

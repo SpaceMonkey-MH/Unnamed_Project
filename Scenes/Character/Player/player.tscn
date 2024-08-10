@@ -581,6 +581,7 @@ next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../SoundBlaster")
 reload_timer = NodePath("MeleeWeaponCoolDown")
 throw_duration_timer = NodePath("MeleeWeaponThrowDuration")
+throw_duration = 3.5
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 
 [node name="MeleeWeaponCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]
@@ -729,9 +730,6 @@ position = Vector2(45, -5.96046e-08)
 scale = Vector2(0.341797, 0.341797)
 texture = ExtResource("36_sj2j0")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-rect = Rect2(-22, -22, 44, 44)
-
 [node name="SoundBlasterArea" type="Area2D" parent="." node_paths=PackedStringArray("sound_blaster_state", "sound_blaster_sprite", "sound_blaster_hit_box")]
 script = ExtResource("42_6usw2")
 sound_blaster_state = NodePath("../CharacterWeaponsStateMachine/SoundBlaster")
@@ -747,6 +745,9 @@ self_modulate = Color(0, 1, 0, 0.372549)
 position = Vector2(66, 1.19209e-07)
 scale = Vector2(0.671875, 0.359375)
 texture = ExtResource("36_sj2j0")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-22, -22, 44, 44)
 
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Air" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="BodyAnimationTree" to="CharacterMovementStateMachine/Landing" method="_on_animation_tree_animation_finished"]
@@ -764,5 +765,5 @@ texture = ExtResource("36_sj2j0")
 [connection signal="timeout" from="CharacterWeaponsStateMachine/SoundBlaster/SoundBlasterCoolDown" to="CharacterWeaponsStateMachine/SoundBlaster" method="_on_sound_blaster_cool_down_timeout"]
 [connection signal="body_entered" from="MeleeWeaponChar/MeleeWeaponArea" to="MeleeWeaponChar/MeleeWeaponArea" method="_on_body_entered"]
 [connection signal="body_entered" from="FireSpitterWeapon" to="FireSpitterWeapon" method="_on_body_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="body_entered" from="SoundBlasterArea" to="SoundBlasterArea" method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

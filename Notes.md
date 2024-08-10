@@ -396,17 +396,23 @@
 	not with damage based on distance.
 	The heal display doesn't handle the overheal correctly (it displays the full heal even when only a part is
 	applied). I think it is better that way.
+
 ## - __2024/08/06:__
 	About the copyright issues for the easter egg song, I think it is fine because of the laws about parody (in
 	France at least).
+
 ## - __2024/08/07:__
 	Railgun is done, just raised the issue of what happens when the speed of the projectile is set too high.
 	I accidently set all the projectiles to collision with layer 4, which is only used by the BoxTileMap. Dunno
 	if it is a big deal.
 	I don't know why, but when you shoot directly under yourself while being on the floor, the projectile doesn't
 	appear.
+
 ## - __2024/08/09:__
 	I'm not sure whether or not it is a good thing that several allumer le feu sounds can play at the same time. On
 	the one hand, it is kinda ugly, as the sounds overlap and shit. But on the other hand, it is not supposed to be
 	a playable mode, it is just a goofy ass one. Also, it is kinda logical that more than one sound can be played.
-	
+
+## - __2024/08/10:__
+	For some reason, special_sounds isn't correctly exported in the editor. So I need to do it in code to debug.
+	Sadge.

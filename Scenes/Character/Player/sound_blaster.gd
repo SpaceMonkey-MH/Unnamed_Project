@@ -8,7 +8,7 @@ extends WeaponsState
 @export var sound_list: Node
 @export var attack_damage: float = 10.0
 @export var reload_time: float = 0.2
-@export var knockback_force: float = 100.0
+@export var knockback_force: float = 200.0
 @export var sound_path: String = "res://Assets/Sounds/SoundBlaster/Usable/"
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).
@@ -115,21 +115,31 @@ func on_exit() -> void:
 
 func play_sound():
 	#print("Sound list children: ", sound_list.get_children())
+	# Randomize the index of the sound player.
 	var sound_index: int = randi_range(0, sound_list.get_child_count() - 1)
 	#print("sound_blaster.gd: sound_index: %s, sound_playing_index: %s" % [
 		#sound_index, sound_playing_index])
+	# If this is the first sound played and there is more than 1 sounds to play.
 	if sound_playing_index != -1 and sound_list.get_child_count() > 1:
+		# While the new index is the same as the actual one.
 		while sound_index == sound_playing_index:
 			#print("sound_blaster.gd: sound_index: %s, sound_playing_index: %s" % [
 				#sound_index, sound_playing_index])
+			# Randomize again.
 			sound_index = randi_range(0, sound_list.get_child_count() - 1)
+	# Play the sound with the chosen index.
 	sound_list.get_children()[sound_index].play()
+	# Update the actual index.
 	sound_playing_index = sound_index
 
 
 func _on_sound_blaster_cool_down_timeout() -> void:
 	can_fire = true
 #	print("hello2")
+	# Flash the sprite. Maybe to be removed when there is a real animation.
+	sound_blaster_area.toggle_visible()
+	await get_tree().create_timer(0.05).timeout
+	sound_blaster_area.toggle_visible()
 
 
 func _on_sound_blaster_player_finished():

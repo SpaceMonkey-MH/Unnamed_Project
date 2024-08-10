@@ -57,6 +57,7 @@ var air_jumps_current: int = air_jumps_max
 # I think it is useless for now.
 @export var notifier: VisibleOnScreenNotifier2D
 # Whether or not the special sounds should be played. Should ultimately be set in options.
+# For some reason, it isn't correctly exported in the editor. So I need to do it here to debug. Sadge.
 @export var special_sounds: bool = false
 # Whether or not the game should go crazy, like drunk projectiles and things like that.
 @export var crazy_game: bool = false
@@ -91,6 +92,7 @@ func _enter_tree():
 #	assert(move_speed == 0)
 	#print(PlayerVariables)
 	PlayerVariables.player = self
+	#print("special_sounds in player.gd: ", special_sounds)
 
 
 # Executed at the beginning of runtime, after _enter_tree().
@@ -132,6 +134,7 @@ func _process(_delta):
 	#angle += 0.05
 	#rotate(angle)
 #	print("player: ", move_speed)
+	#print("special_sounds in player.gd: ", special_sounds)
 
 
 # Replaces the _physics_process() procedure so that the body can be queue freed in the superclass.
@@ -143,8 +146,8 @@ func character_physics_process(delta):
 	var direction = get_input_direction()	# Get the direction of the input.
 	# Apply speed to the player velocity, multiplied by the direction so the player goes the right way,
 	# and then by whether the player can move or not.
-	if can_move:
-		velocity.x = direction * move_speed * int(movement_state_machine.check_if_can_move())
+	if not knocked_back:
+		velocity.x = direction * move_speed	 * int(movement_state_machine.check_if_can_move())
 	# Apply the above changes.
 	move_and_slide()
 

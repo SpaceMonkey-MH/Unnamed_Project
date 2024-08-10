@@ -13,7 +13,7 @@ class_name MeleeWeaponState
 # The time for which the thrown weapon is going to fly outwards.
 @export var throw_duration: float = 3.0
 # Speed of the flying weapon. Idk the unit.
-@export var flying_speed: float = 300
+@export var flying_speed: float = 300.0
 # 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise. Maybe there should be a fourth,
 # resting state mid air, between going out and going back in, Idk.
 var flying: int = 0
@@ -25,6 +25,9 @@ var flying: int = 0
 
 
 func _ready() -> void:
+	if crazy_game:
+		# I kinda like these values.
+		reload_time = 2
 	reload_timer.wait_time = reload_time
 	throw_duration_timer.wait_time = throw_duration
 	#print('get_node("../MeleeWeaponChar/MeleeWeaponHitBox"): ', get_node(
@@ -122,7 +125,8 @@ func hit() -> void:
 	var prog_angle: float = (2 * PI) / (60 * min(1, reload_time))
 	for i in range((2 * PI) / prog_angle):
 		if crazy_game:
-			melee_weapon_char.rotate(prog_angle)
+			# I kinda like these values.
+			melee_weapon_char.rotate(0.08)
 		else:
 			melee_weapon_sprite.rotate(prog_angle)
 		# Divide by 60 for a 1 second or less animation.

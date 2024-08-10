@@ -7,4 +7,6 @@ extends EnemyState
 func on_enter():
 	#print("DeadState entered.")
 	# Just in case, idk.
-	character.velocity.x = 0
+	# If the enemy is not knocked back.
+	if not character.knocked_back:
+		character.velocity.x = 0

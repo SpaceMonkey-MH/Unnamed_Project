@@ -48,7 +48,9 @@ func on_health_component_damaged(_node : Node, _damage_amount : float):
 	# When hit again before the end of the stun, the enemy becomes impervious to stun. Seemingly
 	# only when hit during WanderState.
 	#print("character.velocity.x = 0 in on_health_component_damaged of HitState.")
-	character.velocity.x = 0
+	# If the enemy is not knocked back.
+	if not character.knocked_back:
+		character.velocity.x = 0
 	#print("hello")
 	# This is a bit weird, as it is only half of the code for the death (counting DeadState as here).
 	if health_component.health > 0:

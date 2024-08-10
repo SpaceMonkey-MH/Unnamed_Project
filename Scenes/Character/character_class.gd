@@ -24,7 +24,7 @@ var character_is_dead : bool = false
 # Move speed of the character, here so it can be added to all the relative states. In pixels/second.
 var move_speed : float = 0.0
 # Whether or not the player can move, use for knockback.
-var can_move: bool = true
+var knocked_back: bool = false
 
 
 func _ready():
@@ -129,10 +129,10 @@ func handle_character_out_of_screen() -> void:
 
 
 func knockback(source_pos: Vector2, knockback_force: float) -> void:
-	can_move = false
+	knocked_back = true
 	velocity += (global_position - source_pos).normalized() * knockback_force
 	move_and_slide()
 
 
 func stop_knockback() -> void:
-	can_move = true
+	knocked_back = false

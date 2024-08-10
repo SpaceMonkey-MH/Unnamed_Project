@@ -19,7 +19,7 @@ signal damaged(node : Node, damage_taken : float)
 # but it will change soon. Be careful of copyrights.
 @export var allumer_le_feu_sound : AudioStreamPlayer
 # Whether or not the above sound should be played when something is set on fire.
-var allumer_le_feu_plays : bool = false
+#var allumer_le_feu_plays : bool = false
 ## The wait time of that timer.
 #@export var on_fire_wait_time : float = 5.0
 # Debug variable, used to execute code every second.
@@ -28,6 +28,8 @@ var t : float = 0.0
 var on_fire : bool = false
 # The value of the fire damage, which will be applied to health.
 var fire_damage : float = 10.0
+# Whether or not the above sound should be played when something is set on fire.
+@onready var allumer_le_feu_plays: bool = PlayerVariables.player.special_sounds
 # The health of the character, initialized to the max health, with a setter and a getter.
 @onready var health : float = character.max_health :
 	get:
@@ -46,14 +48,17 @@ var fire_damage : float = 10.0
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+#func _ready() -> void:
 	#print("Hello from health_component.gd with parent: ", get_parent())
 	#print("Health Component Timer: ", on_fire_timer)
 	# Just here to simulate a call.
 	#set_on_fire(2.0, 10.0)
 	#on_fire_timer.wait_time = on_fire_wait_time
-	allumer_le_feu_plays = PlayerVariables.player.special_sounds
+	# Get the special sound value from the player global variable.
+	#allumer_le_feu_plays = PlayerVariables.player.special_sounds
 	#print("Allumer le feu: ", allumer_le_feu_sound)
+	#allumer_le_feu_sound.play()
+	#print("allumer_le_feu_plays: ", allumer_le_feu_plays)
 
 
 func _process(delta) -> void:
@@ -88,6 +93,7 @@ func set_on_fire(fire_duration : float = 5.0, f_damage : float = 10.0) -> void:
 		on_fire_timer.start()
 		fire_damage = f_damage
 		on_fire = true
+		#print("PlayerVariables.player.special_sounds in h_c.gd: ", PlayerVariables.player.special_sounds)
 		if allumer_le_feu_plays:
 			allumer_le_feu_sound.play()
 

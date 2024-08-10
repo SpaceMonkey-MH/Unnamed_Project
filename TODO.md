@@ -44,21 +44,7 @@ NOT DONE :
 - Rework the names of the weapons and bullets (copyright issues).
 - Make healing trigger only out of combat.
 - Add blood splatter when character is hit or killed, on the terrain and the characters.
-- Add Sound Blaster.
-	- Add area for the damage/knockback. // DONE.
-	- Add sprite for the area. // DONE.
-	- Make area rotate around player to follow mouse. // DONE.
-	- Make the Sound Blaster fire like an automatic weapon. // DONE.
-	- Make the SB damage when firing. // DONE.
-	- Make the SB knock enemies back.
-		- Push them back. // DONE.
-		- Stop their movement.
-	- Add crazy game content.
-	- Add sound.
-		- Create a list of sounds to play. // DONE.
-		- Have the sound player choose randomly among that list.
-		- Play the sound while firing, stop when stopping the fire, starting a new one when resuming fire.
-- Make the game crazy (invert left and right, etc).
+- Make the game crazy (invert left and right, do something for the SOund Blaster maybe, etc).
 - Solve the collision issue (enemies can force the player through walls).
 - Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. I think it is
 	fine, as it is parody kinda.
@@ -69,6 +55,8 @@ NOT DONE :
 		don't do anything.
 - Add more sounds for the Sound Blaster.
 - Make the game music stop when sound blasting.
+- Make the fire stackable?
+
 ------------------------------------------------------------------------------------------------------
 DONE :
 
@@ -131,3 +119,16 @@ DONE :
 - Finish the code for test_moving_enemy, should be a state machine and all the tintouin. // DONE.
 - Finish the code in hit_state. // DONE.
 - Fix the characters healing after death. // DONE.
+- Add Sound Blaster. // DONE.
+	- Add area for the damage/knockback. // DONE.
+	- Add sprite for the area. // DONE.
+	- Make area rotate around player to follow mouse. // DONE.
+	- Make the Sound Blaster fire like an automatic weapon. // DONE.
+	- Make the SB damage when firing. // DONE.
+	- Make the SB knock enemies back. // DONE.
+		- Push them back. // DONE.
+		- Stop their movement. // DONE.
+	- Add sound. // DONE.
+		- Create a list of sounds to play. // DONE.
+		- Have the sound player choose randomly among that list. // DONE.
+		- Play the sound while firing, stop when stopping the fire, starting a new one when resuming fire. // DONE.

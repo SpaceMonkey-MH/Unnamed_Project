@@ -19,8 +19,10 @@ var wander_speed : float = 0.0
 
 # Called in _physics_process in state machine. 
 func state_process(delta) -> void:
-	# Move the enemy.
-	character.velocity.x = wander_direction * wander_speed
+	# If the enemy is not knocked back.
+	if not character.knocked_back:
+		# Move the enemy.
+		character.velocity.x = wander_direction * wander_speed
 	# Reduce the time of wandering remaining by the time elapsed since the last call (delta).
 	wander_time -= delta
 	# If the wander time is 0 or less, randomize the wander values again. 

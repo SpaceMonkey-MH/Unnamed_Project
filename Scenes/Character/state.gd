@@ -5,6 +5,7 @@ signal interrupt_state(new_state : State)
 
 # The state machine as an export variable, so that it can be referenced to in subclasses.
 @export var character_movement_state_machine : CharacterMovementStateMachine
+@export var can_move : bool = true
 var character : CharacterClass
 var playback : AnimationNodeStateMachinePlayback
 var next_state : State

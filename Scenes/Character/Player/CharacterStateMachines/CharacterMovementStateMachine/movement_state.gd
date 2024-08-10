@@ -13,8 +13,6 @@ var jump_velocity : float
 var jump_gravity : float
 var fall_gravity : float
 
-@export var can_move : bool = true
-
 
 #
 #func _ready():

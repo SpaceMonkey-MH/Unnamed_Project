@@ -15,9 +15,11 @@ var follow_margin : float = 10.0
 func state_process(_delta) -> void:
 #	var time = Time.get_time_dict_from_system()
 #	print("Hello! ", time.second)
-	# Moving the character in the follow_direction, at the follow speed.
-	# We use the move_speed variable directly, as it is the way the Creator (I) intended it.
-	character.velocity.x = follow_direction * move_speed
+	# If the enemy is not knocked back.
+	if not character.knocked_back:
+		# Moving the character in the follow_direction, at the follow speed.
+		# We use the move_speed variable directly, as it is the way the Creator (I) intended it.
+		character.velocity.x = follow_direction * move_speed
 	# Using an auxilliary variable to compute the direction and the distance to player.
 	var relative_x_distance_to_player = player.position.x - character.position.x
 	# Now we need to assign the correct value to follow_direction.

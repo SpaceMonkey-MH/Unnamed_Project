@@ -42,4 +42,4 @@ func _on_body_entered(body: Node):
 	if body is CharacterClass:
 		body.knockback(global_position, sound_blaster_state.knockback_force)
 		await get_tree().create_timer(2).timeout
-		body.can_move = true
+		body.stop_knockback()

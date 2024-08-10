@@ -135,3 +135,5 @@ DONE :
 		- Play the sound while firing, stop when stopping the fire, starting a new one when resuming fire. // DONE.
 - Add air resistance to the characters. // DONE.
 - Make knockback depend on aimed at direction. // DONE.
+- Normalize the volume of the sounds. // DONE.
+- Solve the issue when changing weapon while firing Sound Blaster or Fire Spitter. // DONE.

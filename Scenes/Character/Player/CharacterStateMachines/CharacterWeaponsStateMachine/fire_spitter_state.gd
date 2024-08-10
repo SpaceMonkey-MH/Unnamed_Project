@@ -44,8 +44,9 @@ func state_input(event : InputEvent) -> void:
 		fire_pressed = true
 		fire_spitter_weapon.toggle_visible()
 	if event.is_action_released("fire"):
-		fire_pressed = false
-		fire_spitter_weapon.toggle_visible()
+		if fire_pressed:
+			fire_pressed = false
+			fire_spitter_weapon.toggle_visible()
 
 
 # Called when the current_state becomes this state.
@@ -58,6 +59,10 @@ func on_enter() -> void:
 func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	timer.paused = true
+	if fire_pressed:
+		#print("Hello from on_enter() in f_s_s.gd.")
+		fire_pressed = false
+		fire_spitter_weapon.toggle_visible()
 
 
 

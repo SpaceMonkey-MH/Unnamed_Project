@@ -674,7 +674,7 @@ next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Railgun")
 sound_blaster_area = NodePath("../../SoundBlasterArea")
 sound_list = NodePath("SoundList")
-knockback_force = 400.0
+knockback_force = 500.0
 
 [node name="SoundBlasterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/SoundBlaster"]
 one_shot = true

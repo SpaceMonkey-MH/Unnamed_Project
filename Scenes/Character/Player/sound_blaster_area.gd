@@ -22,7 +22,8 @@ func _ready():
 
 # Might be just a placeholder, as with animations I just have to display an empty sprite.
 func toggle_visible():
-	#print("Hello from toggle_visible() in fire_spitter_weapon.gd.")
+	var time: Dictionary = Time.get_datetime_dict_from_system()
+	#print("Hello from toggle_visible() in fire_spitter_weapon.gd at %s." % time.second)
 	sound_blaster_sprite.visible = !sound_blaster_sprite.visible
 
 

@@ -96,8 +96,9 @@ func state_input(event: InputEvent) -> void:
 		play_sound()
 		#$SoundList/SoundBlasterSound1.play()
 	if event.is_action_released("fire"):
-		fire_pressed = false
-		sound_blaster_area.toggle_visible()
+		if fire_pressed:
+			fire_pressed = false
+			sound_blaster_area.toggle_visible()
 		sound_list.get_children()[sound_playing_index].stop()
 
 
@@ -111,6 +112,10 @@ func on_enter() -> void:
 func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	cd_timer.paused = true
+	if fire_pressed:
+		fire_pressed = false
+		sound_blaster_area.toggle_visible()
+		sound_list.get_children()[sound_playing_index].stop()
 
 
 func play_sound():
@@ -137,9 +142,10 @@ func _on_sound_blaster_cool_down_timeout() -> void:
 	can_fire = true
 #	print("hello2")
 	# Flash the sprite. Maybe to be removed when there is a real animation.
-	sound_blaster_area.toggle_visible()
-	await get_tree().create_timer(0.05).timeout
-	sound_blaster_area.toggle_visible()
+	if fire_pressed:
+		sound_blaster_area.toggle_visible()
+		await get_tree().create_timer(0.05).timeout
+		sound_blaster_area.toggle_visible()
 
 
 func _on_sound_blaster_player_finished():

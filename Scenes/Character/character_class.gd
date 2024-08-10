@@ -137,7 +137,7 @@ func knockback(source_pos: Vector2, mouse_pos: Vector2, knockback_force: float) 
 	knocked_back = true
 	#print("character_class.gd: source_pos: %s, global_position: %s" % [source_pos, global_position])
 	velocity += (mouse_pos - source_pos).normalized() * knockback_force
-	print("character_class.gd: velocity: ", velocity)
+	#print("character_class.gd: velocity: ", velocity)
 	move_and_slide()
 
 

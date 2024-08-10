@@ -4,7 +4,7 @@ extends Area2D
 @export var sound_blaster_state: SoundBlasterState
 @export var sound_blaster_sprite : Sprite2D
 # Need to try to see if this is of any use.
-@export var sound_blaster_hit_box : CollisionShape2D
+@export var sound_blaster_hit_box : CollisionPolygon2D
 var crazy_game: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -40,6 +40,6 @@ func _on_body_entered(body: Node):
 			child.call_deferred("damage", attack)
 			#child.set_on_fire(sound_blaster_state.fire_duration, sound_blaster_state.fire_damage)
 	if body is CharacterClass:
-		body.knockback(global_position, sound_blaster_state.knockback_force)
+		body.knockback(global_position, get_global_mouse_position(), sound_blaster_state.knockback_force)
 		await get_tree().create_timer(2).timeout
 		body.stop_knockback()

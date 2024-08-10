@@ -58,6 +58,7 @@ NOT DONE :
 - Make the fire stackable?
 
 ------------------------------------------------------------------------------------------------------
+
 DONE :
 
 - Fix the issue with the heal popping up when the health is set at the beginning of the game. // DONE.
@@ -132,3 +133,5 @@ DONE :
 		- Create a list of sounds to play. // DONE.
 		- Have the sound player choose randomly among that list. // DONE.
 		- Play the sound while firing, stop when stopping the fire, starting a new one when resuming fire. // DONE.
+- Add air resistance to the characters. // DONE.
+- Make knockback depend on aimed at direction. // DONE.

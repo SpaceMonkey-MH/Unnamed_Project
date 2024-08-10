@@ -4,25 +4,28 @@ extends CharacterBody2D
 # Base class for the characters, that is to say the player and the enemies.
 
 # HitBox as a variable, so that it can be disabled.
-@export var hit_box : HitBoxClass
+@export var hit_box: HitBoxClass
 # I'm trying stuff with the visible on screen notifier, in oreder to properly queue free the characters when dead.
 #@export var notifier = VisibleOnScreenNotifier2D
 # The maximum health of the character.
-@export var max_health : float = 100.0
+@export var max_health: float = 100.0
 # Timer before queue_free() when the dead characters fall out of the screen.
-@export var out_of_screen_death_timer : float = 1.5
+@export var out_of_screen_death_timer: float = 1.5
 # Whether or not the character is out of screen. Used to queue free it when dead. Initialized here for placeholder
 # but really set in _ready() in subclasses.
-@export var out_of_screen : bool = false
+@export var out_of_screen: bool = false
+# The amount of air penetration (1 - air resistance). Will be multiplied by the velocity of the character.
+# Maybe this should be in level script, to be seen.
+@export var air_penetration: float = 0.99
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
-var death_animation_timer : float = 1.5
+var death_animation_timer: float = 1.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Whether or not the character is dead. I think this is useless? Maybe not.
-var character_is_dead : bool = false
+var character_is_dead: bool = false
 # Move speed of the character, here so it can be added to all the relative states. In pixels/second.
-var move_speed : float = 0.0
+var move_speed: float = 0.0
 # Whether or not the player can move, use for knockback.
 var knocked_back: bool = false
 
@@ -46,6 +49,8 @@ func _process(delta) -> void:
 func _physics_process(delta) -> void:
 #	print("Move speed of ", self, " from character_class.gd: ", move_speed)
 	character_physics_process(delta)
+	# Simulate air resistance.
+	velocity *= air_penetration
 #	print("Hello from _physics_process in character_class.")
 
 
@@ -128,9 +133,11 @@ func handle_character_out_of_screen() -> void:
 	#print("queue_free() of ", self)
 
 
-func knockback(source_pos: Vector2, knockback_force: float) -> void:
+func knockback(source_pos: Vector2, mouse_pos: Vector2, knockback_force: float) -> void:
 	knocked_back = true
-	velocity += (global_position - source_pos).normalized() * knockback_force
+	#print("character_class.gd: source_pos: %s, global_position: %s" % [source_pos, global_position])
+	velocity += (mouse_pos - source_pos).normalized() * knockback_force
+	print("character_class.gd: velocity: ", velocity)
 	move_and_slide()
 
 

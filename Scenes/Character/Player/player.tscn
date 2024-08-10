@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=80 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -475,9 +475,6 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7dft"]
-size = Vector2(86, 46)
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box")]
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
@@ -581,7 +578,6 @@ next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../SoundBlaster")
 reload_timer = NodePath("MeleeWeaponCoolDown")
 throw_duration_timer = NodePath("MeleeWeaponThrowDuration")
-throw_duration = 3.5
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 
 [node name="MeleeWeaponCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/Melee"]
@@ -678,6 +674,7 @@ next_weapon_state = NodePath("../Melee")
 previous_weapon_state = NodePath("../Railgun")
 sound_blaster_area = NodePath("../../SoundBlasterArea")
 sound_list = NodePath("SoundList")
+knockback_force = 400.0
 
 [node name="SoundBlasterCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/SoundBlaster"]
 one_shot = true
@@ -736,14 +733,14 @@ sound_blaster_state = NodePath("../CharacterWeaponsStateMachine/SoundBlaster")
 sound_blaster_sprite = NodePath("SoundBlasterSprite")
 sound_blaster_hit_box = NodePath("SoundBlasterHitBox")
 
-[node name="SoundBlasterHitBox" type="CollisionShape2D" parent="SoundBlasterArea"]
+[node name="SoundBlasterHitBox" type="CollisionPolygon2D" parent="SoundBlasterArea"]
 position = Vector2(66, 0)
-shape = SubResource("RectangleShape2D_i7dft")
+polygon = PackedVector2Array(-66, 0, -44, -22, 43, -64, 70, -35, 80, 0, 70, 35, 43, 64, -44, 22)
 
 [node name="SoundBlasterSprite" type="Sprite2D" parent="SoundBlasterArea"]
 self_modulate = Color(0, 1, 0, 0.372549)
-position = Vector2(66, 1.19209e-07)
-scale = Vector2(0.671875, 0.359375)
+position = Vector2(73.5, 0)
+scale = Vector2(1.13281, 1)
 texture = ExtResource("36_sj2j0")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

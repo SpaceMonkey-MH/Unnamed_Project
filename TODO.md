@@ -68,7 +68,7 @@ NOT DONE :
 	- Solve the multiple overlapping sounds issue. Maybe put the code in level.gd and use a signal? Or maybe just
 		don't do anything.
 - Add more sounds for the Sound Blaster.
-
+- Make the game music stop when sound blasting.
 ------------------------------------------------------------------------------------------------------
 DONE :
 

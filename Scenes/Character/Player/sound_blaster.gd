@@ -8,23 +8,24 @@ extends WeaponsState
 @export var sound_list: Node
 @export var attack_damage: float = 10.0
 @export var reload_time: float = 0.2
-@export var knockback_force: float = 10.0
-@export var sound_path: String = "res://Assets/Sounds/SoundBlaster/Original/"
+@export var knockback_force: float = 100.0
+@export var sound_path: String = "res://Assets/Sounds/SoundBlaster/Usable/"
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).
 var fire_pressed: bool = false
 # The sound player currently playing.
-var sound_playing: AudioStreamPlayer
+var sound_playing_index: int = -1
 
 
 func _ready() -> void:
 	cd_timer.wait_time = reload_time
 	#print("dir_content: ", dir_contents(sound_path))
 	create_stream_players(dir_contents(sound_path))
+	#print("sound_playing_index in sound_blaster.gd: ", sound_playing_index)
 
 
 # Reads path, and returns a list of the absolute paths to the .mp3 files in path.
-func dir_contents(path):
+func dir_contents(path: String):
 	var dir: DirAccess = DirAccess.open(path)
 	var content_array: Array = []
 	#print("dir: ", dir)
@@ -97,7 +98,7 @@ func state_input(event: InputEvent) -> void:
 	if event.is_action_released("fire"):
 		fire_pressed = false
 		sound_blaster_area.toggle_visible()
-		sound_playing.stop()
+		sound_list.get_children()[sound_playing_index].stop()
 
 
 # Called when the current_state becomes this state.
@@ -115,9 +116,15 @@ func on_exit() -> void:
 func play_sound():
 	#print("Sound list children: ", sound_list.get_children())
 	var sound_index: int = randi_range(0, sound_list.get_child_count() - 1)
-	var sound_player = sound_list.get_children()[sound_index]
-	sound_player.play()
-	sound_playing = sound_player
+	#print("sound_blaster.gd: sound_index: %s, sound_playing_index: %s" % [
+		#sound_index, sound_playing_index])
+	if sound_playing_index != -1 and sound_list.get_child_count() > 1:
+		while sound_index == sound_playing_index:
+			#print("sound_blaster.gd: sound_index: %s, sound_playing_index: %s" % [
+				#sound_index, sound_playing_index])
+			sound_index = randi_range(0, sound_list.get_child_count() - 1)
+	sound_list.get_children()[sound_index].play()
+	sound_playing_index = sound_index
 
 
 func _on_sound_blaster_cool_down_timeout() -> void:
@@ -127,4 +134,4 @@ func _on_sound_blaster_cool_down_timeout() -> void:
 
 func _on_sound_blaster_player_finished():
 	#print("Hello from sound_blaster.gd.")
-	sound_playing.play()
+	sound_list.get_children()[sound_playing_index].play()

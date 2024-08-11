@@ -50,10 +50,11 @@ var fire_damage : float = 10.0
 			#print("Hello from health setter in health_component.")
 			health = value
 #		print("Set health in HealthComponent in ", get_parent(), " to: ", health)
+		health_bar.update_value(health)
 
 
 # Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
+func _ready() -> void:
 	#print("Hello from health_component.gd with parent: ", get_parent())
 	#print("Health Component Timer: ", on_fire_timer)
 	# Just here to simulate a call.
@@ -64,6 +65,7 @@ var fire_damage : float = 10.0
 	#print("Allumer le feu: ", allumer_le_feu_sound)
 	#allumer_le_feu_sound.play()
 	#print("allumer_le_feu_plays: ", allumer_le_feu_plays)
+	health_bar.set_max_value(max_health)
 
 
 func _process(delta) -> void:

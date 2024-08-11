@@ -517,17 +517,16 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_0orfo")
 anim_player = NodePath("../WeaponsAnimationPlayer")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "on_fire_timer") instance=ExtResource("32_5aed7")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "health_bar", "on_fire_timer") instance=ExtResource("32_5aed7")]
 character = NodePath("..")
+health_bar = NodePath("../HealthBar")
 on_fire_timer = NodePath("FireDurationTimer")
 
 [node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
 
 [node name="HealthBar" parent="." instance=ExtResource("43_8c3dl")]
-offset_left = -29.0
-offset_top = -116.0
-offset_right = 11.0
-offset_bottom = -76.0
+offset_top = -119.0
+offset_bottom = -79.0
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("8_8i88a")

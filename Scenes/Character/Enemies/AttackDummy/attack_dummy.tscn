@@ -21,8 +21,9 @@ max_health = 10000.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_assgn")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "on_fire_timer") instance=ExtResource("2_1oxxk")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "health_bar", "on_fire_timer") instance=ExtResource("2_1oxxk")]
 character = NodePath("..")
+health_bar = NodePath("../HealthBar")
 on_fire_timer = NodePath("FireDurationTimer")
 
 [node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
@@ -36,9 +37,10 @@ offset_bottom = -20.0
 text = "Attack Dummy"
 
 [node name="HealthBar" parent="." instance=ExtResource("5_26mcx")]
+offset_top = -86.0
+offset_bottom = -46.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-9.53674e-07, -9.53674e-07)
 scale = Vector2(2, 2)
 
 [connection signal="timeout" from="HealthComponent/FireDurationTimer" to="HealthComponent" method="_on_fire_duration_timer_timeout"]

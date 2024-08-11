@@ -148,8 +148,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_1hkq0")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "on_fire_timer") instance=ExtResource("2_kyko0")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "health_bar", "on_fire_timer") instance=ExtResource("2_kyko0")]
 character = NodePath("..")
+health_bar = NodePath("../HealthBar")
 on_fire_timer = NodePath("FireDurationTimer")
 
 [node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
@@ -163,6 +164,8 @@ offset_bottom = -20.0
 text = "Test Moving Enemy"
 
 [node name="HealthBar" parent="." instance=ExtResource("6_mikho")]
+offset_top = -100.0
+offset_bottom = -60.0
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("3_v7f25")

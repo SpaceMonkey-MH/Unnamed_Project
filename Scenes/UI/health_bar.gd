@@ -14,10 +14,11 @@ extends TextureProgressBar
 
 func set_max_value(new_max_value: float):
 	new_max_value = floor(new_max_value)
+	# Apparently, this is useless, but I don't get why.
 	max_value = new_max_value
 	update_value(max_value)
 
 
-func update_value(value_change: float):
-	value_change = floor(value_change)
-	value += value_change
+func update_value(new_value: float):
+	new_value = floor(new_value)
+	value = new_value

@@ -4,7 +4,6 @@ class_name HealthComponent
 # that is to say reduce health, as well as death. Ultimately, should incorporate various other features,
 # such as healing (kinda here, like negative damage, or maybe positive ? Idk).
 
-
 signal damaged(node : Node, damage_taken : float)
 
 ## I'm gonna need to find a solution to the issue of the max health (cf Notes.md).
@@ -13,6 +12,9 @@ signal damaged(node : Node, damage_taken : float)
 #@export var max_health : float = 100
 # The character as a variable, so that it can be damaged.
 @export var character : CharacterClass
+# Health bar of the character, so it can be modified. Not sure if that requires a new variable, but whatever.
+# Not sure if it is better than using the health_changed signal.
+@export var health_bar: HealthBar
 # The timer storing the time of "on fire" left as a variable so it can be started.
 @export var on_fire_timer : Timer
 # The sound "allumer le feu" from the song, as a variable so it can be played. For now it is not the correct
@@ -31,15 +33,18 @@ var fire_damage : float = 10.0
 # Whether or not the above sound should be played when something is set on fire.
 @onready var allumer_le_feu_plays: bool = PlayerVariables.player.special_sounds
 # The health of the character, initialized to the max health, with a setter and a getter.
-@onready var health : float = character.max_health :
+@onready var max_health = character.max_health
+@onready var health : float = max_health :
 	get:
 		return health
 	set(value):
 		# Goes (for now) to health_changed_manager.
-		if value > character.max_health:
+		if value > max_health:
 			#SignalBus.emit_signal("health_changed", get_parent(),
 				#min(value - health, character.max_health - health))
-			health = character.max_health
+			if health != max_health:
+				SignalBus.emit_signal("health_changed", get_parent(), value - health)
+				health = max_health
 		else:
 			SignalBus.emit_signal("health_changed", get_parent(), value - health)
 			#print("Hello from health setter in health_component.")
@@ -76,6 +81,8 @@ func _process(delta) -> void:
 			damage(attack)
 		health += 10
 		t = 0.0
+		#if character is AttackDummy:
+			#print("%s health: %s." % [character, health])
 
 
 # Should be a function that handles the setting target on fire part, taking a duration and a damage for the burn.
@@ -104,7 +111,8 @@ func damage(attack : Attack = Attack.new()) -> void:
 	if character.has_method("take_damage"):
 		character.take_damage()
 #		print(health)
-	damaged.emit(get_parent(), attack.attack_damage)	# Goes (for now) to hit_state.
+	# Goes (for now) to hit_state. I don't think the parameters are useful, but maybe they are. See that later.
+	damaged.emit(get_parent(), attack.attack_damage)
 	
 	if health <= 0 and character.has_method("death"):
 		character.death()

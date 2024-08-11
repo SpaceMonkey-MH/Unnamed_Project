@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=81 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -42,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://csbsggeffyy2q" path="res://icon.svg" id="36_sj2j0"]
 [ext_resource type="Texture2D" uid="uid://bsd5aysnifj1t" path="res://Assets/Sprites/Weapons/Axe_1.png" id="38_dquvd"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/sound_blaster_area.gd" id="42_6usw2"]
+[ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="43_8c3dl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7nr7k"]
 size = Vector2(45, 45)
@@ -521,6 +522,12 @@ character = NodePath("..")
 on_fire_timer = NodePath("FireDurationTimer")
 
 [node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
+
+[node name="HealthBar" parent="." instance=ExtResource("43_8c3dl")]
+offset_left = -29.0
+offset_top = -116.0
+offset_right = 11.0
+offset_bottom = -76.0
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("8_8i88a")

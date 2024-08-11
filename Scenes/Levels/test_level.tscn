@@ -2924,13 +2924,6 @@ player = NodePath("../Player")
 position = Vector2(5738, 885)
 scale = Vector2(5, 5)
 
-[node name="AttackDummy7" parent="." node_paths=PackedStringArray("sprite_2d", "notifier", "hit_box") instance=ExtResource("5_pn2ls")]
-position = Vector2(2219, 938)
-scale = Vector2(5, 5)
-sprite_2d = NodePath("../AttackDummy5/Sprite2D")
-notifier = NodePath("../AttackDummy5/VisibleOnScreenNotifier2D")
-hit_box = NodePath("../AttackDummy5/HitBox")
-
 [node name="AttackDummy8" parent="." node_paths=PackedStringArray("sprite_2d", "notifier", "hit_box") instance=ExtResource("5_pn2ls")]
 position = Vector2(6442, 879)
 scale = Vector2(5, 5)

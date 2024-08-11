@@ -1,16 +1,17 @@
 class_name WeaponsState
 extends State
 
-var can_fire : bool = true
+#@export var reload_bar: ReloadBar
+var can_fire: bool = true
 
 
 # Base procedure for the weapon firing mechanic.
-func weapon_fire(spawn_pos : Vector2, target_pos : Vector2, bullet_scene : PackedScene,
-				attack_damage : float = 20.0, speed_factor : float = 10.0, aoe_attack_damage : float = 0.0,
-				aoe_size : float = 80.0, fire_duration : float = 0.0, fire_damage : float = 0.0,
-				time_to_effect : float = 0.0, nb_frags : int = 0) -> void:
-	var bullet = bullet_scene.instantiate()
-	var rotation = spawn_pos.angle_to_point(target_pos)
+func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedScene,
+				attack_damage: float = 20.0, speed_factor: float = 10.0, aoe_attack_damage: float = 0.0,
+				aoe_size: float = 80.0, fire_duration: float = 0.0, fire_damage: float = 0.0,
+				time_to_effect: float = 0.0, nb_frags: int = 0) -> void:
+	var bullet: Bullet = bullet_scene.instantiate()
+	var rotation: float = spawn_pos.angle_to_point(target_pos)
 	bullet.position = spawn_pos
 	bullet.rotate(rotation)
 	bullet.direction = target_pos - spawn_pos

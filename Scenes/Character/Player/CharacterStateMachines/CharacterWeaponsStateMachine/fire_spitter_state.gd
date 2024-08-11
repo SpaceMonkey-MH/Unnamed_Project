@@ -7,7 +7,7 @@ extends WeaponsState
 @export var fire_spitter_weapon : Area2D
 @export var next_weapon_state : MachineGunState
 @export var previous_weapon_state : RocketLauncherState
-@export var timer : Timer
+@export var reload_timer : Timer
 @export var attack_damage : float = 20.0
 # I think the minimum effective cool down is 0.05, lower is useless as there is an await call in state_process()
 # that I don't think can be much lower.
@@ -18,21 +18,24 @@ extends WeaponsState
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).
 var fire_pressed : bool = false
+@onready var reload_bar = get_parent().reload_bar
 
 
 func _ready():
-	timer.wait_time = reload_time
+	reload_timer.wait_time = reload_time
 	fire_spitter_weapon.monitoring = false
 
 
-func state_process(_delta) -> void:
+func state_process(delta) -> void:
 	#print("fire_pressed in fire_spitter_state.gd: ", fire_pressed, "\ncan_fire: ", can_fire)
 	if fire_pressed and can_fire:
 		fire_spitter_weapon.monitoring = true
 		can_fire = false
-		timer.start()
+		reload_timer.start()
 		await get_tree().create_timer(0.05).timeout
 		fire_spitter_weapon.monitoring = false
+	if not can_fire:
+		reload_bar.update_value(-delta * 1000)
 
 
 func state_input(event : InputEvent) -> void:
@@ -52,13 +55,15 @@ func state_input(event : InputEvent) -> void:
 # Called when the current_state becomes this state.
 func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
-	timer.paused = false
+	reload_timer.paused = false
+	reload_bar.set_max_value(reload_time * 1000)
+	reload_bar.update_value(reload_timer.time_left * 1000)
 
 
 # Called when the next_state becomes another.
 func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
-	timer.paused = true
+	reload_timer.paused = true
 	if fire_pressed:
 		#print("Hello from on_enter() in f_s_s.gd.")
 		fire_pressed = false
@@ -68,3 +73,4 @@ func on_exit() -> void:
 
 func _on_fire_spitter_cool_down_timeout():
 	can_fire = true
+	reload_bar.update_value(reload_time * 1000)

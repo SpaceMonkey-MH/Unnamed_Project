@@ -1,7 +1,7 @@
 class_name ShotgunState
 extends WeaponsState
 
-@export var timer : Timer
+@export var reload_timer : Timer
 @export var lead_scene : PackedScene
 @export var next_weapon_state : RocketLauncherState
 @export var previous_weapon_state : DesertEagleState
@@ -13,15 +13,18 @@ extends WeaponsState
 # The number of leads (projectiles) fired at each shot.
 # If even and not 0, there will be two shots in the middle. If odd, there will be one shot in the middle. 
 @export var nb_leads : int = 10
+@onready var reload_bar = get_parent().reload_bar
 
 
 func _ready() -> void:
-	timer.wait_time = reload_time
+	reload_timer.wait_time = reload_time
 
 
-#func _process(_delta):
+func _process(delta: float) -> void:
 	#print("timer.wait_time in shotgun.gd: ", timer.time_left)
 	#print("can_fire in shotgun.gd: ", can_fire)
+	if not can_fire:
+		reload_bar.update_value(-delta * 1000)
 
 
 func state_input(event : InputEvent) -> void:
@@ -82,22 +85,25 @@ func state_input(event : InputEvent) -> void:
 					lead_scene, attack_damage, speed_factor)
 				
 		can_fire = false
-		timer.start()
+		reload_timer.start()
 		#print("can_fire in shotgun_state.gd: ", can_fire)
 
 
 # Called when the current_state becomes this state.
 func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
-	timer.paused = false
+	reload_timer.paused = false
+	reload_bar.set_max_value(reload_time * 1000)
+	reload_bar.update_value(reload_timer.time_left * 1000)
 
 
 # Called when the next_state becomes another.
 func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
-	timer.paused = true
+	reload_timer.paused = true
 
 
 func _on_shotgun_cool_down_timeout() -> void:
 	can_fire = true
+	reload_bar.update_value(reload_time * 1000)
 

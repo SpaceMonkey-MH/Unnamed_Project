@@ -24,6 +24,7 @@ var flying: int = 0
 @onready var melee_weapon_area: Area2D = melee_weapon_char.get_node("MeleeWeaponArea")
 @onready var melee_weapon_sprite: Sprite2D = melee_weapon_char.get_node("MeleeWeaponSprite")
 @onready var crazy_game: bool = PlayerVariables.player.crazy_game
+@onready var reload_bar = get_parent().reload_bar
 
 
 func _ready() -> void:
@@ -36,10 +37,12 @@ func _ready() -> void:
 		#"../../MeleeWeaponChar/MeleeWeaponHitBox"))
 	# Can't seem to get the hit box from melee_weapon_char.
 	melee_weapon_hit_box.disabled = true
-	weapons_sprite_2d.visible = false
+	#weapons_sprite_2d.visible = false
+	#reload_bar.set_max_value(1000)
+	#reload_bar.update_value(1000)
 
 
-func state_process(_delta: float) -> void:
+func state_process(delta: float) -> void:
 	#print("WeaponState melee_weapon.monitoring is ", melee_weapon.monitoring)
 	#print("WeaponState can_fire is ", can_fire)
 	#print("Time remaining on timer: ", timer.time_left)
@@ -64,14 +67,18 @@ func state_process(_delta: float) -> void:
 			mouse_pos.normalized() * flying_speed, 0.3)
 		#if melee_weapon_char.velocity.length() >= 10:
 		melee_weapon_char.move_and_slide()
+		reload_bar.update_value(-delta * 1000)
 	elif flying == -1:
 		# We return to the player. Divide by 100 is a magic number so that the return is slower.
 		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
 			(-1 * melee_weapon_char.position * flying_speed) / 100, 0.3)
 		melee_weapon_char.move_and_slide()
-	if melee_weapon_char.position.length() <= 5 and flying == -1:
+	elif not can_fire:
+		reload_bar.update_value(-delta * 1000)
+	if melee_weapon_char.position.length() <= 500 and flying == -1:
 		melee_weapon_char.position = Vector2.ZERO
 		flying = 0
+		#can_fire = false
 	#print("flying in m_w_s.gd: ", flying)
 
 func state_input(event : InputEvent) -> void:
@@ -82,6 +89,8 @@ func state_input(event : InputEvent) -> void:
 	# If the player fired, and if it can fire.
 	if event.is_action_pressed("fire") and can_fire:
 		hit()
+		reload_bar.set_max_value(reload_time * 1000)
+		reload_bar.update_value(reload_timer.time_left * 1000)
 	if event.is_action_pressed("secondary_fire") and can_fire:
 		throw_weapon()
 		hit()
@@ -102,6 +111,15 @@ func on_enter() -> void:
 	# This doesn't work at the beginning of the scene, at least not if the default weapon is melee. Will change
 	# that for now.
 	weapons_sprite_2d.visible = false
+	# We multiply everything by 1000 so that it handles better the floats. The ratios sould stay the same.
+	if flying == 0:
+		reload_bar.set_max_value(reload_time * 1000)
+		reload_bar.update_value(reload_timer.time_left * 1000)
+	else:
+		reload_bar.set_max_value(throw_duration * 1000)
+		reload_bar.update_value(throw_duration_timer.time_left * 1000)
+	#print("%s is the max value of %s\n%s is the value of %s" % [
+		#reload_bar.max_value, reload_bar, reload_bar.value, reload_bar])
 
 
 # Called when the next_state becomes another.
@@ -115,8 +133,8 @@ func on_exit() -> void:
 
 
 func hit() -> void:
-	#var time: Dictionary = Time.get_datetime_dict_from_system()
-	#print("Hello from hit() in m_w_s.gd at %s." % time.second)
+	var time: Dictionary = Time.get_datetime_dict_from_system()
+	print("Hello from hit() in m_w_s.gd at %s." % time.second)
 	# Set can_fire to false to prevent from firing again before the end of the cooldown.
 	can_fire = false
 	# Set the monitoring of the area of melee_weapon_area to true, so that it detects the overlapping
@@ -139,7 +157,10 @@ func hit() -> void:
 		# Divide by 60 for a 1 second or less animation.
 		await get_tree().create_timer(1 / 60).timeout
 	# Waiting for the monitoring to do its thing. It's not pretty that way, and might lead to issues.
-	await get_tree().create_timer(0.05).timeout
+	# Trying it with the reload_time as a wait time, that means that technically if an enemy goes in and out
+	# very fast, it can be damaged several times. But otherwise, enemies won't get damaged if they get in range
+	# at the wrong time. Maybe 1 second max is better, because we consider that the weapon whirls for a second max.
+	await get_tree().create_timer(min(reload_time, 1)).timeout
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	melee_weapon_area.monitoring = false
 
@@ -155,6 +176,9 @@ func throw_weapon() -> void:
 		#print("Hello from thrown_weapon() in melee_weapon_state.gd")
 	melee_weapon_area.monitoring = true
 	melee_weapon_hit_box.disabled = false
+	reload_bar.set_max_value(throw_duration * 1000)
+	# Not sure if this line is useful.
+	reload_bar.update_value(throw_duration_timer.time_left * 1000)
 	
 
 
@@ -166,7 +190,10 @@ func _on_melee_weapon_cool_down_timeout() -> void:
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	#melee_weapon.monitoring = false
 	if flying != 0:
+	#if flying == 1:
 		hit()
+	if flying == 0:
+		reload_bar.update_value(reload_time * 1000)
 
 
 func _on_melee_weapon_throw_duration_timeout() -> void:
@@ -175,4 +202,6 @@ func _on_melee_weapon_throw_duration_timeout() -> void:
 	flying = -1
 	melee_weapon_area.monitoring = false
 	melee_weapon_hit_box.disabled = true
-	hit()
+	#hit()
+	reload_bar.set_max_value(reload_time * 1000)
+	#reload_bar.update_value(-reload_timer.time_left * 1000)

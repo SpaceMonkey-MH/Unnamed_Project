@@ -417,3 +417,6 @@
 	For some reason, special_sounds isn't correctly exported in the editor. So I need to do it in code to debug.
 	Sadge.
 	Amplified amanita muscaria aggressive dubstep to 0 dB, the two others to -2 dB. Kinda same volume level now.
+
+## - __2024/08/11:__
+	The Throw hits much faster the the Melee Weapon, I don't know if this is concerning or not.

@@ -44,13 +44,15 @@ var fire_damage : float = 10.0
 				#min(value - health, character.max_health - health))
 			if health != max_health:
 				SignalBus.emit_signal("health_changed", get_parent(), value - health)
+				health_bar.update_value(value - health)
 				health = max_health
 		else:
 			SignalBus.emit_signal("health_changed", get_parent(), value - health)
+			health_bar.update_value(value - health)
 			#print("Hello from health setter in health_component.")
 			health = value
 #		print("Set health in HealthComponent in ", get_parent(), " to: ", health)
-		health_bar.update_value(health)
+		#health_bar.update_value(value - health)
 
 
 # Called when the node enters the scene tree for the first time.

@@ -164,8 +164,8 @@ offset_bottom = -20.0
 text = "Test Moving Enemy"
 
 [node name="HealthBar" parent="." instance=ExtResource("6_mikho")]
-offset_top = -100.0
-offset_bottom = -60.0
+offset_top = -61.0
+offset_bottom = -55.0
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("3_v7f25")

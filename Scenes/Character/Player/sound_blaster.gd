@@ -1,24 +1,25 @@
 class_name SoundBlasterState
 extends WeaponsState
 
-@export var cd_timer: Timer
+@export var reload_timer: Timer
 @export var next_weapon_state: MeleeWeaponState
 @export var previous_weapon_state: RailgunState
 @export var sound_blaster_area: Area2D
 @export var sound_list: Node
 @export var attack_damage: float = 10.0
 @export var reload_time: float = 0.2
-@export var knockback_force: float = 200.0
+@export var knockback_force: float = 500.0
 @export var sound_path: String = "res://Assets/Sounds/SoundBlaster/Usable/"
 # A variable to store whether or not the fire button is pressed. This is used to go around the fact that
 # _unhandled_input() doesn't do continuous input (click hold is just a click).
 var fire_pressed: bool = false
 # The sound player currently playing.
 var sound_playing_index: int = -1
+@onready var reload_bar = get_parent().reload_bar
 
 
 func _ready() -> void:
-	cd_timer.wait_time = reload_time
+	reload_timer.wait_time = reload_time
 	#print("dir_content: ", dir_contents(sound_path))
 	create_stream_players(dir_contents(sound_path))
 	#print("sound_playing_index in sound_blaster.gd: ", sound_playing_index)
@@ -59,7 +60,7 @@ func create_stream_players(audio_files: Array) -> void:
 		#print("audio_stream_player.stream in sound_blaster.gd: ", audio_stream_player.stream)
 
 
-func state_process(_delta: float) -> void:
+func state_process(delta: float) -> void:
 	#if Input.is_action_pressed("fire") and can_fire:
 		#weapon_fire(character.position, character.get_global_mouse_position(), bullet_2_scene,
 			#attack_damage, speed_factor)
@@ -70,10 +71,12 @@ func state_process(_delta: float) -> void:
 	if fire_pressed and can_fire:
 		sound_blaster_area.monitoring = true
 		can_fire = false
-		cd_timer.start()
+		reload_timer.start()
 		await get_tree().create_timer(0.05).timeout
 		sound_blaster_area.monitoring = false
 		#print("Fire in sound_blaster.gd.")
+	if not can_fire:
+		reload_bar.update_value(-delta * 1000)
 
 
 func state_input(event: InputEvent) -> void:
@@ -105,13 +108,15 @@ func state_input(event: InputEvent) -> void:
 # Called when the current_state becomes this state.
 func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
-	cd_timer.paused = false
+	reload_timer.paused = false
+	reload_bar.set_max_value(reload_time * 1000)
+	reload_bar.update_value(reload_timer.time_left * 1000)
 
 
 # Called when the next_state becomes another.
 func on_exit() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
-	cd_timer.paused = true
+	reload_timer.paused = true
 	if fire_pressed:
 		fire_pressed = false
 		sound_blaster_area.toggle_visible()
@@ -146,6 +151,7 @@ func _on_sound_blaster_cool_down_timeout() -> void:
 		sound_blaster_area.toggle_visible()
 		await get_tree().create_timer(0.05).timeout
 		sound_blaster_area.toggle_visible()
+	reload_bar.update_value(reload_time * 1000)
 
 
 func _on_sound_blaster_player_finished():

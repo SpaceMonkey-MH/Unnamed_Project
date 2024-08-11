@@ -3,6 +3,7 @@ extends Node
 class_name CharacterWeaponsStateMachine
 
 @export var character : CharacterBody2D
+@export var reload_bar: ReloadBar
 @export var current_state : WeaponsState
 # The different weapons as variables so they can be transitioned to.
 @export var weapon_0_state: MeleeWeaponState
@@ -29,6 +30,7 @@ func _ready():
 			
 		else:
 			push_warning("Child " + child.name + " is not a WeaponsState for CharacterWeaponsStateMachine.")
+	current_state.on_enter()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

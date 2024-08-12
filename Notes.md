@@ -424,5 +424,9 @@
 ## - __2024/08/12:__
 	There is a bug in melee_weapon_state.gd, where the Throw hits once more after being retrieved, thus displaying
 	a reload where there should not be one, and delaying the next fire. That can be circumvoluted by disabling the
-	the hits on the inwards fly, but that isn't really a fix, that is a feature atken down; also, that means that
+	the hits on the inwards fly, but that isn't really a fix, that is a feature taken down; also, that means that
 	the Weapon won't be hitting nor turning on the way back, which might look weird.
+	Apparently, all the fuzz I had about the AoE of damaging according to distance could have been solved using
+	actual ShapeCast2D, not the shite I did. The problem is there is no code example. Actually, shape casting is
+	like throwing a shape like a ray, it is not a check on a static zone, so it is not what I am looking for.
+	Not for the blink either.

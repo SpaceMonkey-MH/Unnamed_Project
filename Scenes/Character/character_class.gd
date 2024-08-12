@@ -18,12 +18,14 @@ extends CharacterBody2D
 # Maybe this should be in level script, to be seen.
 @export var air_penetration: float = 0.99
 # Whether or not the character can use the blink ability defined below. Needed so that the sounds are loaded
-# only if needed.
+# only when necessary. Has to be set manually, but should prevent from blinking if false.
 @export var can_blink: bool = false
 # The path to the folder with the sounds for the blink.
 @export var blink_sound_path: String = "res://Assets/Sounds/Blink/"
 # The maximum distance of the blink.
 @export var blink_distance = 200
+# The shape cast used to check if the blink can be done (outside of a wall).
+#@export var terrain_check_sc: ShapeCast2D
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
 var death_animation_timer: float = 1.5
@@ -39,6 +41,8 @@ var knocked_back: bool = false
 var blink_sounds_node: Node
 # The sound player currently playing.
 var sound_playing_index: int = -1
+# The area used to check if the blink target position is valid.
+var check_area: Area2D
 
 
 func _ready():
@@ -52,6 +56,18 @@ func _ready():
 		#print("Children of b_s_n in character_class.gd: ", blink_sounds_node.get_children())
 		#for child in blink_sounds_node.get_children():
 			#child.play()
+		
+		# This is to check the validity of the spot to which the character is blinking.
+		# So, I am creating an area with a cs the shape of the hit box, at the position resulting of the movement.
+		check_area= Area2D.new()
+		var check_collision_shape: CollisionShape2D = CollisionShape2D.new()
+		# I think this crashes if the character is not a rectangle.
+		var check_shape: RectangleShape2D = RectangleShape2D.new()
+		check_shape.size = hit_box.shape.size
+		check_collision_shape.shape = check_shape
+		check_area.add_child(check_collision_shape)
+		add_child(check_area)
+		check_area.monitoring = false
 
 
 # Reads path, and returns a list of the absolute paths to the .mp3 files in path.
@@ -199,10 +215,43 @@ func stop_knockback() -> void:
 
 # This teleports the character aver a short distance.
 func blink(source_pos: Vector2, target_pos: Vector2) -> void:
+	# This is to prevent issues, like if I forget to set can_blink to true for instance.
+	if not can_blink:
+		print("ERROR, the character cannot blink!")
+		return
 	# We teleport the character to the desired point (mouse position for instance) if that point is close by, or
 	# else to a fixed distance in that direction.
-	position += (target_pos - source_pos).normalized() * min(blink_distance, (target_pos - source_pos).length())
+	var movement: Vector2 = (target_pos - source_pos).normalized() * min(
+		blink_distance, (target_pos - source_pos).length())
+	
+	# I think that what I want to do is to check if target_pos is in a clear spot, and if not, use move_and_slide
+	# instead of teleport. This wont be perfect, but I think it will be good enough.
+	check_area.position = source_pos + movement
+	check_area.monitoring = true
+	print("In c_c.gd, check_area collisions: ", check_area.get_overlapping_bodies())
+	await get_tree().create_timer(0.05).timeout
+	#check_area.monitoring = false
+	
+	position += movement
+	
 	play_sound()
+	
+	## I think that shape casting is not what I am looking for here.
+	#var space_state : PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
+	#var query : PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
+	#query.set_shape(shape)
+	###print("shape: %s, shape.shape: %s" % [shape, shape.shape])
+	#print("In c_c.gd, query is %s, query.shape is %s." % [query, query.shape])
+	#var result : Array[Dictionary] = space_state.intersect_shape(query)
+	#print("result in c_c.gd: ", result)
+	#var shape_cast: ShapeCast2D = ShapeCast2D.new()
+	#shape_cast.shape = shape
+	#shape_cast.name = "TerrainCheckShapeCast"
+	#add_child(shape_cast)
+	#print("In c_c.gd, collisions: ", shape_cast.is_colliding())
+	#print("I c_c.gd, children: ", get_children())
+	#terrain_check_sc.target_position = target_pos
+	#print("In c_c.gd, collisions: ", terrain_check_sc.collision_result)
 
 
 func play_sound():

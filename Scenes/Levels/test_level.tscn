@@ -2881,22 +2881,7 @@ drag_vertical_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_xkfwj")]
 position = Vector2(975, 971)
-player_move_speed = 300.0
-air_jumps_max = 3
-jump_height = 120.0
-jump_time_to_peak = 0.5
-jump_time_to_descent = 0.4
-self_damage = true
 flashing_color = Color(0.823529, 0.411765, 0.117647, 1)
-flashing_time = 0.1
-normal_color = Color(1, 1, 1, 1)
-special_sounds = false
-crazy_game = false
-out_of_screen_death_timer = 1.5
-out_of_screen = false
-air_penetration = 0.99
-blink_sound_path = "res://Assets/Sounds/Blink/"
-blink_distance = 200
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")

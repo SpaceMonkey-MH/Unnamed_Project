@@ -488,9 +488,9 @@ fire_spitter_sprite_2d = NodePath("FireSpitterWeapon/FireSpitterSprite")
 sound_blaster_area = NodePath("SoundBlasterArea")
 sound_blaster_sprite = NodePath("SoundBlasterArea/SoundBlasterSprite")
 notifier = NodePath("VisibleOnScreenNotifier2D")
-crazy_game = true
 hit_box = NodePath("HitBox")
 max_health = 10000.0
+can_blink = true
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
 shape = SubResource("RectangleShape2D_7nr7k")

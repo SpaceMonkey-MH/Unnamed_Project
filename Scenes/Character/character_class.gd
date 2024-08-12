@@ -17,6 +17,13 @@ extends CharacterBody2D
 # The amount of air penetration (1 - air resistance). Will be multiplied by the velocity of the character.
 # Maybe this should be in level script, to be seen.
 @export var air_penetration: float = 0.99
+# Whether or not the character can use the blink ability defined below. Needed so that the sounds are loaded
+# only if needed.
+@export var can_blink: bool = false
+# The path to the folder with the sounds for the blink.
+@export var blink_sound_path: String = "res://Assets/Sounds/Blink/"
+# The maximum distance of the blink.
+@export var blink_distance = 200
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
 var death_animation_timer: float = 1.5
@@ -28,10 +35,55 @@ var character_is_dead: bool = false
 var move_speed: float = 0.0
 # Whether or not the player can move, use for knockback.
 var knocked_back: bool = false
+# The Node that holds all the sound players for the blink.
+var blink_sounds_node: Node
+# The sound player currently playing.
+var sound_playing_index: int = -1
 
 
 func _ready():
 	character_ready()
+	if can_blink:
+		blink_sounds_node = Node.new()
+		blink_sounds_node.name = "BlinkSoundList"
+		add_child(blink_sounds_node)
+		create_stream_players(dir_contents(blink_sound_path))
+		#print("blink_sounds_node in c_c.gd: ", blink_sounds_node)
+		#print("Children of b_s_n in character_class.gd: ", blink_sounds_node.get_children())
+		#for child in blink_sounds_node.get_children():
+			#child.play()
+
+
+# Reads path, and returns a list of the absolute paths to the .mp3 files in path.
+func dir_contents(path: String) -> Array:
+	var dir: DirAccess = DirAccess.open(path)
+	var content_array: Array = []
+	#print("dir: ", dir)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				print("Found directory: " + file_name)
+				pass
+			else:
+				#print("Found file: " + file_name)
+				if file_name.get_extension() == "mp3":
+					content_array.append(file_name)
+			file_name = dir.get_next()
+	else:
+		print("An error occurred when trying to access the path.")
+	return content_array
+
+
+func create_stream_players(audio_files: Array) -> void:
+	for audio_file_name in audio_files:
+		var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
+		audio_stream_player.stream = load(blink_sound_path + audio_file_name)
+		audio_stream_player.name = audio_file_name
+		blink_sounds_node.add_child(audio_stream_player)
+		#audio_stream_player.play()
+		
 
 
 # Creating a _process() procedure so that there can be code inside it and inside the functions in subclasses.
@@ -143,3 +195,26 @@ func knockback(source_pos: Vector2, mouse_pos: Vector2, knockback_force: float) 
 
 func stop_knockback() -> void:
 	knocked_back = false
+
+
+# This teleports the character aver a short distance.
+func blink(source_pos: Vector2, target_pos: Vector2) -> void:
+	# We teleport the character to the desired point (mouse position for instance) if that point is close by, or
+	# else to a fixed distance in that direction.
+	position += (target_pos - source_pos).normalized() * min(blink_distance, (target_pos - source_pos).length())
+	play_sound()
+
+
+func play_sound():
+	# Randomize the index of the sound player.
+	var sound_index: int = randi_range(0, blink_sounds_node.get_child_count() - 1)
+	# If this is the first sound played and there is more than 1 sounds to play.
+	if sound_playing_index != -1 and blink_sounds_node.get_child_count() > 1:
+		# While the new index is the same as the actual one.
+		while sound_index == sound_playing_index:
+			# Randomize again.
+			sound_index = randi_range(0, blink_sounds_node.get_child_count() - 1)
+	# Play the sound with the chosen index.
+	blink_sounds_node.get_children()[sound_index].play()
+	# Update the actual index.
+	sound_playing_index = sound_index

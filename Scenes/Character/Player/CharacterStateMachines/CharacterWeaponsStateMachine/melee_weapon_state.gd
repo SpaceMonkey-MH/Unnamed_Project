@@ -19,6 +19,8 @@ class_name MeleeWeaponState
 # 1 if the weapon is flying outwards, -1 if it is flying inwards, 0 otherwise. Maybe there should be a fourth,
 # resting state mid air, between going out and going back in, Idk.
 var flying: int = 0
+# The margin for the snapping of the Weapon on the mouse or on the player.
+var snap_margin: int = 5
 # Idk if this is better than @export var.
 @onready var melee_weapon_hit_box: CollisionShape2D = melee_weapon_char.get_node("MeleeWeaponCharHitBox")
 @onready var melee_weapon_area: Area2D = melee_weapon_char.get_node("MeleeWeaponArea")
@@ -62,7 +64,7 @@ func state_process(delta: float) -> void:
 		#melee_weapon_char.velocity = melee_weapon_char.get_local_mouse_position().normalized() * flying_speed
 		var mouse_pos: Vector2 = melee_weapon_char.get_local_mouse_position()
 		# This is to avoid weird twitching when the cursor in near the pos.
-		if mouse_pos.length() < 5:
+		if mouse_pos.length() < snap_margin:
 			mouse_pos = Vector2.ZERO
 		#print("mouse_pos in m_w_s.gd: ", mouse_pos)
 		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
@@ -81,7 +83,7 @@ func state_process(delta: float) -> void:
 			#hit()
 	elif not can_fire:
 		reload_bar.update_value(-delta * 1000)
-	if melee_weapon_char.position.length() <= 5 and flying == -1:
+	if melee_weapon_char.position.length() <= snap_margin and flying == -1:
 		melee_weapon_char.position = Vector2.ZERO
 		flying = 0
 		#can_fire = false

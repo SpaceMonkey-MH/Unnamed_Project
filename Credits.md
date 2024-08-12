@@ -25,3 +25,8 @@
 			https://pixabay.com/music/search/dubstep/
 		-> "Aggressive Metal (Sinister)", music by Nick Valerson from Pixabay:
 			https://pixabay.com/music/search/metal/
+	- Blink:
+		-> "teleport" from Pixabay:
+			https://pixabay.com/sound-effects/search/teleport/
+		-> "game teleport" from Pixabay:
+			https://pixabay.com/sound-effects/search/teleport/

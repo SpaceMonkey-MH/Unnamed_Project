@@ -152,6 +152,10 @@ func character_physics_process(delta):
 	move_and_slide()
 
 
+func _unhandled_input(event : InputEvent):
+	if event.is_action_pressed("blink"):
+		blink(global_position, get_global_mouse_position())
+
 
 # This should not be used anymore, keeping it just in case (and to have the history).
 #func _physics_process(delta):

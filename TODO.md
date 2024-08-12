@@ -17,7 +17,14 @@ NOT DONE :
 - Make a story.
 - Make it so that the player can't shoot after death. Or just handle after-death.
 - Put self_damage in options.
-- Blink?
+- Add blink.
+	- Find sounds for the effect. // DONE.
+	- Add the shortcuts. // DONE.
+	- Make the code for the teleport. // DONE.
+	- Handle edge cases like blinking close by of inside of a wall.
+	- Add the code to the proper script of the player. // DONE.
+	- Make the blink use a cool down.
+	- Add a cool down bar to the player.
 - Balancing.
 - Add inverted gravity mechanic.
 - Add water mechanic.
@@ -28,7 +35,6 @@ NOT DONE :
 - Decide what weapons there will be.
 - Add powers, such as crits or smth.
 - Bosses (levels).
-- User key mapping?
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target). // Unable to replicate for now.
 - Fix hit state for tme.
@@ -43,13 +49,6 @@ NOT DONE :
 - Add blood splatter when character is hit or killed, on the terrain and the characters.
 - Make the game crazy (invert left and right, do something for the SOund Blaster maybe, etc).
 - Solve the collision issue (enemies can force the player through walls).
-- Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. I think it is
-	fine, as it is parody kinda.
-	- Find the song. // DONE.
-	- Make the code to play it. // DONE.
-	- Cut the sample correctly. // DONE.
-	- Solve the multiple overlapping sounds issue. Maybe put the code in level.gd and use a signal? Or maybe just
-		don't do anything.
 - Add more sounds for the Sound Blaster.
 - Make the game music stop when sound blasting.
 - Make the fire stackable?
@@ -139,3 +138,11 @@ DONE :
 - Make health bar. // DONE.
 - Add indicator of reload time left. Make reload bar. // DONE.
 - Solve issue of changing weapon while reloading. // DONE.
+- User key mapping? // I think not.
+- Have "allumer le feu" play when setting something on fire as an option. Hard because of copyrights. I think it is
+	fine, as it is parody kinda. // DONE.
+	- Find the song. // DONE.
+	- Make the code to play it. // DONE.
+	- Cut the sample correctly. // DONE.
+	- Solve the multiple overlapping sounds issue. Maybe put the code in level.gd and use a signal? Or maybe just
+		don't do anything. // DONE.

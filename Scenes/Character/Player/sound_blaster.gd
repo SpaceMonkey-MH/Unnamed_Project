@@ -26,7 +26,7 @@ func _ready() -> void:
 
 
 # Reads path, and returns a list of the absolute paths to the .mp3 files in path.
-func dir_contents(path: String):
+func dir_contents(path: String) -> Array:
 	var dir: DirAccess = DirAccess.open(path)
 	var content_array: Array = []
 	#print("dir: ", dir)

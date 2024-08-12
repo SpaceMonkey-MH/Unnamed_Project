@@ -40,6 +40,7 @@ func _ready() -> void:
 	#weapons_sprite_2d.visible = false
 	#reload_bar.set_max_value(1000)
 	#reload_bar.update_value(1000)
+	#print("Time left on reload_timer in m_w_s.gd: ", reload_timer.time_left)
 
 
 func state_process(delta: float) -> void:
@@ -53,6 +54,7 @@ func state_process(delta: float) -> void:
 #		weapon_fire(player.get_global_mouse_position())
 #		print("firing")	# Will print continuesly during the hold.
 #		print(player.get_global_mouse_position())
+	#print("flying in m_w_s.gd: ", flying, "\nreload_timer.time_left: ", reload_timer.time_left)
 	if flying == 1:
 		#var fly_angle: float = Vector2(1, 0).angle_to_point(character.get_local_mouse_position())
 		#print("angle in m_w_s.gd: ", fly_angle)
@@ -68,14 +70,18 @@ func state_process(delta: float) -> void:
 		#if melee_weapon_char.velocity.length() >= 10:
 		melee_weapon_char.move_and_slide()
 		reload_bar.update_value(-delta * 1000)
+		#if reload_timer.time_left == 0:
+			#hit()
 	elif flying == -1:
 		# We return to the player. Divide by 100 is a magic number so that the return is slower.
 		melee_weapon_char.velocity = lerp(melee_weapon_char.velocity,
 			(-1 * melee_weapon_char.position * flying_speed) / 100, 0.3)
 		melee_weapon_char.move_and_slide()
+		#if reload_timer.time_left == 0:
+			#hit()
 	elif not can_fire:
 		reload_bar.update_value(-delta * 1000)
-	if melee_weapon_char.position.length() <= 500 and flying == -1:
+	if melee_weapon_char.position.length() <= 5 and flying == -1:
 		melee_weapon_char.position = Vector2.ZERO
 		flying = 0
 		#can_fire = false
@@ -114,9 +120,13 @@ func on_enter() -> void:
 	# We multiply everything by 1000 so that it handles better the floats. The ratios sould stay the same.
 	if flying == 0:
 		reload_bar.set_max_value(reload_time * 1000)
+		if reload_timer.time_left != 0:
+			reload_bar.update_value(-reload_time * 1000)
 		reload_bar.update_value(reload_timer.time_left * 1000)
 	else:
 		reload_bar.set_max_value(throw_duration * 1000)
+		if reload_timer.time_left != 0:
+			reload_bar.update_value(-throw_duration * 1000)
 		reload_bar.update_value(throw_duration_timer.time_left * 1000)
 	#print("%s is the max value of %s\n%s is the value of %s" % [
 		#reload_bar.max_value, reload_bar, reload_bar.value, reload_bar])
@@ -133,8 +143,10 @@ func on_exit() -> void:
 
 
 func hit() -> void:
-	var time: Dictionary = Time.get_datetime_dict_from_system()
-	print("Hello from hit() in m_w_s.gd at %s." % time.second)
+	# There is a bug here, hit() is called one too many time when the Thrown Weapon return to the player,
+	# thus delaying next fires. I cna't find the bug, so for now I'll just disable the hits on the return fly.
+	#var time: Dictionary = Time.get_datetime_dict_from_system()
+	#print("Hello from hit() in m_w_s.gd at %s." % time.second)
 	# Set can_fire to false to prevent from firing again before the end of the cooldown.
 	can_fire = false
 	# Set the monitoring of the area of melee_weapon_area to true, so that it detects the overlapping
@@ -142,7 +154,7 @@ func hit() -> void:
 	melee_weapon_area.monitoring = true
 	# Start the timer of the cooldown.
 	reload_timer.start()
-	# The angle of progression of the rotation of the sprite. Two times PI divided by the base fps.
+	# The angle of progression of the rotation of the sprite. Two times PI divided by the base fps (or just 60).
 	# This makes a rotation in one second, but it needs to be shorter. Idk how to make that relative to
 	# the "reload" time. Found it kinda, now taking the min between 1 and reload_time, so that the animation
 	# doesn't last longer than a second nor than the reload time. Breaks if the reload time is set too low
@@ -174,7 +186,7 @@ func throw_weapon() -> void:
 		#melee_weapon_char.velocity = Vector2(10, 0)
 		#melee_weapon_char.move_and_slide()
 		#print("Hello from thrown_weapon() in melee_weapon_state.gd")
-	melee_weapon_area.monitoring = true
+	#melee_weapon_area.monitoring = true
 	melee_weapon_hit_box.disabled = false
 	reload_bar.set_max_value(throw_duration * 1000)
 	# Not sure if this line is useful.
@@ -189,8 +201,8 @@ func _on_melee_weapon_cool_down_timeout() -> void:
 	can_fire = true
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	#melee_weapon.monitoring = false
-	if flying != 0:
-	#if flying == 1:
+	#if flying != 0:
+	if flying == 1:
 		hit()
 	if flying == 0:
 		reload_bar.update_value(reload_time * 1000)

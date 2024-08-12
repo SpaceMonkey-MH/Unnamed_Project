@@ -50,6 +50,8 @@ func on_enter() -> void:
 	reload_timer.paused = false
 	#print("Time left on timer in weapon3.gd: ", timer.time_left)
 	reload_bar.set_max_value(reload_time * 1000)
+	if reload_timer.time_left != 0:
+		reload_bar.update_value(-reload_time * 1000)
 	reload_bar.update_value(reload_timer.time_left * 1000)
 
 

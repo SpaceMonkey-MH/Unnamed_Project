@@ -66,6 +66,8 @@ func on_enter() -> void:
 	# This is so that the player can't reload a weapon that is not "equipped".
 	reload_timer.paused = false
 	reload_bar.set_max_value(reload_time * 1000)
+	if reload_timer.time_left != 0:
+		reload_bar.update_value(-reload_time * 1000)
 	reload_bar.update_value(reload_timer.time_left * 1000)
 
 

@@ -27,14 +27,12 @@ NOT DONE :
 	are added.
 - Decide what weapons there will be.
 - Add powers, such as crits or smth.
-- Add indicator of reload time left. Make reload bar.
 - Bosses (levels).
 - User key mapping?
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
 	target). // Unable to replicate for now.
 - Fix hit state for tme.
 - Make some kind of rampaging or score or whatever.
-- Make health bar.
 - Update the names of the projectiles.
 - Update the names of the states.
 - Implement blast of the explosion of rockets and so on, like move the characters when hit.
@@ -55,6 +53,7 @@ NOT DONE :
 - Add more sounds for the Sound Blaster.
 - Make the game music stop when sound blasting.
 - Make the fire stackable?
+- Solve issue of Throw hitting one too many time.
 
 ------------------------------------------------------------------------------------------------------
 
@@ -137,3 +136,6 @@ DONE :
 - Normalize the volume of the sounds. // DONE.
 - Solve the issue when changing weapon while firing Sound Blaster or Fire Spitter. // DONE.
 - Navigate through weapons via # keys. // DONE.
+- Make health bar. // DONE.
+- Add indicator of reload time left. Make reload bar. // DONE.
+- Solve issue of changing weapon while reloading. // DONE.

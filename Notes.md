@@ -420,3 +420,9 @@
 
 ## - __2024/08/11:__
 	The Throw hits much faster the the Melee Weapon, I don't know if this is concerning or not.
+
+## - __2024/08/12:__
+	There is a bug in melee_weapon_state.gd, where the Throw hits once more after being retrieved, thus displaying
+	a reload where there should not be one, and delaying the next fire. That can be circumvoluted by disabling the
+	the hits on the inwards fly, but that isn't really a fix, that is a feature atken down; also, that means that
+	the Weapon won't be hitting nor turning on the way back, which might look weird.

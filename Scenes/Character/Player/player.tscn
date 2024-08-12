@@ -488,6 +488,7 @@ fire_spitter_sprite_2d = NodePath("FireSpitterWeapon/FireSpitterSprite")
 sound_blaster_area = NodePath("SoundBlasterArea")
 sound_blaster_sprite = NodePath("SoundBlasterArea/SoundBlasterSprite")
 notifier = NodePath("VisibleOnScreenNotifier2D")
+crazy_game = true
 hit_box = NodePath("HitBox")
 max_health = 10000.0
 
@@ -600,7 +601,6 @@ next_weapon_state = NodePath("../DesertEagle")
 previous_weapon_state = NodePath("../SoundBlaster")
 reload_timer = NodePath("MeleeWeaponCoolDown")
 throw_duration_timer = NodePath("MeleeWeaponThrowDuration")
-reload_time = 1.0
 weapons_sprite_2d = NodePath("../../WeaponsSprite2D")
 character_movement_state_machine = NodePath("../../CharacterMovementStateMachine")
 

@@ -46,6 +46,8 @@ func on_enter() -> void:
 	# We multiply everything by 1000 so that it handles better the floats. The ratios sould stay the same.
 	reload_bar.set_max_value(reload_time * 1000)
 	#reload_bar.set_max_value(1000)
+	if reload_timer.time_left != 0:
+		reload_bar.update_value(-reload_time * 1000)
 	reload_bar.update_value(reload_timer.time_left * 1000)
 
 

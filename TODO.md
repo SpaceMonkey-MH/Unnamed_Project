@@ -22,7 +22,7 @@ NOT DONE :
 	- Add the shortcuts. // DONE.
 	- Make the code for the teleport. // DONE.
 	- Handle edge case of blinking close by. // DONE.
-	- Handle edge case of blinking inside of a wall.
+	- Handle edge case of blinking inside of a wall. // DONE.
 	- Add the code to the proper script of the player. // DONE.
 	- Make the blink use a cool down.
 	- Add a cool down bar to the player.

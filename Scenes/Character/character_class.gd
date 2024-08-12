@@ -258,16 +258,20 @@ func blink(source_pos: Vector2, target_pos: Vector2) -> void:
 	#check_area.monitoring = false
 	# Apparently it needs to wait a bit.
 	await get_tree().create_timer(0.05).timeout
-	print("At: ", time.second, ". In c_c.gd, body_list: ", body_list)
+	#print("At: ", time.second, ". In c_c.gd, body_list: ", body_list)
 	
-	#if body_list.is_empty():
-		#global_position += movement
-	#else:
+	if body_list.is_empty():
+		global_position += movement
+	else:
 		##global_position += Vector2(0, -10)
 		#velocity = movement# + Vector2(0, -100)
 		#move_and_slide()
-	velocity = movement.normalized() * 10000
-	move_and_slide()
+		# This is kinda ok, though it does stop if the target is too close to the ground, but I think that
+		# would be too hard to get around.
+		move_and_collide(movement)
+	#velocity = movement.normalized() * 10000
+	#move_and_slide()
+	#move_and_collide(movement)
 	
 	play_sound()
 	

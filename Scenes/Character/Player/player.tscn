@@ -636,6 +636,7 @@ reload_timer = NodePath("RocketLauncherCoolDown")
 next_weapon_state = NodePath("../FireSpitter")
 previous_weapon_state = NodePath("../Shotgun")
 bullet_3_scene = ExtResource("27_30sim")
+speed_factor = 1.0
 
 [node name="RocketLauncherCoolDown" type="Timer" parent="CharacterWeaponsStateMachine/RocketLauncher"]
 one_shot = true

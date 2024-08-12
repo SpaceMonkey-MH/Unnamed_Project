@@ -42,7 +42,9 @@ var blink_sounds_node: Node
 # The sound player currently playing.
 var sound_playing_index: int = -1
 # The area used to check if the blink target position is valid.
-var check_area: Area2D
+#var check_area: Area2D
+# A list of bodies inside the check_area.
+var body_list: Array = []
 
 
 func _ready():
@@ -59,15 +61,17 @@ func _ready():
 		
 		# This is to check the validity of the spot to which the character is blinking.
 		# So, I am creating an area with a cs the shape of the hit box, at the position resulting of the movement.
-		check_area= Area2D.new()
-		var check_collision_shape: CollisionShape2D = CollisionShape2D.new()
-		# I think this crashes if the character is not a rectangle.
-		var check_shape: RectangleShape2D = RectangleShape2D.new()
-		check_shape.size = hit_box.shape.size
-		check_collision_shape.shape = check_shape
-		check_area.add_child(check_collision_shape)
-		add_child(check_area)
-		check_area.monitoring = false
+		#check_area = Area2D.new()
+		#var check_collision_shape: CollisionShape2D = CollisionShape2D.new()
+		## I think this crashes if the character is not a rectangle.
+		#var check_shape: RectangleShape2D = RectangleShape2D.new()
+		#check_shape.size = hit_box.shape.size
+		##check_shape.size = Vector2(1, 1)
+		#check_collision_shape.shape = check_shape
+		#check_area.add_child(check_collision_shape)
+		#add_child(check_area)
+		##check_area.monitoring = false
+		#check_area.connect("body_entered", _on_check_area_body_entered)
 
 
 # Reads path, and returns a list of the absolute paths to the .mp3 files in path.
@@ -224,17 +228,55 @@ func blink(source_pos: Vector2, target_pos: Vector2) -> void:
 	var movement: Vector2 = (target_pos - source_pos).normalized() * min(
 		blink_distance, (target_pos - source_pos).length())
 	
+	# So, the issue is that, apparently, get_overlapping_bodies() happens before the change of position even
+	# though it is supposed to be after, and I don't know why. Also the monitoring is weird.
+	# My fix is to create a new area each time, and queue_free() it when a body enters, after adding the body
+	# to an array. Then in here, we can check things and do the stuff we want.
+	# Maybe this works better with a new variable each time.
+	var check_area: Area2D = Area2D.new()
+	var check_collision_shape: CollisionShape2D = CollisionShape2D.new()
+	# I think this crashes if the character is not a rectangle.
+	var check_shape: RectangleShape2D = RectangleShape2D.new()
+	check_shape.size = hit_box.shape.size
+	#check_shape.size = Vector2(1, 1)
+	check_collision_shape.shape = check_shape
+	check_area.add_child(check_collision_shape)
+	check_area.name = "CheckArea"
+	add_child(check_area)
+	#check_area.monitoring = false
+	check_area.connect("body_entered", _on_check_area_body_entered)
+	
 	# I think that what I want to do is to check if target_pos is in a clear spot, and if not, use move_and_slide
 	# instead of teleport. This wont be perfect, but I think it will be good enough.
-	check_area.position = source_pos + movement
-	check_area.monitoring = true
-	print("In c_c.gd, check_area collisions: ", check_area.get_overlapping_bodies())
-	await get_tree().create_timer(0.05).timeout
+	check_area.global_position = source_pos + movement
+	#check_area.global_position = target_pos
+	#check_area.monitoring = true
+	var time = Time.get_datetime_dict_from_system()
+	#print("In c_c.gd: ", target_pos, source_pos + movement)
+	#print("In c_c.gd, check_area.position is: ", check_area.global_position)
+	#print("At: ", time.second, ". In c_c.gd, check_area collisions: ", check_area.get_overlapping_bodies())
 	#check_area.monitoring = false
+	# Apparently it needs to wait a bit.
+	await get_tree().create_timer(0.05).timeout
+	print("At: ", time.second, ". In c_c.gd, body_list: ", body_list)
 	
-	position += movement
+	#if body_list.is_empty():
+		#global_position += movement
+	#else:
+		##global_position += Vector2(0, -10)
+		#velocity = movement# + Vector2(0, -100)
+		#move_and_slide()
+	velocity = movement.normalized() * 10000
+	move_and_slide()
 	
 	play_sound()
+	
+	body_list.clear()
+	
+	#check_area.queue_free()
+	#await get_tree().create_timer(0.05).timeout
+	
+	#check_area.global_position
 	
 	## I think that shape casting is not what I am looking for here.
 	#var space_state : PhysicsDirectSpaceState2D = get_world_2d().direct_space_state
@@ -267,3 +309,11 @@ func play_sound():
 	blink_sounds_node.get_children()[sound_index].play()
 	# Update the actual index.
 	sound_playing_index = sound_index
+
+
+func _on_check_area_body_entered(body: Node) -> void:
+	#var time = Time.get_datetime_dict_from_system()
+	#print("At: ", time.second, ". In c_c.gd, body is: ", body)
+	body_list.append(body)
+	if $CheckArea:
+		$CheckArea.queue_free()

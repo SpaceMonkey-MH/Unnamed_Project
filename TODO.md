@@ -17,15 +17,6 @@ NOT DONE :
 - Make a story.
 - Make it so that the player can't shoot after death. Or just handle after-death.
 - Put self_damage in options.
-- Add blink. // DONE.
-	- Find sounds for the effect. // DONE.
-	- Add the shortcuts. // DONE.
-	- Make the code for the teleport. // DONE.
-	- Handle edge case of blinking close by. // DONE.
-	- Handle edge case of blinking inside of a wall. // DONE.
-	- Add the code to the proper script of the player. // DONE.
-	- Make the blink use a cool down. // DONE.
-	- Add a cool down bar to the player. // DONE.
 - Balancing.
 - Add inverted gravity mechanic.
 - Add water mechanic.
@@ -131,7 +122,7 @@ DONE :
 	- Add sound. // DONE.
 		- Create a list of sounds to play. // DONE.
 		- Have the sound player choose randomly among that list. // DONE.
-		- Play the sound while firing, stop when stopping the fire, starting a new one when resuming fire. // DONE.
+		- Play the sound while firing, stop when stopping the fire, start a new one when resuming fire. // DONE.
 - Add air resistance to the characters. // DONE.
 - Make knockback depend on aimed at direction. // DONE.
 - Normalize the volume of the sounds. // DONE.
@@ -148,3 +139,12 @@ DONE :
 	- Cut the sample correctly. // DONE.
 	- Solve the multiple overlapping sounds issue. Maybe put the code in level.gd and use a signal? Or maybe just
 		don't do anything. // DONE.
+- Add blink. // DONE.
+	- Find sounds for the effect. // DONE.
+	- Add the shortcuts. // DONE.
+	- Make the code for the teleport. // DONE.
+	- Handle edge case of blinking close by. // DONE.
+	- Handle edge case of blinking inside of a wall. // DONE.
+	- Add the code to the proper script of the player. // DONE.
+	- Make the blink use a cool down. // DONE.
+	- Add a cool down bar to the player. // DONE.

@@ -1,9 +1,18 @@
 class_name TextureProgressBarClass
 extends TextureProgressBar
 
+@export var ttr_under: Texture2D
+@export var ttr_over: Texture2D
+@export var ttr_progress: Texture2D
+#@export var f_mode: int = 0
 
-#func _ready():
+
+func _ready():
 	#set_value(max_value)
+	texture_under = ttr_under
+	texture_over = ttr_over
+	texture_progress = ttr_progress
+	#fill_mode = f_mode
 
 
 #func _process(delta):

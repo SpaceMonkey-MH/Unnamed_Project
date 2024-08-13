@@ -17,15 +17,15 @@ NOT DONE :
 - Make a story.
 - Make it so that the player can't shoot after death. Or just handle after-death.
 - Put self_damage in options.
-- Add blink.
+- Add blink. // DONE.
 	- Find sounds for the effect. // DONE.
 	- Add the shortcuts. // DONE.
 	- Make the code for the teleport. // DONE.
 	- Handle edge case of blinking close by. // DONE.
 	- Handle edge case of blinking inside of a wall. // DONE.
 	- Add the code to the proper script of the player. // DONE.
-	- Make the blink use a cool down.
-	- Add a cool down bar to the player.
+	- Make the blink use a cool down. // DONE.
+	- Add a cool down bar to the player. // DONE.
 - Balancing.
 - Add inverted gravity mechanic.
 - Add water mechanic.
@@ -37,7 +37,7 @@ NOT DONE :
 - Add powers, such as crits or smth.
 - Bosses (levels).
 - Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
-	target). // Unable to replicate for now.
+	target). // Unable to replicate, for now.
 - Fix hit state for tme.
 - Make some kind of rampaging or score or whatever.
 - Update the names of the projectiles.
@@ -54,6 +54,7 @@ NOT DONE :
 - Make the game music stop when sound blasting.
 - Make the fire stackable?
 - Solve issue of Throw hitting one too many time.
+- Make walkable slopes.
 
 ------------------------------------------------------------------------------------------------------
 

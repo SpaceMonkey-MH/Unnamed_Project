@@ -114,7 +114,7 @@ func character_ready():
 	out_of_screen = false
 
 
-func _process(_delta):
+func character_process(_delta):
 #	print("Player velocity: ", velocity)
 	smoothed_mouse_pos = lerp(smoothed_mouse_pos, get_global_mouse_position(), 0.3)
 	weapons_sprite_2d.look_at(smoothed_mouse_pos)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=85 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -16,8 +16,11 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/idle_state.gd" id="12_4t18e"]
 [ext_resource type="PackedScene" uid="uid://bmf70gpp4xdoa" path="res://Scenes/UI/reload_bar.tscn" id="12_limdq"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="13_nnmwf"]
+[ext_resource type="Texture2D" uid="uid://65gr2k7difmq" path="res://Assets/Sprites/UI/ReloadBars/reload_bar_over_1.png" id="13_rwcn4"]
+[ext_resource type="Texture2D" uid="uid://cj7a267gx6mdm" path="res://Assets/Sprites/UI/ReloadBars/reload_bar_progress_blue_1.png" id="14_8nnt0"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/character_fire_state_machine.gd" id="14_j1tkn"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/not_firing.gd" id="15_b7158"]
+[ext_resource type="Texture2D" uid="uid://n8654lkhiwgc" path="res://Assets/Sprites/UI/ReloadBars/reload_bar_progress_yellow_1.png" id="15_myol3"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterFireStateMachine/firing.gd" id="16_nowjs"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/character_weapons_state_machine.gd" id="18_gi4pl"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterWeaponsStateMachine/melee_weapon_state.gd" id="19_lk4n7"]
@@ -477,7 +480,7 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box", "blink_reload_bar")]
 script = ExtResource("1_8tv8j")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
@@ -491,6 +494,7 @@ notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
 max_health = 10000.0
 can_blink = true
+blink_reload_bar = NodePath("BlinkReloadBar")
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]
 shape = SubResource("RectangleShape2D_7nr7k")
@@ -530,9 +534,23 @@ on_fire_timer = NodePath("FireDurationTimer")
 offset_top = -86.0
 offset_bottom = -80.0
 
-[node name="PlayerReloadBar" parent="." instance=ExtResource("12_limdq")]
-offset_left = -51.0
-offset_right = -27.0
+[node name="BlinkReloadBar" parent="." instance=ExtResource("12_limdq")]
+offset_left = -52.0
+offset_top = -24.0
+offset_right = -28.0
+offset_bottom = 0.0
+fill_mode = 5
+ttr_over = ExtResource("13_rwcn4")
+ttr_progress = ExtResource("14_8nnt0")
+
+[node name="WeaponReloadBar" parent="." instance=ExtResource("12_limdq")]
+offset_left = -52.0
+offset_top = 1.0
+offset_right = -28.0
+offset_bottom = 25.0
+fill_mode = 4
+ttr_over = ExtResource("13_rwcn4")
+ttr_progress = ExtResource("15_myol3")
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("8_8i88a")
@@ -581,7 +599,7 @@ script = ExtResource("16_nowjs")
 [node name="CharacterWeaponsStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "reload_bar", "current_state", "weapon_0_state", "weapon_1_state", "weapon_2_state", "weapon_3_state", "weapon_4_state", "weapon_5_state", "weapon_6_state", "weapon_7_state", "weapon_8_state", "weapon_9_state")]
 script = ExtResource("18_gi4pl")
 character = NodePath("..")
-reload_bar = NodePath("../PlayerReloadBar")
+reload_bar = NodePath("../WeaponReloadBar")
 current_state = NodePath("Melee")
 weapon_0_state = NodePath("Melee")
 weapon_1_state = NodePath("DesertEagle")

@@ -23,7 +23,12 @@ extends CharacterBody2D
 # The path to the folder with the sounds for the blink.
 @export var blink_sound_path: String = "res://Assets/Sounds/Blink/"
 # The maximum distance of the blink.
-@export var blink_distance = 200
+@export var blink_distance: float = 200.0
+# The cool down of the blink.
+@export var blink_cool_down_duration: float = 3.0
+# The bar indicating if the blink is on or off cool down. I think it is easier to position if the position is
+# exported, and then it takes less variables to just export the ReloadBar itself.
+@export var blink_reload_bar: ReloadBar
 # The shape cast used to check if the blink can be done (outside of a wall).
 #@export var terrain_check_sc: ShapeCast2D
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
@@ -44,7 +49,9 @@ var sound_playing_index: int = -1
 # The area used to check if the blink target position is valid.
 #var check_area: Area2D
 # A list of bodies inside the check_area.
-var body_list: Array = []
+var body_array: Array = []
+# Timer for the cool down of the blink.
+var blink_cool_down_timer: Timer
 
 
 func _ready():
@@ -72,6 +79,19 @@ func _ready():
 		#add_child(check_area)
 		##check_area.monitoring = false
 		#check_area.connect("body_entered", _on_check_area_body_entered)
+		
+		# Creating a Timer for the cool down of the blink.
+		blink_cool_down_timer = Timer.new()
+		blink_cool_down_timer.wait_time = blink_cool_down_duration
+		blink_cool_down_timer.autostart = false
+		blink_cool_down_timer.one_shot = true
+		add_child(blink_cool_down_timer)
+		blink_cool_down_timer.connect("timeout", _on_blink_cool_down_timer_timeout)
+		
+		if blink_reload_bar:
+			# We multiply everything by 1000 so that it handles better the floats. The ratios sould stay the same.
+			blink_reload_bar.set_max_value(blink_cool_down_duration * 1000)
+			blink_reload_bar.update_value(blink_cool_down_duration * 1000)
 
 
 # Reads path, and returns a list of the absolute paths to the .mp3 files in path.
@@ -108,12 +128,16 @@ func create_stream_players(audio_files: Array) -> void:
 
 # Creating a _process() procedure so that there can be code inside it and inside the functions in subclasses.
 # This is useless for now.
-func _process(delta) -> void:
+func _process(delta: float) -> void:
 #	print("Move speed of ", self, " from character_class.gd: ", move_speed)
 	character_process(delta)
 #	print("Hello from _physics_process in character_class.")
 	# Doesn't seem to work. I Apparently cannot do this in superclass, idk.
 	#print(notifier.is_on_screen())
+	#if self is PlayerClass:
+		#print("In c_c.gd (%s), blink_cool_down_timer.time_left: %s" % [self, blink_cool_down_timer.time_left])
+	if blink_reload_bar and not can_blink:
+		blink_reload_bar.update_value(-delta * 1000)
 
 
 # Creating a _physics_process() procedure so that it regroups the test if the body is outside of the screen
@@ -237,7 +261,8 @@ func blink(source_pos: Vector2, target_pos: Vector2) -> void:
 	var check_collision_shape: CollisionShape2D = CollisionShape2D.new()
 	# I think this crashes if the character is not a rectangle.
 	var check_shape: RectangleShape2D = RectangleShape2D.new()
-	check_shape.size = hit_box.shape.size
+	# I divide it by 5 to allow more flexibility, but this might lead to blinking into objects, Idk.
+	check_shape.size = hit_box.shape.size / 5
 	#check_shape.size = Vector2(1, 1)
 	check_collision_shape.shape = check_shape
 	check_area.add_child(check_collision_shape)
@@ -258,9 +283,9 @@ func blink(source_pos: Vector2, target_pos: Vector2) -> void:
 	#check_area.monitoring = false
 	# Apparently it needs to wait a bit.
 	await get_tree().create_timer(0.05).timeout
-	#print("At: ", time.second, ". In c_c.gd, body_list: ", body_list)
+	#print("At: ", time.second, ". In c_c.gd, body_array: ", body_array)
 	
-	if body_list.is_empty():
+	if body_array.is_empty():
 		global_position += movement
 	else:
 		##global_position += Vector2(0, -10)
@@ -275,7 +300,12 @@ func blink(source_pos: Vector2, target_pos: Vector2) -> void:
 	
 	play_sound()
 	
-	body_list.clear()
+	body_array.clear()
+	
+	can_blink = false
+	blink_cool_down_timer.start()
+	#await  get_tree().create_timer(5).timeout
+	#print("In c_c.gd (%s), blink_cool_down_timer.wait_time: %s" % [self, blink_cool_down_timer.wait_time])
 	
 	#check_area.queue_free()
 	#await get_tree().create_timer(0.05).timeout
@@ -315,9 +345,18 @@ func play_sound():
 	sound_playing_index = sound_index
 
 
+# Connected to the signal of the areas created by code, for the blink.
+# I don't know why it adds all the bodies to the array even though it should be queue_free(),
+# but I'm not complaining. This kinda relies on magic.
 func _on_check_area_body_entered(body: Node) -> void:
 	#var time = Time.get_datetime_dict_from_system()
 	#print("At: ", time.second, ". In c_c.gd, body is: ", body)
-	body_list.append(body)
+	body_array.append(body)
 	if $CheckArea:
 		$CheckArea.queue_free()
+
+
+# Connected to the timeout() signal of the blink_cool_down_timer created by code.
+func _on_blink_cool_down_timer_timeout() -> void:
+	can_blink = true
+	blink_reload_bar.update_value(blink_cool_down_duration * 1000)

@@ -243,6 +243,7 @@ func stop_knockback() -> void:
 
 # This teleports the character aver a short distance.
 func blink(source_pos: Vector2, target_pos: Vector2) -> void:
+	print(get_children())
 	# This is to prevent issues, like if I forget to set can_blink to true for instance.
 	if not can_blink:
 		print("ERROR, the character cannot blink!")
@@ -352,11 +353,15 @@ func _on_check_area_body_entered(body: Node) -> void:
 	#var time = Time.get_datetime_dict_from_system()
 	#print("At: ", time.second, ". In c_c.gd, body is: ", body)
 	body_array.append(body)
-	if $CheckArea:
-		$CheckArea.queue_free()
+	#if $CheckArea:
+		#$CheckArea.queue_free()
+		#print("Hello 1 from c_c.gd.")
 
 
 # Connected to the timeout() signal of the blink_cool_down_timer created by code.
 func _on_blink_cool_down_timer_timeout() -> void:
 	can_blink = true
 	blink_reload_bar.update_value(blink_cool_down_duration * 1000)
+	if $CheckArea:
+		$CheckArea.queue_free()
+		#print("Hello 2 from c_c.gd.")

@@ -480,8 +480,9 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box", "blink_reload_bar")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_state_machine", "body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box", "blink_reload_bar")]
 script = ExtResource("1_8tv8j")
+movement_state_machine = NodePath("CharacterMovementStateMachine")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
 body_sprite_2d = NodePath("BodySprite2D")

@@ -30,7 +30,8 @@ var air_jumps_current: int = air_jumps_max
 									(jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 # CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
-@onready var movement_state_machine: CharacterMovementStateMachine = $CharacterMovementStateMachine
+#@onready var movement_state_machine: CharacterMovementStateMachine = $CharacterMovementStateMachine
+@export var movement_state_machine: CharacterMovementStateMachine
 # BodyAnimationTree as a variable so it can be activated.
 @export var body_animation_tree: AnimationTree 
 # WeaponsAnimationTree as a variable so it can be activated.

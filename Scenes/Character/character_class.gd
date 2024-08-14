@@ -29,6 +29,29 @@ extends CharacterBody2D
 # The bar indicating if the blink is on or off cool down. I think it is easier to position if the position is
 # exported, and then it takes less variables to just export the ReloadBar itself.
 @export var blink_reload_bar: ReloadBar
+
+# Speed on the movement of the player, in pixels/second.
+@export var move_speed: float = 300.0
+# Maximum number of air jumps.
+@export var air_jumps_max: int = 3
+## Base variables, not used directly for the jump.
+# Height of the jump, in pixels.
+@export var jump_height: float = 120.0
+# Time for the player to reach the peak of the jump, in seconds.
+@export var jump_time_to_peak: float = 0.5
+# Time to reach the ground during the jump, in seconds.
+@export var jump_time_to_descent: float = 0.4
+
+## Variables directly used for the jump and the falling:
+# Velocity applied to the player when jumping.
+@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+# Gravity applied to the player during the rising part of the jump.
+@onready var jump_gravity: float = ((-2.0 * jump_height) /
+	(jump_time_to_peak * jump_time_to_peak)) * -1.0
+# Gravity applied to the plyaer during the fall.
+@onready var fall_gravity: float = ((-2.0 * jump_height) /
+	(jump_time_to_descent * jump_time_to_descent)) * -1.0
+
 # The shape cast used to check if the blink can be done (outside of a wall).
 #@export var terrain_check_sc: ShapeCast2D
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
@@ -38,8 +61,8 @@ var death_animation_timer: float = 1.5
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Whether or not the character is dead. I think this is useless? Maybe not.
 var character_is_dead: bool = false
-# Move speed of the character, here so it can be added to all the relative states. In pixels/second.
-var move_speed: float = 0.0
+## Move speed of the character, here so it can be added to all the relative states. In pixels/second.
+#var move_speed: float = 0.0
 # Whether or not the player can move, use for knockback.
 var knocked_back: bool = false
 # The Node that holds all the sound players for the blink.
@@ -52,7 +75,6 @@ var sound_playing_index: int = -1
 var body_array: Array = []
 # Timer for the cool down of the blink.
 var blink_cool_down_timer: Timer
-
 
 func _ready():
 	character_ready()

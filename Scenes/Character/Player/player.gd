@@ -4,30 +4,30 @@ extends CharacterClass
 ### Sources (sjvnnings and kwhitejr): https://gist.github.com/sjvnnings/5f02d2f2fc417f3804e967daa73cccfd
 
 ## Defining variables:
-# Speed on the movement of the player, in pixels/second.
-@export var player_move_speed: float = 300.0
-# Maximum number of air jumps.
-@export var air_jumps_max: int = 3
-# Counter of the air jumps done, initialized at air_jumps_max.
-var air_jumps_current: int = air_jumps_max
+## Speed on the movement of the player, in pixels/second.
+#@export var player_move_speed: float = 300.0
+## Maximum number of air jumps.
+#@export var air_jumps_max: int = 3
+## Counter of the air jumps done, initialized at air_jumps_max. This could be placed elsewhere.
+#var air_jumps_current: int = air_jumps_max
 
 ## Base variables, not used directly for the jump.
 # Height of the jump, in pixels.
-@export var jump_height: float = 120.0
-# Time for the player to reach the peak of the jump, in seconds.
-@export var jump_time_to_peak: float = 0.5
-# Time to reach the ground during the jump, in seconds.
-@export var jump_time_to_descent: float = 0.4
-
-## Variables directly used for the jump and the falling:
-# Velocity applied to the player when jumping.
-@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-# Gravity applied to the player during the rising part of the jump.
-@onready var jump_gravity: float = ((-2.0 * jump_height) /
-									(jump_time_to_peak * jump_time_to_peak)) * -1.0
-# Gravity applied to the plyaer during the fall.
-@onready var fall_gravity: float = ((-2.0 * jump_height) /
-									(jump_time_to_descent * jump_time_to_descent)) * -1.0
+#@export var jump_height: float = 120.0
+## Time for the player to reach the peak of the jump, in seconds.
+#@export var jump_time_to_peak: float = 0.5
+## Time to reach the ground during the jump, in seconds.
+#@export var jump_time_to_descent: float = 0.4
+#
+### Variables directly used for the jump and the falling:
+## Velocity applied to the player when jumping.
+#@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+## Gravity applied to the player during the rising part of the jump.
+#@onready var jump_gravity: float = ((-2.0 * jump_height) /
+									#(jump_time_to_peak * jump_time_to_peak)) * -1.0
+## Gravity applied to the plyaer during the fall.
+#@onready var fall_gravity: float = ((-2.0 * jump_height) /
+									#(jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 # CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
 #@onready var movement_state_machine: CharacterMovementStateMachine = $CharacterMovementStateMachine
@@ -85,9 +85,9 @@ var damage_multiplier: float = 1	# Applied to every attack.
 
 # Executed at the beginning of runtime.
 func _enter_tree():
-	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
-	# declared in superclass.
-	move_speed = player_move_speed
+	## This is ugly, but I can't find a better way to have the speed exported in this script while making it
+	## declared in superclass.
+	#move_speed = player_move_speed
 	assert(move_speed == 300, "move_speed is not equal to 300.")
 #	assert(move_speed != 300, "move_speed is equal to 300.")
 #	assert(move_speed == 0)

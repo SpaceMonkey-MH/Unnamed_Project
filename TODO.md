@@ -46,6 +46,11 @@ NOT DONE :
 - Make the fire stackable?
 - Solve issue of Throw hitting one too many time.
 - Make walkable slopes.
+- Respawn.
+- Checkpoints.
+- Make enemies jump.
+- Solve health bar not displaying issue.
+- Decide whether or not the fact that when the grenades explode inside something, the fragments do not spawn.
 
 ------------------------------------------------------------------------------------------------------
 

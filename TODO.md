@@ -67,8 +67,8 @@ DONE :
 - Give a brain to the enemies. // Kinda DONE.
 - Repair the MeleeWeapon attack. // DONE.
 - Solve the issue of the melee attack (lasting longer than it should). // (I think) DONE.
-- Change the Z index of labels so that they are in front of tile map (or change the Z index of the tile map). // DONE
-	(increased the Z index of the labels, so that the character are still behind the grass).
+- Change the Z index of labels so that they are in front of tile map (or change the Z index of the tile map).
+	// (increased the Z index of the labels, so that the character are still behind the grass). DONE.
 - Change the Z index of the enemies. // DONE.
 - Fix the issue of the TME dying to only two rockets. // DONE.
 - Solve the issue of the melee attack (lasting longer than it should). // DONE.

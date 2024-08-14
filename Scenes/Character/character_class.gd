@@ -56,6 +56,8 @@ var blink_cool_down_timer: Timer
 
 func _ready():
 	character_ready()
+	# Not sure if this is the right place to do that. 5 is a magic number, I got it but trying stuff.
+	floor_snap_length = 5
 	if can_blink:
 		blink_sounds_node = Node.new()
 		blink_sounds_node.name = "BlinkSoundList"
@@ -148,6 +150,21 @@ func _physics_process(delta) -> void:
 	# Simulate air resistance.
 	velocity *= air_penetration
 #	print("Hello from _physics_process in character_class.")
+
+
+	# Attempt at walk on slopes. Actually not needed.
+	#var slides: int = get_slide_collision_count()
+	#if slides:
+		#slope(slides)
+#
+#
+#func slope(slides: int) -> void:
+	##print("Hello 1 in c_c.gd.")
+	#for i in slides:
+		##print("In slope in c_c.gd: ", get_slide_collision(i))
+		#var touched: KinematicCollision2D = get_slide_collision(i)
+		#if is_on_floor() and touched.get_normal().y < 1.0 and velocity.x != 0.0:
+			#velocity.y = touched.get_normal().y
 
 
 # Just a placeholder.
@@ -243,10 +260,10 @@ func stop_knockback() -> void:
 
 # This teleports the character aver a short distance.
 func blink(source_pos: Vector2, target_pos: Vector2) -> void:
-	print(get_children())
+	#print(get_children())
 	# This is to prevent issues, like if I forget to set can_blink to true for instance.
 	if not can_blink:
-		print("ERROR, the character cannot blink!")
+		#print("ERROR, the character cannot blink!")
 		return
 	# We teleport the character to the desired point (mouse position for instance) if that point is close by, or
 	# else to a fixed distance in that direction.
@@ -277,7 +294,7 @@ func blink(source_pos: Vector2, target_pos: Vector2) -> void:
 	check_area.global_position = source_pos + movement
 	#check_area.global_position = target_pos
 	#check_area.monitoring = true
-	var time = Time.get_datetime_dict_from_system()
+	#var time = Time.get_datetime_dict_from_system()
 	#print("In c_c.gd: ", target_pos, source_pos + movement)
 	#print("In c_c.gd, check_area.position is: ", check_area.global_position)
 	#print("At: ", time.second, ". In c_c.gd, check_area collisions: ", check_area.get_overlapping_bodies())

@@ -50,5 +50,6 @@ one_shot = true
 one_shot = true
 
 [connection signal="body_entered" from="BurningGroundArea" to="BurningGroundArea" method="_on_body_entered"]
+[connection signal="timeout" from="BurningGroundArea/TimeBurningGroundTimer" to="." method="_on_time_burning_ground_timer_timeout"]
 [connection signal="timeout" from="BurningGroundArea/TimeBurningGroundTimer" to="BurningGroundArea" method="_on_time_burning_ground_timer_timeout"]
 [connection signal="timeout" from="BurningGroundArea/BurnCheckTimer" to="BurningGroundArea" method="_on_burn_check_timer_timeout"]

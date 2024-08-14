@@ -45,8 +45,8 @@ func _on_burn_check_timer_timeout():
 	burn_check_timer.start()
 
 
-func _on_time_burning_ground_timer_timeout():
-	queue_free()
+#func _on_time_burning_ground_timer_timeout():
+	#queue_free()
 
 
 func _on_body_entered(body):

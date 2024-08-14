@@ -151,6 +151,7 @@ func character_physics_process(delta):
 		velocity.x = direction * move_speed	 * int(movement_state_machine.check_if_can_move())
 	# Apply the above changes.
 	move_and_slide()
+	#print("Slide count in c_p_p() in player.gd: ", get_slide_collision_count())
 
 
 func _unhandled_input(event : InputEvent):

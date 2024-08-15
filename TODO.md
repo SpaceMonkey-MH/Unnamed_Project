@@ -39,7 +39,7 @@ NOT DONE :
 - Rework the names of the weapons and bullets (copyright issues).
 - Make healing trigger only out of combat.
 - Add blood splatter when character is hit or killed, on the terrain and the characters.
-- Make the game crazy (invert left and right, do something for the SOund Blaster maybe, etc).
+- Make the game crazy (invert left and right, do something for the Sound Blaster maybe, etc).
 - Solve the collision issue (enemies can force the player through walls).
 - Add more sounds for the Sound Blaster.
 - Make the game music stop when sound blasting.
@@ -50,7 +50,9 @@ NOT DONE :
 - Checkpoints.
 - Make enemies jump.
 - Solve health bar not displaying issue.
-- Decide whether or not the fact that when the grenades explode inside something, the fragments do not spawn.
+- Decide whether or not the fact that when the grenades explode inside something, the fragments do not spawn, is normal.
+- Make menu.
+- Have the sprite change to Gogol when in crazy game mode.
 
 ------------------------------------------------------------------------------------------------------
 

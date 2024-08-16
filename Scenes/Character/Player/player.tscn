@@ -480,10 +480,8 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_odl77"]
 radius = 60.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_state_machine", "body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box", "blink_reload_bar")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("movement_state_machine", "body_animation_tree", "weapons_animation_tree", "body_sprite_2d", "weapons_sprite_2d", "fire_spitter_area_2D", "fire_spitter_sprite_2d", "sound_blaster_area", "sound_blaster_sprite", "notifier", "hit_box", "sprite", "blink_reload_bar")]
 script = ExtResource("1_8tv8j")
-max_health = 10000.0
-can_blink = true
 movement_state_machine = NodePath("CharacterMovementStateMachine")
 body_animation_tree = NodePath("BodyAnimationTree")
 weapons_animation_tree = NodePath("WeaponsAnimationTree")
@@ -495,6 +493,9 @@ sound_blaster_area = NodePath("SoundBlasterArea")
 sound_blaster_sprite = NodePath("SoundBlasterArea/SoundBlasterSprite")
 notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
+sprite = NodePath("BodySprite2D")
+max_health = 10000.0
+can_blink = true
 blink_reload_bar = NodePath("BlinkReloadBar")
 
 [node name="HitBox" parent="." instance=ExtResource("2_sm5m6")]

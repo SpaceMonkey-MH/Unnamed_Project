@@ -84,7 +84,7 @@ func attack() -> void:
 
 
 func jump():
-	character.velocity.y -= 500
+	character.velocity.y += jump_height
 
 
 # Connected to the timeout signal of the AttackTimer. Supposed to be the start of a new attack, but there is

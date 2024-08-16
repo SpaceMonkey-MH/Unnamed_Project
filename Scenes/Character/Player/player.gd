@@ -13,21 +13,21 @@ extends CharacterClass
 
 ## Base variables, not used directly for the jump.
 # Height of the jump, in pixels.
-#@export var jump_height: float = 120.0
-## Time for the player to reach the peak of the jump, in seconds.
-#@export var jump_time_to_peak: float = 0.5
-## Time to reach the ground during the jump, in seconds.
-#@export var jump_time_to_descent: float = 0.4
-#
-### Variables directly used for the jump and the falling:
-## Velocity applied to the player when jumping.
-#@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-## Gravity applied to the player during the rising part of the jump.
-#@onready var jump_gravity: float = ((-2.0 * jump_height) /
-									#(jump_time_to_peak * jump_time_to_peak)) * -1.0
-## Gravity applied to the plyaer during the fall.
-#@onready var fall_gravity: float = ((-2.0 * jump_height) /
-									#(jump_time_to_descent * jump_time_to_descent)) * -1.0
+@export var jump_height: float = 120.0
+# Time for the player to reach the peak of the jump, in seconds.
+@export var jump_time_to_peak: float = 0.5
+# Time to reach the ground during the jump, in seconds.
+@export var jump_time_to_descent: float = 0.4
+
+## Variables directly used for the jump and the falling:
+# Velocity applied to the player when jumping.
+@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+# Gravity applied to the player during the rising part of the jump.
+@onready var jump_gravity: float = ((-2.0 * jump_height) /
+									(jump_time_to_peak * jump_time_to_peak)) * -1.0
+# Gravity applied to the plyaer during the fall.
+@onready var fall_gravity: float = ((-2.0 * jump_height) /
+									(jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 # CharacterMovementStateMachine as a variable, so that check_if_can_move() can be used.
 #@onready var movement_state_machine: CharacterMovementStateMachine = $CharacterMovementStateMachine

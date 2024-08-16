@@ -430,3 +430,6 @@
 	actual ShapeCast2D, not the shite I did. The problem is there is no code example. Actually, shape casting is
 	like throwing a shape like a ray, it is not a check on a static zone, so it is not what I am looking for.
 	Not for the blink either.
+
+## - __2024/08/16:__
+	My project is a real mess LoL.

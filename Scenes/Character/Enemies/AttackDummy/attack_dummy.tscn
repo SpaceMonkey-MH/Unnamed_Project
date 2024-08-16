@@ -2,24 +2,27 @@
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.gd" id="1_x5k5i"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_1oxxk"]
-[ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="2_assgn"]
 [ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="3_l1p6l"]
+[ext_resource type="Texture2D" uid="uid://bcqf3n2fa33h1" path="res://Assets/Sprites/Player/Player_test.png" id="3_vnh03"]
 [ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="5_26mcx"]
 
-[node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "notifier", "hit_box")]
+[node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "notifier", "hit_box", "sprite")]
 z_index = -1
 collision_layer = 3
 collision_mask = 4
 script = ExtResource("1_x5k5i")
-sprite_2d = NodePath("Sprite2D")
+sprite_2d = NodePath("Sprite")
 notifier = NodePath("VisibleOnScreenNotifier2D")
 hit_box = NodePath("HitBox")
+sprite = NodePath("Sprite")
 max_health = 10000.0
 
 [node name="HitBox" parent="." instance=ExtResource("3_l1p6l")]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_assgn")
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-1.19209e-06, -1.19209e-06)
+scale = Vector2(1.48148, 1.48148)
+texture = ExtResource("3_vnh03")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "health_bar", "on_fire_timer") instance=ExtResource("2_1oxxk")]
 character = NodePath("..")

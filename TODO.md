@@ -22,13 +22,13 @@ NOT DONE :
 - Add water mechanic.
 - Achievements.
 - Death animations.
-- Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy shapes
-	are added.
+- Complete the code for the health change label (make it use the radius of the circle and so on) when new enemy
+	shapes are added.
 - Decide what weapons there will be.
 - Add powers, such as crits or smth.
 - Bosses (levels).
-- Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage() on
-	target). // Unable to replicate, for now.
+- Bug: sometimes, the fire spitter weapon does not deal any damage (it probably deals 0, as it calls take_damage()
+	on target). // Unable to replicate, for now.
 - Fix hit state for tme.
 - Make some kind of rampaging or score or whatever.
 - Update the names of the projectiles.
@@ -48,11 +48,12 @@ NOT DONE :
 - Make walkable slopes.
 - Respawn.
 - Checkpoints.
-- Make enemies jump.
 - Solve health bar not displaying issue.
-- Decide whether or not the fact that when the grenades explode inside something, the fragments do not spawn, is normal.
+- Decide whether or not the fact that when the grenades explode inside something, the fragments do not spawn,
+	is normal.
 - Make menu.
 - Have the sprite change to Gogol when in crazy game mode.
+- Make the sprites turn when walking on slopes.
 
 ------------------------------------------------------------------------------------------------------
 
@@ -155,3 +156,4 @@ DONE :
 	- Add the code to the proper script of the player. // DONE.
 	- Make the blink use a cool down. // DONE.
 	- Add a cool down bar to the player. // DONE.
+- Make enemies jump. // DONE.

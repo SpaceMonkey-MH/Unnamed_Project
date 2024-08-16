@@ -5,6 +5,8 @@ extends CharacterBody2D
 
 # HitBox as a variable, so that it can be disabled.
 @export var hit_box: HitBoxClass
+# The sprite as a variable, so that is can be rotated.
+@export var sprite: Sprite2D
 # I'm trying stuff with the visible on screen notifier, in oreder to properly queue free the characters when dead.
 #@export var notifier = VisibleOnScreenNotifier2D
 # The maximum health of the character.
@@ -34,23 +36,24 @@ extends CharacterBody2D
 @export var move_speed: float = 300.0
 # Maximum number of air jumps.
 @export var air_jumps_max: int = 3
-## Base variables, not used directly for the jump.
-# Height of the jump, in pixels.
-@export var jump_height: float = 120.0
-# Time for the player to reach the peak of the jump, in seconds.
-@export var jump_time_to_peak: float = 0.5
-# Time to reach the ground during the jump, in seconds.
-@export var jump_time_to_descent: float = 0.4
-
-## Variables directly used for the jump and the falling:
-# Velocity applied to the player when jumping.
-@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
-# Gravity applied to the player during the rising part of the jump.
-@onready var jump_gravity: float = ((-2.0 * jump_height) /
-	(jump_time_to_peak * jump_time_to_peak)) * -1.0
-# Gravity applied to the plyaer during the fall.
-@onready var fall_gravity: float = ((-2.0 * jump_height) /
-	(jump_time_to_descent * jump_time_to_descent)) * -1.0
+### Base variables, not used directly for the jump.
+## Height of the jump, in pixels.
+#@export var jump_height: float = 120.0
+## Time for the player to reach the peak of the jump, in seconds.
+#@export var jump_time_to_peak: float = 0.5
+## Time to reach the ground during the jump, in seconds.
+#@export var jump_time_to_descent: float = 0.4
+##var jump_time_to_descent: float = 0.4
+#
+### Variables directly used for the jump and the falling:
+## Velocity applied to the player when jumping.
+#@onready var jump_velocity: float = ((2.0 * jump_height) / jump_time_to_peak) * -1.0
+## Gravity applied to the player during the rising part of the jump.
+#@onready var jump_gravity: float = ((-2.0 * jump_height) /
+	#(jump_time_to_peak * jump_time_to_peak)) * -1.0
+## Gravity applied to the plyaer during the fall.
+#@onready var fall_gravity: float = ((-2.0 * jump_height) /
+	#(jump_time_to_descent * jump_time_to_descent)) * -1.0
 
 # The shape cast used to check if the blink can be done (outside of a wall).
 #@export var terrain_check_sc: ShapeCast2D
@@ -178,15 +181,29 @@ func _physics_process(delta) -> void:
 	#var slides: int = get_slide_collision_count()
 	#if slides:
 		#slope(slides)
-#
-#
-#func slope(slides: int) -> void:
-	##print("Hello 1 in c_c.gd.")
+	# Attempt at rotating the sprites to match the slopes. I think this is shite.
+	#var slide_count: int = get_slide_collision_count()
+	#if slide_count:
+		#slope(slide_count)
+	# Another attempt. This apparently causes weird sprite glitches when walking down slopes.
+	if is_on_floor() and sprite:
+		var normal: Vector2 = get_floor_normal()
+		sprite.rotation = normal.angle() + PI / 2
+
+
+#func slope(slide_count: int) -> void:
+	#print("Hello 1 in c_c.gd.")
 	#for i in slides:
-		##print("In slope in c_c.gd: ", get_slide_collision(i))
+		#print("In slope in c_c.gd: ", get_slide_collision(i))
 		#var touched: KinematicCollision2D = get_slide_collision(i)
 		#if is_on_floor() and touched.get_normal().y < 1.0 and velocity.x != 0.0:
 			#velocity.y = touched.get_normal().y
+	#for i in slide_count:
+		#if self is PlayerClass:
+			#print("In slope in c_c.gd: ", get_slide_collision(i).get_normal())
+			#if sprite:
+				#sprite.look_at(get_slide_collision(i).get_normal())
+				#sprite.rotation = PI
 
 
 # Just a placeholder.

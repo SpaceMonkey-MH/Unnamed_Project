@@ -35,6 +35,8 @@ const JUMP_VELOCITY = -400.0
 @export var attack_hit_box : CollisionShape2D
 # Trying to use the notifier in export.
 @export var notifier : VisibleOnScreenNotifier2D
+# The height of the jump. Added to the character.position.y.
+@export var jump_height: float = -500
 
 
 func _enter_tree() -> void:

@@ -54,6 +54,8 @@ NOT DONE :
 - Make menu.
 - Have the sprite change to Gogol when in crazy game mode.
 - Make the sprites turn when walking on slopes.
+- Fix bug where the sprite on slope is flying above ground.
+- Fix bug where the sprite on slope twitches weirdly when walking down.
 
 ------------------------------------------------------------------------------------------------------
 

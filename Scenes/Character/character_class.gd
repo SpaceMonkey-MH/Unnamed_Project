@@ -186,9 +186,10 @@ func _physics_process(delta) -> void:
 	#if slide_count:
 		#slope(slide_count)
 	# Another attempt. This apparently causes weird sprite glitches when walking down slopes.
-	if is_on_floor() and sprite:
+	if is_on_floor() and sprite and hit_box:
 		var normal: Vector2 = get_floor_normal()
 		sprite.rotation = normal.angle() + PI / 2
+		hit_box.rotation = normal.angle() + PI / 2
 
 
 #func slope(slide_count: int) -> void:

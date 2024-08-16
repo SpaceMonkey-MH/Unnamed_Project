@@ -57,7 +57,7 @@ extends CharacterBody2D
 # No magic numbers. This is the time during which the death animation is supposedly played (this is just
 # a placeholder).
 var death_animation_timer: float = 1.5
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+# Get the gravity from the project settings to be synced with RigidBody nodes. I don't think this is used.
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Whether or not the character is dead. I think this is useless? Maybe not.
 var character_is_dead: bool = false

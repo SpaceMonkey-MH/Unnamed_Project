@@ -38,15 +38,18 @@ func state_process(_delta) -> void:
 	# Using an auxilliary variable to compute the distance to player.
 	#var relative_x_distance_to_player = player.position.x - character.position.x
 	# This is better (+ same as above).
-	var distance_to_player: float = (player.position - character.position).length()
+	var distance_to_player: Vector2 = (player.position - character.position)
 	#print((player.position - character.position).length())
 	#print("relative_x_distance_to_player: ", relative_x_distance_to_player)
+	# Jump if the player is higher than this character.
+	if -distance_to_player.y > attack_range and character.is_on_floor():
+		jump()
 	# If the player is too far away.
-	if distance_to_player > attack_range:
+	if abs(distance_to_player.x) > attack_range:
 		# Transition to FollowState.
 		next_state = follow_state
 	# If the distance between enemy and player is shorter than the sum of half the size of both + 1.
-	elif distance_to_player <= x_size_ep:
+	elif distance_to_player.length() <= x_size_ep:
 		# Nullify the x velocity. This is to prevent the enemy from forcing the player into walls and glitching.
 		character.velocity.x = 0
 
@@ -78,7 +81,11 @@ func attack() -> void:
 	await get_tree().create_timer(0.05).timeout
 	# Stopping the monitoring thus the attack. Here because otherwise it collides with a new timer, I think.
 	melee_weapon.monitoring = false
-	
+
+
+func jump():
+	character.velocity.y -= 500
+
 
 # Connected to the timeout signal of the AttackTimer. Supposed to be the start of a new attack, but there is
 # a problem: it attacks continuously, even out of range. 

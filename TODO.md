@@ -56,6 +56,8 @@ NOT DONE :
 - Make the sprites turn when walking on slopes.
 - Fix bug where the sprite on slope is flying above ground.
 - Fix bug where the sprite on slope twitches weirdly when walking down.
+- Make different enemies.
+- Make boss mechanic.
 
 ------------------------------------------------------------------------------------------------------
 

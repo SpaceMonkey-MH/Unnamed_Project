@@ -36,4 +36,4 @@
 	farms, polluted the nap spots and the walk routes, did something with the horses.
 	Wait, maybe that's too ambitious, idk.
 ## Version 5:
-	
+	Cuby is chilling, chopping wood with his big axe. O-Ren arrives, saying "Oi, the bad guys are here, they've taken control of my the good stuff, come help me bro!", to which Cuby replies "I'm on it, don't worry fam.". He then gets angry, grabs his weapons, remembers that he buried the ammunitions because he is retired, he only has a clip or whatever, so he asks O-Ren to dig them up, while he goes whop some ass, and retrieve nice stuff for her. Each level, he gains temporary access to a weapon, and when he finishes the level he gets a stick or whatever, and when he goes back, O-Ren has dug up the ammo for the weapon, which he unlocks, bis repetitam. Until the final boss, which holds the best thing of all (Idk what it is yet), and when he gets it she is super happy! Then he can just destroy endless waves of enemies for fun, and out of anger.

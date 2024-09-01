@@ -188,14 +188,17 @@ func _physics_process(delta) -> void:
 	# Another attempt. This apparently causes weird sprite glitches when walking down slopes.
 	# So, either I do nothing, and the sprites aren't aligned with the slope, or I rotate the sprite only,
 	# and the sprites appear above the ground (not touching it), but I could maybe lower them, though it seems
-	# hard, and alos there are weird visual bugs (the sprite seems to twitch shortly sometimes), or I could also
+	# hard, and also there are weird visual bugs (the sprite seems to twitch shortly sometimes), or I could also
 	# rotate the hit box, which makes the sprite follow the ground orientation, but it seems to play the jump
 	# start animation, which is weird, and also it gets stuck on the transition from slope to lower ground.
 	# I think I should do nothing.
-	#if is_on_floor() and sprite and hit_box:
-		#var normal: Vector2 = get_floor_normal()
-		#sprite.rotation = normal.angle() + PI / 2
-		#hit_box.rotation = normal.angle() + PI / 2
+	# Maybe I could rotate only a bit.
+	if is_on_floor() and sprite and hit_box:
+		var normal_angle: float = get_floor_normal().angle()
+		#sprite.rotation = normal_angle + PI / 2
+		#hit_box.rotation = normal_angle + PI / 2
+		if self is PlayerClass:
+			print("normal_angle in c_c.gd: ", normal_angle)
 
 
 #func slope(slide_count: int) -> void:

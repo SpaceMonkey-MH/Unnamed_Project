@@ -433,3 +433,7 @@
 
 ## - __2024/08/16:__
 	My project is a real mess LoL.
+
+## - __2024/08/31:__
+	I struggle to find a way to rotate the characters when on a slope, and apparently the slope is still not smoothed enough.
+	FML. Ok this seems good.

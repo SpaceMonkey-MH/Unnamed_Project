@@ -27,6 +27,8 @@ func _ready() -> void:
 #			print("1 ", character.move_speed)
 #			print("character: ", character)
 #			print(child.move_speed)
+			child.jump_height = character.jump_height
+#			print(child.jump_height)
 			if character is PlayerClass:
 				child.playback = animation_tree["parameters/playback"]
 	#			print(child)
@@ -34,8 +36,6 @@ func _ready() -> void:
 	#			print(child.air_jumps_max)
 				child.air_jumps_current = child.air_jumps_max
 	#			print(child.air_jumps_current)
-				child.jump_height = character.jump_height
-	#			print(child.jump_height)
 				child.jump_time_to_peak = character.jump_time_to_peak
 	#			print(child.jump_time_to_peak)
 				child.jump_time_to_descent = character.jump_time_to_descent

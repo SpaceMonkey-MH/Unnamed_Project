@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://fi71b5nrxf28"]
+[gd_scene load_steps=23 format=3 uid="uid://fi71b5nrxf28"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.gd" id="1_cmmdb"]
 [ext_resource type="Texture2D" uid="uid://bxyu22fxcx6gg" path="res://Assets/Sprites/Player/Player_V1_40p_cyan.png" id="2_16f2o"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/attack_state.gd" id="6_40nwy"]
 [ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="6_mikho"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="7_en48c"]
+[ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="7_fl3hf"]
+[ext_resource type="Texture2D" uid="uid://t5mihmeo43ky" path="res://Assets/Sprites/UI/HealthBars/health_bar_progress_red_2.png" id="8_45vwx"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/hit_state.gd" id="8_f3jqe"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="9_vkggd"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestMovingEnemy/tme_weapon.gd" id="12_1uuhp"]
@@ -166,6 +168,8 @@ text = "Test Moving Enemy"
 [node name="HealthBar" parent="." instance=ExtResource("6_mikho")]
 offset_top = -61.0
 offset_bottom = -55.0
+ttr_over = ExtResource("7_fl3hf")
+ttr_progress = ExtResource("8_45vwx")
 
 [node name="CharacterMovementStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("3_v7f25")

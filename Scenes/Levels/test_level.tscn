@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ofmg46djwodl"]
+[gd_scene load_steps=14 format=3 uid="uid://ofmg46djwodl"]
 
 [ext_resource type="PackedScene" uid="uid://bq653xirgnv8k" path="res://Scenes/UI/ui.tscn" id="1_kv158"]
 [ext_resource type="PackedScene" uid="uid://cthsy2erljdkt" path="res://Scenes/Character/Player/player.tscn" id="2_xkfwj"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://deft3xydco1mh" path="res://Assets/Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="4_vwdav"]
 [ext_resource type="PackedScene" uid="uid://cv6wtd2pqvjb5" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.tscn" id="5_pn2ls"]
 [ext_resource type="PackedScene" uid="uid://fi71b5nrxf28" path="res://Scenes/Character/Enemies/TestMovingEnemy/test_moving_enemy.tscn" id="6_vfolm"]
+[ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="7_sijbo"]
+[ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="8_uykeh"]
+[ext_resource type="Texture2D" uid="uid://t5mihmeo43ky" path="res://Assets/Sprites/UI/HealthBars/health_bar_progress_red_2.png" id="9_a7bxs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ykabh"]
 texture = ExtResource("3_dlphg")
@@ -2968,3 +2971,11 @@ player = NodePath("../Player")
 [node name="TestMovingEnemy4" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_vfolm")]
 position = Vector2(2547, 953)
 player = NodePath("../Player")
+
+[node name="HealthBar" parent="." instance=ExtResource("7_sijbo")]
+offset_left = 706.0
+offset_top = 912.0
+offset_right = 764.0
+offset_bottom = 918.0
+ttr_over = ExtResource("8_uykeh")
+ttr_progress = ExtResource("9_a7bxs")

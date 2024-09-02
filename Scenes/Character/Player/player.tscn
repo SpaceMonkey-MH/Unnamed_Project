@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://cthsy2erljdkt"]
+[gd_scene load_steps=87 format=3 uid="uid://cthsy2erljdkt"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Player/player.gd" id="1_8tv8j"]
 [ext_resource type="Texture2D" uid="uid://hjdw8asbvrm7" path="res://Assets/Sprites/Player/Idle/Player_Idle_Sheet_V2_4s_45p.png" id="2_j5og1"]
@@ -14,7 +14,9 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/air_state.gd" id="10_cs3ji"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/landing_state.gd" id="11_p7vgs"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/idle_state.gd" id="12_4t18e"]
+[ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="12_f1g7y"]
 [ext_resource type="PackedScene" uid="uid://bmf70gpp4xdoa" path="res://Scenes/UI/reload_bar.tscn" id="12_limdq"]
+[ext_resource type="Texture2D" uid="uid://t5mihmeo43ky" path="res://Assets/Sprites/UI/HealthBars/health_bar_progress_red_2.png" id="13_3ef7e"]
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="13_nnmwf"]
 [ext_resource type="Texture2D" uid="uid://65gr2k7difmq" path="res://Assets/Sprites/UI/ReloadBars/reload_bar_over_1.png" id="13_rwcn4"]
 [ext_resource type="Texture2D" uid="uid://cj7a267gx6mdm" path="res://Assets/Sprites/UI/ReloadBars/reload_bar_progress_blue_1.png" id="14_8nnt0"]
@@ -535,6 +537,8 @@ on_fire_timer = NodePath("FireDurationTimer")
 [node name="PlayerHealthBar" parent="." instance=ExtResource("43_8c3dl")]
 offset_top = -86.0
 offset_bottom = -80.0
+ttr_over = ExtResource("12_f1g7y")
+ttr_progress = ExtResource("13_3ef7e")
 
 [node name="BlinkReloadBar" parent="." instance=ExtResource("12_limdq")]
 offset_left = -52.0

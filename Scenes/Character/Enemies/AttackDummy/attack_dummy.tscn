@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cv6wtd2pqvjb5"]
+[gd_scene load_steps=8 format=3 uid="uid://cv6wtd2pqvjb5"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/AttackDummy/attack_dummy.gd" id="1_x5k5i"]
 [ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="2_1oxxk"]
 [ext_resource type="Texture2D" uid="uid://qopmqkxjri51" path="res://Assets/Sprites/Player/Player_V1_40p.png" id="3_80kyj"]
 [ext_resource type="PackedScene" uid="uid://deaq0nigyrnxf" path="res://Scenes/Character/hit_box.tscn" id="3_l1p6l"]
 [ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="5_26mcx"]
+[ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="6_iiyy4"]
+[ext_resource type="Texture2D" uid="uid://t5mihmeo43ky" path="res://Assets/Sprites/UI/HealthBars/health_bar_progress_red_2.png" id="7_w8as2"]
 
 [node name="AttackDummy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "notifier", "hit_box", "sprite")]
 z_index = -1
@@ -41,6 +43,8 @@ text = "Attack Dummy"
 [node name="HealthBar" parent="." instance=ExtResource("5_26mcx")]
 offset_top = -50.0
 offset_bottom = -44.0
+ttr_over = ExtResource("6_iiyy4")
+ttr_progress = ExtResource("7_w8as2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(2, 2)

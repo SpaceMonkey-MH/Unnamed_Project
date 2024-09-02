@@ -192,13 +192,13 @@ func _physics_process(delta) -> void:
 	# rotate the hit box, which makes the sprite follow the ground orientation, but it seems to play the jump
 	# start animation, which is weird, and also it gets stuck on the transition from slope to lower ground.
 	# I think I should do nothing.
-	# Maybe I could rotate only a bit.
+	# Maybe I could rotate only a bit. Idk.
 	if is_on_floor() and sprite and hit_box:
 		var normal_angle: float = get_floor_normal().angle()
-		#sprite.rotation = normal_angle + PI / 2
-		#hit_box.rotation = normal_angle + PI / 2
-		if self is PlayerClass:
-			print("normal_angle in c_c.gd: ", normal_angle)
+		sprite.rotation = normal_angle + PI / 2
+		hit_box.rotation = normal_angle+ PI / 2
+		#if self is PlayerClass:
+			#print("normal_angle in c_c.gd: ", normal_angle)
 
 
 #func slope(slide_count: int) -> void:

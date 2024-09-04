@@ -1,0 +1,44 @@
+[gd_scene load_steps=9 format=3 uid="uid://jerwd7q42oll"]
+
+[ext_resource type="Texture2D" uid="uid://caapj6gog8tar" path="res://Assets/Sprites/Player/Player_V1_40p_yellow.png" id="1_otp7i"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestShootingEnemy/test_shooting_enemy.gd" id="1_ys0op"]
+[ext_resource type="Script" path="res://Scenes/Character/hit_box.gd" id="2_pd7my"]
+[ext_resource type="PackedScene" uid="uid://mwdkp0msg23q" path="res://Scenes/Character/Components/health_component.tscn" id="3_3kg53"]
+[ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="4_7stlc"]
+[ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="5_3w2el"]
+[ext_resource type="Texture2D" uid="uid://t5mihmeo43ky" path="res://Assets/Sprites/UI/HealthBars/health_bar_progress_red_2.png" id="6_q33sd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtejm"]
+size = Vector2(40, 40)
+
+[node name="TestShootingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
+script = ExtResource("1_ys0op")
+hit_box = NodePath("HitBox")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qtejm")
+script = ExtResource("2_pd7my")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_otp7i")
+
+[node name="Label" type="Label" parent="."]
+z_index = 2
+offset_left = -81.0
+offset_top = -45.0
+offset_right = 81.0
+offset_bottom = -22.0
+text = "Test Shooting Enemy"
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("character", "health_bar", "on_fire_timer") instance=ExtResource("3_3kg53")]
+character = NodePath("..")
+health_bar = NodePath("../HealthBar")
+on_fire_timer = NodePath("FireDurationTimer")
+
+[node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
+
+[node name="HealthBar" parent="." instance=ExtResource("4_7stlc")]
+offset_top = -53.0
+offset_bottom = -47.0
+ttr_over = ExtResource("5_3w2el")
+ttr_progress = ExtResource("6_q33sd")

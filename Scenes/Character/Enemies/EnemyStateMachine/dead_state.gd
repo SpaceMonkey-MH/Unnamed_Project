@@ -9,4 +9,5 @@ func on_enter():
 	# Just in case, idk.
 	# If the enemy is not knocked back.
 	if not character.knocked_back:
+		# Make it so it doesn't move.
 		character.velocity.x = 0

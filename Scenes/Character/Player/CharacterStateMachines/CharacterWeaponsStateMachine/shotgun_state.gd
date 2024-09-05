@@ -1,19 +1,21 @@
 class_name ShotgunState
 extends WeaponsState
 
-@export var reload_timer : Timer
-@export var lead_scene : PackedScene
-@export var next_weapon_state : RocketLauncherState
-@export var previous_weapon_state : DesertEagleState
-@export var attack_damage : float = 10
-@export var speed_factor : float = 25
-@export var reload_time : float = 2
+@export var reload_timer: Timer
+@export var lead_scene: PackedScene
+@export var next_weapon_state: RocketLauncherState
+@export var previous_weapon_state: DesertEagleState
+@export var attack_damage: float = 10
+@export var speed_factor: float = 25
+@export var reload_time: float = 2
 # The spread of the leads, so the total angle of maximum dispersion of the projectiles.
-@export var lead_spread : float = PI / 8
+@export var lead_spread: float = PI / 8
 # The number of leads (projectiles) fired at each shot.
 # If even and not 0, there will be two shots in the middle. If odd, there will be one shot in the middle. 
-@export var nb_leads : int = 10
+@export var nb_leads: int = 10
 @onready var reload_bar = get_parent().reload_bar
+# Testings with the time.
+#var last_ms: int = 0
 
 
 func _ready() -> void:
@@ -27,7 +29,7 @@ func state_process(delta: float) -> void:
 		reload_bar.update_value(-delta * 1000)
 
 
-func state_input(event : InputEvent) -> void:
+func state_input(event: InputEvent) -> void:
 	if event.is_action_pressed("next_weapon"):
 		next_state = next_weapon_state
 	if event.is_action_pressed("previous_weapon"):
@@ -36,7 +38,7 @@ func state_input(event : InputEvent) -> void:
 		# I feel like it might be easier to refactor the weapon_fire() procedure, Idk.
 		# The position of the mouse as a variable, so it is easier to manipulate. It is a vector from the origin
 		# to the mouse position.
-		var mouse_pos : Vector2 = character.get_global_mouse_position()
+		var mouse_pos: Vector2 = character.get_global_mouse_position()
 		# What we want here, is, for each lead, to call weapon_fire() on a point that depends on the angle
 		# computed by: the vector between the character pos and mouse_pos rotated by plus or minus the index of the
 		# current lead times the dispersion of the leads divided by the total number of leads. That being said,
@@ -50,16 +52,16 @@ func state_input(event : InputEvent) -> void:
 		if nb_leads <= 0:
 			return
 		# The increment of the angle during the iterations.
-		var incr_angle : float = lead_spread / nb_leads
+		var incr_angle: float = lead_spread / nb_leads
 		# The position of the character as a variable so it is easier to manipulate.
-		var char_pos : Vector2 = character.position
+		var char_pos: Vector2 = character.position
 		# The vector from the character pos to mouse_pos.
-		var dir_vector : Vector2 = mouse_pos - char_pos
+		var dir_vector: Vector2 = mouse_pos - char_pos
 		# If the number of leads is even (and not 0, 0 has been handled above).
 		if nb_leads % 2 == 0:
 			# I'm trying to make the two middle projectiles parallel, so I offset the whole thing, or maybe not,
 			# I'll see. FF this, too complex to handle for nothing.
-			var offset : Vector2 = Vector2(0, 0)
+			var offset: Vector2 = Vector2(0, 0)
 			# We iterate on half that number.
 			#print("nb_leads in shotgun_state.gd: ", nb_leads / 2)	# This, weirdly, gives a warning about int div.
 			for shot_angle in range (nb_leads / 2):
@@ -108,4 +110,7 @@ func on_exit() -> void:
 func _on_shotgun_cool_down_timeout() -> void:
 	can_fire = true
 	reload_bar.update_value(reload_time * 1000)
+	#print("timeout: ", Time.get_ticks_msec() - last_ms)
+	#last_ms = Time.get_ticks_msec()
+	#reload_timer.start()
 

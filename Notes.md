@@ -435,5 +435,11 @@
 	My project is a real mess LoL.
 
 ## - __2024/08/31:__
-	I struggle to find a way to rotate the characters when on a slope, and apparently the slope is still not smoothed enough.
+	I struggle to find a way to rotate the characters when on a slope, and apparently the slope is still not smooth enough.
 	FML. Ok this seems good.
+
+## - __2024/09/05:__
+	Making a new enemy type, static but shooting projectiles. I'm not sure if I should create a new superclass for the attacks,
+	extended by a class for each type of attack, to avoid boilerplate, or a separate class for each attack, which is simpler,
+	but does boilerplate, or just a single class for the entire stuff, which is simple, without boilerplate, but ugly and
+	potentially heavy.

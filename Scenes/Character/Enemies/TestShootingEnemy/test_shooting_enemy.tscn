@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://jerwd7q42oll"]
+[gd_scene load_steps=12 format=3 uid="uid://jerwd7q42oll"]
 
 [ext_resource type="Texture2D" uid="uid://caapj6gog8tar" path="res://Assets/Sprites/Player/Player_V1_40p_yellow.png" id="1_otp7i"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestShootingEnemy/test_shooting_enemy.gd" id="1_ys0op"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="4_7stlc"]
 [ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="5_3w2el"]
 [ext_resource type="Texture2D" uid="uid://t5mihmeo43ky" path="res://Assets/Sprites/UI/HealthBars/health_bar_progress_red_2.png" id="6_q33sd"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/movement_state_debug_label.gd" id="8_sdn51"]
+[ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="9_ascvj"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/wander_state.gd" id="10_ioest"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtejm"]
 size = Vector2(40, 40)
@@ -38,7 +41,30 @@ on_fire_timer = NodePath("FireDurationTimer")
 [node name="FireDurationTimer" type="Timer" parent="HealthComponent"]
 
 [node name="HealthBar" parent="." instance=ExtResource("4_7stlc")]
-offset_top = -53.0
-offset_bottom = -47.0
+offset_top = -67.0
+offset_bottom = -61.0
 ttr_over = ExtResource("5_3w2el")
 ttr_progress = ExtResource("6_q33sd")
+
+[node name="StateDebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
+offset_left = -103.0
+offset_top = -62.0
+offset_right = 29.0
+offset_bottom = -39.0
+text = "Movement State:"
+script = ExtResource("8_sdn51")
+state_machine = NodePath("../CharacterStateMachine")
+
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "current_state")]
+script = ExtResource("9_ascvj")
+character = NodePath("..")
+current_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("10_ioest")
+
+[node name="Shoot" type="Node" parent="CharacterStateMachine"]
+
+[node name="Hit" type="Node" parent="CharacterStateMachine"]
+
+[node name="Dead" type="Node" parent="CharacterStateMachine"]

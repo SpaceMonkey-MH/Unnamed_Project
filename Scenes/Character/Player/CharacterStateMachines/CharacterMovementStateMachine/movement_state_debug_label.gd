@@ -1,6 +1,5 @@
 extends Label
 
-
 @export var state_machine : CharacterMovementStateMachine
 
 

@@ -11,12 +11,6 @@ extends EnemyState
 var can_attack: bool = true
 
 
-# Called at the beginning of the scene.
-#func _ready() -> void:
-##	print(attack_wait_time)	# Prints 0.
-	#pass
-
-
 # Procedure called on state enter by the StateMachine.
 func on_enter() -> void:
 	# Setting the attack_wait_time of the cooldown timer to the export variable attack_wait_time set in superclass
@@ -28,19 +22,12 @@ func on_enter() -> void:
 		attack()
 
 
-#func _process(_delta) -> void:
-	#print(can_attack)
-
-
 # The state version of the _physics_process() procedure, called by the StateMachine.
 func state_process(_delta) -> void:
-	#print("melee_weapon.monitoring: ", melee_weapon.monitoring)
 	# Using an auxilliary variable to compute the distance to player.
 	#var relative_x_distance_to_player = player.position.x - character.position.x
 	# This is better (+ same as above).
 	var distance_to_player: Vector2 = (player.position - character.position)
-	#print((player.position - character.position).length())
-	#print("relative_x_distance_to_player: ", relative_x_distance_to_player)
 	# Jump if the player is higher than this character.
 	if -distance_to_player.y > attack_range and character.is_on_floor():
 		jump()
@@ -57,34 +44,15 @@ func state_process(_delta) -> void:
 # Called by the StateMachine on transition to another state.
 func on_exit() -> void:
 	pass
-	#print("AttackState exited.")
-	# Stop the timer so that it doesn't continuously call attack(). Doesn't work properly, I need to stop
-	# the attack() calls from happening while out of range.
-#	timer.stop()
-	
 
 
 # The procedure used to create the attacks. I think I'm gonna overwrite this in a subclass or something.
 func attack() -> void:
-	## Adding a timer so that the enemy can hit right on entrance (otherwise it. Useless.
-	#await get_tree().create_timer(0.05).timeout
-	# Starting the attack cooldown timer.
-	timer.start()
-	# Attack placeholder. Not needed anymore.
-	#var time = Time.get_datetime_dict_from_system()
-	#print("%d: Attack!" % [time.second])
-	# Setting the Effective attack.
-	melee_weapon.monitoring = true
-	# Setting the can_attack variable to false so that the enemy can't attack before the end of the timer.
-	can_attack = false
-	# Waiting a bit for the area monitoring to do its thing.
-	await get_tree().create_timer(0.05).timeout
-	# Stopping the monitoring thus the attack. Here because otherwise it collides with a new timer, I think.
-	melee_weapon.monitoring = false
+	pass
 
 
-func jump():
-	character.velocity.y += jump_height
+func jump() -> void:
+	pass
 
 
 # Connected to the timeout signal of the AttackTimer. Supposed to be the start of a new attack, but there is

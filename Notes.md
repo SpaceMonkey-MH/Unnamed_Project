@@ -441,5 +441,9 @@
 ## - __2024/09/05:__
 	Making a new enemy type, static but shooting projectiles. I'm not sure if I should create a new superclass for the attacks,
 	extended by a class for each type of attack, to avoid boilerplate, or a separate class for each attack, which is simpler,
-	but does boilerplate, or just a single class for the entire stuff, which is simple, without boilerplate, but ugly and
+	but has boilerplate, or just a single class for the entire stuff, which is simple, without boilerplate, but ugly and
 	potentially heavy.
+
+## - 2024/09/08:__
+	About the issue of above, I'm going for the superclass thing, but I think I'll use the current AttackState as a basis,
+	which should prove easier, but also with useless code for some attacks.

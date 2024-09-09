@@ -48,7 +48,6 @@ NOT DONE :
 - Make walkable slopes.
 - Respawn.
 - Checkpoints.
-- Solve health bar not displaying issue.
 - Decide whether or not the fact that when the grenades explode inside something, the fragments do not spawn,
 	is normal.
 - Make menu.
@@ -161,3 +160,5 @@ DONE :
 	- Make the blink use a cool down. // DONE.
 	- Add a cool down bar to the player. // DONE.
 - Make enemies jump. // DONE.
+- Fix bugs added before vacation. // DONE.
+- Solve health bar not displaying issue. // DONE.

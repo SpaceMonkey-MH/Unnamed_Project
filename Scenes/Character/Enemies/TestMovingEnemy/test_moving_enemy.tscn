@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="3_v7f25"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/wander_state.gd" id="4_0ysqk"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/follow_state.gd" id="5_4vjxa"]
-[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/attack_state.gd" id="6_40nwy"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/melee_attack_state.gd" id="6_40nwy"]
 [ext_resource type="PackedScene" uid="uid://ctxugofpeo2va" path="res://Scenes/UI/health_bar.tscn" id="6_mikho"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="7_en48c"]
 [ext_resource type="Texture2D" uid="uid://vpec7nf5midp" path="res://Assets/Sprites/UI/HealthBars/health_bar_over_1.png" id="7_fl3hf"]

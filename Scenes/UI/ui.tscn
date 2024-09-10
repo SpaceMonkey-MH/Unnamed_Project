@@ -27,6 +27,7 @@ text = "Quit Game"
 [node name="PauseButton" type="Button" parent="."]
 offset_right = 68.0
 offset_bottom = 38.0
+focus_mode = 0
 shortcut = SubResource("Shortcut_6xb6l")
 text = "Pause"
 

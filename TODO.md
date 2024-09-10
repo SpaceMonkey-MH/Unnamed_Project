@@ -162,3 +162,4 @@ DONE :
 - Make enemies jump. // DONE.
 - Fix bugs added before vacation. // DONE.
 - Solve health bar not displaying issue. // DONE.
+- Solve pause button space bar issue. // Changed focus mode of button. DONE.

@@ -2,4 +2,5 @@ class_name RangedAttackState
 extends AttackState
 
 
-func a
+func attack() -> void:
+	pass

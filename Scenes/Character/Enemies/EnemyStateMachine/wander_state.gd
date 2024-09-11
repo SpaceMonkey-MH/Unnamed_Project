@@ -2,7 +2,7 @@ class_name WanderState
 extends EnemyState
 
 # The Follow state as a variable, so it can be put in next_state.
-@export var follow_state : FollowState
+@export var follow_state : EnemyState
 # The Attack state as a variable, so it can be put in next_state.
 @export var attack_state : AttackState
 # The direction of movement of the character: -1 left, 0 idle, 1 right. To be randomized.

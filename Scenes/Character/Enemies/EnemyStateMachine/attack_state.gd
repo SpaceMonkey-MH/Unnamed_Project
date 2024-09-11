@@ -2,7 +2,7 @@ class_name AttackState
 extends EnemyState
 
 # The FollowState as a variable, so it can be transitioned to. To be set in editor.
-@export var follow_state: FollowState
+@export var follow_state: EnemyState
 # The cooldwown timer as a variable, so it can be controlled. To be set in editor.
 @export var timer: Timer
 # MeleeWeapon as a variable, so the monitoring can be toggled.

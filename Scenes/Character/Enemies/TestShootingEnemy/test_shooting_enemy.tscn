@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jerwd7q42oll"]
+[gd_scene load_steps=17 format=3 uid="uid://jerwd7q42oll"]
 
 [ext_resource type="Texture2D" uid="uid://caapj6gog8tar" path="res://Assets/Sprites/Player/Player_V1_40p_yellow.png" id="1_otp7i"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestShootingEnemy/test_shooting_enemy.gd" id="1_ys0op"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" path="res://Scenes/Character/Player/CharacterStateMachines/CharacterMovementStateMachine/character_movement_state_machine.gd" id="9_ascvj"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/wander_state.gd" id="10_ioest"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/ranged_attack_state.gd" id="11_ioxdy"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/hit_state.gd" id="12_g8mu7"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/TestShootingEnemy/tse_weapon.gd" id="12_nj7tm"]
+[ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="13_4d5o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtejm"]
 size = Vector2(40, 40)
@@ -82,8 +85,19 @@ script = ExtResource("11_ioxdy")
 follow_state = NodePath("../Idle")
 character_movement_state_machine = NodePath("..")
 
-[node name="Hit" type="Node" parent="CharacterStateMachine"]
+[node name="TSEWeapon" type="Node" parent="CharacterStateMachine/Shoot"]
+script = ExtResource("12_nj7tm")
+
+[node name="TSEWeaponCoolDown" type="Timer" parent="CharacterStateMachine/Shoot/TSEWeapon"]
+
+[node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("health_component", "dead_state", "wander_state", "character_movement_state_machine")]
+script = ExtResource("12_g8mu7")
+health_component = NodePath("../../HealthComponent")
+dead_state = NodePath("../Dead")
+wander_state = NodePath("../Idle")
+character_movement_state_machine = NodePath("..")
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("13_4d5o3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

@@ -57,6 +57,7 @@ NOT DONE :
 - Fix bug where the sprite on slope twitches weirdly when walking down.
 - Make different enemies.
 - Make boss mechanic.
+- Solve bug where the melee weapon rotates but doesn't damage.
 - Make shooting enemy.
 	- Sprite.
 	- State Machine.

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://117q05vakla8"]
+
+[ext_resource type="PackedScene" uid="uid://capj7vnfkligq" path="res://Scenes/Character/Components/attack_component.tscn" id="1_4fhs5"]
+[ext_resource type="Script" path="res://Scenes/Character/Bullets/tse_bullet.gd" id="1_dwtdi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_786aq"]
+radius = 5.0
+height = 40.0
+
+[node name="TSEBullet" type="CharacterBody2D"]
+script = ExtResource("1_dwtdi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 20.0
+offset_bottom = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_786aq")
+
+[node name="AttackComponent" parent="." instance=ExtResource("1_4fhs5")]

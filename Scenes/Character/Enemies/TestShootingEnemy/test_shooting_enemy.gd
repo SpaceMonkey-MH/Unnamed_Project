@@ -2,9 +2,9 @@ class_name TestShootingEnemy
 extends EnemyClass
 
 # Not used currently.
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = 0
 # The speed of the enemy, in pixels/second.
-@export var enemy_move_speed = 100.0
+@export var enemy_move_speed = 0
 # The distance to start following the player. So far it is a 1D follow, so a 1D distance, whatever that means.
 @export var follow_distance : float = 200.0
 # The distance beyond which the enemy stops following the player, thus transitioning to wander_state.

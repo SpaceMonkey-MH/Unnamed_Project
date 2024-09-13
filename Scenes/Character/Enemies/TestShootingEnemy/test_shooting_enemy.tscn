@@ -80,13 +80,15 @@ script = ExtResource("10_ioest")
 follow_state = NodePath(".")
 attack_state = NodePath("../Shoot")
 
-[node name="Shoot" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("follow_state", "character_movement_state_machine")]
+[node name="Shoot" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("tse_weapon", "follow_state", "character_movement_state_machine")]
 script = ExtResource("11_ioxdy")
+tse_weapon = NodePath("TSEWeapon")
 follow_state = NodePath("../Idle")
 character_movement_state_machine = NodePath("..")
 
-[node name="TSEWeapon" type="Node" parent="CharacterStateMachine/Shoot"]
+[node name="TSEWeapon" type="Node" parent="CharacterStateMachine/Shoot" node_paths=PackedStringArray("reload_timer")]
 script = ExtResource("12_nj7tm")
+reload_timer = NodePath("TSEWeaponCoolDown")
 
 [node name="TSEWeaponCoolDown" type="Timer" parent="CharacterStateMachine/Shoot/TSEWeapon"]
 

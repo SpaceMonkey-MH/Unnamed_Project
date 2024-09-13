@@ -35,6 +35,6 @@ func fire(target_pos: Vector2) -> void:
 		reload_timer.start()
 
 
-func _on_desert_eagle_cool_down_timeout() -> void:
+func _on_tse_weapon_cool_down_timeout() -> void:
 	can_fire = true
 	#reload_bar.update_value(reload_time * 1000)

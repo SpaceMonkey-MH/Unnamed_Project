@@ -36,8 +36,12 @@ func fire(target_pos: Vector2) -> void:
 	#if can_fire:
 	#print("character in tse_w.gd: ", character)
 	#print("Fire in tse_w.gd.")
-	weapon_fire(shoot_state.character.position, target_pos, tse_bullet_scene, shoot_state.attack_damage,
-		shoot_state.speed_factor)
+	#weapon_fire(shoot_state.character.global_position, target_pos, tse_bullet_scene, shoot_state.attack_damage,
+		#shoot_state.speed_factor)
+	weapon_fire(shoot_state.character.position, shoot_state.character.get_global_mouse_position(),
+		tse_bullet_scene, shoot_state.attack_damage, shoot_state.speed_factor)
+	print("shoot_state.character.get_global_mouse_position() in tse_w.gd: ",
+		shoot_state.character.get_global_mouse_position())
 		#can_fire = false
 		#reload_timer.start()
 

@@ -451,3 +451,5 @@
 ## - 2024/09/17:__
 	Not sure about how I should do for the damage multipliers (for instance for the difficulty), it seems like a lot of work
 	to go and add a factor to each damage stuff. Maybe I'd be better off doing it all at once in health_component.gd, Idk.
+	The weird behavior of the tse_bullet seems to originate from the weapon_fire() procedure, which seems to take into
+	account the velocity of the target_pos (player, or mouse for testing). This shouldn't happen.

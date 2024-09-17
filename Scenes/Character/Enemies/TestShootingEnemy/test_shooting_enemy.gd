@@ -11,7 +11,7 @@ const JUMP_VELOCITY = 0.0
 @export var follow_stop_distance : float = 0.0
 # The range of the enemy, meaning the distance below which the enemy starts attacking the player,
 # thus transitioning to attack_state.
-@export var attack_range : float = 1000.0
+@export var attack_range : float = 800.0
 # The maximum amount of wander_time.
 @export var max_wander_time : float = 5.0
 # The amount of damage the enemy deals.

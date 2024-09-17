@@ -5,7 +5,7 @@ extends State
 var can_fire: bool = true
 
 
-# Base procedure for the weapon firing mechanic.
+# Base procedure for the weapon firing mechanic. Maybe time_to_effect should default to 0.0 instead.
 func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedScene,
 				attack_damage: float = 20.0, speed_factor: float = 10.0, aoe_attack_damage: float = 0.0,
 				aoe_size: float = 80.0, fire_duration: float = 0.0, fire_damage: float = 0.0,
@@ -15,9 +15,10 @@ func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedSc
 	bullet.position = spawn_pos
 	bullet.rotate(rotation)
 	bullet.direction = target_pos - spawn_pos
-	bullet.attack_damage = attack_damage * character.damage_multiplier
+	# Withdrawing the damage_multiplier part, gonna move it to health_component.gd instead. Keeping it here just in case.
+	bullet.attack_damage = attack_damage	# * character.damage_multiplier
 #	print(aoe_attack_damage)
-	bullet.aoe_attack_damage = aoe_attack_damage * character.damage_multiplier
+	bullet.aoe_attack_damage = aoe_attack_damage	# * character.damage_multiplier
 	bullet.speed_factor = speed_factor
 	bullet.aoe_size = aoe_size
 	bullet.fire_duration = fire_duration

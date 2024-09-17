@@ -447,3 +447,7 @@
 ## - 2024/09/08:__
 	About the issue of above, I'm going for the superclass thing, but I think I'll use the current AttackState as a basis,
 	which should prove easier, but also with useless code for some attacks.
+
+## - 2024/09/17:__
+	Not sure about how I should do for the damage multipliers (for instance for the difficulty), it seems like a lot of work
+	to go and add a factor to each damage stuff. Maybe I'd be better off doing it all at once in health_component.gd, Idk.

@@ -29,6 +29,7 @@ var jump_height: float
 # Just a safety, in case the player dies and gets queue freed, which should maybe not happen.
 # It doesn't work xd, so that means that I can't queue free the player, unless I want to do something complicated
 # like queue freeing the whole gang.
+# MAYBE THIS WOULD WORK BETTER IF YOU USED A PROCEDURE THAT IS ACTUALLY CALLED, YOU STUPID FUCK!!!
 #func enemy_state_process(_delta):
 	#print("player in enemy_state: ", player)
 	#if not player:

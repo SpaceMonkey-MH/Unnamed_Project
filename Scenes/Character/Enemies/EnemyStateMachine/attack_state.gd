@@ -5,7 +5,7 @@ extends EnemyState
 @export var follow_state: EnemyState
 # The cooldwown timer as a variable, so it can be controlled. To be set in editor.
 @export var timer: Timer
-# MeleeWeapon as a variable, so the monitoring can be toggled.
+# MeleeWeapon as a variable, so the monitoring can be toggled. Is this used?
 @export var melee_weapon: Area2D
 # I wanted to avoid this but(t): whether or not the enemy can attack.
 var can_attack: bool = true
@@ -24,6 +24,7 @@ func on_enter() -> void:
 
 # The state version of the _physics_process() procedure, called by the StateMachine.
 func state_process(_delta) -> void:
+	#print("can_attack for %s in a_s.gd: %s." % [can_attack, self])
 	# Using an auxilliary variable to compute the distance to player.
 	#var relative_x_distance_to_player = player.position.x - character.position.x
 	# This is better (+ same as above).
@@ -58,11 +59,13 @@ func jump() -> void:
 # Connected to the timeout signal of the AttackTimer. Supposed to be the start of a new attack, but there is
 # a problem: it attacks continuously, even out of range. 
 func _on_attack_timer_timeout() -> void:
+	#print("Hello 1.")
 	# If the current state is this state. This is to prevent continuous attacks,
 	# but not enough to stop the reset of the attack timer on enter.
 	if character_movement_state_machine.current_state is AttackState:
 		# Call attack() so that it attacks while on range.
 		attack()
+		#print("Hello 2.")
 	# Setting the can_attack variable back to true so that the enemy can attack again.
 	can_attack = true
 	#melee_weapon.monitoring = false

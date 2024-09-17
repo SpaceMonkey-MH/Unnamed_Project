@@ -2900,7 +2900,6 @@ flashing_color = Color(0.823529, 0.411765, 0.117647, 1)
 remote_path = NodePath("../../Camera2D")
 
 [node name="LevelTileMap" type="TileMap" parent="."]
-position = Vector2(-2, -3)
 tile_set = SubResource("TileSet_11a0a")
 format = 2
 layer_0/name = "Ground"

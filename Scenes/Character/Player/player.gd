@@ -71,7 +71,7 @@ var smoothed_mouse_pos: Vector2
 # Gameplay variables #
 ######################
 
-var damage_multiplier: float = 1	# Applied to every attack.
+#var damage_multiplier: float = 1	# Applied to every attack. Or at least the bullet ones.
 
 
 # // From template:

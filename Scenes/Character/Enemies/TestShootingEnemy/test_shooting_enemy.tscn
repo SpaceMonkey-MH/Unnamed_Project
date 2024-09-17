@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://jerwd7q42oll"]
+[gd_scene load_steps=18 format=3 uid="uid://jerwd7q42oll"]
 
 [ext_resource type="Texture2D" uid="uid://caapj6gog8tar" path="res://Assets/Sprites/Player/Player_V1_40p_yellow.png" id="1_otp7i"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestShootingEnemy/test_shooting_enemy.gd" id="1_ys0op"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/ranged_attack_state.gd" id="11_ioxdy"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/hit_state.gd" id="12_g8mu7"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/TestShootingEnemy/tse_weapon.gd" id="12_nj7tm"]
+[ext_resource type="PackedScene" uid="uid://117q05vakla8" path="res://Scenes/Character/Bullets/tse_bullet.tscn" id="13_0snsf"]
 [ext_resource type="Script" path="res://Scenes/Character/Enemies/EnemyStateMachine/dead_state.gd" id="13_4d5o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qtejm"]
@@ -21,6 +22,8 @@ size = Vector2(40, 40)
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_nfiae"]
 
 [node name="TestShootingEnemy" type="CharacterBody2D" node_paths=PackedStringArray("sprite_2d", "animation_tree", "notifier", "hit_box")]
+collision_layer = 3
+collision_mask = 4
 script = ExtResource("1_ys0op")
 sprite_2d = NodePath("Sprite2D")
 animation_tree = NodePath("AnimationTree")
@@ -80,17 +83,20 @@ script = ExtResource("10_ioest")
 follow_state = NodePath(".")
 attack_state = NodePath("../Shoot")
 
-[node name="Shoot" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("tse_weapon", "follow_state", "character_movement_state_machine")]
+[node name="Shoot" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("tse_weapon", "follow_state", "timer", "character_movement_state_machine")]
 script = ExtResource("11_ioxdy")
 tse_weapon = NodePath("TSEWeapon")
 follow_state = NodePath("../Idle")
+timer = NodePath("TSEWeaponCoolDown")
 character_movement_state_machine = NodePath("..")
 
-[node name="TSEWeapon" type="Node" parent="CharacterStateMachine/Shoot" node_paths=PackedStringArray("reload_timer")]
+[node name="TSEWeapon" type="Node" parent="CharacterStateMachine/Shoot" node_paths=PackedStringArray("shoot_state")]
 script = ExtResource("12_nj7tm")
-reload_timer = NodePath("TSEWeaponCoolDown")
+tse_bullet_scene = ExtResource("13_0snsf")
+shoot_state = NodePath("..")
 
-[node name="TSEWeaponCoolDown" type="Timer" parent="CharacterStateMachine/Shoot/TSEWeapon"]
+[node name="TSEWeaponCoolDown" type="Timer" parent="CharacterStateMachine/Shoot"]
+one_shot = true
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("health_component", "dead_state", "wander_state", "character_movement_state_machine")]
 script = ExtResource("12_g8mu7")
@@ -103,3 +109,7 @@ character_movement_state_machine = NodePath("..")
 script = ExtResource("13_4d5o3")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(9.53674e-07, 9.53674e-07)
+scale = Vector2(2, 2)
+
+[connection signal="timeout" from="CharacterStateMachine/Shoot/TSEWeaponCoolDown" to="CharacterStateMachine/Shoot" method="_on_tse_weapon_cool_down_timeout"]

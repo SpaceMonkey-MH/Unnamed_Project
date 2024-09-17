@@ -2,22 +2,22 @@ class_name TestShootingEnemy
 extends EnemyClass
 
 # Not used currently.
-const JUMP_VELOCITY = 0
+const JUMP_VELOCITY = 0.0
 # The speed of the enemy, in pixels/second.
-@export var enemy_move_speed = 0
+@export var enemy_move_speed = 0.0
 # The distance to start following the player. So far it is a 1D follow, so a 1D distance, whatever that means.
-@export var follow_distance : float = 200.0
+@export var follow_distance : float = 0.0
 # The distance beyond which the enemy stops following the player, thus transitioning to wander_state.
-@export var follow_stop_distance : float = 400.0
+@export var follow_stop_distance : float = 0.0
 # The range of the enemy, meaning the distance below which the enemy starts attacking the player,
 # thus transitioning to attack_state.
-@export var attack_range : float = 100.0
+@export var attack_range : float = 1000.0
 # The maximum amount of wander_time.
 @export var max_wander_time : float = 5.0
 # The amount of damage the enemy deals.
 @export var damage : float = 25.0
 # The time between two attacks, to be assigned to timer.wait_time. To be set in editor.
-@export var attack_wait_time : float = 1
+@export var attack_wait_time : float = 1.0
 # The amount of time the sprite will be flashing a color.
 @export var flashing_time : float = 0.1
 # The color the sprite will be flashing.
@@ -29,14 +29,15 @@ const JUMP_VELOCITY = 0
 # Half the x size of this enemy plus half the x size of the player plus 5.
 # Maybe I need to do this in a cleaner way.
 @export var x_size_ep : float = 20 + 20 + 5
-# The damage dealt by this enemy.
-@export var attack_damage : float = 20.0
+# The base damage dealt by this enemy. Should be multiplied by various factors depending on the attack.
+@export var attack_damage : float = 10.0
 # The AttackHitBox as a variable, so that its radius can be changed.
 #@export var attack_hit_box : CollisionShape2D
 # Trying to use the notifier in export.
 @export var notifier : VisibleOnScreenNotifier2D
 # The height of the jump. Added to the character.position.y.
 @export var jump_height: float = -500
+#var damage_multiplier: float = 1	# Applied to every attack. Or at least the bullet ones.
 
 
 func _enter_tree() -> void:

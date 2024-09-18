@@ -23,6 +23,7 @@ func _ready() -> void:
 			# Set the states up with what they need to function.
 			child.character = character
 			#print("In c_m_s_m: ", character)
+			#print(child.move_speed, " ", self, "\n", child)
 			child.move_speed= character.move_speed
 #			print(child.move_speed, " ", self, "\n", child)
 #			print("1 ", character.move_speed)

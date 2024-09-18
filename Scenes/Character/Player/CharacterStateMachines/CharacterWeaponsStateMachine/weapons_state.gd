@@ -6,10 +6,10 @@ var can_fire: bool = true
 
 
 # Base procedure for the weapon firing mechanic. Maybe time_to_effect should default to 0.0 instead.
-func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedScene,
-				attack_damage: float = 20.0, speed_factor: float = 10.0, aoe_attack_damage: float = 0.0,
-				aoe_size: float = 80.0, fire_duration: float = 0.0, fire_damage: float = 0.0,
-				time_to_effect: float = 0.0, nb_frags: int = 0) -> void:
+func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedScene, attack_damage: float = 20.0,
+		speed_factor: float = 10.0, aoe_attack_damage: float = 0.0,
+		aoe_size: float = 80.0, fire_duration: float = 0.0, fire_damage: float = 0.0,
+		time_to_effect: float = 0.0, nb_frags: int = 0) -> void:
 	var bullet: Bullet = bullet_scene.instantiate()
 	var rotation: float = spawn_pos.angle_to_point(target_pos)
 	bullet.position = spawn_pos
@@ -20,6 +20,9 @@ func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedSc
 #	print(aoe_attack_damage)
 	bullet.aoe_attack_damage = aoe_attack_damage	# * character.damage_multiplier
 	bullet.speed_factor = speed_factor
+	print("speed_factor in w_s.gd: ", speed_factor)
+	print("In w_s.gd: ", character)
+	bullet.source_velocity = character.velocity
 	bullet.aoe_size = aoe_size
 	bullet.fire_duration = fire_duration
 	bullet.fire_damage = fire_damage

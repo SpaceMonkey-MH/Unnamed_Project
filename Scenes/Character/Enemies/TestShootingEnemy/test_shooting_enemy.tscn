@@ -90,13 +90,13 @@ follow_state = NodePath("../Idle")
 timer = NodePath("TSEWeaponCoolDown")
 character_movement_state_machine = NodePath("..")
 
+[node name="TSEWeaponCoolDown" type="Timer" parent="CharacterStateMachine/Shoot"]
+one_shot = true
+
 [node name="TSEWeapon" type="Node" parent="CharacterStateMachine/Shoot" node_paths=PackedStringArray("shoot_state")]
 script = ExtResource("12_nj7tm")
 tse_bullet_scene = ExtResource("13_0snsf")
 shoot_state = NodePath("..")
-
-[node name="TSEWeaponCoolDown" type="Timer" parent="CharacterStateMachine/Shoot"]
-one_shot = true
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("health_component", "dead_state", "wander_state", "character_movement_state_machine")]
 script = ExtResource("12_g8mu7")

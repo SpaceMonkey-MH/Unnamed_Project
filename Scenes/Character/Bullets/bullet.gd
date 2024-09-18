@@ -11,7 +11,9 @@ class_name Bullet
 var attack_damage: float = 10.0
 var aoe_attack_damage: float = 10.0
 var speed_factor: float = 10.0
+# How come this isn't Vector2(0, 0)? Or maybe it is? I don't understand LoL. But ofc, it is set by weapon_fire().
 var direction: Vector2 = Vector2.ZERO
+#var direction: Vector2 = Vector2(10, 10)
 # The size of the AoE/explosion.
 var aoe_size: float = 80.0
 var fire_duration: float = 0.0
@@ -20,6 +22,9 @@ var fire_damage: float = 0.0
 var time_to_effect: float = 0.0
 # The quantity of fragments emited by the 
 var nb_frags: int = 0
+# The velocity of the source of the bullet, so the player or an enemy, so the bullet can have its speed affected related to
+# that.
+var source_velocity: Vector2 = Vector2.ZERO
 
 # This is so that we can do stuff like getting the self_damage value.
 #@onready var player : PlayerClass = get_parent().get_parent().get_parent()
@@ -31,7 +36,11 @@ var nb_frags: int = 0
 #@onready var mov : Vector2 = direction.normalized() * speed_factor + player_velocity * 0.016
 #@onready var mov : Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
 							#Engine.get_frames_per_second())
-@onready var mov: Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
+# What is direction for here? Apparently something.
+#@onready var mov: Vector2 = (direction.normalized() * speed_factor) + (PlayerVariables.player.velocity /
+							#Engine.get_frames_per_second())
+#@onready var mov: Vector2 = (PlayerVariables.player.velocity / Engine.get_frames_per_second())
+@onready var mov: Vector2 = (direction.normalized() * speed_factor) + (source_velocity /
 							Engine.get_frames_per_second())
 
 
@@ -48,6 +57,7 @@ var nb_frags: int = 0
 
 
 func _physics_process(delta: float) -> void:
+	#print("In bullet.gd: ", direction, ", ", direction.normalized(), ", ", direction.normalized() * speed_factor)
 	#print("time_to_effect in bullet.gd: ", time_to_effect)
 	mov.x = apply_x_mod(mov.x, delta)
 	mov.y = apply_y_mod(mov.y, delta)

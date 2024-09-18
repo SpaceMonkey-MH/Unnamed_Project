@@ -11,8 +11,19 @@ extends EnemyState
 var can_attack: bool = true
 
 
+#func _ready() -> void:
+	#attack_state_ready()
+
+
+# An alternate _ready() function so that it can be used in subclass.
+func attack_state_ready() -> void:
+	pass
+
+
 # Procedure called on state enter by the StateMachine.
 func on_enter() -> void:
+	attack_state_ready()
+	#print("In a_s.gd: ", character)
 	# Setting the attack_wait_time of the cooldown timer to the export variable attack_wait_time set in superclass
 	# and StateMachine and main Enemy script.
 	timer.wait_time = attack_wait_time

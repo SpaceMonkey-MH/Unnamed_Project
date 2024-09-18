@@ -7,6 +7,13 @@ extends AttackState
 #@export var reload_time: float = 2.0
 
 
+func attack_state_ready() -> void:
+	print("Hello.")
+	# We need to set the character variable in the state machine's stead so that the velocity can be extracted when firing.
+	tse_weapon.character = character
+	print("In r_a_s.gd, tse_weapon.character: ", tse_weapon.character, " character: ", character)
+
+
 func attack() -> void:
 	#print("Attack in r_a_s.gd.")
 	tse_weapon.fire(player.global_position)

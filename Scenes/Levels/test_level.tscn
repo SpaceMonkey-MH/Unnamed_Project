@@ -2981,5 +2981,5 @@ ttr_over = ExtResource("8_uykeh")
 ttr_progress = ExtResource("9_a7bxs")
 
 [node name="TestShootingEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_wme5g")]
-position = Vector2(9908, 949)
+position = Vector2(10195, 944)
 player = NodePath("../Player")

@@ -58,10 +58,6 @@ NOT DONE :
 - Make different enemies.
 - Make boss mechanic.
 - Solve bug where the melee weapon rotates but doesn't damage.
-- Make shooting enemy.
-	- Sprite.
-	- State Machine.
-		- 
 
 ------------------------------------------------------------------------------------------------------
 
@@ -168,3 +164,7 @@ DONE :
 - Fix bugs added before vacation. // DONE.
 - Solve health bar not displaying issue. // DONE.
 - Solve pause button space bar issue. // Changed focus mode of button. DONE.
+- Make shooting enemy. // DONE.
+	- Sprite. // DONE.
+	- State Machine. // DONE.
+		- Yes // DONE.

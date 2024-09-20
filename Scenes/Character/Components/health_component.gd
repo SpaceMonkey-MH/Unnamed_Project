@@ -111,6 +111,7 @@ func set_on_fire(fire_duration : float = 5.0, f_damage : float = 10.0) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func damage(attack : Attack = Attack.new()) -> void:
+	print("damage() in h_c.gd.")
 	health -= attack.attack_damage
 	if character.has_method("take_damage"):
 		character.take_damage()

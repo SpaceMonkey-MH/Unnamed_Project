@@ -17,6 +17,7 @@ func _on_body_entered(body):
 	# Could this be an easter egg that the melee weapon does self damage?
 	if body is PlayerClass:
 		return
+	#print("_on_body_entered() in m_w.gd.")
 #	print("Body entered: ", body)
 	var attack = Attack.new()
 	#print("attack: ", attack, "\nmelee_weapon_state: ", melee_weapon_state)
@@ -25,5 +26,6 @@ func _on_body_entered(body):
 		if child is HealthComponent:
 #			print("call_deferred(\"child.damage\", attack)")
 			# IT WORKS! I just had to not be an idiot!
+			print("_on_body_entered() in m_w.gd.")
 			child.call_deferred("damage", attack)
 #			child.damage(attack)

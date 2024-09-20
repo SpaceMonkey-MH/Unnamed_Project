@@ -145,8 +145,12 @@ func on_exit() -> void:
 
 
 func hit() -> void:
+	# Trying to solve issue where hit() is called but not damage().
+	#if not can_fire:
+		#return
+	print("m_w_s.gd hit.")
 	# There is a bug here, hit() is called one too many time when the Thrown Weapon return to the player,
-	# thus delaying next fires. I cna't find the bug, so for now I'll just disable the hits on the return fly.
+	# thus delaying next fires. I can't find the bug, so for now I'll just disable the hits on the return fly.
 	#var time: Dictionary = Time.get_datetime_dict_from_system()
 	#print("Hello from hit() in m_w_s.gd at %s." % time.second)
 	# Set can_fire to false to prevent from firing again before the end of the cooldown.
@@ -174,7 +178,11 @@ func hit() -> void:
 	# Trying it with the reload_time as a wait time, that means that technically if an enemy goes in and out
 	# very fast, it can be damaged several times. But otherwise, enemies won't get damaged if they get in range
 	# at the wrong time. Maybe 1 second max is better, because we consider that the weapon whirls for a second max.
+	# Note: I think it won't damage properly if the awaited timer is set too short (shorter than like 0.05 sec iIrc).
+	# There is a bug where if you click very fast, you can call hit again but there is no damage. I think it is because
+	# this timer is set too long. Let's try to reduce it by a small fixed amount. Nope.
 	await get_tree().create_timer(min(reload_time, 1)).timeout
+	#await get_tree().create_timer(max(min(reload_time, 1) - 0.5, 0.05)).timeout
 	# Stop the monitoring of the area, so that it doesn't damage anymore.
 	melee_weapon_area.monitoring = false
 

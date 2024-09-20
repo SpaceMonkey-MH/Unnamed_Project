@@ -25,6 +25,7 @@ size = Vector2(40, 40)
 collision_layer = 3
 collision_mask = 4
 script = ExtResource("1_ys0op")
+attack_range = 0.0
 sprite_2d = NodePath("Sprite2D")
 animation_tree = NodePath("AnimationTree")
 notifier = NodePath("VisibleOnScreenNotifier2D")

@@ -20,8 +20,8 @@ func weapon_fire(spawn_pos: Vector2, target_pos: Vector2, bullet_scene: PackedSc
 #	print(aoe_attack_damage)
 	bullet.aoe_attack_damage = aoe_attack_damage	# * character.damage_multiplier
 	bullet.speed_factor = speed_factor
-	print("speed_factor in w_s.gd: ", speed_factor)
-	print("In w_s.gd: ", character)
+	#print("speed_factor in w_s.gd: ", speed_factor)
+	#print("In w_s.gd: ", character)
 	bullet.source_velocity = character.velocity
 	bullet.aoe_size = aoe_size
 	bullet.fire_duration = fire_duration

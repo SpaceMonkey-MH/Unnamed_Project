@@ -2937,7 +2937,7 @@ position = Vector2(5738, 885)
 scale = Vector2(5, 5)
 
 [node name="AttackDummy8" parent="." node_paths=PackedStringArray("notifier", "hit_box") instance=ExtResource("5_pn2ls")]
-position = Vector2(6442, 879)
+position = Vector2(9348, 893)
 scale = Vector2(5, 5)
 notifier = NodePath("../AttackDummy5/VisibleOnScreenNotifier2D")
 hit_box = NodePath("../AttackDummy5/HitBox")

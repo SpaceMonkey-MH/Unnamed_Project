@@ -44,6 +44,7 @@ func _enter_tree() -> void:
 	# This is ugly, but I can't find a better way to have the speed exported in this script while making it
 	# declared in superclass.
 	move_speed = enemy_move_speed
+	assert(move_speed == 0)
 
 
 func character_ready() -> void:
